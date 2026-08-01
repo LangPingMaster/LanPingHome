@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>嘉義市家庭聚餐餐廳推薦</title>
+<style>
+:root{--bg:#f6f1e8;--ink:#2d2924;--muted:#706a61;--card:#fffdf8;--accent:#a4432c;--accent2:#315c53;--line:#e5d9c8}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.7}
+.hero{padding:64px 22px 50px;background:linear-gradient(135deg,#264b45,#47766b 55%,#c77b4d);color:white}
+.wrap{max-width:1220px;margin:auto} .hero h1{font-size:clamp(2rem,5vw,4rem);margin:0 0 10px;letter-spacing:.04em}
+.hero p{max-width:800px;font-size:1.08rem;opacity:.94} .hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.hero-meta span{background:#ffffff22;border:1px solid #ffffff55;padding:6px 12px;border-radius:999px}
+main{padding:28px 20px 70px} .notice{background:#fff7df;border-left:5px solid #d7972f;padding:16px 18px;border-radius:12px;margin-bottom:22px}
+.toolbar{position:sticky;top:0;z-index:5;background:#f6f1e8ef;backdrop-filter:blur(10px);padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:2fr repeat(3,1fr);gap:10px}
+input,select{width:100%;padding:12px 13px;border:1px solid #cfc2b0;border-radius:10px;background:white;font-size:1rem}
+.summary{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px;gap:12px} h2{margin:0;font-size:1.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px #59452b12;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-2px);transition:.2s} .card-top{display:flex;justify-content:space-between;gap:8px}
+.badge,.district{padding:4px 9px;border-radius:999px;font-size:.83rem} .badge{background:#f0e1cc;color:#7b3c20} .district{background:#dcebe6;color:#27564d}
+.card h3{font-size:1.3rem;margin:13px 0 5px} .feature{color:var(--muted);min-height:54px}
+dl{margin:7px 0 14px} dl div{display:grid;grid-template-columns:54px 1fr;border-top:1px dashed #dfd3c4;padding:7px 0} dt{font-weight:700;color:#7c5945} dd{margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto} .btn{text-decoration:none;border:1px solid #b7a896;color:#423b33;padding:8px 11px;border-radius:9px;font-weight:700}
+.btn.primary{background:var(--accent2);color:white;border-color:var(--accent2)} .btn.ghost{color:var(--accent)} 
+.table-wrap{overflow:auto;background:white;border:1px solid var(--line);border-radius:16px;margin-top:14px} table{border-collapse:collapse;width:100%;min-width:1000px}
+th,td{padding:12px;border-bottom:1px solid #eee4d7;text-align:left;vertical-align:top} th{position:sticky;top:0;background:#315c53;color:white}
+details{margin-top:34px;background:white;border:1px solid var(--line);border-radius:16px;padding:16px} summary{font-weight:800;cursor:pointer;font-size:1.15rem}
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:18px} .tip{background:#fff;border-radius:14px;padding:16px;border:1px solid var(--line)}
+footer{background:#282d2a;color:#eee6dc;padding:28px 20px} footer a{color:#ffd49f} .hidden{display:none!important}
+@media(max-width:760px){.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.hero{padding-top:42px}}
+@media print{.toolbar,.actions{display:none} body{background:white} .card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div>CHIAYI FAMILY DINING GUIDE</div>
+  <h1>嘉義市家庭聚餐餐廳推薦</h1>
+  <p>依合菜、飯店餐廳、台菜、海鮮、西式套餐與親子需求整理。每家附地址、電話、聚餐人數、停車提示與 Google 地圖導航。</p>
+  <div class="hero-meta"><span>15 家精選</span><span>東區＋西區</span><span>可搜尋與篩選</span><span>資料整理：2026-08-01</span></div>
+</div></header>
+
+<main><div class="wrap">
+  <div class="notice"><strong>重要提醒：</strong>餐廳營業時間、包廂、低消、停車與電話可能調整，尤其節日與颱風後更容易臨時變更。出發前請先電話確認。本文是「實用精選名單」，無法保證涵蓋嘉義市每一家餐廳。</div>
+
+  <section class="toolbar">
+    <input id="search" placeholder="搜尋餐廳、料理、地址、特色…">
+    <select id="district"><option value="">全部區域</option><option>東區</option><option>西區</option></select>
+    <select id="price"><option value="">全部價位</option><option>平價</option><option>中</option><option>中高</option><option>高</option></select>
+    <select id="view"><option value="cards">卡片檢視</option><option value="table">表格檢視</option></select>
+  </section>
+
+  <div class="summary"><h2>餐廳清單</h2><div>顯示 <strong id="count">15</strong> 家</div></div>
+
+  <section id="cards" class="grid">
+    <article class="card" data-category="江浙／福州合菜" data-district="東區" data-price="中高" data-text="桃花源餐廳－嘉義分店 江浙／福州合菜 東區 嘉義市東區大雅路一段870號 05-275-7585 中高 6–20+ 人 對面公有收費停車場 庭園景觀、合菜、適合長輩、家庭慶生與大型聚會 香酥鴨、酸菜白肉鍋、江浙與福州菜 https://www.peach-restaurant.com.tw/store_info/2">
+      <div class="card-top"><span class="badge">江浙／福州合菜</span><span class="district">東區</span></div>
+      <h3>桃花源餐廳－嘉義分店</h3>
+      <p class="feature">庭園景觀、合菜、適合長輩、家庭慶生與大型聚會</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區大雅路一段870號</dd></div>
+        <div><dt>電話</dt><dd>05-275-7585</dd></div>
+        <div><dt>人數</dt><dd>6–20+ 人</dd></div>
+        <div><dt>價位</dt><dd>中高</dd></div>
+        <div><dt>停車</dt><dd>對面公有收費停車場</dd></div>
+        <div><dt>推薦</dt><dd>香酥鴨、酸菜白肉鍋、江浙與福州菜</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E8%8A%B1%E6%BA%90%E9%A4%90%E5%BB%B3%EF%BC%8D%E5%98%89%E7%BE%A9%E5%88%86%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%A4%A7%E9%9B%85%E8%B7%AF%E4%B8%80%E6%AE%B5870%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052757585">撥打電話</a>
+        <a class="btn ghost" href="https://www.peach-restaurant.com.tw/store_info/2" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="粵菜／港式點心" data-district="東區" data-price="中高" data-text="頤粵軒－新悦花園酒店 粵菜／港式點心 東區 嘉義市東區保順路69號2樓 05-277-6266 中高 4–20+ 人 飯店停車場，訂位時確認折抵 飯店餐廳、烤鴨、港點、用餐環境舒適，適合三代同堂 櫻桃片皮鴨、港式點心、粵式桌菜 https://www.hsinhotel.com.tw/banquet-detail/41/">
+      <div class="card-top"><span class="badge">粵菜／港式點心</span><span class="district">東區</span></div>
+      <h3>頤粵軒－新悦花園酒店</h3>
+      <p class="feature">飯店餐廳、烤鴨、港點、用餐環境舒適，適合三代同堂</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區保順路69號2樓</dd></div>
+        <div><dt>電話</dt><dd>05-277-6266</dd></div>
+        <div><dt>人數</dt><dd>4–20+ 人</dd></div>
+        <div><dt>價位</dt><dd>中高</dd></div>
+        <div><dt>停車</dt><dd>飯店停車場，訂位時確認折抵</dd></div>
+        <div><dt>推薦</dt><dd>櫻桃片皮鴨、港式點心、粵式桌菜</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E9%A0%A4%E7%B2%B5%E8%BB%92%EF%BC%8D%E6%96%B0%E6%82%A6%E8%8A%B1%E5%9C%92%E9%85%92%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E4%BF%9D%E9%A0%86%E8%B7%AF69%E8%99%9F2%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052776266">撥打電話</a>
+        <a class="btn ghost" href="https://www.hsinhotel.com.tw/banquet-detail/41/" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="自助餐／國際料理" data-district="西區" data-price="中高" data-text="田園西餐廳－嘉義福容voco酒店 自助餐／國際料理 西區 嘉義市西區世賢路一段789號2樓 05-232-3399 中高 2–20+ 人 飯店停車場 寬敞座位、餐點選擇多，適合有長輩與小孩的家庭 依檔期供應自助餐或主題餐飲，訂位前確認餐期 https://www.fullon-hotels.com.tw/voco/cy/tw/restaurant/">
+      <div class="card-top"><span class="badge">自助餐／國際料理</span><span class="district">西區</span></div>
+      <h3>田園西餐廳－嘉義福容voco酒店</h3>
+      <p class="feature">寬敞座位、餐點選擇多，適合有長輩與小孩的家庭</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區世賢路一段789號2樓</dd></div>
+        <div><dt>電話</dt><dd>05-232-3399</dd></div>
+        <div><dt>人數</dt><dd>2–20+ 人</dd></div>
+        <div><dt>價位</dt><dd>中高</dd></div>
+        <div><dt>停車</dt><dd>飯店停車場</dd></div>
+        <div><dt>推薦</dt><dd>依檔期供應自助餐或主題餐飲，訂位前確認餐期</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E5%9C%92%E8%A5%BF%E9%A4%90%E5%BB%B3%EF%BC%8D%E5%98%89%E7%BE%A9%E7%A6%8F%E5%AE%B9voco%E9%85%92%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E4%B8%96%E8%B3%A2%E8%B7%AF%E4%B8%80%E6%AE%B5789%E8%99%9F2%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052323399">撥打電話</a>
+        <a class="btn ghost" href="https://www.fullon-hotels.com.tw/voco/cy/tw/restaurant/" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="粵菜／中式桌菜" data-district="西區" data-price="高" data-text="福粵樓－嘉義福容voco酒店 粵菜／中式桌菜 西區 嘉義市西區世賢路一段789號 05-232-3399 高 6–20+ 人 飯店停車場 飯店中餐廳、家庭宴席、節慶聚餐與正式慶生 櫻桃片皮鴨、粵式海鮮、桌菜 https://www.fullon-hotels.com.tw/voco/cy/tw/restaurant/">
+      <div class="card-top"><span class="badge">粵菜／中式桌菜</span><span class="district">西區</span></div>
+      <h3>福粵樓－嘉義福容voco酒店</h3>
+      <p class="feature">飯店中餐廳、家庭宴席、節慶聚餐與正式慶生</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區世賢路一段789號</dd></div>
+        <div><dt>電話</dt><dd>05-232-3399</dd></div>
+        <div><dt>人數</dt><dd>6–20+ 人</dd></div>
+        <div><dt>價位</dt><dd>高</dd></div>
+        <div><dt>停車</dt><dd>飯店停車場</dd></div>
+        <div><dt>推薦</dt><dd>櫻桃片皮鴨、粵式海鮮、桌菜</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E7%B2%B5%E6%A8%93%EF%BC%8D%E5%98%89%E7%BE%A9%E7%A6%8F%E5%AE%B9voco%E9%85%92%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E4%B8%96%E8%B3%A2%E8%B7%AF%E4%B8%80%E6%AE%B5789%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052323399">撥打電話</a>
+        <a class="btn ghost" href="https://www.fullon-hotels.com.tw/voco/cy/tw/restaurant/" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="川菜／台式合菜" data-district="西區" data-price="中" data-text="金牌川菜料理 川菜／台式合菜 西區 嘉義市西區興達路120號 05-281-0258 中 4–12 人 對面停車空間，仍建議電話確認 多人分食、份量適合家庭、口味較有變化 五更腸旺、客家小炒、橙汁排骨 https://www.newbeiping.com.tw/lastest-content?id=43">
+      <div class="card-top"><span class="badge">川菜／台式合菜</span><span class="district">西區</span></div>
+      <h3>金牌川菜料理</h3>
+      <p class="feature">多人分食、份量適合家庭、口味較有變化</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區興達路120號</dd></div>
+        <div><dt>電話</dt><dd>05-281-0258</dd></div>
+        <div><dt>人數</dt><dd>4–12 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>對面停車空間，仍建議電話確認</dd></div>
+        <div><dt>推薦</dt><dd>五更腸旺、客家小炒、橙汁排骨</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E7%89%8C%E5%B7%9D%E8%8F%9C%E6%96%99%E7%90%86%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E8%88%88%E9%81%94%E8%B7%AF120%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052810258">撥打電話</a>
+        <a class="btn ghost" href="https://www.newbeiping.com.tw/lastest-content?id=43" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="茶樓／港點／合菜" data-district="東區" data-price="中" data-text="竹居茶樓 茶樓／港點／合菜 東區 嘉義市東區大雅路二段275號 05-271-9275 中 4–12 人 無專屬停車場，建議找附近停車格 中式庭園、錦鯉池、港點與熱炒，適合親子與長輩 小籠包、港式點心、熱炒合菜 https://www.newbeiping.com.tw/lastest-content?id=43">
+      <div class="card-top"><span class="badge">茶樓／港點／合菜</span><span class="district">東區</span></div>
+      <h3>竹居茶樓</h3>
+      <p class="feature">中式庭園、錦鯉池、港點與熱炒，適合親子與長輩</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區大雅路二段275號</dd></div>
+        <div><dt>電話</dt><dd>05-271-9275</dd></div>
+        <div><dt>人數</dt><dd>4–12 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>無專屬停車場，建議找附近停車格</dd></div>
+        <div><dt>推薦</dt><dd>小籠包、港式點心、熱炒合菜</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E7%AB%B9%E5%B1%85%E8%8C%B6%E6%A8%93%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%A4%A7%E9%9B%85%E8%B7%AF%E4%BA%8C%E6%AE%B5275%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052719275">撥打電話</a>
+        <a class="btn ghost" href="https://www.newbeiping.com.tw/lastest-content?id=43" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="精緻台菜／川味" data-district="西區" data-price="中" data-text="春燕飯館 精緻台菜／川味 西區 嘉義市西區興業西路233號 05-286-0688 中 4–10 人 市區路邊或附近停車場 小家庭聚餐、菜色精緻、適合慶生與朋友聚會 左宗棠雞、金沙豆腐、花雕醉雞 https://www.newbeiping.com.tw/lastest-content?id=43">
+      <div class="card-top"><span class="badge">精緻台菜／川味</span><span class="district">西區</span></div>
+      <h3>春燕飯館</h3>
+      <p class="feature">小家庭聚餐、菜色精緻、適合慶生與朋友聚會</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區興業西路233號</dd></div>
+        <div><dt>電話</dt><dd>05-286-0688</dd></div>
+        <div><dt>人數</dt><dd>4–10 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>市區路邊或附近停車場</dd></div>
+        <div><dt>推薦</dt><dd>左宗棠雞、金沙豆腐、花雕醉雞</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E6%98%A5%E7%87%95%E9%A3%AF%E9%A4%A8%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E8%88%88%E6%A5%AD%E8%A5%BF%E8%B7%AF233%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052860688">撥打電話</a>
+        <a class="btn ghost" href="https://www.newbeiping.com.tw/lastest-content?id=43" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="海鮮／台式熱炒" data-district="西區" data-price="中" data-text="蚵庄海產 海鮮／台式熱炒 西區 嘉義市西區博愛路二段396號 05-231-9987 中 4–12 人 附近停車，訂位時詢問店家 傳統海產店、多人點菜分食、適合喜歡海鮮的家庭 蚵仔酥、炒海瓜子、清蒸鮮魚 https://www.facebook.com/oysterhouse2319987/">
+      <div class="card-top"><span class="badge">海鮮／台式熱炒</span><span class="district">西區</span></div>
+      <h3>蚵庄海產</h3>
+      <p class="feature">傳統海產店、多人點菜分食、適合喜歡海鮮的家庭</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區博愛路二段396號</dd></div>
+        <div><dt>電話</dt><dd>05-231-9987</dd></div>
+        <div><dt>人數</dt><dd>4–12 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>附近停車，訂位時詢問店家</dd></div>
+        <div><dt>推薦</dt><dd>蚵仔酥、炒海瓜子、清蒸鮮魚</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E5%BA%84%E6%B5%B7%E7%94%A2%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%8D%9A%E6%84%9B%E8%B7%AF%E4%BA%8C%E6%AE%B5396%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052319987">撥打電話</a>
+        <a class="btn ghost" href="https://www.facebook.com/oysterhouse2319987/" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="台式熱炒／烤雞" data-district="西區" data-price="中" data-text="阿傑台式料理 × 三八雞 台式熱炒／烤雞 西區 嘉義市西區南京路306號 05-235-5215 中 4–12 人 附近有停車空間，建議先詢問 晚餐聚會、台式菜色、適合食量較大的家庭 三八烤雞、薑母鴨、台式熱炒 https://www.newbeiping.com.tw/lastest-content?id=43">
+      <div class="card-top"><span class="badge">台式熱炒／烤雞</span><span class="district">西區</span></div>
+      <h3>阿傑台式料理 × 三八雞</h3>
+      <p class="feature">晚餐聚會、台式菜色、適合食量較大的家庭</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區南京路306號</dd></div>
+        <div><dt>電話</dt><dd>05-235-5215</dd></div>
+        <div><dt>人數</dt><dd>4–12 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>附近有停車空間，建議先詢問</dd></div>
+        <div><dt>推薦</dt><dd>三八烤雞、薑母鴨、台式熱炒</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E9%98%BF%E5%82%91%E5%8F%B0%E5%BC%8F%E6%96%99%E7%90%86%20%C3%97%20%E4%B8%89%E5%85%AB%E9%9B%9E%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%8D%97%E4%BA%AC%E8%B7%AF306%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052355215">撥打電話</a>
+        <a class="btn ghost" href="https://www.newbeiping.com.tw/lastest-content?id=43" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="嘉義小吃／台式合菜" data-district="東區" data-price="平價" data-text="噴水雞肉飯－小雅旗艦店 嘉義小吃／台式合菜 東區 嘉義市東區小雅路382號 05-275-1555 平價 2–10+ 人 附近或對面停車空間，依現場為準 外地親友來嘉義、快速用餐、大型座席 雞肉飯、雞片飯及台式小菜 https://www.newbeiping.com.tw/lastest-content?id=43">
+      <div class="card-top"><span class="badge">嘉義小吃／台式合菜</span><span class="district">東區</span></div>
+      <h3>噴水雞肉飯－小雅旗艦店</h3>
+      <p class="feature">外地親友來嘉義、快速用餐、大型座席</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區小雅路382號</dd></div>
+        <div><dt>電話</dt><dd>05-275-1555</dd></div>
+        <div><dt>人數</dt><dd>2–10+ 人</dd></div>
+        <div><dt>價位</dt><dd>平價</dd></div>
+        <div><dt>停車</dt><dd>附近或對面停車空間，依現場為準</dd></div>
+        <div><dt>推薦</dt><dd>雞肉飯、雞片飯及台式小菜</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E5%99%B4%E6%B0%B4%E9%9B%9E%E8%82%89%E9%A3%AF%EF%BC%8D%E5%B0%8F%E9%9B%85%E6%97%97%E8%89%A6%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%B0%8F%E9%9B%85%E8%B7%AF382%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052751555">撥打電話</a>
+        <a class="btn ghost" href="https://www.newbeiping.com.tw/lastest-content?id=43" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="西式套餐／牛排" data-district="西區" data-price="中高" data-text="TASTy 西堤牛排－嘉義文化店 西式套餐／牛排 西區 嘉義市西區文化路155-70號2樓 05-223-9418 中高 2–12 人 市中心停車場或停車格 套餐制、價格容易掌握，適合生日與小家庭聚餐 牛排與完整套餐，熱門時段宜預約 https://www.tasty.com.tw/shop/content.php?store=25">
+      <div class="card-top"><span class="badge">西式套餐／牛排</span><span class="district">西區</span></div>
+      <h3>TASTy 西堤牛排－嘉義文化店</h3>
+      <p class="feature">套餐制、價格容易掌握，適合生日與小家庭聚餐</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區文化路155-70號2樓</dd></div>
+        <div><dt>電話</dt><dd>05-223-9418</dd></div>
+        <div><dt>人數</dt><dd>2–12 人</dd></div>
+        <div><dt>價位</dt><dd>中高</dd></div>
+        <div><dt>停車</dt><dd>市中心停車場或停車格</dd></div>
+        <div><dt>推薦</dt><dd>牛排與完整套餐，熱門時段宜預約</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=TASTy%20%E8%A5%BF%E5%A0%A4%E7%89%9B%E6%8E%92%EF%BC%8D%E5%98%89%E7%BE%A9%E6%96%87%E5%8C%96%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E6%96%87%E5%8C%96%E8%B7%AF155-70%E8%99%9F2%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052239418">撥打電話</a>
+        <a class="btn ghost" href="https://www.tasty.com.tw/shop/content.php?store=25" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="和風創作套餐" data-district="東區" data-price="中高" data-text="陶板屋－嘉義林森西店 和風創作套餐 東區 嘉義市東區林森西路153號2樓 05-228-8239 中高 2–12 人 中央廣場及市中心停車場 套餐制、口味接受度高，適合長輩、慶生與節日 和風創作套餐，訂位時可告知慶生需求 https://www.tokiya.com.tw/">
+      <div class="card-top"><span class="badge">和風創作套餐</span><span class="district">東區</span></div>
+      <h3>陶板屋－嘉義林森西店</h3>
+      <p class="feature">套餐制、口味接受度高，適合長輩、慶生與節日</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區林森西路153號2樓</dd></div>
+        <div><dt>電話</dt><dd>05-228-8239</dd></div>
+        <div><dt>人數</dt><dd>2–12 人</dd></div>
+        <div><dt>價位</dt><dd>中高</dd></div>
+        <div><dt>停車</dt><dd>中央廣場及市中心停車場</dd></div>
+        <div><dt>推薦</dt><dd>和風創作套餐，訂位時可告知慶生需求</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E9%99%B6%E6%9D%BF%E5%B1%8B%EF%BC%8D%E5%98%89%E7%BE%A9%E6%9E%97%E6%A3%AE%E8%A5%BF%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E6%9E%97%E6%A3%AE%E8%A5%BF%E8%B7%AF153%E8%99%9F2%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052288239">撥打電話</a>
+        <a class="btn ghost" href="https://www.tokiya.com.tw/" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="個人燒肉" data-district="西區" data-price="中" data-text="燒肉Smile－嘉義秀泰店 個人燒肉 西區 嘉義市西區文化路299號3樓 05-216-1555 中 2–8 人 秀泰影城附設停車場，可依規定折抵 每人一爐、年輕家庭與小家庭方便，各自選套餐 個人燒肉套餐；目前營業狀態建議訂位前確認 https://www.jhujian.com.tw/yakiniku_smile/tw/store/detail/%E5%98%89%E7%BE%A9%E7%A7%80%E6%B3%B0">
+      <div class="card-top"><span class="badge">個人燒肉</span><span class="district">西區</span></div>
+      <h3>燒肉Smile－嘉義秀泰店</h3>
+      <p class="feature">每人一爐、年輕家庭與小家庭方便，各自選套餐</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市西區文化路299號3樓</dd></div>
+        <div><dt>電話</dt><dd>05-216-1555</dd></div>
+        <div><dt>人數</dt><dd>2–8 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>秀泰影城附設停車場，可依規定折抵</dd></div>
+        <div><dt>推薦</dt><dd>個人燒肉套餐；目前營業狀態建議訂位前確認</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E7%87%92%E8%82%89Smile%EF%BC%8D%E5%98%89%E7%BE%A9%E7%A7%80%E6%B3%B0%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E6%96%87%E5%8C%96%E8%B7%AF299%E8%99%9F3%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052161555">撥打電話</a>
+        <a class="btn ghost" href="https://www.jhujian.com.tw/yakiniku_smile/tw/store/detail/%E5%98%89%E7%BE%A9%E7%A7%80%E6%B3%B0" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="嘉義台菜／合菜" data-district="東區" data-price="中" data-text="桃城古味餐廳 嘉義台菜／合菜 東區 嘉義市東區大雅路二段350號 05-271-9080 中 4–12 人 大雅路周邊停車，訂位時確認 嘉義在地風味、台菜合菜，適合長輩與外地親友 嘉義風味台菜與多人合菜 https://margaret.tw/restaurants-chiayi/">
+      <div class="card-top"><span class="badge">嘉義台菜／合菜</span><span class="district">東區</span></div>
+      <h3>桃城古味餐廳</h3>
+      <p class="feature">嘉義在地風味、台菜合菜，適合長輩與外地親友</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區大雅路二段350號</dd></div>
+        <div><dt>電話</dt><dd>05-271-9080</dd></div>
+        <div><dt>人數</dt><dd>4–12 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>大雅路周邊停車，訂位時確認</dd></div>
+        <div><dt>推薦</dt><dd>嘉義風味台菜與多人合菜</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9F%8E%E5%8F%A4%E5%91%B3%E9%A4%90%E5%BB%B3%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%A4%A7%E9%9B%85%E8%B7%AF%E4%BA%8C%E6%AE%B5350%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="tel:052719080">撥打電話</a>
+        <a class="btn ghost" href="https://margaret.tw/restaurants-chiayi/" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article>
+    <article class="card" data-category="庭園餐廳／套餐／合菜" data-district="東區" data-price="中" data-text="葉子庭園餐廳 庭園餐廳／套餐／合菜 東區 嘉義市東區近蘭潭、大雅路生活圈（請依訂位資訊導航） 電話請於訂位前由官方頁面確認 中 2–12 人 庭園周邊停車條件請先確認 戶外庭園、親子與寵物友善，適合帶小孩放鬆聚餐 套餐、鍋物與合菜；出發前務必確認最新地址電話 https://wonderfood.pixnet.net/blog/posts/8234866379">
+      <div class="card-top"><span class="badge">庭園餐廳／套餐／合菜</span><span class="district">東區</span></div>
+      <h3>葉子庭園餐廳</h3>
+      <p class="feature">戶外庭園、親子與寵物友善，適合帶小孩放鬆聚餐</p>
+      <dl>
+        <div><dt>地址</dt><dd>嘉義市東區近蘭潭、大雅路生活圈（請依訂位資訊導航）</dd></div>
+        <div><dt>電話</dt><dd>電話請於訂位前由官方頁面確認</dd></div>
+        <div><dt>人數</dt><dd>2–12 人</dd></div>
+        <div><dt>價位</dt><dd>中</dd></div>
+        <div><dt>停車</dt><dd>庭園周邊停車條件請先確認</dd></div>
+        <div><dt>推薦</dt><dd>套餐、鍋物與合菜；出發前務必確認最新地址電話</dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%E8%91%89%E5%AD%90%E5%BA%AD%E5%9C%92%E9%A4%90%E5%BB%B3%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E8%BF%91%E8%98%AD%E6%BD%AD%E3%80%81%E5%A4%A7%E9%9B%85%E8%B7%AF%E7%94%9F%E6%B4%BB%E5%9C%88%EF%BC%88%E8%AB%8B%E4%BE%9D%E8%A8%82%E4%BD%8D%E8%B3%87%E8%A8%8A%E5%B0%8E%E8%88%AA%EF%BC%89" target="_blank" rel="noopener">Google 地圖</a>
+        <a class="btn" href="#">撥打電話</a>
+        <a class="btn ghost" href="https://wonderfood.pixnet.net/blog/posts/8234866379" target="_blank" rel="noopener">資料來源</a>
+      </div>
+    </article></section>
+  <section id="tableSection" class="table-wrap hidden">
+    <table><thead><tr><th>餐廳</th><th>類型</th><th>區域</th><th>地址</th><th>電話</th><th>建議人數</th><th>價位</th><th>地圖</th></tr></thead>
+    <tbody>
+      <tr data-category="江浙／福州合菜" data-district="東區" data-price="中高" data-text="桃花源餐廳－嘉義分店 江浙／福州合菜 東區 嘉義市東區大雅路一段870號 05-275-7585 中高 6–20+ 人 對面公有收費停車場 庭園景觀、合菜、適合長輩、家庭慶生與大型聚會 香酥鴨、酸菜白肉鍋、江浙與福州菜 https://www.peach-restaurant.com.tw/store_info/2">
+        <td><strong>桃花源餐廳－嘉義分店</strong></td><td>江浙／福州合菜</td><td>東區</td>
+        <td>嘉義市東區大雅路一段870號</td><td>05-275-7585</td><td>6–20+ 人</td><td>中高</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E8%8A%B1%E6%BA%90%E9%A4%90%E5%BB%B3%EF%BC%8D%E5%98%89%E7%BE%A9%E5%88%86%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%A4%A7%E9%9B%85%E8%B7%AF%E4%B8%80%E6%AE%B5870%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="粵菜／港式點心" data-district="東區" data-price="中高" data-text="頤粵軒－新悦花園酒店 粵菜／港式點心 東區 嘉義市東區保順路69號2樓 05-277-6266 中高 4–20+ 人 飯店停車場，訂位時確認折抵 飯店餐廳、烤鴨、港點、用餐環境舒適，適合三代同堂 櫻桃片皮鴨、港式點心、粵式桌菜 https://www.hsinhotel.com.tw/banquet-detail/41/">
+        <td><strong>頤粵軒－新悦花園酒店</strong></td><td>粵菜／港式點心</td><td>東區</td>
+        <td>嘉義市東區保順路69號2樓</td><td>05-277-6266</td><td>4–20+ 人</td><td>中高</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E9%A0%A4%E7%B2%B5%E8%BB%92%EF%BC%8D%E6%96%B0%E6%82%A6%E8%8A%B1%E5%9C%92%E9%85%92%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E4%BF%9D%E9%A0%86%E8%B7%AF69%E8%99%9F2%E6%A8%93" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="自助餐／國際料理" data-district="西區" data-price="中高" data-text="田園西餐廳－嘉義福容voco酒店 自助餐／國際料理 西區 嘉義市西區世賢路一段789號2樓 05-232-3399 中高 2–20+ 人 飯店停車場 寬敞座位、餐點選擇多，適合有長輩與小孩的家庭 依檔期供應自助餐或主題餐飲，訂位前確認餐期 https://www.fullon-hotels.com.tw/voco/cy/tw/restaurant/">
+        <td><strong>田園西餐廳－嘉義福容voco酒店</strong></td><td>自助餐／國際料理</td><td>西區</td>
+        <td>嘉義市西區世賢路一段789號2樓</td><td>05-232-3399</td><td>2–20+ 人</td><td>中高</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E7%94%B0%E5%9C%92%E8%A5%BF%E9%A4%90%E5%BB%B3%EF%BC%8D%E5%98%89%E7%BE%A9%E7%A6%8F%E5%AE%B9voco%E9%85%92%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E4%B8%96%E8%B3%A2%E8%B7%AF%E4%B8%80%E6%AE%B5789%E8%99%9F2%E6%A8%93" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="粵菜／中式桌菜" data-district="西區" data-price="高" data-text="福粵樓－嘉義福容voco酒店 粵菜／中式桌菜 西區 嘉義市西區世賢路一段789號 05-232-3399 高 6–20+ 人 飯店停車場 飯店中餐廳、家庭宴席、節慶聚餐與正式慶生 櫻桃片皮鴨、粵式海鮮、桌菜 https://www.fullon-hotels.com.tw/voco/cy/tw/restaurant/">
+        <td><strong>福粵樓－嘉義福容voco酒店</strong></td><td>粵菜／中式桌菜</td><td>西區</td>
+        <td>嘉義市西區世賢路一段789號</td><td>05-232-3399</td><td>6–20+ 人</td><td>高</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E7%B2%B5%E6%A8%93%EF%BC%8D%E5%98%89%E7%BE%A9%E7%A6%8F%E5%AE%B9voco%E9%85%92%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E4%B8%96%E8%B3%A2%E8%B7%AF%E4%B8%80%E6%AE%B5789%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="川菜／台式合菜" data-district="西區" data-price="中" data-text="金牌川菜料理 川菜／台式合菜 西區 嘉義市西區興達路120號 05-281-0258 中 4–12 人 對面停車空間，仍建議電話確認 多人分食、份量適合家庭、口味較有變化 五更腸旺、客家小炒、橙汁排骨 https://www.newbeiping.com.tw/lastest-content?id=43">
+        <td><strong>金牌川菜料理</strong></td><td>川菜／台式合菜</td><td>西區</td>
+        <td>嘉義市西區興達路120號</td><td>05-281-0258</td><td>4–12 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E7%89%8C%E5%B7%9D%E8%8F%9C%E6%96%99%E7%90%86%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E8%88%88%E9%81%94%E8%B7%AF120%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="茶樓／港點／合菜" data-district="東區" data-price="中" data-text="竹居茶樓 茶樓／港點／合菜 東區 嘉義市東區大雅路二段275號 05-271-9275 中 4–12 人 無專屬停車場，建議找附近停車格 中式庭園、錦鯉池、港點與熱炒，適合親子與長輩 小籠包、港式點心、熱炒合菜 https://www.newbeiping.com.tw/lastest-content?id=43">
+        <td><strong>竹居茶樓</strong></td><td>茶樓／港點／合菜</td><td>東區</td>
+        <td>嘉義市東區大雅路二段275號</td><td>05-271-9275</td><td>4–12 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E7%AB%B9%E5%B1%85%E8%8C%B6%E6%A8%93%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%A4%A7%E9%9B%85%E8%B7%AF%E4%BA%8C%E6%AE%B5275%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="精緻台菜／川味" data-district="西區" data-price="中" data-text="春燕飯館 精緻台菜／川味 西區 嘉義市西區興業西路233號 05-286-0688 中 4–10 人 市區路邊或附近停車場 小家庭聚餐、菜色精緻、適合慶生與朋友聚會 左宗棠雞、金沙豆腐、花雕醉雞 https://www.newbeiping.com.tw/lastest-content?id=43">
+        <td><strong>春燕飯館</strong></td><td>精緻台菜／川味</td><td>西區</td>
+        <td>嘉義市西區興業西路233號</td><td>05-286-0688</td><td>4–10 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E6%98%A5%E7%87%95%E9%A3%AF%E9%A4%A8%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E8%88%88%E6%A5%AD%E8%A5%BF%E8%B7%AF233%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="海鮮／台式熱炒" data-district="西區" data-price="中" data-text="蚵庄海產 海鮮／台式熱炒 西區 嘉義市西區博愛路二段396號 05-231-9987 中 4–12 人 附近停車，訂位時詢問店家 傳統海產店、多人點菜分食、適合喜歡海鮮的家庭 蚵仔酥、炒海瓜子、清蒸鮮魚 https://www.facebook.com/oysterhouse2319987/">
+        <td><strong>蚵庄海產</strong></td><td>海鮮／台式熱炒</td><td>西區</td>
+        <td>嘉義市西區博愛路二段396號</td><td>05-231-9987</td><td>4–12 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E8%9A%B5%E5%BA%84%E6%B5%B7%E7%94%A2%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%8D%9A%E6%84%9B%E8%B7%AF%E4%BA%8C%E6%AE%B5396%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="台式熱炒／烤雞" data-district="西區" data-price="中" data-text="阿傑台式料理 × 三八雞 台式熱炒／烤雞 西區 嘉義市西區南京路306號 05-235-5215 中 4–12 人 附近有停車空間，建議先詢問 晚餐聚會、台式菜色、適合食量較大的家庭 三八烤雞、薑母鴨、台式熱炒 https://www.newbeiping.com.tw/lastest-content?id=43">
+        <td><strong>阿傑台式料理 × 三八雞</strong></td><td>台式熱炒／烤雞</td><td>西區</td>
+        <td>嘉義市西區南京路306號</td><td>05-235-5215</td><td>4–12 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E9%98%BF%E5%82%91%E5%8F%B0%E5%BC%8F%E6%96%99%E7%90%86%20%C3%97%20%E4%B8%89%E5%85%AB%E9%9B%9E%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%8D%97%E4%BA%AC%E8%B7%AF306%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="嘉義小吃／台式合菜" data-district="東區" data-price="平價" data-text="噴水雞肉飯－小雅旗艦店 嘉義小吃／台式合菜 東區 嘉義市東區小雅路382號 05-275-1555 平價 2–10+ 人 附近或對面停車空間，依現場為準 外地親友來嘉義、快速用餐、大型座席 雞肉飯、雞片飯及台式小菜 https://www.newbeiping.com.tw/lastest-content?id=43">
+        <td><strong>噴水雞肉飯－小雅旗艦店</strong></td><td>嘉義小吃／台式合菜</td><td>東區</td>
+        <td>嘉義市東區小雅路382號</td><td>05-275-1555</td><td>2–10+ 人</td><td>平價</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E5%99%B4%E6%B0%B4%E9%9B%9E%E8%82%89%E9%A3%AF%EF%BC%8D%E5%B0%8F%E9%9B%85%E6%97%97%E8%89%A6%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%B0%8F%E9%9B%85%E8%B7%AF382%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="西式套餐／牛排" data-district="西區" data-price="中高" data-text="TASTy 西堤牛排－嘉義文化店 西式套餐／牛排 西區 嘉義市西區文化路155-70號2樓 05-223-9418 中高 2–12 人 市中心停車場或停車格 套餐制、價格容易掌握，適合生日與小家庭聚餐 牛排與完整套餐，熱門時段宜預約 https://www.tasty.com.tw/shop/content.php?store=25">
+        <td><strong>TASTy 西堤牛排－嘉義文化店</strong></td><td>西式套餐／牛排</td><td>西區</td>
+        <td>嘉義市西區文化路155-70號2樓</td><td>05-223-9418</td><td>2–12 人</td><td>中高</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=TASTy%20%E8%A5%BF%E5%A0%A4%E7%89%9B%E6%8E%92%EF%BC%8D%E5%98%89%E7%BE%A9%E6%96%87%E5%8C%96%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E6%96%87%E5%8C%96%E8%B7%AF155-70%E8%99%9F2%E6%A8%93" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="和風創作套餐" data-district="東區" data-price="中高" data-text="陶板屋－嘉義林森西店 和風創作套餐 東區 嘉義市東區林森西路153號2樓 05-228-8239 中高 2–12 人 中央廣場及市中心停車場 套餐制、口味接受度高，適合長輩、慶生與節日 和風創作套餐，訂位時可告知慶生需求 https://www.tokiya.com.tw/">
+        <td><strong>陶板屋－嘉義林森西店</strong></td><td>和風創作套餐</td><td>東區</td>
+        <td>嘉義市東區林森西路153號2樓</td><td>05-228-8239</td><td>2–12 人</td><td>中高</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E9%99%B6%E6%9D%BF%E5%B1%8B%EF%BC%8D%E5%98%89%E7%BE%A9%E6%9E%97%E6%A3%AE%E8%A5%BF%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E6%9E%97%E6%A3%AE%E8%A5%BF%E8%B7%AF153%E8%99%9F2%E6%A8%93" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="個人燒肉" data-district="西區" data-price="中" data-text="燒肉Smile－嘉義秀泰店 個人燒肉 西區 嘉義市西區文化路299號3樓 05-216-1555 中 2–8 人 秀泰影城附設停車場，可依規定折抵 每人一爐、年輕家庭與小家庭方便，各自選套餐 個人燒肉套餐；目前營業狀態建議訂位前確認 https://www.jhujian.com.tw/yakiniku_smile/tw/store/detail/%E5%98%89%E7%BE%A9%E7%A7%80%E6%B3%B0">
+        <td><strong>燒肉Smile－嘉義秀泰店</strong></td><td>個人燒肉</td><td>西區</td>
+        <td>嘉義市西區文化路299號3樓</td><td>05-216-1555</td><td>2–8 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E7%87%92%E8%82%89Smile%EF%BC%8D%E5%98%89%E7%BE%A9%E7%A7%80%E6%B3%B0%E5%BA%97%20%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E6%96%87%E5%8C%96%E8%B7%AF299%E8%99%9F3%E6%A8%93" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="嘉義台菜／合菜" data-district="東區" data-price="中" data-text="桃城古味餐廳 嘉義台菜／合菜 東區 嘉義市東區大雅路二段350號 05-271-9080 中 4–12 人 大雅路周邊停車，訂位時確認 嘉義在地風味、台菜合菜，適合長輩與外地親友 嘉義風味台菜與多人合菜 https://margaret.tw/restaurants-chiayi/">
+        <td><strong>桃城古味餐廳</strong></td><td>嘉義台菜／合菜</td><td>東區</td>
+        <td>嘉義市東區大雅路二段350號</td><td>05-271-9080</td><td>4–12 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9F%8E%E5%8F%A4%E5%91%B3%E9%A4%90%E5%BB%B3%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%A4%A7%E9%9B%85%E8%B7%AF%E4%BA%8C%E6%AE%B5350%E8%99%9F" target="_blank">導航</a></td>
+      </tr>
+      <tr data-category="庭園餐廳／套餐／合菜" data-district="東區" data-price="中" data-text="葉子庭園餐廳 庭園餐廳／套餐／合菜 東區 嘉義市東區近蘭潭、大雅路生活圈（請依訂位資訊導航） 電話請於訂位前由官方頁面確認 中 2–12 人 庭園周邊停車條件請先確認 戶外庭園、親子與寵物友善，適合帶小孩放鬆聚餐 套餐、鍋物與合菜；出發前務必確認最新地址電話 https://wonderfood.pixnet.net/blog/posts/8234866379">
+        <td><strong>葉子庭園餐廳</strong></td><td>庭園餐廳／套餐／合菜</td><td>東區</td>
+        <td>嘉義市東區近蘭潭、大雅路生活圈（請依訂位資訊導航）</td><td>電話請於訂位前由官方頁面確認</td><td>2–12 人</td><td>中</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query=%E8%91%89%E5%AD%90%E5%BA%AD%E5%9C%92%E9%A4%90%E5%BB%B3%20%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E8%BF%91%E8%98%AD%E6%BD%AD%E3%80%81%E5%A4%A7%E9%9B%85%E8%B7%AF%E7%94%9F%E6%B4%BB%E5%9C%88%EF%BC%88%E8%AB%8B%E4%BE%9D%E8%A8%82%E4%BD%8D%E8%B3%87%E8%A8%8A%E5%B0%8E%E8%88%AA%EF%BC%89" target="_blank">導航</a></td>
+      </tr></tbody></table>
+  </section>
+
+  <details open><summary>依家庭需求快速選擇</summary>
+    <div class="tips">
+      <div class="tip"><strong>三代同堂、長輩優先</strong><br>桃花源、頤粵軒、福粵樓、竹居茶樓。先詢問電梯、無障礙與包廂。</div>
+      <div class="tip"><strong>小孩口味很多變</strong><br>田園西餐廳的多樣餐點、葉子庭園餐廳的戶外空間較有彈性。</div>
+      <div class="tip"><strong>慶生與節日</strong><br>西堤、陶板屋、飯店餐廳較容易安排套餐、蛋糕與儀式感。</div>
+      <div class="tip"><strong>多人合菜、預算好分攤</strong><br>金牌川菜、春燕飯館、蚵庄海產、阿傑台式料理。</div>
+      <div class="tip"><strong>外地親友想吃嘉義味</strong><br>桃城古味、噴水雞肉飯小雅旗艦店、蚵庄海產。</div>
+      <div class="tip"><strong>停車優先</strong><br>飯店餐廳與秀泰館內餐廳通常較方便；市中心餐廳應預留找車位時間。</div>
+    </div>
+  </details>
+
+  <details><summary>訂位時建議一次問清楚</summary>
+    <p>建議告知日期、用餐時段、成人與兒童人數，並詢問兒童椅、包廂費或最低消費、是否能帶蛋糕、素食或過敏餐、信用卡與停車折抵。週末家庭聚餐可提前一至兩週詢問；母親節、父親節與農曆年前則需更早。</p>
+  </details>
+</div></main>
+
+<footer><div class="wrap">
+  <strong>資料來源說明</strong><br>
+  店家官方網站、官方訂位頁及近期嘉義餐廳整理頁交叉整理。每張餐廳卡均附「資料來源」按鈕。資訊可能異動，請以餐廳最新公告為準。
+</div></footer>
+
+<script>
+const search=document.querySelector('#search'), district=document.querySelector('#district'), price=document.querySelector('#price');
+const count=document.querySelector('#count'), cards=[...document.querySelectorAll('.card')], rows=[...document.querySelectorAll('tbody tr')];
+function filter(){
+ const q=search.value.trim().toLowerCase(), d=district.value, p=price.value; let n=0;
+ cards.forEach((el,i)=>{const ok=(!q||el.dataset.text.toLowerCase().includes(q))&&(!d||el.dataset.district===d)&&(!p||el.dataset.price===p); el.classList.toggle('hidden',!ok); rows[i].classList.toggle('hidden',!ok); if(ok)n++;});
+ count.textContent=n;
+}
+[search,district,price].forEach(x=>x.addEventListener('input',filter));
+document.querySelector('#view').addEventListener('change',e=>{
+ document.querySelector('#cards').classList.toggle('hidden',e.target.value!=='cards');
+ document.querySelector('#tableSection').classList.toggle('hidden',e.target.value!=='table');
+});
+</script>
+</body></html>
