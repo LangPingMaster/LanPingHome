@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嘉義 → 麗寶樂園｜一日自駕多媒體旅遊指南</title>
+<meta name="description" content="嘉義出發到麗寶樂園一日自駕行程，包含月眉觀光糖廠、麗寶樂園、Outlet、天空之夢摩天輪、中社觀光花市等景點，多媒體圖片、影片、語音導覽與導航連結。">
+<style>
+:root{
+  --bg:#07111f;--panel:#0d1b2d;--panel2:#12243a;--text:#eef6ff;--muted:#b7c8dc;
+  --accent:#ffb703;--accent2:#26c6da;--green:#4ade80;--line:#29435e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;background:
+radial-gradient(circle at 10% 5%,#183a59 0,transparent 30%),
+linear-gradient(180deg,#06101d,#0a1625 45%,#07111f);color:var(--text);line-height:1.75}
+a{color:inherit;text-decoration:none}
+.hero{min-height:78vh;display:grid;place-items:center;position:relative;overflow:hidden;padding:70px 20px}
+.hero:before{content:"";position:absolute;inset:0;background:
+linear-gradient(180deg,rgba(0,0,0,.16),rgba(5,13,24,.9)),
+url('https://www.themepark.net.tw/Upload/UserFiles/images/%E5%85%A8%E5%8F%B0%E6%9C%80%E5%A4%A7%E6%91%A9%E5%A4%A9%E8%BC%AASKY%20DREAM%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%A4%A2%28%E9%BA%97%E5%AF%B6%E6%8F%90%E4%BE%9B%29.jpg') center/cover;transform:scale(1.04)}
+.hero-inner{position:relative;max-width:1050px;text-align:center}
+.kicker{display:inline-block;padding:7px 14px;border:1px solid #ffffff44;border-radius:999px;background:#081525b0;backdrop-filter:blur(10px);font-weight:800}
+h1{font-size:clamp(2.35rem,6vw,5rem);line-height:1.1;margin:18px 0 14px;text-shadow:0 4px 28px #000}
+.hero p{max-width:850px;margin:auto;color:#e2edf8;font-size:clamp(1rem,2.2vw,1.25rem)}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn{border:0;border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer;background:var(--accent);color:#142033;box-shadow:0 10px 25px #0005}
+.btn.secondary{background:#10243ad9;color:#fff;border:1px solid #ffffff40}
+nav{position:sticky;top:0;z-index:20;background:#07111fdd;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{max-width:1150px;margin:auto;padding:10px 16px;display:flex;gap:12px;overflow:auto}
+nav a{white-space:nowrap;padding:8px 12px;border-radius:10px;color:#dceaff}
+nav a:hover{background:#17304a}
+main{max-width:1150px;margin:auto;padding:34px 18px 80px}
+section{margin:42px 0}
+.section-title{font-size:clamp(1.55rem,3vw,2.2rem);margin:0 0 18px}
+.note{background:#10243a;border-left:5px solid var(--accent);padding:14px 16px;border-radius:12px;color:#e9f2fb}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{grid-column:span 4;background:linear-gradient(180deg,#11263b,#0c1c2e);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 13px 30px #0003}
+.card img{width:100%;height:215px;object-fit:cover;display:block}
+.card .body{padding:18px}
+.badge{display:inline-block;background:#143552;color:#bdeeff;border:1px solid #2d638a;padding:4px 9px;border-radius:999px;font-size:.83rem;font-weight:800}
+.card h3{margin:8px 0 6px;font-size:1.32rem}
+.meta{color:var(--muted);font-size:.94rem}
+.timeline{position:relative;margin-left:12px}
+.timeline:before{content:"";position:absolute;left:18px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--accent),var(--accent2))}
+.stop{position:relative;margin:0 0 20px;padding:18px 18px 18px 56px;background:#0d1d30;border:1px solid var(--line);border-radius:16px}
+.stop:before{content:"";position:absolute;left:10px;top:22px;width:17px;height:17px;border-radius:50%;background:var(--accent);border:4px solid #0b1b2b;box-shadow:0 0 0 2px #ffcf54}
+.stop strong{color:#ffd166}
+.route{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:center}
+.route-step{background:#0e2033;border:1px solid var(--line);padding:15px;border-radius:14px;text-align:center;font-weight:800}
+.arrow{text-align:center;color:var(--accent);font-size:1.6rem}
+.media-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.gallery-main{background:#0b1a2a;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.gallery-main img{width:100%;height:460px;object-fit:cover;display:block;transition:.4s}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.thumbs img{width:100%;height:100px;object-fit:cover;border-radius:12px;cursor:pointer;border:2px solid transparent}
+.thumbs img:hover{border-color:var(--accent)}
+.video{background:#0b1a2a;border:1px solid var(--line);border-radius:20px;padding:14px}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:14px}
+details{background:#0d1d30;border:1px solid var(--line);border-radius:14px;margin:10px 0;padding:4px 16px}
+summary{cursor:pointer;padding:13px 0;font-weight:900;color:#f6fbff}
+table{width:100%;border-collapse:collapse;background:#0b1a2b;border-radius:16px;overflow:hidden}
+th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:#122941;color:#ffd166}
+.small{font-size:.9rem;color:var(--muted)}
+footer{text-align:center;padding:30px;color:#9fb0c5;border-top:1px solid var(--line)}
+@media(max-width:900px){.card{grid-column:span 6}.media-grid{grid-template-columns:1fr}.route{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+@media(max-width:620px){.card{grid-column:span 12}.hero{min-height:68vh}.gallery-main img{height:300px}table{font-size:.9rem}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <span class="kicker">🚗 嘉義出發｜台中后里一日自駕</span>
+    <h1>嘉義 → 麗寶樂園<br>一天玩得剛剛好</h1>
+    <p>以麗寶樂園為主角，搭配月眉觀光糖廠、Outlet Mall、天空之夢摩天輪；想賞花則可把上午改成中社觀光花市。頁面內含圖片、影片、語音導覽與 Google Maps 導航。</p>
+    <div class="actions">
+      <a class="btn" href="#schedule">查看推薦行程</a>
+      <button class="btn secondary" onclick="speakTrip()">🔊 播放行程語音介紹</button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#route">路線總覽</a><a href="#schedule">時間表</a><a href="#spots">景點介紹</a>
+    <a href="#media">多媒體</a><a href="#options">替代方案</a><a href="#tips">自駕提醒</a>
+  </div>
+</nav>
+
+<main>
+<section id="route">
+  <h2 class="section-title">🧭 推薦路線總覽</h2>
+  <div class="route">
+    <div class="route-step">嘉義<br><span class="small">07:00 出發</span></div><div class="arrow">→</div>
+    <div class="route-step">月眉觀光糖廠<br><span class="small">08:40 左右</span></div><div class="arrow">→</div>
+    <div class="route-step">麗寶樂園<br><span class="small">09:30～16:30</span></div>
+  </div>
+  <div class="route" style="margin-top:10px">
+    <div class="route-step">麗寶 Outlet<br><span class="small">晚餐＋逛街</span></div><div class="arrow">→</div>
+    <div class="route-step">天空之夢<br><span class="small">夕陽／夜景</span></div><div class="arrow">→</div>
+    <div class="route-step">嘉義<br><span class="small">約 21:00 返回</span></div>
+  </div>
+  <p class="note">這個版本刻意不塞太多景點，目的是讓麗寶樂園至少保留約 6～7 小時。若想拍花海，可以把「月眉觀光糖廠」替換成「中社觀光花市」。</p>
+</section>
+
+<section id="schedule">
+<h2 class="section-title">⏰ 一日行程時間軸</h2>
+<div class="timeline">
+  <div class="stop"><strong>07:00｜嘉義出發</strong><br>建議走國道一號北上。途中可視情況在西螺或泰安服務區短暫休息。</div>
+  <div class="stop"><strong>08:40～09:20｜月眉觀光糖廠</strong><br>先散步、看糖業文化、錦鯉池，也可買冰品。官方資料顯示一般營業時間為 08:30～17:00。</div>
+  <div class="stop"><strong>09:30～16:30｜麗寶樂園</strong><br>把大部分時間留給主題樂園。熱門設施、午餐與排隊時間都要算進去，夏季也要注意補水與防曬。</div>
+  <div class="stop"><strong>16:30～18:00｜麗寶 Outlet Mall</strong><br>離開遊樂設施後改成比較輕鬆的逛街節奏，在園區直接用餐，不必再另外開車找餐廳。</div>
+  <div class="stop"><strong>18:00～18:40｜天空之夢摩天輪</strong><br>傍晚搭乘最適合拍照，可以從白天一路看到夕陽或夜間燈光。</div>
+  <div class="stop"><strong>19:00～21:00｜返回嘉義</strong><br>結束一日行程。實際時間會受週末車流、停車、排隊與天候影響。</div>
+</div>
+</section>
+
+<section id="spots">
+<h2 class="section-title">📍 景點多媒體介紹</h2>
+<div class="grid">
+  <article class="card">
+    <img src="https://travel.taichung.gov.tw/instagram-src/cz6de_hlxgu" alt="月眉觀光糖廠" loading="lazy">
+    <div class="body"><span class="badge">上午順遊</span><h3>月眉觀光糖廠</h3>
+    <p>距麗寶很近，適合開園前安排。可以認識糖業歷史、逛園區、看錦鯉池及吃冰，時間抓 30～50 分鐘即可。</p>
+    <p class="meta">地址：臺中市后里區甲后路二段350號｜一般營業 08:30～17:00</p>
+    <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=月眉觀光糖廠">Google Maps 導航</a></div>
+  </article>
+
+  <article class="card">
+    <img src="https://www.themepark.net.tw/Upload/UserFiles/images/%E5%85%A8%E5%8F%B0%E6%9C%80%E5%A4%A7%E6%91%A9%E5%A4%A9%E8%BC%AASKY%20DREAM%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%A4%A2%28%E9%BA%97%E5%AF%B6%E6%8F%90%E4%BE%9B%29.jpg" alt="麗寶樂園與摩天輪" loading="lazy">
+    <div class="body"><span class="badge">今日主角</span><h3>麗寶樂園度假區</h3>
+    <p>一天的核心行程。遊樂園之外還有 Outlet、摩天輪等設施，很適合從上午一路待到晚餐後。</p>
+    <p class="meta">建議停留：至少 6～7 小時</p>
+    <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=麗寶樂園度假區">Google Maps 導航</a></div>
+  </article>
+
+  <article class="card">
+    <img src="https://pimg.1px.tw/julialkpkpk/1675088350-1483560289-g.jpg" alt="中社觀光花市" loading="lazy">
+    <div class="body"><span class="badge">賞花替代方案</span><h3>中社觀光花市</h3>
+    <p>如果喜歡花海與拍照，可取代糖廠。官方資料顯示花海區一般為 09:00～18:00；每年 1～3 月鬱金香最具代表性。</p>
+    <p class="meta">臺中市后里區三豐路五段333號｜花海全票目前公告 150 元</p>
+    <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=中社觀光花市">Google Maps 導航</a></div>
+  </article>
+</div>
+</section>
+
+<section id="media">
+<h2 class="section-title">🎞️ 圖片＋影片＋語音導覽</h2>
+<div class="media-grid">
+  <div>
+    <div class="gallery-main"><img id="mainPhoto" src="https://www.themepark.net.tw/Upload/UserFiles/images/%E5%85%A8%E5%8F%B0%E6%9C%80%E5%A4%A7%E6%91%A9%E5%A4%A9%E8%BC%AASKY%20DREAM%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%A4%A2%28%E9%BA%97%E5%AF%B6%E6%8F%90%E4%BE%9B%29.jpg" alt="旅遊相簿"></div>
+    <div class="thumbs">
+      <img onclick="swap(this.src)" src="https://www.themepark.net.tw/Upload/UserFiles/images/%E5%85%A8%E5%8F%B0%E6%9C%80%E5%A4%A7%E6%91%A9%E5%A4%A9%E8%BC%AASKY%20DREAM%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%A4%A2%28%E9%BA%97%E5%AF%B6%E6%8F%90%E4%BE%9B%29.jpg" alt="麗寶摩天輪">
+      <img onclick="swap(this.src)" src="https://travel.taichung.gov.tw/instagram-src/cz6de_hlxgu" alt="月眉糖廠">
+      <img onclick="swap(this.src)" src="https://pimg.1px.tw/julialkpkpk/1675088350-1483560289-g.jpg" alt="中社花市">
+    </div>
+  </div>
+  <div class="video">
+    <h3>▶ 月眉觀光糖廠影片</h3>
+    <iframe src="https://www.youtube.com/embed/6DOAnlvyGFM" title="月眉觀光糖廠影片" allowfullscreen></iframe>
+    <p class="small">影片來源：YouTube 公開影片。若瀏覽器阻擋第三方嵌入，可直接按下方按鈕開啟 YouTube。</p>
+    <a class="btn" target="_blank" href="https://www.youtube.com/watch?v=6DOAnlvyGFM">在 YouTube 開啟</a>
+    <button class="btn secondary" style="margin-top:10px" onclick="speakTrip()">🔊 聽行程語音</button>
+  </div>
+</div>
+</section>
+
+<section id="options">
+<h2 class="section-title">🌸 三種玩法比較</h2>
+<table>
+<thead><tr><th>版本</th><th>上午</th><th>下午～晚上</th><th>適合</th></tr></thead>
+<tbody>
+<tr><td>⭐ 標準版</td><td>月眉觀光糖廠</td><td>麗寶樂園 → Outlet → 摩天輪</td><td>第一次去、想把麗寶玩完整</td></tr>
+<tr><td>🌷 賞花版</td><td>中社觀光花市</td><td>麗寶樂園 → Outlet</td><td>家庭、長輩、喜歡拍照</td></tr>
+<tr><td>🎢 純樂園版</td><td>直接前往麗寶</td><td>樂園 → Outlet → 摩天輪</td><td>想玩最多設施、不想趕行程</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="tips">
+<h2 class="section-title">🚘 出發前實用提醒</h2>
+<details open><summary>高速公路與時間怎麼抓？</summary><p>嘉義到后里屬跨縣市移動，單程通常要抓約 1.5～2 小時以上；週末、連假與國道壅塞時應再預留緩衝。建議 07:00 左右出發。</p></details>
+<details><summary>如果只能選一個附加景點？</summary><p>選月眉觀光糖廠。它距離麗寶近、停留時間短，最不容易壓縮遊樂園時間。</p></details>
+<details><summary>中社花市值得排嗎？</summary><p>喜歡賞花、拍照就值得，但它至少需要約 1 小時。若主要目標是麗寶，建議用它「取代」糖廠，而不是兩個都塞進上午。</p></details>
+<details><summary>夏天要準備什麼？</summary><p>防曬用品、帽子、補水用品、行動電源、替換衣物都很實用。水上設施或午後雷陣雨也可能讓衣物潮濕。</p></details>
+<p class="note">票價、營業時間、設施維修與活動可能臨時變更。出發前一天請再查麗寶樂園與各景點官方公告。</p>
+</section>
+</main>
+
+<footer>
+  嘉義 → 麗寶樂園 一日自駕多媒體旅遊指南｜2026<br>
+  <span class="small">圖片與影片均以外部公開來源連結載入；網路離線時部分多媒體內容可能無法顯示。</span>
+</footer>
+
+<script>
+function swap(src){document.getElementById('mainPhoto').src=src;}
+function speakTrip(){
+  if(!('speechSynthesis' in window)){alert('你的瀏覽器不支援語音朗讀。');return;}
+  speechSynthesis.cancel();
+  const text='嘉義到麗寶樂園一日遊。建議早上七點從嘉義出發，八點四十分左右先到月眉觀光糖廠，九點半進入麗寶樂園。下午四點半左右到麗寶 Outlet 逛街和吃晚餐，傍晚搭天空之夢摩天輪看夕陽及夜景，晚上七點左右返回嘉義。';
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='zh-TW'; u.rate=0.95; u.pitch=1;
+  speechSynthesis.speak(u);
+}
+</script>
+</body>
+</html>
