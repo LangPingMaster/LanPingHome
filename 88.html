@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>龔家父親節七彩無人機動畫</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #02040f;
+    font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.panel {
+    position: fixed;
+    top: 22px;
+    left: 50%;
+    z-index: 5;
+    padding: 10px 20px;
+    border: 1px solid rgba(125, 211, 252, 0.28);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    background: rgba(5, 12, 35, 0.45);
+    backdrop-filter: blur(10px);
+    transform: translateX(-50%);
+}
+
+#message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+#message.show {
+    animation: messageShow 2s ease-out forwards;
+}
+
+.main-text,
+.second-text {
+    display: block;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    background: linear-gradient(
+        90deg,
+        #ff3158,
+        #ff9f1c,
+        #fff200,
+        #2eff8b,
+        #29d9ff,
+        #6574ff,
+        #d650ff,
+        #ff3158
+    );
+    background-size: 300% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: rainbowMove 3s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,.75))
+            drop-shadow(0 0 26px rgba(55,200,255,.8));
+}
+
+.main-text {
+    font-size: clamp(2.2rem, 7vw, 6rem);
+}
+
+.second-text {
+    margin-top: 14px;
+    font-size: clamp(2.7rem, 9vw, 8rem);
+}
+
+.english {
+    display: block;
+    margin-top: 22px;
+    color: white;
+    font-size: clamp(0.9rem, 2vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: 0.38em;
+    text-shadow: 0 0 15px #5bdcff;
+}
+
+#replay {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 10;
+    padding: 12px 24px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 999px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(15, 25, 65, 0.65);
+    backdrop-filter: blur(10px);
+    transition: 0.4s;
+}
+
+#replay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#replay:hover {
+    background: linear-gradient(90deg, #7657ff, #ef4fff);
+    transform: translateY(-2px);
+}
+
+@keyframes messageShow {
+    0% {
+        opacity: 0;
+        filter: blur(18px);
+        transform: translate(-50%, -50%) scale(0.65);
+    }
+
+    70% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes rainbowMove {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: 300% center;
+    }
+}
+
+@media (max-width: 650px) {
+    .main-text,
+    .second-text {
+        letter-spacing: 0.05em;
+    }
+
+    .english {
+        letter-spacing: 0.18em;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="panel" id="status">
+    七彩無人機表演準備中
+</div>
+
+<div id="message">
+    <span class="main-text">龔家各位爸爸</span>
+    <span class="second-text">父親節快樂</span>
+    <span class="english">HAPPY FATHER'S DAY</span>
+</div>
+
+<button id="replay">重新播放</button>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const message = document.getElementById("message");
+const replay = document.getElementById("replay");
+const statusText = document.getElementById("status");
+
+let width;
+let height;
+let drones = [];
+let stars = [];
+let animationStart = 0;
+let animationFrame;
+let showFinished = false;
+
+const rainbowColors = [
+    "#ff3158",
+    "#ff8a1f",
+    "#ffe600",
+    "#35ff83",
+    "#26d9ff",
+    "#5471ff",
+    "#cf4fff"
+];
+
+function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    createStars();
+}
+
+function createStars() {
+    stars = [];
+
+    const count = Math.floor((width * height) / 7000);
+
+    for (let i = 0; i < count; i++) {
+        stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height * 0.8,
+            size: Math.random() * 1.4 + 0.2,
+            alpha: Math.random() * 0.65 + 0.2,
+            speed: Math.random() * 0.015 + 0.004
+        });
+    }
+}
+
+class Drone {
+    constructor(index, total) {
+        this.index = index;
+        this.total = total;
+
+        this.x = width / 2 + (Math.random() - 0.5) * 80;
+        this.y = height + Math.random() * 180;
+
+        this.targetX = this.x;
+        this.targetY = this.y;
+
+        this.vx = 0;
+        this.vy = 0;
+
+        this.color = rainbowColors[
+            index % rainbowColors.length
+        ];
+
+        this.phase = Math.random() * Math.PI * 2;
+        this.size = width < 600 ? 2.2 : 3;
+    }
+
+    setTarget(x, y) {
+        this.targetX = x;
+        this.targetY = y;
+    }
+
+    update(time) {
+        const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+
+        this.vx += dx * 0.012;
+        this.vy += dy * 0.012;
+
+        this.vx *= 0.88;
+        this.vy *= 0.88;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        this.phase += 0.07;
+
+        // 模擬無人機懸停時的小幅移動
+        this.x += Math.sin(this.phase + time * 0.001) * 0.08;
+        this.y += Math.cos(this.phase + time * 0.001) * 0.08;
+    }
+
+    draw() {
+        ctx.save();
+
+        const pulse = 0.75 + Math.sin(this.phase) * 0.25;
+
+        ctx.globalAlpha = 0.95;
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 15 + pulse * 12;
+
+        ctx.beginPath();
+        ctx.arc(
+            this.x,
+            this.y,
+            this.size + pulse,
+            0,
+            Math.PI * 2
+        );
+        ctx.fill();
+
+        ctx.globalAlpha = 0.55;
+        ctx.beginPath();
+        ctx.arc(
+            this.x,
+            this.y,
+            this.size * 2.1,
+            0,
+            Math.PI * 2
+        );
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+function createDrones() {
+    drones = [];
+
+    const droneCount = width < 600 ? 260 : 520;
+
+    for (let i = 0; i < droneCount; i++) {
+        drones.push(new Drone(i, droneCount));
+    }
+}
+
+function setCircleFormation() {
+    const radius = Math.min(width, height) * 0.26;
+
+    drones.forEach((drone, index) => {
+        const angle =
+            (index / drones.length) * Math.PI * 2;
+
+        const ring = index % 3;
+        const ringRadius = radius - ring * 30;
+
+        drone.setTarget(
+            width / 2 + Math.cos(angle) * ringRadius,
+            height / 2 + Math.sin(angle) * ringRadius
+        );
+    });
+}
+
+function setSpiralFormation(time) {
+    const maxRadius = Math.min(width, height) * 0.34;
+
+    drones.forEach((drone, index) => {
+        const ratio = index / drones.length;
+        const angle =
+            ratio * Math.PI * 12 + time * 0.00035;
+
+        const radius = 25 + ratio * maxRadius;
+
+        drone.setTarget(
+            width / 2 + Math.cos(angle) * radius,
+            height / 2 + Math.sin(angle) * radius * 0.72
+        );
+    });
+}
+
+function setRainbowWaveFormation(time) {
+    const columns = Math.ceil(Math.sqrt(drones.length));
+    const spacingX = Math.min(18, width / columns);
+
+    drones.forEach((drone, index) => {
+        const column = index % columns;
+        const row = Math.floor(index / columns);
+
+        const totalWidth = columns * spacingX;
+        const x =
+            width / 2 -
+            totalWidth / 2 +
+            column * spacingX;
+
+        const wave =
+            Math.sin(column * 0.38 + time * 0.003) * 65;
+
+        const y =
+            height * 0.42 +
+            row * 11 +
+            wave;
+
+        drone.setTarget(x, y);
+    });
+}
+
+function setHeartFormation() {
+    drones.forEach((drone, index) => {
+        const t =
+            (index / drones.length) * Math.PI * 2;
+
+        const scale = Math.min(width, height) * 0.018;
+
+        const heartX =
+            16 * Math.pow(Math.sin(t), 3);
+
+        const heartY =
+            13 * Math.cos(t) -
+            5 * Math.cos(2 * t) -
+            2 * Math.cos(3 * t) -
+            Math.cos(4 * t);
+
+        const layer = index % 4;
+        const layerScale = 1 - layer * 0.06;
+
+        drone.setTarget(
+            width / 2 + heartX * scale * layerScale,
+            height / 2 - heartY * scale * layerScale
+        );
+    });
+}
+
+function setFinalFormation() {
+    /*
+      最後讓無人機排列於文字周圍，
+      中央七彩文字由 HTML 顯示，
+      可確保中文字清楚且不會缺筆畫。
+    */
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radiusX = Math.min(width * 0.46, 650);
+    const radiusY = Math.min(height * 0.32, 270);
+
+    drones.forEach((drone, index) => {
+        const angle =
+            (index / drones.length) * Math.PI * 2;
+
+        const wave =
+            Math.sin(index * 0.47) * 10;
+
+        drone.setTarget(
+            centerX +
+            Math.cos(angle) * (radiusX + wave),
+
+            centerY +
+            Math.sin(angle) * (radiusY + wave)
+        );
+    });
+}
+
+function drawBackground() {
+    const gradient =
+        ctx.createLinearGradient(0, 0, 0, height);
+
+    gradient.addColorStop(0, "#01020b");
+    gradient.addColorStop(0.6, "#07102c");
+    gradient.addColorStop(1, "#191035");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    stars.forEach(star => {
+        star.alpha += star.speed;
+
+        if (star.alpha > 0.9 || star.alpha < 0.18) {
+            star.speed *= -1;
+        }
+
+        ctx.globalAlpha = star.alpha;
+        ctx.fillStyle = "#dcedff";
+
+        ctx.beginPath();
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+        ctx.fill();
+    });
+
+    ctx.globalAlpha = 1;
+
+    // 地面城市剪影
+    ctx.fillStyle = "rgba(1, 3, 14, 0.9)";
+
+    for (let x = 0; x < width; x += 48) {
+        const buildingHeight =
+            25 + Math.abs(Math.sin(x * 0.018)) * 75;
+
+        ctx.fillRect(
+            x,
+            height - buildingHeight,
+            43,
+            buildingHeight
+        );
+    }
+}
+
+function updateShow(elapsed) {
+    if (elapsed < 1500) {
+        statusText.textContent = "七彩無人機正在升空";
+
+        // 初始上升隊形
+        drones.forEach((drone, index) => {
+            const columns = 26;
+            const column = index % columns;
+            const row = Math.floor(index / columns);
+
+            drone.setTarget(
+                width / 2 -
+                columns * 11 +
+                column * 22,
+                height * 0.75 - row * 17
+            );
+        });
+    }
+    else if (elapsed < 4200) {
+        statusText.textContent = "第一幕｜七彩光環";
+        setCircleFormation();
+    }
+    else if (elapsed < 6900) {
+        statusText.textContent = "第二幕｜七彩旋渦";
+        setSpiralFormation(elapsed);
+    }
+    else if (elapsed < 9300) {
+        statusText.textContent = "第三幕｜七彩光波";
+        setRainbowWaveFormation(elapsed);
+    }
+    else if (elapsed < 11900) {
+        statusText.textContent = "第四幕｜愛心祝福";
+        setHeartFormation();
+    }
+    else {
+        statusText.textContent =
+            "龔家各位爸爸，父親節快樂！";
+
+        setFinalFormation();
+
+        if (!showFinished) {
+            showFinished = true;
+            message.classList.add("show");
+            replay.classList.add("show");
+        }
+    }
+}
+
+function animate(timestamp) {
+    if (!animationStart) {
+        animationStart = timestamp;
+    }
+
+    const elapsed = timestamp - animationStart;
+
+    drawBackground();
+    updateShow(elapsed);
+
+    drones.forEach(drone => {
+        drone.update(timestamp);
+        drone.draw();
+    });
+
+    animationFrame = requestAnimationFrame(animate);
+}
+
+function restartAnimation() {
+    cancelAnimationFrame(animationFrame);
+
+    message.classList.remove("show");
+    replay.classList.remove("show");
+
+    showFinished = false;
+    animationStart = 0;
+
+    createDrones();
+
+    animationFrame = requestAnimationFrame(animate);
+}
+
+canvas.addEventListener("pointerdown", event => {
+    // 點擊夜空，無人機短暫聚集到點擊位置
+    drones.forEach((drone, index) => {
+        const angle =
+            (index / drones.length) * Math.PI * 2;
+
+        const radius =
+            35 + (index % 8) * 10;
+
+        drone.setTarget(
+            event.clientX + Math.cos(angle) * radius,
+            event.clientY + Math.sin(angle) * radius
+        );
+    });
+});
+
+replay.addEventListener("click", restartAnimation);
+
+window.addEventListener("resize", () => {
+    resizeCanvas();
+    createDrones();
+});
+
+resizeCanvas();
+createDrones();
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>
