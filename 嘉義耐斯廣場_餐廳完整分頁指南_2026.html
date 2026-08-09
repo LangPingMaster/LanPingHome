@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>嘉義耐斯廣場餐廳完整指南</title>
+<style>
+:root{--bg:#f6f1e8;--paper:#fffdf8;--ink:#24211d;--muted:#6e675e;--accent:#a33b20;--accent2:#1d5c4a;--line:#ded5c8;--shadow:0 16px 40px rgba(49,39,27,.10)}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;background:linear-gradient(180deg,#f3ede3,#faf8f3);color:var(--ink)}
+a{color:inherit} .topbar{position:sticky;top:0;z-index:50;background:rgba(255,253,248,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topinner{max-width:1280px;margin:auto;padding:12px 18px;display:flex;gap:14px;align-items:center}
+.brand{font-family:Georgia,serif;font-weight:800;white-space:nowrap} .brand small{display:block;font-family:inherit;font-size:10px;letter-spacing:.14em;color:var(--accent)}
+.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:2px} .tab-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;cursor:pointer;white-space:nowrap;font-weight:700}
+.tab-btn.active{background:var(--ink);color:white;border-color:var(--ink)}
+main{max-width:1280px;margin:auto;padding:28px 18px 70px} .tab-panel{display:none} .tab-panel.active{display:block;animation:fade .25s ease} @keyframes fade{from{opacity:.4;transform:translateY(4px)}}
+.hero{display:grid;grid-template-columns:1.7fr .7fr;gap:24px;background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:42px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:#d9b68c;right:-120px;top:-150px;opacity:.22}
+.eyebrow{font-weight:900;letter-spacing:.18em;color:var(--accent);font-size:12px} h1{font:800 clamp(38px,6vw,76px)/.98 Georgia,"Noto Serif TC",serif;margin:14px 0 18px;letter-spacing:-.03em}
+.hero p{font-size:18px;line-height:1.8;max-width:760px;color:var(--muted)} .hero-tags{display:flex;flex-wrap:wrap;gap:8px} .hero-tags span{padding:8px 12px;border-radius:999px;background:#f1eadf;font-weight:700}
+.hero-stat{display:grid;align-content:center;gap:5px;border-left:1px solid var(--line);padding-left:28px;z-index:2} .hero-stat strong{font:800 52px/1 Georgia,serif;color:var(--accent2)} .hero-stat span{margin-bottom:20px;color:var(--muted)}
+.notice{margin:20px 0;background:#fff7d8;border:1px solid #ead997;padding:16px 18px;border-radius:16px;line-height:1.7}
+.floor-overview{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:22px} .floor-overview button{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:20px;padding:20px;cursor:pointer;box-shadow:0 8px 18px rgba(30,20,10,.05)}
+.floor-overview b{font:800 32px Georgia,serif;display:block;color:var(--accent)} .floor-overview span{display:block;color:var(--muted);line-height:1.55;margin-top:8px}
+.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:22px} .section-head h2{font:800 46px/1 Georgia,"Noto Serif TC",serif;margin:8px 0} .section-head p{margin:0;color:var(--muted)} .count{padding:10px 14px;border-radius:999px;background:var(--accent);color:white;font-weight:800}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px} .restaurant-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+.photo-wrap{height:260px;position:relative;background:#ddd;overflow:hidden} .photo-wrap img{width:100%;height:100%;object-fit:cover;transition:.4s} .restaurant-card:hover img{transform:scale(1.035)} .photo-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.42))}
+.photo-note{position:absolute;left:12px;bottom:12px;z-index:2;background:rgba(0,0,0,.60);color:#fff;padding:5px 9px;border-radius:999px;font-size:11px} .floor-badge{position:absolute;right:14px;top:14px;z-index:2;background:var(--paper);padding:8px 10px;border-radius:999px;font-weight:900}
+.card-body{padding:22px} h3{font-size:25px;margin:0} .type{color:var(--accent);font-weight:800;margin:7px 0 18px} .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.info-grid div{border:1px solid var(--line);background:#faf6ef;border-radius:14px;padding:12px;line-height:1.5} .info-grid b{display:block;font-size:12px;color:var(--accent2);margin-bottom:5px} .info-grid span{font-size:14px}
+details{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px} summary{cursor:pointer;font-weight:900} .menu-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 18px;padding-left:20px;line-height:1.55}
+.small{font-size:12px;color:var(--muted)} .note{background:#eef5f1;border-radius:12px;padding:12px;margin:12px 0;line-height:1.6;font-size:14px}
+.actions{display:flex;flex-wrap:wrap;gap:8px} .actions a{text-decoration:none;border:1px solid var(--line);padding:8px 11px;border-radius:10px;font-weight:800;font-size:13px;background:white} .actions a:hover{background:var(--ink);color:white}
+.table-wrap{overflow:auto;background:white;border:1px solid var(--line);border-radius:18px} table{width:100%;border-collapse:collapse;min-width:900px} th,td{padding:14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.55} th{background:#27231e;color:white;position:sticky;top:0} tbody tr:hover{background:#faf4e9}
+.toolbar{margin-bottom:14px} #search{width:min(520px,100%);padding:13px 15px;border:1px solid var(--line);border-radius:12px;font:inherit;background:white}
+footer{max-width:1280px;margin:0 auto 40px;padding:0 18px;color:var(--muted);font-size:13px;line-height:1.8}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:28px}.hero-stat{border-left:0;border-top:1px solid var(--line);padding:20px 0 0;grid-template-columns:auto 1fr}.floor-overview{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}}
+@media(max-width:560px){main{padding-inline:12px}.topinner{align-items:flex-start;flex-direction:column}.floor-overview{grid-template-columns:1fr}.hero{padding:22px}h1{font-size:42px}.section-head h2{font-size:36px}.photo-wrap{height:220px}.menu-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topinner"><div class="brand"><small>NICE PLAZA FOOD GUIDE</small>耐斯餐廳指南</div><nav class="tabs"><button class="tab-btn active" data-tab="tab-0">總覽</button><button class="tab-btn " data-tab="tab-1">B1</button><button class="tab-btn " data-tab="tab-2">1F</button><button class="tab-btn " data-tab="tab-3">3F</button><button class="tab-btn " data-tab="tab-4">6F</button><button class="tab-btn " data-tab="tab-5">7F</button><button class="tab-btn " data-tab="tab-6">餐廳比較</button></nav></div></header>
+<main>
+<section id="tab-0" class="tab-panel active">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">NICE PLAZA · CHIAYI</span>
+      <h1>嘉義耐斯廣場<br>餐廳完整分頁指南</h1>
+      <p>依樓層整理位置、電話、營業時間、訂位／訂餐方式、代表菜單與官方資訊。適合家庭聚餐、朋友聚會、快速用餐與咖啡休息。</p>
+      <div class="hero-tags"><span>📍 嘉義市東區忠孝路600號</span><span>☎ 百貨 05-276-7888</span><span>🅿 B2–B4 停車場</span></div>
+    </div>
+    <div class="hero-stat">
+      <strong>14</strong><span>餐飲櫃位整理</span>
+      <strong>5</strong><span>餐飲樓層</span>
+    </div>
+  </div>
+  <div class="notice"><b>資料說明：</b>以耐斯廣場官方樓層頁與各品牌官方門市資訊為優先。部分 B1 獨立櫃位沒有公開電話或完整線上菜單，因此以「洽百貨／現場」明確標註；圖片為料理類型示意圖，不冒充店家實景。</div>
+  <div class="floor-overview">
+    <button onclick="openFloor('B1')"><b>B1</b><span>生活街・美食街｜餐飲選擇最多，從正餐、速食到烘焙一次集中。</span></button><button onclick="openFloor('1F')"><b>1F</b><span>時尚館｜咖啡與輕食。</span></button><button onclick="openFloor('3F')"><b>3F</b><span>仕女館｜迴轉壽司。</span></button><button onclick="openFloor('6F')"><b>6F</b><span>主題餐廳｜適合家庭、朋友聚餐與多人合菜。</span></button><button onclick="openFloor('7F')"><b>7F</b><span>主題餐廳｜日式套餐與泰式聚餐。</span></button>
+  </div>
+</section>
+
+<section id="tab-1" class="tab-panel">
+  <div class="section-head"><div><span class="eyebrow">FLOOR GUIDE</span><h2>B1 餐飲</h2><p>生活街・美食街｜餐飲選擇最多，從正餐、速食到烘焙一次集中。</p></div><span class="count">9 家</span></div>
+  <div class="cards">
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80" alt="LE BLE D’OR 金色三麥｜嘉義耐斯店 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>LE BLE D’OR 金色三麥｜嘉義耐斯店</h3><p class="type">餐酒館／西式料理</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-276-9909</span></div>
+              <div><b>🕒 營業時間</b><span>週日～週四 11:00–22:30（最後點餐 21:30）；週五～週六 11:00–24:00（最後點餐 23:00）</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>可由金色三麥官網「立即訂位」；也可電話洽詢。外帶／活動餐點請依門市公告。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>經典啤酒與餐酒搭配</li><li>炸物／拼盤</li><li>義式與西式主餐</li><li>多人分享餐點</li><li>季節限定餐酒</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>2026 年新進駐耐斯，店裝以「餐酒列車」為主題。</div>
+            <div class="actions">
+              <a href="https://www.lebledor.com/location/niceplaza" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.lebledor.com/" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 LE BLE D’OR 金色三麥｜嘉義耐斯店" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1514516816566-de580c621376?auto=format&fit=crop&w=1200&q=80" alt="品味鐵板燒 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>品味鐵板燒</h3><p class="type">鐵板燒</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>未見官方獨立電話公告；可洽耐斯 05-276-7888</span></div>
+              <div><b>🕒 營業時間</b><span>依耐斯廣場營業時間為主，通常 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>以現場點餐／外帶為主；如需團體或特殊需求，建議先洽百貨或現場櫃位。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>牛肉／豬肉／雞肉鐵板主餐</li><li>海鮮鐵板料理</li><li>雞蛋與時蔬</li><li>白飯／湯品／飲料（依現場供應）</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>公開資料顯示提供內用與外帶；實際菜單與價格以現場為準。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.iwans.tw/post/47460.html" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 品味鐵板燒" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=1200&q=80" alt="玉子屋 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>玉子屋</h3><p class="type">日式料理</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>未見官方獨立電話公告；可洽耐斯 05-276-7888</span></div>
+              <div><b>🕒 營業時間</b><span>依耐斯廣場營業時間為主，通常 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>以現場點餐為主；是否提供外帶／外送依櫃位現場公告。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>日式丼飯／定食類</li><li>蛋料理</li><li>炸物與配菜</li><li>套餐飲品／湯品（依現場供應）</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>耐斯 B1 美食街櫃位。品牌菜單未在耐斯官網公開完整價目。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 玉子屋" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=1200&q=80" alt="雪嶽山韓式料理 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>雪嶽山韓式料理</h3><p class="type">韓式料理</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>未見官方獨立電話公告；可洽耐斯 05-276-7888</span></div>
+              <div><b>🕒 營業時間</b><span>依耐斯廣場營業時間為主，通常 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>以現場點餐為主；外帶／外送依櫃位與平台即時資訊。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>韓式拌飯</li><li>韓式烤肉／肉類主餐</li><li>泡菜與韓式小菜</li><li>鍋物／湯品（依現場供應）</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>耐斯 B1 美食街韓式料理櫃位。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 雪嶽山韓式料理" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80" alt="熊定食 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>熊定食</h3><p class="type">日式定食</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>未見官方獨立電話公告；可洽耐斯 05-276-7888</span></div>
+              <div><b>🕒 營業時間</b><span>依耐斯廣場營業時間為主，通常 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>以現場點餐為主；外帶資訊請洽現場櫃位。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>日式定食</li><li>炸物主餐</li><li>肉類／魚類套餐</li><li>白飯、湯品與配菜</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>耐斯 B1 美食街日式定食櫃位。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 熊定食" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=1200&q=80" alt="杏子豬排 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>杏子豬排</h3><p class="type">日式豬排</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>未見耐斯分店官方獨立電話公告；可洽耐斯 05-276-7888</span></div>
+              <div><b>🕒 營業時間</b><span>依耐斯廣場營業時間為主，通常 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>建議以現場候位／點餐為主；外帶資訊依品牌與櫃位公告。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>腰內豬排</li><li>里肌豬排</li><li>豬排套餐</li><li>高麗菜絲、白飯、味噌湯</li><li>季節限定套餐</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>日式炸豬排專門料理，實際供應品項依嘉義耐斯櫃位為準。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 杏子豬排" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80" alt="西西里義式香草料理 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>西西里義式香草料理</h3><p class="type">義式料理</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>未見官方獨立電話公告；可洽耐斯 05-276-7888</span></div>
+              <div><b>🕒 營業時間</b><span>依耐斯廣場營業時間為主，通常 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>以現場點餐為主；是否提供外帶／平台外送請依現場公告。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>義大利麵</li><li>燉飯</li><li>香草風味主餐</li><li>套餐／湯品／飲料</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>耐斯 B1 義式料理櫃位。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 西西里義式香草料理" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=80" alt="MOS BURGER 摩斯漢堡｜嘉義耐斯店 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>MOS BURGER 摩斯漢堡｜嘉義耐斯店</h3><p class="type">漢堡／速食</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-277-2361</span></div>
+              <div><b>🕒 營業時間</b><span>11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>支援 MOS APP、網路訂餐、電話訂餐；外送服務依官方系統與配送範圍。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>摩斯漢堡</li><li>米漢堡</li><li>熱狗／炸物</li><li>早餐／套餐（依門市時段）</li><li>咖啡與冷熱飲</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>官方門市頁列有 APP 訂餐、網路訂餐、電話訂餐與外送說明。</div>
+            <div class="actions">
+              <a href="https://www.mos.com.tw/shop/search_detail.aspx?id=B127" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.mos.com.tw/menu/" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 MOS BURGER 摩斯漢堡｜嘉義耐斯店" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80" alt="王子烘焙坊 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">B1</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>王子烘焙坊</h3><p class="type">麵包／烘焙</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 B1</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-277-1999（公開餐飲資料）</span></div>
+              <div><b>🕒 營業時間</b><span>約 11:00–22:00；週五、週六可能延長，請以百貨／櫃位公告為準</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>以現場購買為主；蛋糕、麵包預留或大量訂購建議先電話詢問。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>麵包</li><li>甜點</li><li>蛋糕</li><li>伴手禮／烘焙商品</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>電話來自公開餐飲資料；大型訂單建議再次向門市確認。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/floor-guide_b1.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.tripadvisor.com.tw/Restaurant_Review-g13806498-d18971187-Reviews-Prince_House_Bakery-East_District_Chiayi.html" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 B1 王子烘焙坊" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        </div>
+</section>
+
+<section id="tab-2" class="tab-panel">
+  <div class="section-head"><div><span class="eyebrow">FLOOR GUIDE</span><h2>1F 餐飲</h2><p>時尚館｜咖啡與輕食。</p></div><span class="count">1 家</span></div>
+  <div class="cards">
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="星巴克 Starbucks｜耐斯門市 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">1F</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>星巴克 Starbucks｜耐斯門市</h3><p class="type">咖啡／輕食</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 1F</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-278-9265</span></div>
+              <div><b>🕒 營業時間</b><span>公開資料：平日約 10:00–22:00；週末約 09:00–22:00，請以星巴克 APP／門市公告為準</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>可使用星巴克行動預點、現場點餐；外送依合作平台及範圍。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>濃縮咖啡系列</li><li>星冰樂</li><li>茶飲</li><li>蛋糕甜點</li><li>三明治／輕食</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>1F 時尚館咖啡櫃位；節慶飲品與糕點會依季節更新。</div>
+            <div class="actions">
+              <a href="https://www.niceplaza.com.tw/mobile/floor.asp" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.starbucks.com.tw/" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 1F 星巴克 Starbucks｜耐斯門市" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        </div>
+</section>
+
+<section id="tab-3" class="tab-panel">
+  <div class="section-head"><div><span class="eyebrow">FLOOR GUIDE</span><h2>3F 餐飲</h2><p>仕女館｜迴轉壽司。</p></div><span class="count">1 家</span></div>
+  <div class="cards">
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=80" alt="藏壽司 Kura Sushi｜嘉義耐斯店 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">3F</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>藏壽司 Kura Sushi｜嘉義耐斯店</h3><p class="type">迴轉壽司</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 3F</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-276-0189（不接受電話預約）</span></div>
+              <div><b>🕒 營業時間</b><span>週一～週日及例假日 11:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>建議使用藏壽司官方預約／候位系統；不接受電話預約。可查指定日期與候位狀況。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>握壽司</li><li>軍艦／卷物</li><li>生魚片與副餐</li><li>拉麵／茶碗蒸</li><li>甜點與飲品</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>官方店鋪頁顯示 191 席；客滿時可能有用餐時間限制。</div>
+            <div class="actions">
+              <a href="https://www.kurasushi.tw/shops/59" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.kurasushi.tw/menu" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 3F 藏壽司 Kura Sushi｜嘉義耐斯店" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        </div>
+</section>
+
+<section id="tab-4" class="tab-panel">
+  <div class="section-head"><div><span class="eyebrow">FLOOR GUIDE</span><h2>6F 餐飲</h2><p>主題餐廳｜適合家庭、朋友聚餐與多人合菜。</p></div><span class="count">1 家</span></div>
+  <div class="cards">
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80" alt="開飯川食堂｜嘉義耐斯店 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">6F</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>開飯川食堂｜嘉義耐斯店</h3><p class="type">川味中式料理</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 6F</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-271-8998</span></div>
+              <div><b>🕒 營業時間</b><span>平日 11:30–15:00／17:30–21:30；假日 11:00–16:00／17:00–21:30</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>可透過品牌官方訂位系統；團體／包廂建議提前預約。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>川味熱炒</li><li>麻辣／香辣料理</li><li>肉類與海鮮</li><li>蔬菜／豆腐料理</li><li>多人合菜</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>官方資訊顯示 186 席、4 間包廂，用餐時間通常 90 分鐘。</div>
+            <div class="actions">
+              <a href="https://www.kaifun.com.tw/zh-TW/store/KF035" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.kaifun.com.tw/" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 6F 開飯川食堂｜嘉義耐斯店" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        </div>
+</section>
+
+<section id="tab-5" class="tab-panel">
+  <div class="section-head"><div><span class="eyebrow">FLOOR GUIDE</span><h2>7F 餐飲</h2><p>主題餐廳｜日式套餐與泰式聚餐。</p></div><span class="count">2 家</span></div>
+  <div class="cards">
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1200&q=80" alt="藝奇 日式料理｜嘉義耐斯店 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">7F</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>藝奇 日式料理｜嘉義耐斯店</h3><p class="type">日式套餐／岩板燒</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 7F</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-276-5222</span></div>
+              <div><b>🕒 營業時間</b><span>平日午餐 11:30–14:30、晚餐 17:30–22:00；假日午餐 11:00–14:30、晚餐 17:00–22:00</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>官方提供線上訂位與外帶自取；也可電話洽詢。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>日式套餐</li><li>刺身／前菜</li><li>岩板燒主餐</li><li>釜飯／食事</li><li>甜點與飲品</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>王品集團日式料理品牌，菜單採套餐架構，季節內容可能調整。</div>
+            <div class="actions">
+              <a href="https://www.ikki.com.tw/store_view.php?store=10" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.ikki.com.tw/menu.php" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 7F 藝奇 日式料理｜嘉義耐斯店" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        
+
+        <article class="restaurant-card">
+          <div class="photo-wrap">
+            <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1200&q=80" alt="饗泰多 SIAM MORE｜嘉義耐斯店 餐飲示意圖" loading="lazy">
+            <span class="photo-note">餐飲示意圖</span>
+            <span class="floor-badge">7F</span>
+          </div>
+          <div class="card-body">
+            <div class="title-row">
+              <div><h3>饗泰多 SIAM MORE｜嘉義耐斯店</h3><p class="type">泰式料理</p></div>
+            </div>
+            <div class="info-grid">
+              <div><b>📍 位置</b><span>嘉義市東區忠孝路600號 7F</span></div>
+              <div><b>☎ 聯絡電話</b><span>05-271-8268</span></div>
+              <div><b>🕒 營業時間</b><span>平日午餐 11:30–15:00、晚餐 17:30–21:30；假日午餐 11:00–16:00、晚餐 17:00–21:30</span></div>
+              <div><b>🛒 訂位／訂餐</b><span>可由饗泰多官方網站／饗賓訂位系統預約；部分餐點可外帶或透過外送平台訂購。</span></div>
+            </div>
+            <details open>
+              <summary>代表菜單／餐點類型</summary>
+              <ul class="menu-list"><li>扒飯打拋豬</li><li>鮮蝦寬粉煲</li><li>泰式鹹蛋中卷</li><li>冬蔭海鮮湯</li><li>沙嗲雞與泰式熱炒</li></ul>
+              <p class="small">菜單與價格會隨季節、門市活動或外送平台調整；最新價格請以官方菜單或現場為準。</p>
+            </details>
+            <div class="note"><b>補充：</b>官方資訊顯示 126 席、2 間包廂；一般用餐時間 90 分鐘。</div>
+            <div class="actions">
+              <a href="https://www.siammore.com.tw/zh-TW/store/STB018" target="_blank" rel="noopener">官方／資料來源</a>
+              <a href="https://www.siammore.com.tw/" target="_blank" rel="noopener">查看菜單／品牌網站</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=嘉義市東區忠孝路600號 7F 饗泰多 SIAM MORE｜嘉義耐斯店" target="_blank" rel="noopener">Google 地圖</a>
+            </div>
+          </div>
+        </article>
+        </div>
+</section>
+
+<section id="tab-6" class="tab-panel">
+  <div class="section-head"><div><span class="eyebrow">COMPARISON</span><h2>餐廳快速比較表</h2><p>先用表格快速篩選，再切換到各樓層查看完整菜單與訂餐資訊。</p></div></div>
+  <div class="toolbar"><input id="search" type="search" placeholder="搜尋：壽司、泰式、電話、B1…" oninput="filterTable()"></div>
+  <div class="table-wrap"><table id="compare"><thead><tr><th>樓層</th><th>餐廳</th><th>類型</th><th>電話</th><th>訂位／訂餐</th></tr></thead><tbody><tr><td>B1</td><td>LE BLE D’OR 金色三麥｜嘉義耐斯店</td><td>餐酒館／西式料理</td><td>05-276-9909</td><td>可由金色三麥官網「立即訂位」；也可電話洽詢。外帶／活動餐點請依門市公告。</td></tr><tr><td>B1</td><td>品味鐵板燒</td><td>鐵板燒</td><td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td><td>以現場點餐／外帶為主；如需團體或特殊需求，建議先洽百貨或現場櫃位。</td></tr><tr><td>B1</td><td>玉子屋</td><td>日式料理</td><td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td><td>以現場點餐為主；是否提供外帶／外送依櫃位現場公告。</td></tr><tr><td>B1</td><td>雪嶽山韓式料理</td><td>韓式料理</td><td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td><td>以現場點餐為主；外帶／外送依櫃位與平台即時資訊。</td></tr><tr><td>B1</td><td>熊定食</td><td>日式定食</td><td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td><td>以現場點餐為主；外帶資訊請洽現場櫃位。</td></tr><tr><td>B1</td><td>杏子豬排</td><td>日式豬排</td><td>未見耐斯分店官方獨立電話公告；可洽耐斯 05-276-7888</td><td>建議以現場候位／點餐為主；外帶資訊依品牌與櫃位公告。</td></tr><tr><td>B1</td><td>西西里義式香草料理</td><td>義式料理</td><td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td><td>以現場點餐為主；是否提供外帶／平台外送請依現場公告。</td></tr><tr><td>B1</td><td>MOS BURGER 摩斯漢堡｜嘉義耐斯店</td><td>漢堡／速食</td><td>05-277-2361</td><td>支援 MOS APP、網路訂餐、電話訂餐；外送服務依官方系統與配送範圍。</td></tr><tr><td>B1</td><td>王子烘焙坊</td><td>麵包／烘焙</td><td>05-277-1999（公開餐飲資料）</td><td>以現場購買為主；蛋糕、麵包預留或大量訂購建議先電話詢問。</td></tr><tr><td>1F</td><td>星巴克 Starbucks｜耐斯門市</td><td>咖啡／輕食</td><td>05-278-9265</td><td>可使用星巴克行動預點、現場點餐；外送依合作平台及範圍。</td></tr><tr><td>3F</td><td>藏壽司 Kura Sushi｜嘉義耐斯店</td><td>迴轉壽司</td><td>05-276-0189（不接受電話預約）</td><td>建議使用藏壽司官方預約／候位系統；不接受電話預約。可查指定日期與候位狀況。</td></tr><tr><td>6F</td><td>開飯川食堂｜嘉義耐斯店</td><td>川味中式料理</td><td>05-271-8998</td><td>可透過品牌官方訂位系統；團體／包廂建議提前預約。</td></tr><tr><td>7F</td><td>藝奇 日式料理｜嘉義耐斯店</td><td>日式套餐／岩板燒</td><td>05-276-5222</td><td>官方提供線上訂位與外帶自取；也可電話洽詢。</td></tr><tr><td>7F</td><td>饗泰多 SIAM MORE｜嘉義耐斯店</td><td>泰式料理</td><td>05-271-8268</td><td>可由饗泰多官方網站／饗賓訂位系統預約；部分餐點可外帶或透過外送平台訂購。</td></tr></tbody></table></div>
+</section>
+</main>
+<footer>
+  <b>資料來源與更新提醒：</b>耐斯廣場官方樓層介紹、各品牌官方門市頁，以及必要時的公開餐飲資訊。整理日期：2026-08-09。餐廳菜單、價格、營業時間與訂位規則可能臨時調整，前往前建議點選卡片中的官方來源再次確認。<br>
+  圖片為 Unsplash 料理情境示意圖，僅協助辨識料理類型，並非各門市現場實景。
+</footer>
+<script>
+const buttons=[...document.querySelectorAll('.tab-btn')], panels=[...document.querySelectorAll('.tab-panel')];
+function showTab(id){
+  buttons.forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+  panels.forEach(p=>p.classList.toggle('active',p.id===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+buttons.forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+function openFloor(f){
+ const map={'B1':'tab-1','1F':'tab-2','3F':'tab-3','6F':'tab-4','7F':'tab-5'};
+ showTab(map[f]);
+}
+function filterTable(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ document.querySelectorAll('#compare tbody tr').forEach(tr=>tr.style.display=tr.innerText.toLowerCase().includes(q)?'':'none');
+}
+</script>
+</body></html>
