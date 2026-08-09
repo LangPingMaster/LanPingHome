@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>遠東百貨嘉義店｜餐廳完整分頁指南</title>
+<style>
+:root{--bg:#f7f5f0;--paper:#fffdf9;--ink:#20201e;--muted:#6f6d67;--red:#a51f2d;--gold:#a27d40;--green:#385749;--line:#dfd9cf;--soft:#f4efe6;--shadow:0 15px 42px rgba(35,31,25,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:linear-gradient(180deg,#eee9e0,#fafafa 32%);font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:50;background:rgba(255,253,249,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{max-width:1280px;margin:auto;padding:12px 18px;display:flex;gap:18px;align-items:center}.brand{font-weight:900;white-space:nowrap}.brand small{display:block;font-size:10px;letter-spacing:.16em;color:var(--red)}.tabs{display:flex;gap:7px;overflow:auto}.tab{background:white;border:1px solid var(--line);padding:9px 14px;border-radius:999px;font-weight:800;white-space:nowrap;cursor:pointer}.tab.active{background:var(--ink);color:white;border-color:var(--ink)}
+main{max-width:1280px;margin:auto;padding:28px 18px 70px}.panel{display:none}.panel.active{display:block;animation:fade .23s ease}@keyframes fade{from{opacity:.35;transform:translateY(4px)}}
+.hero{background:var(--paper);border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:44px;display:grid;grid-template-columns:1.55fr .45fr;gap:26px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:390px;height:390px;border-radius:50%;right:-150px;top:-185px;background:#d7b7a2;opacity:.32}.kicker{font-size:12px;letter-spacing:.18em;font-weight:900;color:var(--red)}h1{font:800 clamp(42px,6.3vw,78px)/.98 Georgia,"Noto Serif TC",serif;margin:14px 0 18px;letter-spacing:-.035em}.hero p{font-size:18px;line-height:1.8;color:var(--muted);max-width:760px}.meta{display:flex;gap:8px;flex-wrap:wrap}.meta span{background:var(--soft);border-radius:999px;padding:8px 12px;font-weight:750}.hero-number{z-index:2;border-left:1px solid var(--line);padding-left:28px;align-self:center}.hero-number strong{display:block;font:800 56px Georgia,serif;color:var(--red)}.hero-number span{display:block;color:var(--muted);margin-bottom:20px}
+.warning{margin:20px 0;padding:16px 18px;border-radius:15px;background:#fff3cf;border:1px solid #ead48c;line-height:1.7}.floor-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.floor-cards button{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;text-align:left;cursor:pointer;box-shadow:0 8px 22px rgba(35,31,25,.05)}.floor-cards b{font:800 36px Georgia,serif;color:var(--red);display:block}.floor-cards strong{display:block;font-size:18px;margin:6px 0}.floor-cards span{color:var(--muted)}
+.branch-info{margin-top:26px;background:#272622;color:#fff;border-radius:24px;padding:28px}.branch-info h2{margin-top:0}.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.summary-grid div{background:rgba(255,255,255,.08);padding:14px;border-radius:12px}.summary-grid b,.summary-grid span{display:block}.summary-grid b{font-size:12px;color:#e7c788;margin-bottom:6px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px}.section-head h2{font:800 48px Georgia,"Noto Serif TC",serif;margin:8px 0}.section-head p{margin:0;color:var(--muted)}.count{background:var(--red);color:#fff;padding:8px 12px;border-radius:999px;font-weight:850}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.restaurant{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}.image{height:270px;position:relative;overflow:hidden;background:#ddd}.image img{width:100%;height:100%;object-fit:cover;transition:.35s}.restaurant:hover img{transform:scale(1.035)}.image:after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.45))}.floor{position:absolute;right:14px;top:14px;background:#fff;border-radius:999px;padding:8px 11px;font-weight:900;z-index:2}.image-label{position:absolute;left:13px;bottom:12px;background:rgba(0,0,0,.62);color:white;border-radius:999px;padding:5px 9px;font-size:11px;z-index:2}
+.content{padding:22px}h3{font-size:26px;margin:0}.title p{margin:6px 0 17px;color:var(--red);font-weight:850}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info-grid div{background:#faf7f1;border:1px solid var(--line);border-radius:13px;padding:12px;line-height:1.55}.info-grid b{display:block;font-size:12px;color:var(--green);margin-bottom:5px}.info-grid span{font-size:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.chips span{background:#edf3ef;color:#315342;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:750}.menu-box h4{margin:15px 0 9px}.table-scroll{overflow:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse}th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.55}th{background:#292825;color:white}tbody tr:last-child td{border-bottom:0}.note{margin:13px 0;background:#fff7de;border-radius:11px;padding:11px 12px;font-size:13px;line-height:1.65}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions a{text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-weight:800;font-size:13px}.actions a:hover{background:var(--ink);color:#fff}.search{width:min(520px,100%);padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:14px;font:inherit;background:#fff}.big table{min-width:1080px}
+footer{max-width:1280px;margin:0 auto 42px;padding:0 18px;color:var(--muted);font-size:13px;line-height:1.8}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:28px}.hero-number{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.floor-cards{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr}}
+@media(max-width:590px){.nav{flex-direction:column;align-items:flex-start}main{padding-inline:12px}.hero{padding:22px}.info-grid{grid-template-columns:1fr}.summary-grid{grid-template-columns:1fr}.section-head h2{font-size:38px}.image{height:220px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="brand"><small>FAR EASTERN CHIAYI</small>遠百嘉義美食</div><nav class="tabs"><button class="tab active" data-id="home">總覽</button><button class="tab " data-id="floor-1">1F 咖啡</button><button class="tab " data-id="floor-7">7F 餐廳</button><button class="tab " data-id="floor-b1">B1 美食</button><button class="tab " data-id="compare">比較表</button></nav></div></header>
+<main>
+<section id="home" class="panel active">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="kicker">FAR EASTERN CHIAYI · FOOD GUIDE</span>
+      <h1>遠百嘉義<br>餐廳完整指南</h1>
+      <p>依遠東百貨嘉義店官方「美食」頁目前公開的餐飲品牌，整理樓層、電話、訂位／訂餐方式、營業時間、熱門菜單與價格，並以樓層分頁呈現。</p>
+      <div class="meta">
+        <span>📍 嘉義市西區垂楊路537號</span>
+        <span>☎ 05-236-5137</span>
+        <span>🕒 11:00–21:30</span>
+      </div>
+    </div>
+    <div class="hero-number">
+      <strong>4</strong><span>官方美食頁目前列出的餐飲品牌</span>
+      <strong>3</strong><span>餐飲所在樓層</span>
+    </div>
+  </div>
+  <div class="warning"><b>資料範圍：</b>遠百嘉義官方「美食」頁目前顯示 4 個餐飲品牌：涮乃葉、Starbucks、義式屋古拉爵、金春喜韓廚。百貨內若另有期間限定櫃、食品專櫃或未被歸類到「美食」頁的小型櫃位，本版不冒然列入。菜單與價格可能隨檔期更新。</div>
+  <div class="floor-cards">
+    <button onclick="show('floor-1')"><b>1F</b><strong>咖啡・輕食</strong><span>Starbucks 星巴克</span></button>
+    <button onclick="show('floor-7')"><b>7F</b><strong>主題餐廳</strong><span>涮乃葉、金春喜韓廚</span></button>
+    <button onclick="show('floor-b1')"><b>B1</b><strong>義式料理</strong><span>義式屋古拉爵</span></button>
+  </div>
+  <div class="branch-info">
+    <h2>遠百嘉義店資訊</h2>
+    <div class="summary-grid">
+      <div><b>地址</b><span>嘉義市西區垂楊路537號</span></div>
+      <div><b>服務電話</b><span>05-236-5137</span></div>
+      <div><b>免付費電話</b><span>0800-523-510</span></div>
+      <div><b>百貨營業時間</b><span>11:00–21:30</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="floor-1" class="panel">
+  <div class="section-head"><div><span class="kicker">FLOOR GUIDE</span><h2>1F 咖啡・輕食</h2><p>適合咖啡、甜點、簡單休息。</p></div><span class="count">1 家</span></div>
+  <div class="cards">
+    <article class="restaurant">
+      <div class="image">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80" alt="Starbucks 星巴克 料理類型示意圖" loading="lazy">
+        <div class="image-label">料理類型示意圖</div>
+        <div class="floor">1F</div>
+      </div>
+      <div class="content">
+        <div class="title">
+          <div><h3>Starbucks 星巴克</h3><p>輕食／下午茶／咖啡</p></div>
+        </div>
+        <div class="info-grid">
+          <div><b>📍 位置</b><span>嘉義市西區垂楊路537號 1F</span></div>
+          <div><b>☎ 聯絡電話</b><span>05-283-2501</span></div>
+          <div><b>🕒 營業時間</b><span>遠百官網標示：(日～五) 08:00–21:30；週六及特殊節日請以門市公告為準</span></div>
+          <div><b>🛒 訂位／訂餐資訊</b><span>可現場點餐；行動預點／外送服務依 Starbucks APP 與該門市當日開放狀態。亦可電話洽詢。</span></div>
+        </div>
+        <div class="chips"><span>提供座位</span><span>可刷卡</span><span>咖啡與輕食</span><span>季節限定飲品</span></div>
+        <div class="menu-box">
+      <h4>代表菜單與價格</h4>
+      <div class="table-scroll"><table><thead><tr><th>餐點／方案</th><th>價格／內容</th></tr></thead><tbody><tr><td>濃縮咖啡／美式／那堤</td><td>依星巴克當季菜單</td></tr><tr><td>星冰樂系列</td><td>依星巴克當季菜單</td></tr><tr><td>茶瓦納茶飲</td><td>依星巴克當季菜單</td></tr><tr><td>三明治／輕食</td><td>依門市供應</td></tr><tr><td>蛋糕／甜點</td><td>依門市供應</td></tr><tr><td>楓糖胡桃風味那堤</td><td>遠百官網熱銷推薦</td></tr></tbody></table></div>
+    </div>
+        <div class="note"><b>資料提醒：</b>遠百官方美食頁目前將此店列為嘉義店 1F 餐飲櫃位。</div>
+        <div class="actions">
+          <a href="https://cdn.feds.com.tw/tw/37/Food/Detail/154" target="_blank" rel="noopener">遠百官方資料</a>
+          <a href="https://www.starbucks.com.tw/" target="_blank" rel="noopener">品牌／菜單網站</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Starbucks 星巴克 嘉義市西區垂楊路537號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article></div>
+</section>
+
+<section id="floor-7" class="panel">
+  <div class="section-head"><div><span class="kicker">FLOOR GUIDE</span><h2>7F 主題餐廳</h2><p>火鍋吃到飽與韓式料理，適合家庭或多人聚餐。</p></div><span class="count">2 家</span></div>
+  <div class="cards">
+    <article class="restaurant">
+      <div class="image">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1400&q=80" alt="涮乃葉日式涮涮鍋 料理類型示意圖" loading="lazy">
+        <div class="image-label">料理類型示意圖</div>
+        <div class="floor">7F</div>
+      </div>
+      <div class="content">
+        <div class="title">
+          <div><h3>涮乃葉日式涮涮鍋</h3><p>日式料理／火鍋吃到飽</p></div>
+        </div>
+        <div class="info-grid">
+          <div><b>📍 位置</b><span>嘉義市西區垂楊路537號 7F</span></div>
+          <div><b>☎ 聯絡電話</b><span>05-284-3262</span></div>
+          <div><b>🕒 營業時間</b><span>11:00–21:30</span></div>
+          <div><b>🛒 訂位／訂餐資訊</b><span>建議電話預約；亦可依品牌提供的線上訂位系統預約。尖峰時段與假日建議提早訂位。</span></div>
+        </div>
+        <div class="chips"><span>吃到飽</span><span>提供座位</span><span>蔬菜自助吧</span><span>甜點飲料</span><span>適合多人聚餐</span></div>
+        <div class="menu-box">
+      <h4>代表菜單與價格</h4>
+      <div class="table-scroll"><table><thead><tr><th>餐點／方案</th><th>價格／內容</th></tr></thead><tbody><tr><td>頂級牛豬雞＋海鮮吃到飽全餐</td><td>平日午餐 NT$700／晚餐與假日 NT$740</td></tr><tr><td>雙牛牛肉吃到飽全餐</td><td>平日午餐 NT$590／晚餐與假日 NT$630</td></tr><tr><td>國產豬肉＋國產雞肉吃到飽全餐</td><td>平日午餐 NT$480／晚餐與假日 NT$520</td></tr><tr><td>雙和牛吃到飽套餐</td><td>2026 夏季遠百活動價 NT$730</td></tr><tr><td>新鮮蔬菜／甜點／飲料</td><td>套餐內自助取用</td></tr></tbody></table></div>
+    </div>
+        <div class="note"><b>資料提醒：</b>價格以遠百官方美食頁及 2026/7–8 嘉義聚餐活動頁公開資訊整理；活動價會依檔期變動。</div>
+        <div class="actions">
+          <a href="https://cdn.feds.com.tw/tw/37/Food/Detail/221" target="_blank" rel="noopener">遠百官方資料</a>
+          <a href="https://www.skylark.com.tw/" target="_blank" rel="noopener">品牌／菜單網站</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=涮乃葉日式涮涮鍋 嘉義市西區垂楊路537號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+    <article class="restaurant">
+      <div class="image">
+        <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=1400&q=80" alt="金春喜韓廚 料理類型示意圖" loading="lazy">
+        <div class="image-label">料理類型示意圖</div>
+        <div class="floor">7F</div>
+      </div>
+      <div class="content">
+        <div class="title">
+          <div><h3>金春喜韓廚</h3><p>韓式料理</p></div>
+        </div>
+        <div class="info-grid">
+          <div><b>📍 位置</b><span>嘉義市西區垂楊路537號 7F</span></div>
+          <div><b>☎ 聯絡電話</b><span>05-235-4888</span></div>
+          <div><b>🕒 營業時間</b><span>11:00–15:00；17:00–21:30</span></div>
+          <div><b>🛒 訂位／訂餐資訊</b><span>可電話訂位。多人套餐或假日聚餐建議先預訂；外帶資訊請依門市當日公告。</span></div>
+        </div>
+        <div class="chips"><span>韓式湯飯</span><span>陶鍋拌飯</span><span>多人套餐</span><span>白飯／漬物小菜部分品項可續加</span></div>
+        <div class="menu-box">
+      <h4>代表菜單與價格</h4>
+      <div class="table-scroll"><table><thead><tr><th>餐點／方案</th><th>價格／內容</th></tr></thead><tbody><tr><td>牛肉湯飯（辣）</td><td>NT$298</td></tr><tr><td>金春喜海鮮湯飯</td><td>NT$308</td></tr><tr><td>韓國肉醬陶鍋拌飯</td><td>NT$268</td></tr><tr><td>四人套餐</td><td>2026 夏季推薦價 NT$1,988（原價 NT$2,264）</td></tr><tr><td>套餐內容</td><td>主餐 9 選 4＋海鮮煎餅＋炸雞年糕＋韓國炸年糕＋韓風小點＋飲品</td></tr></tbody></table></div>
+    </div>
+        <div class="note"><b>資料提醒：</b>湯飯與拌飯價格來自遠百官方美食頁；四人套餐為 2026 夏季活動資訊，檔期後可能調整。</div>
+        <div class="actions">
+          <a href="https://cdn.feds.com.tw/tw/37/Food/Detail/468" target="_blank" rel="noopener">遠百官方資料</a>
+          <a href="https://www.feds.com.tw/tw/37/Food/Detail/468" target="_blank" rel="noopener">品牌／菜單網站</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=金春喜韓廚 嘉義市西區垂楊路537號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article></div>
+</section>
+
+<section id="floor-b1" class="panel">
+  <div class="section-head"><div><span class="kicker">FLOOR GUIDE</span><h2>B1 美食</h2><p>義大利麵、Pizza 與多人分享餐。</p></div><span class="count">1 家</span></div>
+  <div class="cards">
+    <article class="restaurant">
+      <div class="image">
+        <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1400&q=80" alt="義式屋古拉爵 料理類型示意圖" loading="lazy">
+        <div class="image-label">料理類型示意圖</div>
+        <div class="floor">B1</div>
+      </div>
+      <div class="content">
+        <div class="title">
+          <div><h3>義式屋古拉爵</h3><p>西式料理／義大利麵／Pizza</p></div>
+        </div>
+        <div class="info-grid">
+          <div><b>📍 位置</b><span>嘉義市西區垂楊路537號 B1</span></div>
+          <div><b>☎ 聯絡電話</b><span>05-236-0337</span></div>
+          <div><b>🕒 營業時間</b><span>11:00–21:30</span></div>
+          <div><b>🛒 訂位／訂餐資訊</b><span>可電話訂位；多人分享餐建議提前預約。是否提供線上訂位、外帶或外送，請以品牌與門市當日系統為準。</span></div>
+        </div>
+        <div class="chips"><span>提供座位</span><span>兒童座椅</span><span>可刷卡</span><span>供應酒類</span><span>義大利麵</span><span>拿坡里 Pizza</span></div>
+        <div class="menu-box">
+      <h4>代表菜單與價格</h4>
+      <div class="table-scroll"><table><thead><tr><th>餐點／方案</th><th>價格／內容</th></tr></thead><tbody><tr><td>古拉爵比薩三重奏</td><td>遠百官網熱銷推薦</td></tr><tr><td>超值個人餐</td><td>主餐＋開胃菜＋湯＋甜點＋飲料</td></tr><tr><td>美味雙人餐</td><td>義大利麵／飯／Pizza 2 份＋開胃料理＋經典料理＋湯＋甜點＋飲料</td></tr><tr><td>三人饗宴</td><td>主餐、義大利麵／飯／Pizza、開胃料理、湯、甜點、飲料</td></tr><tr><td>幸福四人歡聚分享餐</td><td>2026 夏季推薦價 NT$2,680</td></tr></tbody></table></div>
+    </div>
+        <div class="note"><b>資料提醒：</b>遠百官網列有個人、雙人、三人餐內容；四人餐價格來自 2026 夏季遠百嘉義活動頁。</div>
+        <div class="actions">
+          <a href="https://origin.feds.com.tw/tw/37/MallInfo/FloorRestaurant?FloorId=121&RestaurantId=72&tab=floor-B1" target="_blank" rel="noopener">遠百官方資料</a>
+          <a href="https://www.grazie.com.tw/" target="_blank" rel="noopener">品牌／菜單網站</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=義式屋古拉爵 嘉義市西區垂楊路537號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article></div>
+</section>
+
+<section id="compare" class="panel">
+  <div class="section-head"><div><span class="kicker">QUICK COMPARISON</span><h2>餐廳完整比較表</h2><p>可以輸入餐廳、料理、樓層或電話快速篩選。</p></div></div>
+  <input id="search" class="search" type="search" placeholder="搜尋：火鍋、韓式、B1、05-284…" oninput="filterRows()">
+  <div class="table-scroll big">
+  <table id="comparison"><thead><tr><th>樓層</th><th>餐廳</th><th>類型</th><th>電話</th><th>營業時間</th><th>訂位／訂餐資訊</th></tr></thead><tbody><tr><td>1F</td><td>Starbucks 星巴克</td><td>輕食／下午茶／咖啡</td><td>05-283-2501</td><td>遠百官網標示：(日～五) 08:00–21:30；週六及特殊節日請以門市公告為準</td><td>可現場點餐；行動預點／外送服務依 Starbucks APP 與該門市當日開放狀態。亦可電話洽詢。</td></tr><tr><td>7F</td><td>涮乃葉日式涮涮鍋</td><td>日式料理／火鍋吃到飽</td><td>05-284-3262</td><td>11:00–21:30</td><td>建議電話預約；亦可依品牌提供的線上訂位系統預約。尖峰時段與假日建議提早訂位。</td></tr><tr><td>7F</td><td>金春喜韓廚</td><td>韓式料理</td><td>05-235-4888</td><td>11:00–15:00；17:00–21:30</td><td>可電話訂位。多人套餐或假日聚餐建議先預訂；外帶資訊請依門市當日公告。</td></tr><tr><td>B1</td><td>義式屋古拉爵</td><td>西式料理／義大利麵／Pizza</td><td>05-236-0337</td><td>11:00–21:30</td><td>可電話訂位；多人分享餐建議提前預約。是否提供線上訂位、外帶或外送，請以品牌與門市當日系統為準。</td></tr></tbody></table>
+  </div>
+</section>
+</main>
+<footer>
+  <b>資料整理日期：2026-08-09。</b>主要依據遠東百貨嘉義店官方「美食」頁、各餐廳遠百官方頁，以及遠百 2026 年嘉義聚餐活動資料。餐廳菜單、價格、活動、訂位規則與營業時間可能調整，實際消費前請點擊「遠百官方資料」或致電餐廳確認。<br>
+  網頁中的餐飲圖片為料理類型示意圖（Unsplash），並非遠百或各門市官方實景照片。
+</footer>
+<script>
+const tabs=[...document.querySelectorAll('.tab')];
+const panels=[...document.querySelectorAll('.panel')];
+function show(id){
+  tabs.forEach(t=>t.classList.toggle('active',t.dataset.id===id));
+  panels.forEach(p=>p.classList.toggle('active',p.id===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.id)));
+function filterRows(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  document.querySelectorAll('#comparison tbody tr').forEach(r=>{
+    r.style.display=r.innerText.toLowerCase().includes(q)?'':'none';
+  });
+}
+</script>
+</body>
+</html>

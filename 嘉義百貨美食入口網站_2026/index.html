@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="嘉義百貨美食入口網站：耐斯廣場、新光三越嘉義垂楊店、遠東百貨嘉義店餐廳整合指南。">
+<title>嘉義百貨美食｜三大百貨餐廳整合指南</title>
+<style>
+:root{--cream:#fffaf2;--paper:#fff;--ink:#231d18;--muted:#736a62;--tomato:#c94f34;--orange:#e78a32;--green:#56724d;--wine:#7c2d2b;--line:#eadfd3;--shadow:0 22px 60px rgba(74,45,22,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fff4e3 0,#fffaf5 33%,#f7f2ea 100%);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+a{color:inherit}.topbar{position:sticky;top:0;z-index:40;background:rgba(255,250,242,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(172,122,85,.18)}.nav{max-width:1320px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 20px}.logo{font-weight:950;font-size:20px}.logo small{display:block;color:var(--tomato);font:700 10px/1.2 Georgia,serif;letter-spacing:.18em}.navlinks{display:flex;gap:7px;overflow:auto}.navlinks a{text-decoration:none;padding:9px 12px;border-radius:999px;font-weight:800;white-space:nowrap}.navlinks a:hover{background:#fff;border:1px solid var(--line)}
+main{max-width:1320px;margin:auto;padding:26px 20px 80px}
+.hero{min-height:600px;border-radius:34px;overflow:hidden;position:relative;display:grid;align-items:end;background:linear-gradient(90deg,rgba(31,16,7,.80),rgba(31,16,7,.20)),url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=2000&q=85') center/cover;box-shadow:var(--shadow)}.hero-content{color:#fff;padding:55px;max-width:900px}.eyebrow{font-weight:900;letter-spacing:.2em;font-size:12px;color:#ffd48e}h1{font:900 clamp(48px,8vw,94px)/.92 Georgia,"Noto Serif TC",serif;margin:16px 0 22px;letter-spacing:-.05em}.hero p{font-size:20px;line-height:1.8;margin:0 0 24px;color:#fff7e8}.hero-stats{display:flex;flex-wrap:wrap;gap:10px}.hero-stats span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px);border-radius:999px;padding:9px 13px;font-weight:800}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0 10px}.intro h2,.section-head h2{font:900 clamp(34px,5vw,56px)/1 Georgia,"Noto Serif TC",serif;margin:8px 0 12px}.intro p{color:var(--muted);font-size:17px;line-height:1.8;margin:0}.quote{background:#2e2b23;color:#fff;border-radius:22px;padding:25px;display:flex;align-items:center;font:700 20px/1.7 "Noto Serif TC",serif}
+.section{padding-top:58px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}.section-head p{color:var(--muted);max-width:650px;line-height:1.7;margin:0}.kicker{color:var(--tomato);font-weight:950;letter-spacing:.18em;font-size:11px}
+.mall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.mall-card{background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}.mall-photo{display:block;height:320px;position:relative;overflow:hidden}.mall-photo img{width:100%;height:100%;object-fit:cover;transition:.5s}.mall-card:hover .mall-photo img{transform:scale(1.05)}.mall-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(20,10,3,.78))}.overlay{position:absolute;z-index:2;left:20px;right:20px;bottom:18px;color:#fff}.overlay span{display:block;font-size:12px;color:#ffe3b2;margin-bottom:5px}.overlay strong{font-size:18px}.mall-body{padding:21px}.mall-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.mall-top small{color:var(--tomato);font-size:9px;letter-spacing:.12em;font-weight:900}.mall-top h3{margin:5px 0;font-size:23px}.mall-top b{font:900 40px Georgia,serif;color:var(--orange)}.mall-body p{color:var(--muted);line-height:1.7;min-height:80px}.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.tags span{background:#f7eee3;color:#7d4d2d;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:800}.mall-actions{display:flex;flex-wrap:wrap;gap:7px}.mall-actions a{text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:850;font-size:13px}.mall-actions a:first-child{background:var(--tomato);border-color:var(--tomato);color:white}
+.table-shell{background:white;border:1px solid var(--line);border-radius:22px;overflow:auto;box-shadow:0 12px 35px rgba(75,45,25,.06)}table{width:100%;border-collapse:collapse;min-width:1050px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.55}th{background:#352a23;color:#fff;font-size:13px;position:sticky;top:0}tbody tr:hover{background:#fff8ef}.sub{color:var(--muted);font-size:12px}.tel{font-weight:900;text-decoration:none;color:var(--wine)}.btn-mini{display:inline-block;text-decoration:none;white-space:nowrap;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff;font-size:12px;font-weight:850}.btn-mini.hot{background:var(--tomato);color:white;border-color:var(--tomato)}
+.tools{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:14px}.search{flex:1;min-width:260px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;background:white}.filter{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;font:inherit;font-weight:800}.mall-pill{display:inline-block;background:#f4e8db;color:#784728;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:900}.order{min-width:280px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 0}.summary div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.summary b{display:block;font:900 34px Georgia,serif;color:var(--tomato)}.summary span{color:var(--muted)}
+footer{background:#2c241e;color:#e7dbce;padding:40px 20px}footer .inner{max-width:1320px;margin:auto;display:grid;grid-template-columns:1.3fr .7fr;gap:30px}footer h3{color:white;margin-top:0}footer p{line-height:1.8;color:#cfc0b2}footer a{color:#fff2d8}
+@media(max-width:980px){.mall-grid{grid-template-columns:1fr}.mall-body p{min-height:auto}.intro{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr}.hero{min-height:520px}.hero-content{padding:35px}}
+@media(max-width:600px){.nav{align-items:flex-start;flex-direction:column}main{padding-inline:12px}.hero{min-height:500px;border-radius:24px}.hero-content{padding:25px}.hero p{font-size:17px}.summary{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}footer .inner{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="nav"><div class="logo"><small>CHIAYI DEPARTMENT STORE FOOD MAP</small>嘉義百貨美食</div><nav class="navlinks"><a href="#malls">三大百貨</a><a href="#mall-table">百貨資訊</a><a href="#restaurants">24 家餐廳</a><a href="#about">使用說明</a></nav></div></header>
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">嘉義 · 百貨 · 美食一次找齊</span>
+    <h1>今天，<br>想吃哪一家？</h1>
+    <p>整合嘉義耐斯廣場、新光三越嘉義垂楊店、遠東百貨嘉義店三大百貨美食資訊。從咖啡、壽司、火鍋到泰式、韓式與義式料理，一個首頁就能比較、定位，再進入各百貨完整餐廳分頁。</p>
+    <div class="hero-stats"><span>🏬 3 大百貨</span><span>🍽 24 家餐飲整理</span><span>📍 一鍵 Google 地圖</span><span>☎ 電話與訂餐資訊</span></div>
+  </div>
+</section>
+
+<section class="intro">
+  <div><span class="kicker">ABOUT THE GUIDE</span><h2>嘉義市區百貨，<br>美食一站整理</h2><p>這個首頁把三份百貨餐廳指南整合在同一個入口。你可以先用三張照片快速選百貨，也可以直接從總表搜尋餐廳名稱、料理種類、樓層或電話。每張百貨卡片都能開啟原本的完整分頁，繼續查看菜單、營業時間與訂餐方式。</p></div>
+  <div class="quote">「先決定今天想吃什麼，再決定去哪間百貨。」— 讓聚餐選擇變得更簡單。</div>
+</section>
+
+<section id="malls" class="section">
+  <div class="section-head"><div><span class="kicker">THREE FOOD DESTINATIONS</span><h2>三大百貨美食入口</h2></div><p>點擊照片即可直接進入該百貨的完整餐廳分頁；圖片是美食風格主題圖，用來作為入口視覺。</p></div>
+  <div class="mall-grid">
+    <article class="mall-card">
+      <a class="mall-photo" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">
+        <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=82" alt="嘉義耐斯廣場 美食主題圖片">
+        <div class="overlay"><span>14 家餐飲整理</span><strong>進入 耐斯廣場 美食分頁 →</strong></div>
+      </a>
+      <div class="mall-body">
+        <div class="mall-top"><div><small>CHIAYI DEPARTMENT STORE</small><h3>嘉義耐斯廣場</h3></div><b>14</b></div>
+        <p>餐飲選擇最豐富，從 B1 美食街、咖啡、迴轉壽司到 6F、7F 主題餐廳都有。</p>
+        <div class="tags"><span>日式</span><span>泰式</span><span>川菜</span><span>咖啡</span><span>速食</span><span>餐酒</span></div>
+        <div class="mall-actions">
+          <a href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">完整餐廳頁</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BB%A3%E5%A0%B4" target="_blank">地圖定位</a>
+          <a href="http://www.niceplaza.com.tw/?type=web" target="_blank">官方網站</a>
+        </div>
+      </div>
+    </article>
+    <article class="mall-card">
+      <a class="mall-photo" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">
+        <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1600&q=82" alt="新光三越嘉義垂楊店 美食主題圖片">
+        <div class="overlay"><span>6 家餐飲整理</span><strong>進入 新光三越 美食分頁 →</strong></div>
+      </a>
+      <div class="mall-body">
+        <div class="mall-top"><div><small>CHIAYI DEPARTMENT STORE</small><h3>新光三越嘉義垂楊店</h3></div><b>6</b></div>
+        <p>B1 快速用餐與 11F 主題餐廳為主，包含烏龍麵、鰻魚飯、泰式與港式料理。</p>
+        <div class="tags"><span>烏龍麵</span><span>鰻魚飯</span><span>泰式</span><span>港式</span><span>豬排</span></div>
+        <div class="mall-actions">
+          <a href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">完整餐廳頁</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E6%96%B0%E5%85%89%E4%B8%89%E8%B6%8A%E5%98%89%E7%BE%A9%E5%9E%82%E6%A5%8A%E5%BA%97" target="_blank">地圖定位</a>
+          <a href="https://www.skm.com.tw/" target="_blank">官方網站</a>
+        </div>
+      </div>
+    </article>
+    <article class="mall-card">
+      <a class="mall-photo" href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1600&q=82" alt="遠東百貨嘉義店 美食主題圖片">
+        <div class="overlay"><span>4 家餐飲整理</span><strong>進入 遠東百貨 美食分頁 →</strong></div>
+      </a>
+      <div class="mall-body">
+        <div class="mall-top"><div><small>CHIAYI DEPARTMENT STORE</small><h3>遠東百貨嘉義店</h3></div><b>4</b></div>
+        <p>以 1F 咖啡、7F 聚餐餐廳與 B1 義式料理為主，適合家庭與朋友聚餐。</p>
+        <div class="tags"><span>咖啡</span><span>火鍋</span><span>韓式</span><span>義式</span></div>
+        <div class="mall-actions">
+          <a href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">完整餐廳頁</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF537%E8%99%9F%20%E9%81%A0%E6%9D%B1%E7%99%BE%E8%B2%A8%E5%98%89%E7%BE%A9%E5%BA%97" target="_blank">地圖定位</a>
+          <a href="https://www.feds.com.tw/tw/37" target="_blank">官方網站</a>
+        </div>
+      </div>
+    </article></div>
+</section>
+
+<section id="mall-table" class="section">
+  <div class="section-head"><div><span class="kicker">DEPARTMENT STORE DIRECTORY</span><h2>三大百貨資訊總表</h2></div><p>地址、服務電話、營業時間、Google 地圖、官方網站與本站美食分頁集中在同一張表。</p></div>
+  <div class="table-shell"><table><thead><tr><th>百貨名稱</th><th>地址</th><th>聯絡電話</th><th>營業時間</th><th>定位</th><th>官方網址</th><th>美食分頁</th></tr></thead><tbody>
+    <tr>
+      <td><b>嘉義耐斯廣場</b><br><span class="sub">14 家餐飲整理</span></td>
+      <td>嘉義市東區忠孝路600號</td>
+      <td><a class="tel" href="tel:052767888">05-276-7888</a></td>
+      <td>約 11:00–22:00</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BB%A3%E5%A0%B4" target="_blank">📍 Google 地圖</a></td>
+      <td><a class="btn-mini" href="http://www.niceplaza.com.tw/?type=web" target="_blank">🌐 官方網站</a></td>
+      <td><a class="btn-mini hot" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">🍽 美食分頁</a></td>
+    </tr>
+    <tr>
+      <td><b>新光三越嘉義垂楊店</b><br><span class="sub">6 家餐飲整理</span></td>
+      <td>嘉義市西區垂楊路726號</td>
+      <td><a class="tel" href="tel:052224888">05-222-4888</a></td>
+      <td>約 11:00–22:00</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E6%96%B0%E5%85%89%E4%B8%89%E8%B6%8A%E5%98%89%E7%BE%A9%E5%9E%82%E6%A5%8A%E5%BA%97" target="_blank">📍 Google 地圖</a></td>
+      <td><a class="btn-mini" href="https://www.skm.com.tw/" target="_blank">🌐 官方網站</a></td>
+      <td><a class="btn-mini hot" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">🍽 美食分頁</a></td>
+    </tr>
+    <tr>
+      <td><b>遠東百貨嘉義店</b><br><span class="sub">4 家餐飲整理</span></td>
+      <td>嘉義市西區垂楊路537號</td>
+      <td><a class="tel" href="tel:052365137">05-236-5137</a></td>
+      <td>11:00–21:30</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF537%E8%99%9F%20%E9%81%A0%E6%9D%B1%E7%99%BE%E8%B2%A8%E5%98%89%E7%BE%A9%E5%BA%97" target="_blank">📍 Google 地圖</a></td>
+      <td><a class="btn-mini" href="https://www.feds.com.tw/tw/37" target="_blank">🌐 官方網站</a></td>
+      <td><a class="btn-mini hot" href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">🍽 美食分頁</a></td>
+    </tr></tbody></table></div>
+  <div class="summary"><div><b>3</b><span>百貨入口</span></div><div><b>24</b><span>餐廳整合</span></div><div><b>10</b><span>主要餐飲樓層／區域</span></div><div><b>1</b><span>網站一次查完</span></div></div>
+</section>
+
+<section id="restaurants" class="section">
+  <div class="section-head"><div><span class="kicker">ALL RESTAURANTS</span><h2>三大百貨餐廳總表</h2></div><p>把三個既有頁面的餐廳合併成一張 24 家餐廳總表。可依百貨篩選，或搜尋「壽司、泰式、火鍋、B1、電話」等關鍵字。</p></div>
+  <div class="tools">
+    <input id="search" class="search" type="search" placeholder="搜尋餐廳、料理、樓層、電話、訂餐資訊…" oninput="filterRestaurants()">
+    <select id="mallFilter" class="filter" onchange="filterRestaurants()">
+      <option value="">全部百貨</option>
+      <option>嘉義耐斯廣場</option>
+      <option>新光三越嘉義垂楊店</option>
+      <option>遠東百貨嘉義店</option>
+    </select>
+  </div>
+  <div class="table-shell"><table id="restaurantTable"><thead><tr><th>百貨</th><th>樓層</th><th>餐廳</th><th>料理類型</th><th>電話</th><th>營業時間</th><th>訂位／訂餐</th><th>定位</th><th>完整頁</th></tr></thead><tbody>
+    <tr data-mall="遠東百貨嘉義店">
+      <td><span class="mall-pill">遠東百貨</span></td>
+      <td>1F</td>
+      <td><b>Starbucks 星巴克</b></td>
+      <td>輕食／下午茶／咖啡</td>
+      <td>05-283-2501</td>
+      <td>遠百官網標示：(日～五) 08:00–21:30；週六及特殊節日請以門市公告為準</td>
+      <td class="order">可現場點餐；行動預點／外送服務依 Starbucks APP 與該門市當日開放狀態。亦可電話洽詢。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF537%E8%99%9F%20Starbucks%20%E6%98%9F%E5%B7%B4%E5%85%8B" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="遠東百貨嘉義店">
+      <td><span class="mall-pill">遠東百貨</span></td>
+      <td>7F</td>
+      <td><b>涮乃葉日式涮涮鍋</b></td>
+      <td>日式料理／火鍋吃到飽</td>
+      <td>05-284-3262</td>
+      <td>11:00–21:30</td>
+      <td class="order">建議電話預約；亦可依品牌提供的線上訂位系統預約。尖峰時段與假日建議提早訂位。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF537%E8%99%9F%20%E6%B6%AE%E4%B9%83%E8%91%89%E6%97%A5%E5%BC%8F%E6%B6%AE%E6%B6%AE%E9%8D%8B" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="遠東百貨嘉義店">
+      <td><span class="mall-pill">遠東百貨</span></td>
+      <td>7F</td>
+      <td><b>金春喜韓廚</b></td>
+      <td>韓式料理</td>
+      <td>05-235-4888</td>
+      <td>11:00–15:00；17:00–21:30</td>
+      <td class="order">可電話訂位。多人套餐或假日聚餐建議先預訂；外帶資訊請依門市當日公告。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF537%E8%99%9F%20%E9%87%91%E6%98%A5%E5%96%9C%E9%9F%93%E5%BB%9A" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="遠東百貨嘉義店">
+      <td><span class="mall-pill">遠東百貨</span></td>
+      <td>B1</td>
+      <td><b>義式屋古拉爵</b></td>
+      <td>西式料理／義大利麵／Pizza</td>
+      <td>05-236-0337</td>
+      <td>11:00–21:30</td>
+      <td class="order">可電話訂位；多人分享餐建議提前預約。是否提供線上訂位、外帶或外送，請以品牌與門市當日系統為準。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF537%E8%99%9F%20%E7%BE%A9%E5%BC%8F%E5%B1%8B%E5%8F%A4%E6%8B%89%E7%88%B5" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="新光三越嘉義垂楊店">
+      <td><span class="mall-pill">新光三越</span></td>
+      <td>B1F</td>
+      <td><b>丸亀製麵</b></td>
+      <td>日式料理／烏龍麵</td>
+      <td>05-228-0852</td>
+      <td>11:00–21:00</td>
+      <td class="order">新光三越 skmeats 提供外帶功能；候位請電洽或至現場。外送是否開放依當日系統顯示。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E4%B8%B8%E4%BA%80%E8%A3%BD%E9%BA%B5" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="新光三越嘉義垂楊店">
+      <td><span class="mall-pill">新光三越</span></td>
+      <td>B1F</td>
+      <td><b>熊本家</b></td>
+      <td>中式料理／鍋物</td>
+      <td>官網頁未顯示獨立電話；可洽新光三越 05-222-4888</td>
+      <td>11:00–21:00</td>
+      <td class="order">skmeats 頁面支援外帶／外送入口；候位狀態依現場與系統為準。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E7%86%8A%E6%9C%AC%E5%AE%B6" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="新光三越嘉義垂楊店">
+      <td><span class="mall-pill">新光三越</span></td>
+      <td>B1F</td>
+      <td><b>鰻魚日記 MIAMANDAY</b></td>
+      <td>日式料理／鰻魚飯</td>
+      <td>05-227-7502</td>
+      <td>約 11:30–19:30；請以當日系統為準</td>
+      <td class="order">skmeats 提供訂位、候位、外帶與外送入口；實際可用時段依當日系統。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E9%B0%BB%E9%AD%9A%E6%97%A5%E8%A8%98%20MIAMANDAY" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="新光三越嘉義垂楊店">
+      <td><span class="mall-pill">新光三越</span></td>
+      <td>11F</td>
+      <td><b>瓦城泰國料理</b></td>
+      <td>東南亞料理／泰式料理</td>
+      <td>05-227-8686</td>
+      <td>週一～週五 11:00–15:00、17:00–22:00；週六日約 11:00–22:00</td>
+      <td class="order">可透過品牌／訂位平台訂位；SKM 美食地圖提供訂位、候位、外帶與外送入口。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E7%93%A6%E5%9F%8E%E6%B3%B0%E5%9C%8B%E6%96%99%E7%90%86" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="新光三越嘉義垂楊店">
+      <td><span class="mall-pill">新光三越</span></td>
+      <td>11F</td>
+      <td><b>好正點港式點心專賣</b></td>
+      <td>中式料理／港式飲茶</td>
+      <td>05-227-8876</td>
+      <td>約 11:00–21:00／21:30</td>
+      <td class="order">SKM 頁面可線上訂位，最多 8 人；多人聚餐建議電話預約。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E5%A5%BD%E6%AD%A3%E9%BB%9E%E6%B8%AF%E5%BC%8F%E9%BB%9E%E5%BF%83%E5%B0%88%E8%B3%A3" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="新光三越嘉義垂楊店">
+      <td><span class="mall-pill">新光三越</span></td>
+      <td>11F</td>
+      <td><b>勝博殿日式炸豬排</b></td>
+      <td>日式料理／炸豬排</td>
+      <td>05-310-3993</td>
+      <td>依新光三越餐廳營業與品牌現場公告</td>
+      <td class="order">新光三越品牌頁提供線上訂／候位入口；外送平台亦可查到嘉義垂楊店外送菜單。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E8%A5%BF%E5%8D%80%E5%9E%82%E6%A5%8A%E8%B7%AF726%E8%99%9F%20%E5%8B%9D%E5%8D%9A%E6%AE%BF%E6%97%A5%E5%BC%8F%E7%82%B8%E8%B1%AC%E6%8E%92" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>LE BLE D’OR 金色三麥｜嘉義耐斯店</b></td>
+      <td>餐酒館／西式料理</td>
+      <td>05-276-9909</td>
+      <td>週日～週四 11:00–22:30；週五～週六 11:00–24:00</td>
+      <td class="order">可由金色三麥官網訂位；也可電話洽詢。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20LE%20BLE%20D%E2%80%99OR%20%E9%87%91%E8%89%B2%E4%B8%89%E9%BA%A5%EF%BD%9C%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BA%97" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>品味鐵板燒</b></td>
+      <td>鐵板燒</td>
+      <td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td>
+      <td>依耐斯廣場營業時間為主，通常 11:00–22:00</td>
+      <td class="order">以現場點餐／外帶為主。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E5%93%81%E5%91%B3%E9%90%B5%E6%9D%BF%E7%87%92" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>玉子屋</b></td>
+      <td>日式料理</td>
+      <td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td>
+      <td>依耐斯廣場營業時間為主，通常 11:00–22:00</td>
+      <td class="order">以現場點餐為主；是否提供外帶／外送依櫃位現場公告。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E7%8E%89%E5%AD%90%E5%B1%8B" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>雪嶽山韓式料理</b></td>
+      <td>韓式料理</td>
+      <td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td>
+      <td>依耐斯廣場營業時間為主，通常 11:00–22:00</td>
+      <td class="order">以現場點餐為主；外帶／外送依櫃位與平台即時資訊。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E9%9B%AA%E5%B6%BD%E5%B1%B1%E9%9F%93%E5%BC%8F%E6%96%99%E7%90%86" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>熊定食</b></td>
+      <td>日式定食</td>
+      <td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td>
+      <td>依耐斯廣場營業時間為主，通常 11:00–22:00</td>
+      <td class="order">以現場點餐為主；外帶資訊請洽現場櫃位。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E7%86%8A%E5%AE%9A%E9%A3%9F" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>杏子豬排</b></td>
+      <td>日式豬排</td>
+      <td>未見耐斯分店官方獨立電話公告；可洽耐斯 05-276-7888</td>
+      <td>依耐斯廣場營業時間為主，通常 11:00–22:00</td>
+      <td class="order">建議以現場候位／點餐為主；外帶資訊依品牌與櫃位公告。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E6%9D%8F%E5%AD%90%E8%B1%AC%E6%8E%92" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>西西里義式香草料理</b></td>
+      <td>義式料理</td>
+      <td>未見官方獨立電話公告；可洽耐斯 05-276-7888</td>
+      <td>依耐斯廣場營業時間為主，通常 11:00–22:00</td>
+      <td class="order">以現場點餐為主；是否提供外帶／平台外送請依現場公告。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E8%A5%BF%E8%A5%BF%E9%87%8C%E7%BE%A9%E5%BC%8F%E9%A6%99%E8%8D%89%E6%96%99%E7%90%86" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>MOS BURGER 摩斯漢堡｜嘉義耐斯店</b></td>
+      <td>漢堡／速食</td>
+      <td>05-277-2361</td>
+      <td>11:00–22:00</td>
+      <td class="order">支援 MOS APP、網路訂餐、電話訂餐；外送服務依官方系統與配送範圍。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20MOS%20BURGER%20%E6%91%A9%E6%96%AF%E6%BC%A2%E5%A0%A1%EF%BD%9C%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BA%97" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>B1</td>
+      <td><b>王子烘焙坊</b></td>
+      <td>麵包／烘焙</td>
+      <td>05-277-1999（公開餐飲資料）</td>
+      <td>約 11:00–22:00</td>
+      <td class="order">以現場購買為主；蛋糕、麵包預留或大量訂購建議先電話詢問。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E7%8E%8B%E5%AD%90%E7%83%98%E7%84%99%E5%9D%8A" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>1F</td>
+      <td><b>星巴克 Starbucks｜耐斯門市</b></td>
+      <td>咖啡／輕食</td>
+      <td>05-278-9265</td>
+      <td>平日約 10:00–22:00；週末約 09:00–22:00</td>
+      <td class="order">可使用星巴克行動預點、現場點餐；外送依合作平台及範圍。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E6%98%9F%E5%B7%B4%E5%85%8B%20Starbucks%EF%BD%9C%E8%80%90%E6%96%AF%E9%96%80%E5%B8%82" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>3F</td>
+      <td><b>藏壽司 Kura Sushi｜嘉義耐斯店</b></td>
+      <td>迴轉壽司</td>
+      <td>05-276-0189（不接受電話預約）</td>
+      <td>11:00–22:00</td>
+      <td class="order">建議使用藏壽司官方預約／候位系統；不接受電話預約。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E8%97%8F%E5%A3%BD%E5%8F%B8%20Kura%20Sushi%EF%BD%9C%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BA%97" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>6F</td>
+      <td><b>開飯川食堂｜嘉義耐斯店</b></td>
+      <td>川味中式料理</td>
+      <td>05-271-8998</td>
+      <td>平日 11:30–15:00／17:30–21:30；假日 11:00–16:00／17:00–21:30</td>
+      <td class="order">可透過品牌官方訂位系統；團體／包廂建議提前預約。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E9%96%8B%E9%A3%AF%E5%B7%9D%E9%A3%9F%E5%A0%82%EF%BD%9C%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BA%97" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>7F</td>
+      <td><b>藝奇 日式料理｜嘉義耐斯店</b></td>
+      <td>日式套餐／岩板燒</td>
+      <td>05-276-5222</td>
+      <td>平日 11:30–14:30、17:30–22:00；假日 11:00–14:30、17:00–22:00</td>
+      <td class="order">官方提供線上訂位與外帶自取；也可電話洽詢。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E8%97%9D%E5%A5%87%20%E6%97%A5%E5%BC%8F%E6%96%99%E7%90%86%EF%BD%9C%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BA%97" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr>
+    <tr data-mall="嘉義耐斯廣場">
+      <td><span class="mall-pill">耐斯廣場</span></td>
+      <td>7F</td>
+      <td><b>饗泰多 SIAM MORE｜嘉義耐斯店</b></td>
+      <td>泰式料理</td>
+      <td>05-271-8268</td>
+      <td>平日 11:30–15:00、17:30–21:30；假日 11:00–16:00、17:00–21:30</td>
+      <td class="order">可由饗泰多官方網站／饗賓訂位系統預約；部分餐點可外帶或透過外送平台訂購。</td>
+      <td><a class="btn-mini" href="https://www.google.com/maps/search/?api=1&query=%E5%98%89%E7%BE%A9%E5%B8%82%E6%9D%B1%E5%8D%80%E5%BF%A0%E5%AD%9D%E8%B7%AF600%E8%99%9F%20%E9%A5%97%E6%B3%B0%E5%A4%9A%20SIAM%20MORE%EF%BD%9C%E5%98%89%E7%BE%A9%E8%80%90%E6%96%AF%E5%BA%97" target="_blank">定位</a></td>
+      <td><a class="btn-mini" href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">詳細頁</a></td>
+    </tr></tbody></table></div>
+</section>
+
+<section id="about" class="section">
+  <div class="section-head"><div><span class="kicker">HOW TO USE</span><h2>網站使用方式</h2></div></div>
+  <div class="summary">
+    <div><b>①</b><span>先從三張照片選擇百貨</span></div>
+    <div><b>②</b><span>用總表比較餐廳與樓層</span></div>
+    <div><b>③</b><span>按「定位」直接開 Google 地圖</span></div>
+    <div><b>④</b><span>進完整分頁查看菜單與訂餐資訊</span></div>
+  </div>
+</section>
+</main>
+<footer><div class="inner"><div><h3>嘉義百貨美食整合指南</h3><p>資料整合自你提供的三份百貨餐廳 HTML：遠東百貨嘉義店、新光三越嘉義垂楊店、嘉義耐斯廣場。餐廳、營業時間、菜單與訂餐規則可能更新，實際前往前仍建議使用各分頁中的官方來源再次確認。</p></div><div><h3>快速入口</h3><p><a href="嘉義耐斯廣場_餐廳完整分頁指南_2026.html">耐斯廣場</a><br><a href="新光三越嘉義垂楊店_餐廳完整分頁指南_2026.html">新光三越</a><br><a href="遠東百貨嘉義店_餐廳完整分頁指南_2026.html">遠東百貨</a></p></div></div></footer>
+<script>
+function filterRestaurants(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  const mall=document.getElementById('mallFilter').value;
+  document.querySelectorAll('#restaurantTable tbody tr').forEach(row=>{
+    const text=row.innerText.toLowerCase();
+    const okQ=!q || text.includes(q);
+    const okMall=!mall || row.dataset.mall===mall;
+    row.style.display=(okQ && okMall)?'':'none';
+  });
+}
+</script>
+</body>
+</html>
