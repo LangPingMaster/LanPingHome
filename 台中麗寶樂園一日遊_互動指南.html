@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>台中麗寶樂園一日遊互動指南</title>
+    <style>
+      :root {
+        --i: #17192c;
+        --l: #dcff4d;
+        --p: #f5f1e8;
+        --v: #6948ff;
+        --c: #ff5b50;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--p);
+        color: var(--i);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 9;
+        background: #f5f1e8ed;
+        backdrop-filter: blur(12px);
+        padding: 15px 6%;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #2222;
+      }
+      nav b {
+        font-size: 20px;
+      }
+      nav div {
+        display: flex;
+        gap: 18px;
+      }
+      nav a {
+        color: var(--i);
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .hero {
+        min-height: 620px;
+        padding: 90px 6%;
+        display: grid;
+        grid-template-columns: 1fr 0.7fr;
+        align-items: center;
+        background: linear-gradient(135deg, var(--p) 67%, var(--l) 67%);
+      }
+      h1 {
+        font-size: clamp(52px, 8vw, 104px);
+        line-height: 0.94;
+        margin: 15px 0;
+        letter-spacing: -5px;
+      }
+      h1 em {
+        color: var(--v);
+        font-style: normal;
+      }
+      .hero p {
+        font-size: 19px;
+        line-height: 1.8;
+      }
+      .go,
+      .gps a {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 30px;
+        background: var(--i);
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .circle {
+        width: 330px;
+        height: 330px;
+        border: 9px solid var(--i);
+        border-radius: 50%;
+        position: relative;
+        animation: spin 24s linear infinite;
+      }
+      .circle:before,
+      .circle:after {
+        content: "";
+        position: absolute;
+        background: var(--i);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .circle:before {
+        width: 100%;
+        height: 5px;
+      }
+      .circle:after {
+        height: 100%;
+        width: 5px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      section {
+        padding: 75px 6%;
+      }
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+      .title h2 {
+        font-size: clamp(38px, 5vw, 64px);
+        margin: 0;
+      }
+      .title p {
+        max-width: 520px;
+        line-height: 1.8;
+      }
+      .tabs button,
+      .filter button {
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 18px;
+        margin: 3px;
+        background: #e5dfd4;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .tabs button.on,
+      .filter button.on {
+        background: var(--i);
+        color: #fff;
+      }
+      .panel {
+        display: none;
+        background: #fff;
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 12px;
+        line-height: 1.8;
+      }
+      .panel.on {
+        display: block;
+      }
+      .panel b {
+        background: var(--l);
+        padding: 5px 8px;
+      }
+      .gps {
+        margin-top: 18px;
+        border-radius: 20px;
+        background: var(--v);
+        color: #fff;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+      }
+      .gps h3 {
+        margin: 3px 0;
+      }
+      .gps a {
+        background: #fff;
+        color: var(--i);
+        margin: 4px;
+      }
+      .dark {
+        background: var(--i);
+        color: #fff;
+      }
+      .flow,
+      .prices {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 13px;
+      }
+      .flow div {
+        border: 1px solid #ffffff30;
+        border-radius: 18px;
+        padding: 22px;
+      }
+      .flow span {
+        display: block;
+        font-size: 25px;
+        margin-bottom: 10px;
+      }
+      .flow small {
+        display: block;
+        color: #aaa;
+        margin-top: 7px;
+      }
+      .prices {
+        margin-top: 25px;
+        background: #fff;
+        color: var(--i);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+      .prices div {
+        padding: 22px;
+        border-right: 1px solid #ddd;
+      }
+      .prices b {
+        display: block;
+        font-size: 22px;
+        margin: 7px 0;
+      }
+      .ticketbox {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 20px;
+      }
+      .ticketrow {
+        display: grid;
+        grid-template-columns: 1fr 100px 100px;
+        padding: 16px;
+        border-bottom: 1px solid #ccc;
+      }
+      .ticketrow strong {
+        color: var(--v);
+      }
+      .calc {
+        background: var(--l);
+        border: 2px solid var(--i);
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 7px 7px var(--i);
+      }
+      .calc button {
+        width: 38px;
+        height: 38px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--i);
+        color: #fff;
+        font-size: 19px;
+      }
+      .calc #qty {
+        padding: 15px;
+        font-size: 22px;
+      }
+      .total {
+        font-size: 28px;
+        font-weight: bold;
+        margin-top: 25px;
+      }
+      .range {
+        width: 100%;
+        accent-color: var(--l);
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .card {
+        background: #f8f4ea;
+        color: var(--i);
+        border-radius: 18px;
+        padding: 20px;
+      }
+      .card header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .card header span {
+        font-size: 30px;
+      }
+      .card h3 {
+        margin: 3px 0;
+      }
+      .card small {
+        color: #777;
+      }
+      .card details {
+        border-top: 1px solid #ddd;
+        margin-top: 13px;
+        padding-top: 13px;
+      }
+      .card summary {
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .card h4 {
+        color: var(--v);
+        margin-bottom: 3px;
+      }
+      .card p {
+        line-height: 1.7;
+        margin-top: 0;
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        overflow: auto;
+      }
+      .timeline div {
+        min-width: 120px;
+      }
+      .timeline b {
+        font-size: 19px;
+      }
+      .timeline i {
+        display: block;
+        width: 13px;
+        height: 13px;
+        background: var(--c);
+        border-radius: 50%;
+        margin: 12px 0;
+      }
+      footer {
+        background: var(--l);
+        padding: 35px 6%;
+        line-height: 1.8;
+      }
+      footer a {
+        color: var(--i);
+        font-weight: bold;
+        margin-right: 15px;
+      }
+      @media (max-width: 850px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .circle {
+          margin-top: 35px;
+        }
+        .flow,
+        .prices,
+        .cards {
+          grid-template-columns: 1fr 1fr;
+        }
+        .ticketbox {
+          grid-template-columns: 1fr;
+        }
+        .timeline {
+          grid-template-columns: repeat(8, 130px);
+        }
+      }
+      @media (max-width: 560px) {
+        nav div {
+          display: none;
+        }
+        .hero,
+        section {
+          padding: 55px 20px;
+        }
+        h1 {
+          letter-spacing: -3px;
+        }
+        .circle {
+          width: 240px;
+          height: 240px;
+        }
+        .title {
+          display: block;
+        }
+        .gps {
+          display: block;
+        }
+        .flow,
+        .prices,
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .ticketrow {
+          grid-template-columns: 1fr 70px 70px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+        }
+      }
+    </style>
+    <style>
+      .parkmap {
+        background: #dff4ff;
+      }
+      .maptools {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .maptools button {
+        border: 2px solid var(--i);
+        background: #fff;
+        border-radius: 99px;
+        padding: 10px 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .maptools button.on {
+        background: var(--i);
+        color: #fff;
+      }
+      .mapframe {
+        background: #fff;
+        border: 2px solid var(--i);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 8px 8px 0 var(--i);
+      }
+      .mapframe object,
+      .mapframe a,
+      .mapframe img {
+        display: block;
+        width: 100%;
+      }
+      .mapframe img {
+        height: auto;
+        cursor: zoom-in;
+      }
+      .mapframe object {
+        height: 620px;
+      }
+      .mapfallback {
+        padding: 30px;
+        text-align: center;
+      }
+      .mapfallback a,
+      .mapactions a {
+        display: inline-block;
+        background: var(--v);
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 11px 16px;
+        border-radius: 12px;
+        margin: 5px;
+      }
+      .zones {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 13px;
+        margin-top: 25px;
+      }
+      .zone {
+        border: 2px solid var(--i);
+        border-radius: 18px;
+        padding: 20px;
+        background: #fff;
+        transition: 0.25s;
+      }
+      .zone.active {
+        transform: translateY(-6px);
+        box-shadow: 7px 7px 0 var(--c);
+      }
+      .zone strong {
+        font-size: 22px;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .zone ul {
+        padding-left: 20px;
+        line-height: 1.8;
+      }
+      .routeguide {
+        margin-top: 25px;
+        background: var(--i);
+        color: #fff;
+        border-radius: 18px;
+        padding: 22px;
+      }
+      .routeguide ol {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding: 0;
+        list-style: none;
+        counter-reset: step;
+      }
+      .routeguide li {
+        background: #ffffff12;
+        border-radius: 13px;
+        padding: 15px;
+        line-height: 1.6;
+      }
+      .routeguide li:before {
+        counter-increment: step;
+        content: counter(step);
+        display: grid;
+        place-items: center;
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background: var(--l);
+        color: var(--i);
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      @media (max-width: 850px) {
+        .zones {
+          grid-template-columns: 1fr 1fr;
+        }
+        .routeguide ol {
+          grid-template-columns: 1fr 1fr;
+        }
+        .mapframe object {
+          height: 480px;
+        }
+      }
+      @media (max-width: 560px) {
+        .zones,
+        .routeguide ol {
+          grid-template-columns: 1fr;
+        }
+        .mapframe object {
+          height: 360px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <b>LIHPAO 麗寶一日遊</b>
+      <div>
+        <a href="#arrive">交通</a><a href="#park">停車</a
+        ><a href="#ticket">門票</a><a href="#map">園區Map</a
+        ><a href="#ride">設施</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <div>
+        <small>TAICHUNG · HOULI</small>
+        <h1>一日玩遍<br /><em>麗寶探索世界</em></h1>
+        <p>交通、停車、票價、GPS與遊樂設施詳細玩法，全部整理在這一頁。</p>
+        <a class="go" href="#arrive">開始規劃 →</a>
+      </div>
+      <div class="circle"></div>
+    </div>
+    <section id="arrive">
+      <div class="title">
+        <h2>01 怎麼到達？</h2>
+        <p>GPS目的地設定「麗寶樂園探索世界」，地址為台中市后里區福容路8號。</p>
+      </div>
+      <div class="tabs">
+        <button class="on" onclick="tab(0)">🚗 自行開車</button
+        ><button onclick="tab(1)">🚄 高鐵／台鐵</button
+        ><button onclick="tab(2)">🚌 公車／客運</button>
+      </div>
+      <div class="panel on">
+        <p><b>國道1號</b> 160后里／外埔出口下交流道，沿指標約3分鐘抵達。</p>
+        <p><b>國道3號</b> 164大甲／外埔出口下交流道，往外埔、后里約15分鐘。</p>
+        <p>連假建議比開園早30–45分鐘抵達，依現場引導進入第一或第二停車場。</p>
+      </div>
+      <div class="panel">
+        <p><b>高鐵臺中站</b> 轉乘155路公車至麗寶，官方估計約90分鐘以上。</p>
+        <p>
+          <b>台鐵豐原站</b>
+          轉215路直達；或搭212、213至月眉糖廠，再接園區接駁。后里站請查當日轉乘班次。
+        </p>
+      </div>
+      <div class="panel">
+        <p><b>台中火車站</b> 搭12、55、202、203、700或900至豐原，再轉215路。</p>
+        <p>
+          <b>國道客運</b>
+          統聯1617往返台北轉運站與麗寶，返程班次宜提前確認與預約。
+        </p>
+      </div>
+      <div class="gps">
+        <div>
+          <small>GPS DESTINATION</small>
+          <h3>麗寶樂園探索世界</h3>
+          <span>24.3226, 120.7002</span>
+        </div>
+        <div>
+          <a
+            target="_blank"
+            href="https://www.google.com/maps/dir/?api=1&destination=24.3226,120.7002"
+            >Google Maps</a
+          ><a
+            target="_blank"
+            href="https://maps.apple.com/?daddr=24.3226,120.7002&dirflg=d"
+            >Apple地圖</a
+          >
+        </div>
+      </div>
+    </section>
+    <section class="dark" id="park">
+      <div class="title">
+        <h2>02 如何停車？</h2>
+        <p>一般遊客停第一、第二停車場；福容大飯店停車場主要供房客使用。</p>
+      </div>
+      <div class="flow">
+        <div>
+          <span>🚗</span><b>交流道下匝道</b><small>跟隨麗寶樂園指標</small>
+        </div>
+        <div><span>P1</span><b>第一停車場</b><small>優先依現場引導</small></div>
+        <div><span>P2</span><b>第二停車場</b><small>P1滿位時前往</small></div>
+        <div>
+          <span>🎡</span><b>探索世界入口</b><small>先拍下停車區與車格</small>
+        </div>
+      </div>
+      <div class="prices">
+        <div><small>汽車</small><b>NT$40／小時</b>折抵後當日最高NT$200</div>
+        <div><small>機車</small><b>NT$50／次</b>依現場指示停放</div>
+        <div><small>巴士</small><b>NT$100／次</b>團體車輛依引導</div>
+        <div><small>消費折抵</small><b>滿NT$500</b>折1小時，最高6小時</div>
+      </div>
+      <p>折抵適用麗寶休息站、天空之夢及麗寶Outlet；特殊日期以當日公告為準。</p>
+    </section>
+    <section id="ticket">
+      <div class="title">
+        <h2>03 門票大概多少？</h2>
+        <p>探索世界單日票常見官網售價參考，活動價格會依日期調整。</p>
+      </div>
+      <div class="ticketbox">
+        <div id="ticketrows"></div>
+        <div class="calc">
+          <b>快速試算：全票</b>
+          <p>
+            <button onclick="count(-1)">−</button><span id="qty">2</span
+            ><button onclick="count(1)">＋</button>
+          </p>
+          <div class="total" id="total">預估 NT$1,798</div>
+          <p>學生票、學童票與博幼票請攜帶有效證件。摩天輪通常另購票。</p>
+        </div>
+      </div>
+    </section>
+    <section class="parkmap" id="map">
+      <div class="title">
+        <h2>04 园区游玩 Map</h2>
+        <p>
+          官方地图分为POPA欢乐王国、魔法森林与冒险天堂。点选区域查看重点，再依推荐路线移动。
+        </p>
+      </div>
+      <div class="maptools">
+        <button class="on" onclick="zone(0)">🗺️ 全部区域</button
+        ><button onclick="zone(1)">🎠 POPA欢乐王国</button
+        ><button onclick="zone(2)">🌳 魔法森林</button
+        ><button onclick="zone(3)">🎢 冒险天堂</button>
+      </div>
+      <div class="mapframe">
+        <a
+          href="lihpao_official_map.png"
+          target="_blank"
+          title="点击开启高清园区地图"
+        >
+          <img
+            src="lihpao_official_map.png"
+            alt="丽宝乐园探索世界官方园区地图"
+          />
+        </a>
+      </div>
+      <div class="mapactions">
+        <a
+          target="_blank"
+          href="https://www.lihpaoresort.com/LihpaolandApp/parkmap/DownloadMapByDiscover"
+          >放大／下载官方地图</a
+        ><a
+          target="_blank"
+          href="https://www.lihpaoresort.com/LihpaolandApp/parkmap/discover"
+          >官方地图网页</a
+        >
+      </div>
+      <div class="zones">
+        <article class="zone active" data-zone="1">
+          <strong>🎠 POPA欢乐王国</strong>
+          <p>入口左侧，适合亲子与低刺激行程。</p>
+          <ul>
+            <li>熊大的丽宝小镇</li>
+            <li>旋转木马、皇冠秋千</li>
+            <li>碰碰车、花园小舟</li>
+          </ul>
+        </article>
+        <article class="zone active" data-zone="2">
+          <strong>🌳 魔法森林</strong>
+          <p>园区上方与中央，连接两侧区域。</p>
+          <ul>
+            <li>时空飞侠、时光旅行</li>
+            <li>摩天轮造型设施</li>
+            <li>餐饮与休息补给</li>
+          </ul>
+        </article>
+        <article class="zone active" data-zone="3">
+          <strong>🎢 冒险天堂</strong>
+          <p>入口右侧，集中刺激及玩水设施。</p>
+          <ul>
+            <li>抢救地心、银河炫风</li>
+            <li>火山冒险、丛林泛舟</li>
+            <li>世界剧场与主题商店</li>
+          </ul>
+        </article>
+      </div>
+      <div class="routeguide">
+        <h3>推荐移动路线</h3>
+        <ol>
+          <li><b>入口直走</b><br />确认设施状态</li>
+          <li><b>右侧冒险天堂</b><br />先玩抢救地心</li>
+          <li><b>火山与泛舟</b><br />中午集中玩水</li>
+          <li><b>中央魔法森林</b><br />中度及休息设施</li>
+          <li><b>左侧POPA区</b><br />拍照、木马后离园</li>
+        </ol>
+      </div>
+    </section>
+    <section class="dark" id="ride">
+      <div class="title">
+        <h2>05 設施怎麼玩？</h2>
+        <p>
+          選擇可接受的最高刺激度；實際身高、體重、年齡及健康限制以入口標示為準。
+        </p>
+      </div>
+      <label>最高刺激度：<b id="leveltext">5／5</b></label
+      ><input
+        class="range"
+        type="range"
+        min="1"
+        max="5"
+        value="5"
+        oninput="filterRide(this.value)"
+      />
+      <div class="cards" id="cards"></div>
+    </section>
+    <section>
+      <div class="title">
+        <h2>一日建議時間軸</h2>
+        <p>先搶熱門、午後玩水、傍晚拍照；遇維修或天候停駛，就互換同區設施。</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+    <footer>
+      <b>麗寶探索世界一日遊互動指南</b>
+      <p>
+        更新日期：2026-08-27。票價、停車、營業時間與設施狀態可能調整，請在出發前查閱官方公告。
+      </p>
+      <a
+        href="https://www.lihpaoresort.com/lihpaolandapp/miscellaneous/trafficinfo"
+        >官方交通</a
+      ><a href="https://www.lihpaoresort.com/LihpaolandApp/ticket/discover"
+        >官方票價</a
+      ><a href="https://www.lihpaoresort.com/LihpaolandApp/Facility/Discover"
+        >官方設施</a
+      >
+    </footer>
+    <script>
+      const T = [
+        ["全票", "12歲以上成人", 1300, 899],
+        ["學生票", "憑有效學生證", 1150, 799],
+        ["學童票", "6至未滿12歲或依身高", 1000, 699],
+        ["博幼票", "符合幼童、長者或身障等資格", 650, 449],
+        ["午後票", "指定午後時段入園", 950, 649],
+      ];
+      const R = [
+        [
+          "搶救地心",
+          "冒險天堂",
+          5,
+          "145 cm以上",
+          "🎢",
+          "列車爬升後在斷軌接合前懸停，再以最高約94 km/h俯衝旋轉，體感可達約4.5G。",
+          "手機、眼鏡與帽子先收妥，頭背貼穩椅背；易暈車、頸背或心血管不適及懷孕者不宜。",
+          "開園優先排，常見開放至16:00，仍以當日公告為準。",
+        ],
+        [
+          "銀河炫風",
+          "冒險天堂",
+          5,
+          "145 cm以上",
+          "🌀",
+          "座艙在約18公尺高處不規則旋轉與前後翻轉，失重感強。",
+          "頭靠椅背、固定肩部，避免飽餐後立刻玩。",
+          "排入上午刺激組合，中間休息10分鐘。",
+        ],
+        [
+          "火山冒險",
+          "冒險天堂",
+          4,
+          "依入口標示",
+          "🌋",
+          "乘船穿越火山場景，最後高處俯衝入水。",
+          "鞋襪、手機防水；怕濕可穿雨衣。",
+          "炎熱午後體驗，結束後預留晾乾時間。",
+        ],
+        [
+          "叢林泛舟",
+          "冒險天堂",
+          3,
+          "依入口標示",
+          "🛟",
+          "圓形筏艇漂流、旋轉並迎接不同方向水流。",
+          "包包密封並扣妥裝置，每個座位都可能濕。",
+          "和火山冒險排在同一玩水時段。",
+        ],
+        [
+          "時空飛俠",
+          "魔法森林",
+          3,
+          "120 cm以上",
+          "🛩️",
+          "滑翔機座艙升空繞行，俯瞰園區，高度與風感明顯。",
+          "怕高速但想嘗試高空者可先玩。",
+          "傍晚視野較好。",
+        ],
+        [
+          "時光旅行",
+          "魔法森林",
+          3,
+          "依入口標示",
+          "⏳",
+          "座艙隨轉盤旋轉並高低變化。",
+          "易暈者避免盯近物，不舒服就補水休息。",
+          "依排隊長度彈性補位。",
+        ],
+        [
+          "碰碰車",
+          "魔法森林",
+          2,
+          "依入口標示",
+          "🚙",
+          "操作方向盤與踏板，在場內閃避或輕碰。",
+          "碰撞前背貼椅背，手腳勿伸出車外。",
+          "適合午後休息後。",
+        ],
+        [
+          "花園小舟",
+          "魔法森林",
+          1,
+          "親子友善",
+          "🛶",
+          "小舟緩慢繞行花園水道，以觀景休息為主。",
+          "上下船扶欄杆，手機使用掛繩。",
+          "午餐後安排。",
+        ],
+        [
+          "旋轉木馬",
+          "POPA歡樂王國",
+          1,
+          "親子友善",
+          "🎠",
+          "隨音樂緩慢旋轉，是親子拍照代表設施。",
+          "坐穩握扶桿，依人員指示陪乘。",
+          "傍晚點燈後當作收尾。",
+        ],
+        [
+          "皇冠鞦韆",
+          "POPA歡樂王國",
+          2,
+          "依入口標示",
+          "👑",
+          "懸吊座椅升高繞圓，風感大於失重感。",
+          "綁好長髮、穿牢鞋子。",
+          "由低刺激逐步升級。",
+        ],
+        [
+          "熊大的麗寶小鎮",
+          "主題園區",
+          1,
+          "全齡拍照區",
+          "🐻",
+          "探索LINE FRIENDS街景與角色拍照點。",
+          "勿阻擋通道，活動依公告。",
+          "午後排隊變長或閉園前造訪。",
+        ],
+        [
+          "天空之夢摩天輪",
+          "Outlet旁・另購票",
+          1,
+          "依現場規定",
+          "🎡",
+          "密閉車廂緩升高空俯瞰后里，一圈約25分鐘。",
+          "強風雷雨可能停駛；一般全票約NT$350。",
+          "日落前30至45分鐘排隊。",
+        ],
+      ];
+      let q = 2;
+      function zone(n) {
+        document
+          .querySelectorAll(".maptools button")
+          .forEach((b, i) => b.classList.toggle("on", i === n));
+        document
+          .querySelectorAll(".zone")
+          .forEach((z) =>
+            z.classList.toggle(
+              "active",
+              n === 0 || Number(z.dataset.zone) === n,
+            ),
+          );
+      }
+      function tab(n) {
+        document
+          .querySelectorAll(".tabs button")
+          .forEach((x, i) => x.classList.toggle("on", i === n));
+        document
+          .querySelectorAll(".panel")
+          .forEach((x, i) => x.classList.toggle("on", i === n));
+      }
+      function count(n) {
+        q = Math.max(1, Math.min(10, q + n));
+        qty.textContent = q;
+        total.textContent = "預估 NT$" + (899 * q).toLocaleString();
+      }
+      function filterRide(v) {
+        leveltext.textContent = v + "／5";
+        draw(v);
+      }
+      function draw(v = 5) {
+        cards.innerHTML = R.filter((x) => x[2] <= v)
+          .map(
+            (x) =>
+              '<article class="card"><header><span>' +
+              x[4] +
+              "</span><div><small>" +
+              x[1] +
+              "</small><h3>" +
+              x[0] +
+              "</h3></div></header><p>刺激 " +
+              x[2] +
+              "／5・" +
+              x[3] +
+              "</p><details><summary>展開玩法與攻略</summary><h4>怎麼玩</h4><p>" +
+              x[5] +
+              "</p><h4>安全技巧</h4><p>" +
+              x[6] +
+              "</p><h4>排程建議</h4><p>" +
+              x[7] +
+              "</p></details></article>",
+          )
+          .join("");
+      }
+      ticketrows.innerHTML = T.map(
+        (x) =>
+          '<div class="ticketrow"><span><b>' +
+          x[0] +
+          "</b><br><small>" +
+          x[1] +
+          "</small></span><s>NT$" +
+          x[2] +
+          "</s><strong>NT$" +
+          x[3] +
+          "</strong></div>",
+      ).join("");
+      timeline.innerHTML = [
+        ["09:15", "停車拍車位"],
+        ["10:00", "搶救地心"],
+        ["11:00", "冒險天堂"],
+        ["12:15", "午餐休息"],
+        ["13:30", "火山＋泛舟"],
+        ["15:30", "魔法森林"],
+        ["17:00", "熊大小鎮"],
+        ["18:00", "木馬／摩天輪"],
+      ]
+        .map(
+          (x) =>
+            "<div><b>" + x[0] + "</b><i></i><span>" + x[1] + "</span></div>",
+        )
+        .join("");
+      draw();
+    </script>
+  </body>
+</html>
