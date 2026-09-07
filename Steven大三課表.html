@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+	<head>
+		<meta charset=utf-8>
+		<meta http-equiv=X-UA-Compatible content="IE=edge">
+		<meta name=viewport content="width=device-width, initial-scale=1">
+		<meta name=description content="">
+		<meta name=author content="">
+				<meta name="robots" content="index,nofollow" />
+									<base href="https://course.ncku.edu.tw/">
+		<title>國立成功大學課程資訊及選課系統</title>
+		<link rel="icon" type="image/x-icon" href="./favicon/favicon16.ico?v2" sizes="16x16" />
+		<link rel="icon" type="image/x-icon" href="./favicon/favicon32.ico?v2" sizes="32x32" />
+		<link rel="icon" type="image/x-icon" href="./favicon/favicon64.ico?v2" sizes="64x64" />
+		<link rel="icon" type="image/x-icon" href="./favicon/favicon256.ico?v2" sizes="256x256" />
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-57x57.png" sizes="57x57">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-60x60.png" sizes="60x60">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-72x72.png" sizes="72x72">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-76x76.png" sizes="76x76">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-114x114.png" sizes="114x114">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-120x120.png" sizes="120x120">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-144x144.png" sizes="144x144">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-152x152.png" sizes="152x152">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-180x180.png" sizes="180x180">
+		<link rel="apple-touch-icon" href="./favicon/apple-touch-icon-precomposed.png">
+		<script src="./js/modernizr-custom.js?20260906"></script>
+		<script>
+			var query = Modernizr.mq('only all');
+			if( !query ){
+				window.location = "./manual/browser.php";
+			}
+		</script>
+		<!--[if lt IE 11]>
+			<script src="./js/html5shiv.min.js?20260906"></script>
+			<script src="./js/respond.min.js?20260906"></script>
+		<![endif]-->
+		<!--[if lt IE 10]>
+			<script src="./js/manual.js?20260906"></script>
+		<![endif]-->
+		<link href="./css/mis_grid.css?20260906" rel="stylesheet" type="text/css">		
+		<script src="./bootstrap/js/jquery.min.js?20260906"></script>		
+				<link href="./bootstrap/css/bootstrap_ncku.css?20260906" rel=stylesheet>
+		<link href="./bootstrap/css/bootstrap_ncku_1.css?20260906" rel=stylesheet>
+		<link href="./bootstrap/css/responsive.css?20260906" rel=stylesheet>
+		<link href="./bootstrap/css/bootstrap-theme_ncku.css?20260906" rel=stylesheet>
+					<script src="./bootstrap/js/bootstrap.js?20260906"></script>		
+        <script type="text/javascript" src="./bootstrap/js/main.js?20260906"></script>   
+		<script type="text/javascript" src="./bootstrap/js/wow.min.js?20260906"></script>   
+		<script type="text/javascript" src="./bootstrap/js/multimodal.min.js?20260906"></script>   
+		
+		<link href="./js/bootstrap-select/css/bootstrap-select.min.css?20260906" rel="stylesheet" type="text/css">		
+		<script type="text/javascript" src="./js/bootstrap-select/js/bootstrap-select.min.js?20260906"></script>   
+		<script type="text/javascript" src="./js/jquery.cookie.js?20260906"></script>
+		
+					<script src="./js/common.js?20260906" type="text/javascript"></script>
+				<script src="./js/mis_grid.js?20260906" type="text/javascript"></script>
+		<script src="/nf/commons/v2.1.1/js/jquery.blockUI.js?20260906" type="text/javascript"></script>
+		<link href="./js/jquery-ui/jquery-ui.min.css?20260906" rel="stylesheet" type="text/css" /> 
+		<script src="./js/jquery-ui/jquery-ui.min.js?20260906" type="text/javascript"></script>			
+		<link href="/nf/commons/v2.1.1/css/jquery_validate/validate.css?20260906" rel="stylesheet" type="text/css" />	
+		<!--Fontawesome 5 Free-->
+		<link rel='stylesheet' href='./js/fontawesome/css/solid.min.css?20260906'>
+		<link rel='stylesheet' href='./js/fontawesome/css/regular.min.css?20260906'>
+		<link rel='stylesheet' href='./js/fontawesome/css/fontawesome.min.css?20260906'>
+		<!--Fontawesome 4 Free-->
+		<link rel='stylesheet' href='./js/epack/css/font-awesome.min.css?20260906'>	
+		<link rel='stylesheet' href='./js/epack/css/elements/list.css?20260906'>
+		<link rel="stylesheet" href="./js/epack/css/elements/note.css?20260906">
+		<script src="./js/performance.now-polyfill.js?20260906"></script>
+		<script  type="text/javascript" src="./js/mdb-sortable/js/addons/jquery-ui-touch-punch.min.js?20260906"></script>
+		<script src="./js/jquery.taphold.js?20260906"></script>
+		<script src="./js/jquery.patch.js?20260906"></script>
+		<script src="./js/purify.min.js?20260906"></script>
+		<style type='text/css'>
+		.modal-backdrop {display: none;	}
+		.modal {background: rgba(0, 0, 0, 0.5);	}
+		#header .navbar-nav.navbar-right >li a {color: #535353;}
+		#gotop {
+		    display: none;
+		    position: fixed;
+		    right: 40px;
+		    bottom: 40px;    
+		    padding: 10px 15px;    
+		    font-size: 20px;
+		    background: #991f23;
+		    color: white;
+		    cursor: pointer;
+		    border-radius: 50px;
+		}
+		.rwd_th {
+		    background: #efefef none repeat scroll 0 0;
+		    font-size:16px;
+		    vertical-align: center;
+		    font-weight:bold;
+		}
+		.rwd_td, .rwd_th {
+		    border: 1px solid #dcdcdc;
+		    min-height:50px;
+		    padding: 5px;
+		}
+		.rwd_td{
+			background: white;
+		}	
+		.ui-widget {
+			    font-family: 微軟正黑體,"Lato",sans-serif !important;
+		}	
+
+		#login_user {
+		    background: #991f23 none repeat scroll 0 0;
+		    border-radius: 15px 0 0 15px;
+		    color: white;
+		    display: inline-block;
+		    font-size: 15px;
+		    margin: 10px 0px 10px 0;
+		    text-align: center;
+		    max-width: 80px;
+		    min-width: 60px;
+		    white-space: nowrap;
+		    padding: 6px;
+		}
+		#login_logout {
+		    background: #991f23 none repeat scroll 0 0;
+		    border-radius: 0 15px 15px 0;
+		    color: white;
+		    cursor: pointer;
+		    display: inline-block;
+		    font-size: 15px;
+		    margin: 10px 5px 10px 3px !important;
+		    text-align: center;
+		    width: 60px;
+		    padding: 6px;
+		}
+		.choose {
+		    background: #991f23 none repeat scroll 0 0;
+		    border: medium none;
+		    color: white;
+		    margin: 10px 0 10px 3px;
+		    padding: 2px;
+		    width: 200px;
+		    padding: 7px;
+		}			
+		
+		.apName_h {
+				display:block;
+				background: #7d171b none no-repeat scroll center top;
+				color: #f1efe4;
+				font: 30px 微軟正黑體;
+				text-align: center;
+				vertical-align:middle;
+		}
+
+		.apName_h2 {
+				display:block;
+				background: #7d171b none no-repeat scroll center top;
+				color: #f1efe4;
+				text-align: center;
+				vertical-align:middle;
+		}
+
+		.navbar-center {
+			display: inline-block;
+			float: none;
+			vertical-align: top;
+		}
+		.navbar-collapse-center {
+			text-align: center;
+		}
+
+		.navbar-inverse .navbar-nav > .open > a,
+		.navbar-inverse .navbar-nav > .open > a:hover,
+		.navbar-inverse .navbar-nav > .open > a:focus {
+		color: #535353;
+		background-color: #eee;;
+		}
+
+		.dsp {
+			background-color: #E7E4D0;
+		}
+		.dsp_link {
+			padding-left: 1em;
+		}
+		.dsp_top {
+				font-size: 16px;
+		}
+		@media screen and (max-width: 767px) {
+			.dsp {
+				background-color: #E7E4D0;
+			}
+			.dsp_link {
+				padding-left: 1em;
+			}
+			.dsp_top {
+				font-size: 18px;
+			}
+		}
+		@media (min-width: 768px) and (max-width: 991px) {
+			.dsp {
+				font-size: 16px;
+				margin: 0px 1px;
+			}
+			.dsp_link {
+				padding-left: 0em;
+			}
+			.dsp_top {
+				font-size: 18px;
+			}
+		}
+		@media (min-width: 992px) and (max-width: 1199px) {
+			.dsp {
+				background-color: #e7e4d0;
+				font-size: 16px;
+				margin: 0px 1px;
+			}
+			.dsp_link {
+				padding-left: 0em;
+			}
+			.dsp_top {
+				font-size: 18px;
+			}
+		}
+		@media (min-width: 1200px) {
+			.dsp {
+				font-size: 16px;
+				margin: 0px 1px;
+			}
+			.dsp_link {
+				padding-left: 0em;
+			}
+			.dsp_top {
+				font-size: 18px;
+			}
+		}
+		.dropdown .divider {
+			height: 0.08em;
+			margin: 5px 0;
+			overflow: hidden;
+			background-color: #982124;
+		}
+		.ncku_logo {
+			padding-top:2px;
+			max-width:300px;
+		} 
+		@media (max-width: 768px) {
+			.ncku_logo {
+				padding-top:12px;
+				max-width:240px;
+			} 
+		}
+		.note_font_md {
+			font-size:medium;
+		}
+		@media (max-width: 767px) {
+			.note_font_md {
+				font-size:smaller;
+			}
+		}
+		.note_font_lg {
+			font-size:large;
+		}
+		@media (max-width: 767px) {
+			.note_font_lg {
+				font-size:medium;
+			}
+		}
+		.note_font_x-lg {
+			line-height: 26px;
+			font-size:x-large;
+		}
+		@media (max-width: 767px) {
+			.note_font_x-lg {
+				font-size:large;
+			}
+		}
+		.reveal-modal {
+			position: relative;
+			margin: 0 auto;
+			top: 25%;
+		}
+		.reveal-modal2 {
+			position: relative;
+			margin: 0 auto;
+			top: 25%;
+		}
+		@media (max-width: 991px) {
+			.reveal-modal2 {
+				position: relative;
+				margin: 0 auto;
+				top: 20%;
+			}
+		}
+		@media (max-width: 767px) {
+			.reveal-modal2 {
+				position: relative;
+				margin: 0 auto;
+				top: 15%;
+			}
+		}
+		.reveal-modal3 {
+			position: relative;
+			margin: 0 auto;
+			top: 15%;
+		}
+		@media (max-width: 991px) {
+			.reveal-modal3 {
+				position: relative;
+				margin: 0 auto;
+				top: 10%;
+			}
+		}
+		@media (max-width: 767px) {
+			.reveal-modal3 {
+				position: relative;
+				margin: 0 auto;
+				top: 5%;
+			}
+		}
+		.breadcrumb{
+			font-weight: bold;
+		}
+		@media (min-width: 400px) {
+			#show_sp_msg_text .row {
+				display: flex;
+			}
+		}
+		</style>
+		<script>
+		$(document).ready(function(){
+			$("#login_logout").click(function(){
+				location.href='index.php?c=auth&m=logout';
+			});
+			$(function(){
+			    $("#gotop").click(function(){
+			        jQuery("html,body").animate({
+			            scrollTop:0
+			        },500);
+			    });
+			    $(window).scroll(function() {
+			    	
+			        if ( $(this).scrollTop() > 100){
+			            $('#gotop').fadeIn("fast");
+			        } else {
+			            $('#gotop').stop().fadeOut("fast");
+			        }
+			    });
+			});
+					
+		});
+		storageSupported = typeof localStorage !== 'undefined' || typeof sessionStorage !== 'undefined';
+		storageEngine = window.localStorage || window.sessionStorage;
+		if (storageSupported) {
+			try {
+				storageEngine.setItem('storage-testing', 1);
+			} catch(e) {
+				storageSupported = false;
+			} finally {
+				storageEngine.removeItem('storage-testing');
+			}
+        }
+		</script>	
+	</head>
+	<body>	
+		<span style="display:none;" id="portal_is_login">1</span>
+		<header id="header"> 
+			  <div class="navbar navbar-inverse " role=navigation>
+				<div class=container style="padding-left: 0px; padding-right: 0px;">						
+
+					<div style='background:#f1efe4; '>
+
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand visible-lg visible-md visible-sm" href="index.php">
+							<img src="./images/Logo_course.png?20260906" alt="logo" class="ncku_logo">
+							</a>
+							<span class="navbar-brand visible-xs">
+							<img src="./images/Logo_course.png?20260906" alt="logo" class="ncku_logo">
+							</span>
+						</div>	
+
+						<div class="collapse navbar-collapse navbar-collapse-center visible-lg visible-md visible-sm">   
+						<!--大視窗選單開始-->  
+						<ul class="nav navbar-nav navbar-right visible-lg visible-md visible-sm">
+							<li class=start>
+								<a onclick="javascript:setLang('eng');return false;" href=""><span class="dsp_top">ENGLISH</span></a>
+							</li>
+							<li class="dropdown dropdown_1" >				
+								<a onclick="javascript:setLang('cht');return false;" href=""><span class="dsp_top">中文</span></a>
+							</li>
+																	<li class="dropdown dropdown_1" style="margin-left: 2px;">				
+											<a class="open_profile" href=""><span class="dsp_top">學生資訊</span></a>
+										</li>
+																	<li class=end>
+								<a href="./index.php?c=portal"><span class="dsp_top">HOME</span></a>																															
+							</li>
+						</ul>
+						<!--大視窗選單結束-->  
+					   </div>
+					</div>
+					<!--小視窗程式名稱開始-->  
+					<div class="apName visible-lg visible-md visible-sm">
+							<span>
+							115學年度第1學期 (E24134778)&nbsp;<i class="fas fa-home" style="cursor: pointer;" title="回首頁" onclick="javascript:location.href='./index.php?c=portal'">&nbsp;</i>							</span>
+					</div>
+					<div class="apName visible-xs">
+							<span style="font-size:medium;">
+								115學年度第1學期 (E24134778)&nbsp;<i class="fas fa-home" style="cursor: pointer;" title="回首頁" onclick="javascript:location.href='./index.php?c=portal'">&nbsp;</i>							</span>
+					</div>
+					<!--小視窗程式名稱結束-->  
+					
+					<!--選單開始-->  
+					<style>
+						@media (max-width: 767px) {
+							.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse { margin-right: -0px;margin-left: -0px;}
+						}
+						.navbar-ncku {
+							margin-top: 0px;margin-left:0px;margin-right:0px;
+						}
+						@media (max-width: 767px) {
+							.navbar-ncku {
+								margin-top: 0px;margin-left:-15px;margin-right:-15px;
+							}
+						}
+						.fa_icon { margin-left : -18px;text-indent : 4px;}
+						</style><div class="collapse navbar-collapse navbar-collapse-center narbar-menu" style="background: #ffffff none no-repeat scroll center top;"><!--第一層  原背景#bd3135--><ul class="nav navbar-nav navbar-left navbar-ncku"><li class="dropdown visible-xs">
+						<a class="dsp run_logout" href="./index.php?c=auth&m=logout"><i class="fas fa-sign-out-alt">&nbsp;</i><b>登出（E24134778）</b></a><!--小視窗選單開始-->  
+						<li class="dropdown visible-xs">
+							<a onclick="javascript:setLang('eng');return false;" class="dsp" href="">ENGLISH</a>
+						<li class="dropdown visible-xs" >				
+							<a onclick="javascript:setLang('cht');return false;" class="dsp" href="">中文</a>
+						<li class="dropdown visible-xs">
+							<a class="dsp open_profile" href="">學生資訊 </a>
+						<li class="dropdown visible-xs">
+							<a class="dsp" href="./index.php?c=portal">HOME</a>	<!--小視窗選單結束--><li class="dropdown ">
+							<a class="dsp" href=# class="dropdown-toggle eng_span" data-toggle=dropdown role=button aria-expanded=true onclick='$(this).find(".caret").trigger("click");'>
+								課程資訊 
+								<span class=caret></span>
+							</a>
+							<ul class="sub-menu" role=menu>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry11215"><span class="dsp_link fa_icon"><i class="fa fa-search" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>課程查詢</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry11215&m=en_query"><span class="dsp_link fa_icon"><i class="fa fa-search" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>進階課程查詢</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry12322"><span class="dsp_link fa_icon"><i class="fa fa-file-text" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>學分承認徵詢表</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry13225&m=a1"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>A1外國語言登記人數</span></a></li>								
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry13225&m=a2"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>A2體育課程登記人數</span></a></li>								
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry13225&m=a7"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>A7大學國文登記人數</span></a></li>								
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry13225"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>A9通識登記人數</span></a></li>
+								<li style="text-align:left;display:none;" class="eng_span"><a href="./index.php?c=qry13215"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>課程停開公告</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry13235"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>超修公告</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=qry13245"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>補課資料查詢</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=related_link"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>相關連結</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="https://course-query.acad.ncku.edu.tw/index.php?c=qry11215&lang=cht" target="_blank"><span class="dsp_link fa_icon"><i class="fa fa-info-circle" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>歷年課程查詢</span></a></li>
+							</ul><li class="dropdown eng_span">
+						<a class="dsp" href="./index.php?c=qry11215">課程查詢</a><li class="dropdown eng_span">
+						<a class="dsp" href="./index.php?c=cos31315">我的預排科目清單</a><li class="dropdown ">
+									<a class="dsp" href=# class="dropdown-toggle eng_span" data-toggle=dropdown role=button aria-expanded=true onclick='$(this).find(".caret").trigger("click");'>
+										選課 
+										<span class=caret></span>
+									</a>
+									<ul class="sub-menu" role=menu>
+										<li style="text-align:left;" class="eng_span"><a href="./index.php?c=cos21332"><span class="dsp_link" style="margin-left : -18px;text-indent : 4px;"><i class='fa fa-minus' aria-hidden="true" style='padding-left:2px;'>&nbsp;</i>棄選</span></a></li><li role="separator" class="divider"></li><li style="text-align:left;" class="eng_span"><a href="./index.php?c=cos21412"><span class="dsp_link" style="margin-left : -18px;text-indent : 4px;"><i class='fa fa-eraser' aria-hidden="true" style=''>&nbsp;</i>彈性密集棄(退)選</span></a></li>
+									</ul><li class="dropdown">
+							<a class="dsp" href=# class="dropdown-toggle eng_span" data-toggle=dropdown role=button aria-expanded=true onclick='$(this).find(".caret").trigger("click");'>
+								已選課程 
+								<span class=caret></span>
+							</a><ul class="sub-menu" role=menu>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=cos32315"><span class="dsp_link fa_icon"><i class="fa fa-calendar" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>我的課表</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=cos21215"><span class="dsp_link fa_icon"><i class="fa fa-list" aria-hidden="true" style="padding-left:2px;width: 22px">&nbsp;</i>已選課程清單</span></a></li>
+								<li style="text-align:left;" class="eng_span"><a href="./index.php?c=cos21225"><span class="dsp_link fa_icon"><i class="fas fa-minus-square" aria-hidden="true" style="padding-left:2px;">&nbsp;</i>我的停開課程</span></a></li>
+							</ul></ul><!--大視窗選單開始--><ul class="nav navbar-nav navbar-right visible-lg visible-md visible-sm" style="margin-top: 0px;margin-right:10px;">
+								<li class="dropdown visible-lg eng_span" style="background-color:#f8eaea;">
+									<a class="dsp run_logout" href="./index.php?c=auth&m=logout" style="background-color:#e7e4d0;">電機系三年級丙 <span class="cht_logout1">彭靖凱</span>（E24134778）<i class="fas fa-sign-out-alt">&nbsp;</i>登出</a>
+								<li class="dropdown visible-md eng_span" style="background-color:#f8eaea;">
+									<a class="dsp run_logout" href="./index.php?c=auth&m=logout" style="background-color:#e7e4d0;"><span class="cht_logout2">彭靖凱</span>（E24134778）<i class="fas fa-sign-out-alt">&nbsp;</i>登出</a>
+								<li class="dropdown visible-sm eng_span" style="background-color:#f8eaea;"><a class="dsp run_logout" href="./index.php?c=auth&m=logout" style="background-color:#e7e4d0;padding-left:8px;padding-right:8px;"><i class="fas fa-sign-out-alt">&nbsp;</i>登出</a></ul><!--大視窗選單結束-->  </div>					<!--選單結束-->  
+											<div class="breadcrumb col-md-12 apName_1 " style="background: #ffffff;padding-bottom: 0em;!important;margin-bottom:0.5em;">
+												
+						<span>
+							<a href="index.php?c=portal">首頁</a>
+							&nbsp;&gt;&nbsp;<a href='./index.php?c=cos32315'>我的課表</a>						</span>
+					</div>
+					
+				</div>
+			</div>	
+	   </header>
+	   <div class="form modal fade " id="show_note_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-md reveal-modal">
+			<div class="modal-content tc-note-style4 tc-note-warning">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"></h4>
+					<div class="note-icon">
+							<i class="fa fa-info-circle"></i>
+						</div>
+				</div>
+				<div class="modal-body">
+						<div class="note-desc" style="text-align:left;">
+							<div>
+								<ul class="tc-list tc-list-border">
+									<li>
+										<h4><span id="show_note_msg_text"></span></h4>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer" style="z-index:9999;position: relative;">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">確定</button>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="form modal fade " id="show_sp_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-md reveal-modal" style="top: 5%!important;">
+			<div class="modal-content tc-note-style4 tc-note-warning">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"></h4>
+					<div class="note-icon">
+							<i class="fa fa-info-circle"></i>
+						</div>
+				</div>
+				<div class="modal-body">
+						<div class="note-desc" style="text-align:left;">
+							<div>
+								<ul class="tc-list tc-list-border">
+									<li>
+										<h4><span id="show_sp_msg_text"></span></h4>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer" style="z-index:9999;position: relative;">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">確定</button>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="form modal fade " id="login_timeout_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-md reveal-modal">
+			<div class="modal-content tc-note-style4 tc-note-danger">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"></h4>
+					<div class="note-icon">
+							<i class="fa fa-exclamation-circle"></i>
+						</div>
+				</div>
+				<div class="modal-body">
+						<div class="note-desc" style="text-align:left;">
+							<div>
+								<ul class="tc-list tc-list-border">
+									<li>
+										<h4><span id="login_timeout_text" style="color:red;"></span></h4>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer" style="z-index:9999;position: relative;">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">確定</button>
+				</div>
+			</div>
+			</div>
+		</div>
+				<div class="form modal fade " id="run_logout_confirm_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-md reveal-modal reveal-modal2">
+			<div class="modal-content tc-note-style4 tc-note-warning">
+				<div class="modal-header" style="padding-left:0;padding-right:0;">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"></h4>
+					<div class="note-icon">
+							<i class="fa fa-question-circle"></i>
+						</div>
+				</div>
+				<div class="modal-body">
+						<div class="note-desc" style="text-align:left;">
+							<div>
+								<ul class="tc-list tc-list-border">
+									<li>
+										<h4><span style="color:red;">是否確定登出系統？</span></h4>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer" style="z-index:9999;position: relative;">
+					<button type="button" class="btn btn-danger run_logout_confirm_save_button" data-dismiss="modal"> 
+						確定					</button>
+					<button type="button" class="btn btn-default run_logout_confirm_cancel_button" data-dismiss="modal">
+						取消					</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<div class="form modal fade " id="open_profile_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-md">
+			<div class="modal-content tc-note-style4 tc-note-warning">
+				<div class="modal-header" style="padding-left:0;padding-right:0;">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"></h4>
+					<div class="note-icon">
+							<i class="fa fa-info-circle"></i>
+						</div>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer" style="z-index:9999;position: relative;">
+					<button type="button" class="btn btn-default" data-dismiss="modal"> 
+						關閉					</button>
+				</div>
+			</div>
+			</div>
+		</div>
+				<script>
+			function show_note_msg(nowmsg, type , show_title , btn_text){	
+				nowmsg_show=nowmsg.replace(/\n/g,'<br>');
+				if(show_title==undefined){
+					show_title='訊息通知';
+				}
+				if(btn_text==undefined){
+					btn_text='確定';
+				}
+				$('#show_note_msg').find(".modal-footer").find(".btn").text(btn_text);
+				var show_note_style1="tc-note-danger tc-note-success tc-note-warning";
+				var show_note_style2="fa-exclamation-circle fa-check-circle fa-info-circle";
+				nowmsg_type = (type!=undefined&&(type==0||type==1||type=='0'||type=='1'))?((parseInt(type)==1)?'1':'0'):'2';
+				$("#show_note_msg").find(".note-icon").find("i").attr('class', 'fa');
+				if(nowmsg_type=='0'){
+					$("#show_note_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-danger");
+					$("#show_note_msg").find(".note-icon").find("i").addClass("fa-exclamation-circle");
+				}else if(nowmsg_type=='1'){
+					$("#show_note_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-success");
+					$("#show_note_msg").find(".note-icon").find("i").addClass("fa-check-circle");
+				}else{
+					if(type!=undefined&&type=='3'){
+						$("#show_note_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-success");
+						$("#show_note_msg").find(".note-icon").find("i").addClass("fa-tag");
+					}else{
+						$("#show_note_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-warning");
+						$("#show_note_msg").find(".note-icon").find("i").addClass("fa-info-circle");
+					}
+				}
+				if(nowmsg.indexOf("<br><br>") >= 0 ){
+					$("#show_note_msg").find(".modal-dialog").removeClass("reveal-modal").addClass("reveal-modal2");
+				}else{
+					$("#show_note_msg").find(".modal-dialog").removeClass("reveal-modal2").addClass("reveal-modal");
+				}
+				if(nowmsg.indexOf("<!---TOP--->") >= 0 ){
+					$("#show_note_msg").find(".modal-dialog").removeClass("reveal-modal").removeClass("reveal-modal2");
+				}
+				$('#show_note_msg').find('.modal-title').html(show_title);
+				$('#show_note_msg').find('#show_note_msg_text').html(nowmsg_show);
+				$('#show_note_msg').modal();
+			}
+			function show_sp_msg(nowmsg, type , show_title){	
+				nowmsg_show=nowmsg.replace(/\n/g,'<br>');
+				if(show_title==undefined){
+					show_title='訊息通知';
+				}
+				var show_note_style1="tc-note-danger tc-note-success tc-note-warning";
+				var show_note_style2="fa-exclamation-circle fa-check-circle fa-info-circle";
+				nowmsg_type = (type!=undefined&&(type==0||type==1||type=='0'||type=='1'))?((parseInt(type)==1)?'1':'0'):'2';
+				if(nowmsg_type=='0'){
+					$("#show_sp_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-danger");
+					$("#show_sp_msg").find(".note-icon").find(".fa").removeClass(show_note_style2).addClass("fa-exclamation-circle");
+				}else if(nowmsg_type=='1'){
+					$("#show_sp_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-success");
+					$("#show_sp_msg").find(".note-icon").find(".fa").removeClass(show_note_style2).addClass("fa-check-circle");
+				}else{
+					$("#show_sp_msg").find(".modal-content").removeClass(show_note_style1).addClass("tc-note-warning");
+					$("#show_sp_msg").find(".note-icon").find(".fa").removeClass(show_note_style2).addClass("fa-info-circle");
+				}
+				if(nowmsg.indexOf("<br><br>") >= 0 ){
+					$("#show_sp_msg").find(".modal-dialog").removeClass("reveal-modal").addClass("reveal-modal2");
+				}else{
+					$("#show_sp_msg").find(".modal-dialog").removeClass("reveal-modal2").addClass("reveal-modal");
+				}
+				$('#show_sp_msg').find('.modal-title').html(show_title);
+				$('#show_sp_msg').find('#show_sp_msg_text').html(nowmsg_show);
+				$('#show_sp_msg').modal();
+			}
+			function show_login_timeout(nowmsg){	
+				if(nowmsg==undefined){
+					nowmsg='操作已逾時，請重新登入！';
+				}
+				$('#login_timeout_msg').find('.modal-title').html('訊息通知');
+				$('#login_timeout_msg').find('#login_timeout_text').html(nowmsg);
+				$('#login_timeout_msg').modal();
+				throw new Error(nowmsg);
+			}
+			function show_logout(){	
+				$('#login_timeout_msg').find('.modal-title').html('訊息通知');
+				$('#login_timeout_msg').find('#login_timeout_text').html('您已於其他分頁或視窗登出系統！');
+				$('#login_timeout_msg').modal();
+			}
+			$(".run_logout").on('click', function() {
+				$('#run_logout_confirm_msg').find('.modal-title').html('訊息通知');
+				$('#run_logout_confirm_msg').modal();
+				return false;
+			});
+			$(".run_logout_confirm_save_button").on('click', function() {
+				window.location.replace('./index.php?c=auth&m=logout');
+			});
+			$(".open_profile").on('click', function() {
+				$.ajax({
+					type: "POST",
+					url: "index.php?c=profile&time="+Math.round(+new Date()/1000),
+					data:'time='+Math.round(+new Date()/1000),
+					async : true,
+					timeout:30000,
+					success: function(json) {
+						var m = JSON.parse(json);
+						if(m.time!=undefined&&m.status){
+							var profile_content_url = "index.php?c=profile&time=" + Math.round(+new Date()/1000);
+							$('#open_profile_msg').find('.modal-body').load(profile_content_url, function() {
+								$('#open_profile_msg').find('.modal-title').html('學生資訊');
+								$('#open_profile_msg').modal();
+							});
+						}
+					}
+				});
+				return false;
+			});
+			$("#login_timeout_msg").on('hidden.bs.modal', function () {
+				window.location.replace('./index.php?c=portal');
+			});
+			
+			$("#show_sp_msg").on('hidden.bs.modal', function () {
+				storageEngine.setItem('show_sp_msg_20260906_cht', 1);
+			});
+
+			$(document).keyup(function(e) {
+				if(e.keyCode==13){
+					if(($("#run_logout_confirm_msg").data('bs.modal') || {isShown: false}).isShown){
+						$(".run_logout_confirm_save_button").trigger("click");
+					}
+					if(($("#login_timeout_msg").data('bs.modal') || {isShown: false}).isShown){
+						$('#login_timeout_msg').modal('hide');
+					}
+					if(($("#show_note_msg").data('bs.modal') || {isShown: false}).isShown){
+						$('#show_note_msg').modal('hide');
+					}
+					if(($("#show_sp_msg").data('bs.modal') || {isShown: false}).isShown){
+						$('#show_sp_msg').modal('hide');
+					}
+				}
+			});
+		</script>
+<!--Content-->			
+			<div class="container theme-showcase" role="main">
+				<div id='main_content' style="padding-top:2px;">					
+	                <style>
+	.cl-th {
+		min-width: 80px;
+		vertical-align: middle !important;
+	}
+
+	.cl-td {
+		vertical-align: middle !important;
+	}
+
+	.td-yellow {
+		background-color: #f8edb4;
+	}
+
+	.td-primary {
+		background-color: #2e6da4;
+	}
+
+	#cl-table {
+		/*min-width: 1000px;*/
+	}
+
+	.print-btn-group {
+		margin-bottom: 10px;
+	}
+
+	@media print {
+		table {
+			border-collapse: collapse; width: 100%;
+		} 
+		table, th, td {
+			border: 1px solid black; min-width:80px;
+		} 
+		.title {
+			text-align: center;
+		} 
+		.table-noborder, .table-noborder th, .table-noborder td {
+			border: none;
+		} 
+		.table-noborder {
+			width: 100%;
+		}
+  	}
+</style>
+<script src="./js/jquery.clock.js"></script>
+<script src="views/cos32315/js/cos32315.js?t=1788684942"></script>
+
+	<div class="row print-btn-group">
+		<div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
+			<div class="alert alert-warning" role="alert" style="padding-top:2px;padding-bottom:2px;margin:0;font-size:1.2em;">
+				英文模組等級：模組一			</div>
+		</div>
+	</div>
+	
+<div class="row print-btn-group">
+	<div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
+		<a class="btn btn-default" href="#" role="button" id="print-btn">
+			<i class="fa fa-print"></i>
+			列印			</a>
+		<a class="btn btn-default" href="./index.php?c=cos32315&m=report" role="button" target="_blank">
+			<i class="fa fa-download"></i>
+			儲存選課結果		</a>
+	</div>
+</div>
+
+<div class="row hidden-xs">
+	<div class="col-md-10 col-md-offset-1 text-right">
+		<span class="clock"></span>
+		E24134778&nbsp;
+		彭靖凱&nbsp;
+		課表選課總學分 : 21 學分&nbsp;
+	</div>
+	<div class="col-md-10 col-md-offset-1 table-responsive" id="print-div">
+		<div class="print-item title">
+			<span>課程時間表</span>
+		</div>
+		<table class="print-item table-noborder" cellspacing="0" cellpadding="0">
+			<tr>
+				<td style="text-align: right;">
+					<span class="clock"></span>
+					E24134778&nbsp;
+					彭靖凱&nbsp;
+					課表選課總學分 : 21 學分&nbsp;
+				</td>
+			</tr>
+		</table>
+		<table class="table table-bordered table-condensed" id="cl-table">
+			<thead>
+				<tr>
+					<th class="text-center info cl-th">時間區段</th><th class="text-center info cl-th">節次</th><th class="text-center info cl-th">時間</th><th class="text-center info cl-th">一</th><th class="text-center info cl-th">二</th><th class="text-center info cl-th">三</th><th class="text-center info cl-th">四</th><th class="text-center info cl-th">五</th><th class="text-center info cl-th">六</th><th class="text-center info cl-th">日</th>				</tr>
+			</thead>
+			<tbody>
+				<tr><th class="text-center info cl-th" style="width: 100px;" rowspan="5">上午</th><th class="text-center info cl-th" style="width: 80px;">0</th><th class="text-center info cl-th" style="width: 120px;">07:00 ~ 07:50</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">1</th><th class="text-center info cl-th" style="width: 120px;">08:00 ~ 08:50</th><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-117】控制工程<br>（地點：電機系館-92383）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">2</th><th class="text-center info cl-th" style="width: 120px;">09:00 ~ 09:50</th><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-119】電儀表學<br>（地點：電機系館-92331）<br></td><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-118】電磁學（一）<br>（地點：電機系館-92331）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">3</th><th class="text-center info cl-th" style="width: 120px;">10:10 ~ 11:00</th><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-118】電磁學（一）<br>（地點：電機系館-92331）<br></td><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-117】控制工程<br>（地點：電機系館-92383）<br></td><td class="text-center td-yellow cl-td">【E2-119】電儀表學<br>（地點：電機系館-92331）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">4</th><th class="text-center info cl-th" style="width: 120px;">11:10 ~ 12:00</th><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-118】電磁學（一）<br>（地點：電機系館-92331）<br></td><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-117】控制工程<br>（地點：電機系館-92383）<br></td><td class="text-center td-yellow cl-td">【E2-119】電儀表學<br>（地點：電機系館-92331）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 100px;" rowspan="1">中午</th><th class="text-center info cl-th" style="width: 80px;">N</th><th class="text-center info cl-th" style="width: 120px;">12:10 ~ 13:00</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 100px;" rowspan="5">下午</th><th class="text-center info cl-th" style="width: 80px;">5</th><th class="text-center info cl-th" style="width: 120px;">13:10 ~ 14:00</th><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-120】電子電路實驗（二）<br>（地點：電機系館-92231）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">6</th><th class="text-center info cl-th" style="width: 120px;">14:10 ~ 15:00</th><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-120】電子電路實驗（二）<br>（地點：電機系館-92231）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">7</th><th class="text-center info cl-th" style="width: 120px;">15:20 ~ 16:10</th><td class="text-center td-yellow cl-td">【E2-147】ＶＬＳＩ系統設計<br>（地點：啟端館-智慧階梯教室）<br></td><td class="text-center td-yellow cl-td">【E2-120】電子電路實驗（二）<br>（地點：電機系館-92231）<br></td><td class="text-center td-yellow cl-td">【E2-145】生物微機電導論<br>（地點：電機系館-92383）<br></td><td class="text-center td-yellow cl-td">【E2-109】電子學（三）<br>（地點：電機系館-靄雲廳）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">8</th><th class="text-center info cl-th" style="width: 120px;">16:20 ~ 17:10</th><td class="text-center td-yellow cl-td">【E2-147】ＶＬＳＩ系統設計<br>（地點：啟端館-智慧階梯教室）<br></td><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-145】生物微機電導論<br>（地點：電機系館-92383）<br></td><td class="text-center td-yellow cl-td">【E2-109】電子學（三）<br>（地點：電機系館-靄雲廳）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">9</th><th class="text-center info cl-th" style="width: 120px;">17:20 ~ 18:10</th><td class="text-center td-yellow cl-td">【E2-147】ＶＬＳＩ系統設計<br>（地點：啟端館-智慧階梯教室）<br></td><td class="cl-td warning"></td><td class="text-center td-yellow cl-td">【E2-145】生物微機電導論<br>（地點：電機系館-92383）<br></td><td class="text-center td-yellow cl-td">【E2-109】電子學（三）<br>（地點：電機系館-靄雲廳）<br></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 100px;" rowspan="5">夜間</th><th class="text-center info cl-th" style="width: 80px;">A</th><th class="text-center info cl-th" style="width: 120px;">18:20 ~ 19:10</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">B</th><th class="text-center info cl-th" style="width: 120px;">19:15 ~ 20:05</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">C</th><th class="text-center info cl-th" style="width: 120px;">20:10 ~ 21:00</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">D</th><th class="text-center info cl-th" style="width: 120px;">21:05 ~ 21:55</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width: 80px;">E</th><th class="text-center info cl-th" style="width: 120px;">22:10 ~ 23:00</th><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td><td class="cl-td warning"></td></tr>				<tr>
+					<th class="text-center info cl-th" colspan="3">時間未定或彈性時間<br>（含彈性密集課程）</th>
+					<td class="cl-td td-yellow" colspan="7">【A9-220】日常疼痛控制<br></td>				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="row visible-xs">
+	<div class="col-xs-12 text-center">
+		<p>
+			<span class="clock"></span>
+		</p>
+		<p>
+			E24134778&nbsp;
+			彭靖凱&nbsp;
+			課表選課總學分 : 21 學分&nbsp;
+		</p>
+	</div>
+	<div class="col-xs-12">
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" ><a href="#week-1" id="week-1-tab" role="tab" data-toggle="tab" aria-controls="week-1" aria-expanded="true">一</a></li><li role="presentation" ><a href="#week-2" id="week-2-tab" role="tab" data-toggle="tab" aria-controls="week-2" aria-expanded="true">二</a></li><li role="presentation" ><a href="#week-3" id="week-3-tab" role="tab" data-toggle="tab" aria-controls="week-3" aria-expanded="true">三</a></li><li role="presentation" ><a href="#week-4" id="week-4-tab" role="tab" data-toggle="tab" aria-controls="week-4" aria-expanded="true">四</a></li><li role="presentation" ><a href="#week-5" id="week-5-tab" role="tab" data-toggle="tab" aria-controls="week-5" aria-expanded="true">五</a></li><li role="presentation" ><a href="#week-6" id="week-6-tab" role="tab" data-toggle="tab" aria-controls="week-6" aria-expanded="true">六</a></li><li role="presentation" class="active"><a href="#week-7" id="week-7-tab" role="tab" data-toggle="tab" aria-controls="week-7" aria-expanded="true">日</a></li>		</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade  in" id="week-1" aria-labelledby="week-1-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">一</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="text-center td-yellow cl-td">【E2-147】ＶＬＳＩ系統設計<br>（地點：啟端館-智慧階梯教室）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="text-center td-yellow cl-td">【E2-147】ＶＬＳＩ系統設計<br>（地點：啟端館-智慧階梯教室）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="text-center td-yellow cl-td">【E2-147】ＶＬＳＩ系統設計<br>（地點：啟端館-智慧階梯教室）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div><div role="tabpanel" class="tab-pane fade  in" id="week-2" aria-labelledby="week-2-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">二</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="text-center td-yellow cl-td">【E2-117】控制工程<br>（地點：電機系館-92383）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="text-center td-yellow cl-td">【E2-119】電儀表學<br>（地點：電機系館-92331）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="text-center td-yellow cl-td">【E2-118】電磁學（一）<br>（地點：電機系館-92331）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="text-center td-yellow cl-td">【E2-118】電磁學（一）<br>（地點：電機系館-92331）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="text-center td-yellow cl-td">【E2-120】電子電路實驗（二）<br>（地點：電機系館-92231）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="text-center td-yellow cl-td">【E2-120】電子電路實驗（二）<br>（地點：電機系館-92231）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="text-center td-yellow cl-td">【E2-120】電子電路實驗（二）<br>（地點：電機系館-92231）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div><div role="tabpanel" class="tab-pane fade  in" id="week-3" aria-labelledby="week-3-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">三</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="text-center td-yellow cl-td">【E2-145】生物微機電導論<br>（地點：電機系館-92383）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="text-center td-yellow cl-td">【E2-145】生物微機電導論<br>（地點：電機系館-92383）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="text-center td-yellow cl-td">【E2-145】生物微機電導論<br>（地點：電機系館-92383）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div><div role="tabpanel" class="tab-pane fade  in" id="week-4" aria-labelledby="week-4-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">四</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="text-center td-yellow cl-td">【E2-118】電磁學（一）<br>（地點：電機系館-92331）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="text-center td-yellow cl-td">【E2-117】控制工程<br>（地點：電機系館-92383）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="text-center td-yellow cl-td">【E2-117】控制工程<br>（地點：電機系館-92383）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="text-center td-yellow cl-td">【E2-109】電子學（三）<br>（地點：電機系館-靄雲廳）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="text-center td-yellow cl-td">【E2-109】電子學（三）<br>（地點：電機系館-靄雲廳）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="text-center td-yellow cl-td">【E2-109】電子學（三）<br>（地點：電機系館-靄雲廳）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div><div role="tabpanel" class="tab-pane fade  in" id="week-5" aria-labelledby="week-5-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">五</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="text-center td-yellow cl-td">【E2-119】電儀表學<br>（地點：電機系館-92331）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="text-center td-yellow cl-td">【E2-119】電儀表學<br>（地點：電機系館-92331）<br></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div><div role="tabpanel" class="tab-pane fade  in" id="week-6" aria-labelledby="week-6-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">六</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div><div role="tabpanel" class="tab-pane fade active in" id="week-7" aria-labelledby="week-7-tab"><table class="table table-bordered table-condensed"><tr><th class="text-center info cl-th">【節次】<br>時間</th><th class="text-center info cl-th">日</th></tr><tr><th class="text-center info cl-th" style="width:120px;">【0】<br>07:00 ~ 07:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【1】<br>08:00 ~ 08:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【2】<br>09:00 ~ 09:50</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【3】<br>10:10 ~ 11:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【4】<br>11:10 ~ 12:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【N】<br>12:10 ~ 13:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【5】<br>13:10 ~ 14:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【6】<br>14:10 ~ 15:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【7】<br>15:20 ~ 16:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【8】<br>16:20 ~ 17:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【9】<br>17:20 ~ 18:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【A】<br>18:20 ~ 19:10</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【B】<br>19:15 ~ 20:05</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【C】<br>20:10 ~ 21:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【D】<br>21:05 ~ 21:55</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th" style="width:120px;">【E】<br>22:10 ~ 23:00</th><td class="cl-td warning"></td></tr><tr><th class="text-center info cl-th">時間未定或彈性時間<br>（含彈性密集課程）</th><td class="cl-td td-yellow">【A9-220】日常疼痛控制<br></td></tr></table></div>		</div>
+	</div>
+</div>
+
+<div class="col-md-10 col-md-offset-1 " style="padding-left:0;padding-right:0;">
+	<span class="visible-sm"><br style="line-height:0.5em;"></span>
+	<div class="tc-note-style4">
+	<div class="note-icon">
+		<i class="fa fa fa-envelope-o"></i>
+	</div>
+	<div class="note-desc">
+		<ul class="tc-list tc-list-border">
+		<li><h4>當學期課程之成績已登載或承抵通過，須至成績系統查詢，不納入課表中。</h4></li>
+		</ul>
+	</div>
+	</div>
+</div>
+
+<script>
+	$(".clock").clock({
+		"timestamp":1788684942,
+		"langSet":"zh-tw",
+		"dateFormat":"Y-m-d ",
+		"timeFormat":"H:i:s",
+		"rate":50
+	});
+</script>               </div>
+			</div>
+			
+<!--footer-->				
+			<footer id="footer">
+ 
+        <div class="container">
+            <div class="copyright-text text-center">
+			    如有任何問題，請連絡<a href="https://reg-acad.ncku.edu.tw/s/cou-contact" target="_blank">相關諮詢人員</a><br>版權所有 <i class="fa fa-copyright"></i> 2026 國立成功大學 計算機與網路中心            </div>
+        </div>
+        
+		<div id='gotop' ><center>^</center></div> 
+		<script>
+			function storageChange (event) {
+				if(storageSupported){
+					if(event.key === 'cos_logged_in') {
+						if(event.newValue=='false'){
+							if($("#portal_is_login").text()!=""){
+								show_logout();
+							}
+						}
+					}
+				}
+			}
+			if(storageSupported){
+				window.addEventListener('storage', storageChange, false);
+			}
+								if(storageSupported){
+						storageEngine.setItem('cos_logged_in', 'true');
+					}
+					
+		</script>
+
+		    </footer>
+	<!--/#footer-->
+		   </body>
+	   
