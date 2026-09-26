@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Computer Organization 2026｜Lab 1 教學主頁</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#07111f;--panel:#0d1b2d;--text:#eef6ff;--muted:#a8bdd2;--line:rgba(255,255,255,.12)}
+body{margin:0;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;background:
+radial-gradient(circle at 15% 0%,#153b64 0,transparent 28%),
+radial-gradient(circle at 90% 10%,#321d5d 0,transparent 30%),var(--bg);color:var(--text)}
+header{max-width:1280px;margin:auto;padding:64px 5% 26px}
+.badge{display:inline-block;padding:7px 12px;border:1px solid #5cc8ff66;border-radius:999px;color:#8ddcff;background:#0c2b4166;font-weight:800;letter-spacing:.06em}
+h1{font-size:clamp(32px,5vw,64px);line-height:1.08;margin:18px 0 12px}
+.lead{max-width:900px;color:var(--muted);font-size:18px;line-height:1.8}
+.route{margin-top:25px;padding:15px 18px;border:1px solid var(--line);border-radius:16px;background:#ffffff08;color:#cfe7fb}
+main{max-width:1280px;margin:auto;padding:18px 5% 70px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.card{display:grid;grid-template-columns:42% 58%;min-height:285px;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:25px;overflow:hidden;background:rgba(13,27,45,.86);box-shadow:0 18px 55px #0005;transition:.25s ease}
+.card:hover{transform:translateY(-6px);border-color:#8ddcff88;box-shadow:0 25px 70px #0008}
+.visual{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;isolation:isolate}
+.visual:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#fff2,transparent 45%,#0002);z-index:-1}
+.number{position:absolute;top:16px;left:18px;font-size:15px;font-weight:900;padding:5px 9px;border-radius:9px;background:#07111f99}
+.icon{font-size:76px;filter:drop-shadow(0 8px 12px #0004)}
+.mini-flow{display:flex;gap:7px;align-items:center;margin-top:22px;font-size:12px;font-weight:800}
+.mini-flow span{padding:6px 8px;border-radius:8px;background:#07111f66;border:1px solid #ffffff35}
+.body{padding:28px 28px 25px;display:flex;flex-direction:column}
+h2{font-size:23px;line-height:1.35;margin:0 0 13px}
+p{margin:0;color:var(--muted);line-height:1.75;font-size:15px}
+.go{margin-top:auto;padding-top:22px;color:#9de4ff;font-weight:900}
+.go span{display:inline-block;transition:.2s} .card:hover .go span{transform:translateX(6px)}
+footer{text-align:center;color:#7890a8;padding:0 20px 38px;font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+@media(max-width:580px){header{padding-top:38px}.card{grid-template-columns:1fr}.visual{min-height:190px}.icon{font-size:62px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">NCKU EE · Computer Organization · Fall 2026</div>
+  <h1>Lab 1 教學網頁總入口</h1>
+  <div class="lead">這一頁把資料夾內的 <b>8 個教學網頁</b>集中在同一個主頁。每張大型彩色圖卡先告訴你該頁在做什麼，再直接點擊進入；建議由 01 開始依序閱讀，也可以依需求直接跳到指定主題。</div>
+  <div class="route"><b>建議學習路線：</b> 環境建置 → 指令操作 → 專案檔案 → 六題作業 → core.c 改寫 → RV32I ISS → 二值化完整實例</div>
+</header>
+<main><section class="grid">
+    <a class="card" href="01_environment_setup.html">
+      <div class="visual" style="background:linear-gradient(135deg,#2563eb,#06b6d4)">
+        <div class="number">01</div>
+        <div class="icon">🖥️</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>環境建置與 GitHub SSH</h2>
+        <p>從 Windows／WSL 進入 Docker，完成 GitHub SSH、專案操作與檔案複製回 Windows。適合第一次建立 Lab 1 開發環境時使用。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="02_lab1_commands.html">
+      <div class="visual" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">
+        <div class="number">02</div>
+        <div class="icon">⌨️</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>Lab 1 正確指令完整操作手冊</h2>
+        <p>把 Lab 1 常用指令整理成一條清楚的操作路線：建置、編譯、測試、CTest、Git commit 與 push，方便直接照步驟執行。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="03_command_animation.html">
+      <div class="visual" style="background:linear-gradient(135deg,#ea580c,#facc15)">
+        <div class="number">03</div>
+        <div class="icon">▶️</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>逐指令動畫操作教學</h2>
+        <p>用動畫方式拆解每一個終端機指令，說明指令在做什麼、執行前後會發生什麼，以及整個 Lab 1 操作流程如何串起來。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="04_file_relationship.html">
+      <div class="visual" style="background:linear-gradient(135deg,#059669,#22c55e)">
+        <div class="number">04</div>
+        <div class="icon">🗂️</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>ZIP 逐檔案功能與載入關係</h2>
+        <p>逐一介紹專案內各個檔案的用途，並用互動關係圖呈現 core、memory、instruction、test 等模組彼此如何載入與合作。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="05_six_questions.html">
+      <div class="visual" style="background:linear-gradient(135deg,#0891b2,#6366f1)">
+        <div class="number">05</div>
+        <div class="icon">📝</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>Lab 1 六題答案與程式關係圖</h2>
+        <p>依照作業六題整理答案的目的、對應程式與模組互動，幫助理解報告中的每一題究竟在驗證哪一部分。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="06_core_comparison.html">
+      <div class="visual" style="background:linear-gradient(135deg,#dc2626,#f97316)">
+        <div class="number">06</div>
+        <div class="icon">🔁</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>core copy.c → core(1).c 改寫對照</h2>
+        <p>左右視窗對照原始與修改後的 core 程式，動態標示改寫位置，理解 Decode、Execute 等核心邏輯如何一步步補完整。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="07_rv32i_iss_tutorial.html">
+      <div class="visual" style="background:linear-gradient(135deg,#4338ca,#8b5cf6)">
+        <div class="number">07</div>
+        <div class="icon">🧠</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>RV32I ISS 圖片＋程式碼雙例教學</h2>
+        <p>從 CPU／ISS 圖解連到 core(3).c，搭配兩個完整指令實例，逐步說明 Fetch、Decode、Execute、Memory 與 PC 更新。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a>
+    <a class="card" href="08_binarization_tutorial.html">
+      <div class="visual" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">
+        <div class="number">08</div>
+        <div class="icon">🖼️</div>
+        <div class="mini-flow"><span>概念</span><b>→</b><span>程式</span><b>→</b><span>實作</span></div>
+      </div>
+      <div class="body">
+        <h2>2×2 二值化圖片看懂 RV32I</h2>
+        <p>用 2×2 灰階圖片二值化的完整例子，把組合語言、暫存器、記憶體與輸出結果串在一起，直觀看懂 ISS 如何執行程式。</p>
+        <div class="go">開啟教學網頁 <span>→</span></div>
+      </div>
+    </a></section></main>
+<footer>Computer Organization 2026 · Lab 1 Learning Hub · 所有連結已改用安全的英文檔名，避免 # 字元造成瀏覽器連結錯誤</footer>
+</body></html>
