@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 1 Assignment Report — Interactive</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#11243b;--text:#eaf2ff;--muted:#9fb4cf;--accent:#5eead4;--accent2:#60a5fa;--line:#29425f;--code:#06101d}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;background:radial-gradient(circle at 20% 0,#12305a 0,transparent 34%),var(--bg);color:var(--text);line-height:1.75}
+.hero{padding:56px 22px 38px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(96,165,250,.13),rgba(94,234,212,.06))}
+.wrap{max-width:1120px;margin:auto} .eyebrow{color:var(--accent);font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.25em 0} .meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted)} .pill{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#0b1728}
+.toolbar{position:sticky;top:0;z-index:5;background:rgba(7,17,31,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)} .toolbar .wrap{display:flex;gap:10px;padding:10px 22px;overflow:auto}
+button,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 13px;border-radius:10px;cursor:pointer;white-space:nowrap;text-decoration:none} button:hover,.navbtn:hover{border-color:var(--accent2)}
+main{max-width:1120px;margin:28px auto;padding:0 22px 60px} details{background:linear-gradient(180deg,var(--panel),#0a1728);border:1px solid var(--line);border-radius:18px;margin:18px 0;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+summary{list-style:none;display:flex;align-items:center;gap:14px;padding:18px 20px;font-size:1.2rem;font-weight:800;cursor:pointer} summary::-webkit-details-marker{display:none} .qnum{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#03111e} .chev{margin-left:auto;transition:.25s} details[open] .chev{transform:rotate(180deg)}
+.qbody{padding:0 20px 24px} .visual{padding:18px;margin:2px 0 24px;border:1px solid #315072;border-radius:15px;background:rgba(96,165,250,.055)} .visual h3{margin-top:0;color:var(--accent)} h2,h3,h4{color:#d8eaff} p{color:#d6e2f2} strong{color:white} code{font-family:"Cascadia Code",Consolas,monospace;background:#10243a;border:1px solid #29425f;border-radius:6px;padding:.12em .35em;color:#b8f7e9} pre{overflow:auto;background:var(--code);border:1px solid #223c58;border-radius:13px;padding:16px;line-height:1.55} pre code{border:0;background:none;padding:0;color:#d7e8ff}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px} table{width:100%;border-collapse:collapse;min-width:620px} th,td{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top} th{text-align:left;background:#10253e;color:var(--accent)} tr:last-child td{border-bottom:0}
+.diagram,.jalr{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap} .node,.fan span,.jalr>div:not(:nth-child(even)){padding:14px 18px;border:1px solid #3b6389;border-radius:13px;background:#0a1a2d;text-align:center} .cpu{box-shadow:inset 0 0 0 1px var(--accent2)} .fan{display:flex;gap:8px;flex-wrap:wrap} .arrow{font-size:1.7rem;color:var(--accent)} .tip,.warning{margin-top:14px;padding:12px 14px;border-left:4px solid var(--accent);background:#0a1a2d;border-radius:8px} .warning{border-left-color:#fbbf24}
+.stategrid,.compare{display:grid;grid-template-columns:repeat(3,1fr);gap:12px} .stategrid div,.compare div{padding:18px;border-radius:14px;background:#0a1a2d;border:1px solid var(--line);display:flex;flex-direction:column;gap:6px} .compare{grid-template-columns:1fr 1fr} .flowline{margin-top:14px;text-align:center;padding:12px;border-radius:10px;background:#10243a;color:#bfe5ff}
+.memmap{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch} .memmap>div{padding:20px;border-radius:14px;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;text-align:center} .rom{background:#13253a} .ram{background:#0d2b2b} .gap{color:var(--muted)} .bits{text-align:center} .bitrow{display:flex;justify-content:center;flex-wrap:wrap} .bitrow span{padding:12px;border:1px solid var(--line);background:#0a1a2d} .zero{color:var(--accent);font-weight:900}
+.reflection{margin-top:30px;padding:24px;border-radius:18px;border:1px solid var(--line);background:var(--panel)} footer{color:var(--muted);text-align:center;padding:25px}
+@media(max-width:720px){.stategrid,.compare,.memmap{grid-template-columns:1fr} .gap{display:none} h1{font-size:2.2rem}}
+</style>
+<style>
+html,body{height:100%;overflow:hidden}
+.split-app{height:100vh;display:grid;grid-template-columns:minmax(0,55fr) minmax(420px,45fr);background:#07111f}
+.left-pane,.right-pane{height:100vh;overflow:auto;scroll-behavior:smooth}
+.left-pane{border-right:3px solid #29425f;position:relative}
+.right-pane{background:#f8fafc;color:#172033;position:relative}
+.pane-label{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;font-weight:800;letter-spacing:.02em}
+.left-label{background:rgba(7,17,31,.96);color:#eaf2ff;border-bottom:1px solid #29425f}
+.right-label{background:#10243a;color:white;border-bottom:1px solid #35526e}
+.pane-label small{font-weight:500;opacity:.72}
+.sync-badge{padding:4px 8px;border-radius:999px;background:#123d48;color:#8ff7e4;font-size:.75rem}
+.left-pane .hero{padding-top:38px}
+.left-pane .toolbar{top:39px}
+.left-pane main{max-width:100%;padding-left:18px;padding-right:18px}
+.right-content{max-width:880px;margin:auto;padding:22px 28px 70px;line-height:1.72}
+.right-content h1,.right-content h2,.right-content h3,.right-content h4{color:#10243a;line-height:1.3;margin-top:1.5em}
+.right-content h1{font-size:2rem;border-bottom:2px solid #d8e2ec;padding-bottom:.35em}
+.right-content h2{font-size:1.55rem;border-bottom:1px solid #d8e2ec;padding-bottom:.3em}
+.right-content p,.right-content li{color:#26384a}
+.right-content code{font-family:"Cascadia Code",Consolas,monospace;background:#e8eef5;color:#8b1e3f;border:1px solid #d3dee9;border-radius:5px;padding:.12em .32em}
+.right-content pre{background:#0b1522;color:#e7f0fa;border-radius:11px;padding:15px;overflow:auto;border:1px solid #263d55}
+.right-content pre code{background:transparent;color:#d9e9fa;border:0;padding:0}
+.md-table-wrap{overflow:auto;border:1px solid #d1dce7;border-radius:10px;margin:15px 0}
+.right-content table{width:100%;border-collapse:collapse;min-width:590px}
+.right-content th,.right-content td{padding:9px 11px;border-bottom:1px solid #d8e2ec;text-align:left;vertical-align:top}
+.right-content th{background:#eaf1f8;color:#17324d}
+.md-q-anchor{cursor:pointer;border-left:5px solid #60a5fa;padding:10px 12px;background:#eef6ff;border-radius:8px;transition:.2s}
+.md-q-anchor:hover{background:#dfefff}
+.link-flash{animation:flashLink 1.2s ease}
+@keyframes flashLink{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 5px rgba(94,234,212,.35);background-color:rgba(94,234,212,.10)}}
+.right-content .link-flash{background:#d8fff6!important}
+.split-hint{font-size:.78rem;color:#a9bfd5}
+@media(max-width:900px){
+ html,body{height:auto;overflow:auto}
+ .split-app{height:auto;display:block}
+ .left-pane,.right-pane{height:auto;overflow:visible}
+ .left-pane{border-right:0;border-bottom:4px solid #29425f}
+ .pane-label{position:sticky;top:0}
+ .left-pane .toolbar{top:39px}
+}
+</style>
+
+<style id="viewer-toggle-css">
+.right-toolbar{gap:14px;flex-wrap:wrap}
+.right-toolbar>div:first-child{display:flex;flex-direction:column}
+.mode-switch{display:flex;gap:6px;background:#071421;padding:4px;border:1px solid #35526e;border-radius:11px}
+.mode-btn{padding:7px 12px;border-radius:8px;border:1px solid transparent;background:transparent;color:#b8cce0;font-weight:800;cursor:pointer}
+.mode-btn:hover{color:white;border-color:#496a89}
+.mode-btn.active{background:#5eead4;color:#06202a;border-color:#5eead4}
+.raw-md-content{max-width:none;margin:0;padding:26px 28px 70px;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;background:#0b1522;color:#d9e9fa;border:0;border-radius:0;line-height:1.65;font-family:"Cascadia Code",Consolas,monospace;font-size:.92rem;min-height:calc(100vh - 48px)}
+</style>
+
+</head>
+<body>
+<div class="split-app">
+
+<section class="left-pane" id="leftPane">
+  <div class="pane-label left-label">
+    <span>◧ 互动 HTML <small>原报告视窗</small></span>
+    <span class="sync-badge">↔ 已连动 MD</span>
+  </div>
+  
+<header class="hero"><div class="wrap"><div class="eyebrow">Computer Organization · Lab 1</div><h1>Lab 1 Assignment Report</h1><div class="meta"><span class="pill">Student: 彭靖翔</span><span class="pill">ID: E24144773</span><span class="pill">Interactive Study Edition</span></div></div></header>
+<div class="toolbar"><div class="wrap"><button onclick="setAll(true)">全部展开</button><button onclick="setAll(false)">全部收合</button><a class="navbtn" href="#q1">Q1</a><a class="navbtn" href="#q2">Q2</a><a class="navbtn" href="#q3">Q3</a><a class="navbtn" href="#q4">Q4</a><a class="navbtn" href="#q5">Q5</a><a class="navbtn" href="#q6">Q6</a><a class="navbtn" href="#reflection">Reflection</a></div></div>
+<main>
+    <details class="qcard" id="q1" open>
+      <summary><span class="qnum">Q1</span><span>Question 1</span><span class="chev">⌄</span></summary>
+      <div class="qbody">
+        <section class="visual"><h3>概念图解</h3><div class="diagram"><div class="node cpu">CPU<br><small>LOAD / STORE</small></div><div class="arrow">→</div><div class="node">Memory Map<br><small>位址解碼</small></div><div class="arrow">→</div><div class="fan"><span>ROM</span><span>MainMem</span><span>MMIO Device</span></div></div>
+<div class="tip">圖解重點：CPU 使用同一組 load/store；Memory Map 再依位址把請求送到真正的裝置。</div></section>
+        <section class="original">
+<p><strong>What is the benefit for a processor of using the MMIO scheme to control I/O devices?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>MMIO（memory-mapped I/O，記憶體映射輸入輸出）把裝置的控制暫存器或資料介面配置到一般位址空間。處理器沿用原本的 load/store 指令、位址計算和資料路徑，便能存取記憶體或 I/O 裝置，不必為每一種裝置另設一組專用 I/O 指令。軟體看到的都是位址，實際由位址解碼與裝置介面決定要交給哪個裝置處理。因此，ISA 和程式的存取方式較一致，也方便增添新裝置。</p>
+<div class='table-wrap'><table><thead><tr><th>步驟</th><th>在本作業中的實際動作</th><th>對應程式</th></tr></thead><tbody><tr><td>1</td><td>執行 load/store，計算有效位址 <code>rs1 + offset</code></td><td><code>src/core.c</code> 的 <code>Core_execute()</code></td></tr><tr><td>2</td><td>以完整實體位址查找所屬映射區間</td><td><code>src/mem_map.c</code> 的 <code>MemoryMap_generic_load/store()</code></td></tr><tr><td>3</td><td>位址減去裝置映射起點，得到裝置內部位移</td><td><code>base_addr - mmap_unit_ptr-&gt;addr_bound.first</code></td></tr><tr><td>4</td><td>透過裝置的 load/store 回呼處理請求</td><td><code>AbstractMem_load/store()</code>；由 ROM、MainMem 等各自實作</td></tr></tbody></table></div>
+<p>例如 <code>src/core.c</code> 的 load/store 分支會先形成有效位址，再交給統一的記憶體映射介面（此段在原版及改良版均相同）：</p>
+<pre><code class="language-c">MemoryMap_generic_load(&amp;self-&gt;mem_map, a + imm_i, length, bytes);
+/* STORE 分支： */
+MemoryMap_generic_store(&amp;self-&gt;mem_map, a + imm_s, length, bytes);</code></pre>
+<p>其中 <code>a</code> 是事先讀取的 <code>gpr[rs1]</code>；<code>imm_i</code>、<code>imm_s</code> 分別是 LOAD 的 I-type 偏移和 STORE 的 S-type 偏移；<code>length</code> 決定一次讀寫 1、2 或 4 個位元組。核心不需知道目標是 ROM 還是 RAM；同樣的入口也可以對應文字輸出與停止旗標等 MMIO 裝置。</p>
+<p><code>src/mem_map.c</code> 的位址派送關鍵片段如下：</p>
+<pre><code class="language-c">if ((base_addr &gt;= self-&gt;memory_map_arr[i].addr_bound.first) &amp;&amp;
+    (base_addr + length &lt;= self-&gt;memory_map_arr[i].addr_bound.second)) {
+    mmap_unit_ptr = &amp;self-&gt;memory_map_arr[i];
+}
+AbstractMem_load(mmap_unit_ptr-&gt;device_ptr,
+                 base_addr - mmap_unit_ptr-&gt;addr_bound.first, length, buffer);</code></pre>
+<p>這段程式先確定完整存取範圍都落在同一個裝置的區間，然後以裝置相對位址呼叫 load。store 採相同路徑、改呼叫 <code>AbstractMem_store()</code>。<strong>限制</strong>是 MMIO 位址仍須由軟體依裝置規格使用；某些裝置讀寫可能具有副作用，並非每個映射位址都能當一般 RAM 任意存取。</p>
+</section>
+      </div>
+    </details>
+    <details class="qcard" id="q2" >
+      <summary><span class="qnum">Q2</span><span>Question 2</span><span class="chev">⌄</span></summary>
+      <div class="qbody">
+        <section class="visual"><h3>概念图解</h3><div class="stategrid"><div><b>PC</b><span>下一條指令位置</span></div><div><b>x0–x31</b><span>運算元與結果</span></div><div><b>Memory</b><span>程式與資料</span></div></div>
+<div class="flowline">Fetch → Decode → Execute → Write Back / Update PC → 下一個 architectural state</div></section>
+        <section class="original">
+<p><strong>What components in a RISC-V processor are considered part of the architecturally visible state, and why are they important for program execution?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>「架構可見狀態」是執行程式可以透過 ISA 觀察或影響、且執行下一條指令所需依賴的狀態。在此 Lab 1 的 RV32I 模擬器中，主要包括 32 個通用暫存器、PC，以及透過 load/store 可觀察的記憶體與映射裝置狀態。每執行一步，指令依舊狀態產生新狀態；若任一項更新錯誤，後續指令的運算、資料或控制流程都可能偏離原程式。</p>
+<div class='table-wrap'><table><thead><tr><th>項目</th><th>本作業中所在位置</th><th>對後續執行的影響</th></tr></thead><tbody><tr><td><code>x0</code>～<code>x31</code></td><td><code>self-&gt;arch_state.gpr[]</code></td><td><code>rs1</code>、<code>rs2</code> 讀取運算元，<code>rd</code> 接收結果；<code>x0</code> 必須永遠為零</td></tr><tr><td>PC</td><td><code>self-&gt;arch_state.current_pc</code></td><td>指定下一條要讀取的指令；分支與跳躍會改變控制流程</td></tr><tr><td>可觀察記憶體</td><td>ROM、MainMem 與 MemoryMap</td><td>指令擷取、load/store 的資料和裝置效果影響程式行為</td></tr><tr><td>其他環境狀態</td><td>依完整 ISA 與執行環境而定</td><td>例如 CSR 或例外狀態；本作業未實作完整特權架構</td></tr></tbody></table></div>
+<p>從 <code>Core_fetch()</code> 可看出 PC 的直接作用：</p>
+<pre><code class="language-c">MemoryMap_generic_load(&amp;self-&gt;mem_map,
+                       self-&gt;arch_state.current_pc, 4, inst_in_bytes);</code></pre>
+<p>這一行從 PC 指向的位址讀取 4 個位元組機器碼。<code>Core_execute()</code> 一開始設定 <code>new_pc = current_pc + 4</code>；條件分支成立、JAL 或 JALR 會覆寫它。最後 <code>Core_update_pc()</code> 才將新 PC 提交：</p>
+<pre><code class="language-c">static void Core_update_pc(Core *self) {
+    self-&gt;arch_state.current_pc = self-&gt;new_pc;
+}</code></pre>
+<p>對暫存器的寫回，程式有明確的 <code>x0</code> 保護：</p>
+<pre><code class="language-c">if (write_rd &amp;&amp; rd != 0) self-&gt;arch_state.gpr[rd] = result;
+self-&gt;arch_state.gpr[0] = 0;</code></pre>
+<p>這表示指定 <code>rd=x0</code> 時仍執行該指令其他效果（例如 JAL 的跳躍），但不會讓 <code>x0</code> 變成非零。ROM 在此實作中包含載入的程式映像；MainMem 的內容可隨 store 改變。兩者皆可能影響未來的取指或資料讀取。<code>new_pc</code> 是模擬器的中間變數，不應與提交後的架構 PC 混為一談。</p>
+</section>
+      </div>
+    </details>
+    <details class="qcard" id="q3" >
+      <summary><span class="qnum">Q3</span><span>Question 3</span><span class="chev">⌄</span></summary>
+      <div class="qbody">
+        <section class="visual"><h3>概念图解</h3><div class="compare"><div><b>Conditional-set</b><code>slt x3,x1,x2</code><span>直接得到 0 / 1</span></div><div><b>Branch</b><code>blt x1,x2,label</code><span>改變控制流程</span></div></div></section>
+        <section class="original">
+<p><strong>Why does RISC-V define conditional-set instructions? Can branch instructions alone achieve the same functionality? If yes, what is the benefit of having the additional conditional-set instructions?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>條件設定（conditional-set）指令把比較結果直接寫進暫存器：條件成立寫 <code>1</code>，否則寫 <code>0</code>。本作業的 <code>SLT</code>、<code>SLTU</code>、<code>SLTI</code>、<code>SLTIU</code> 分別支援有號／無號、暫存器／立即數比較。條件分支也能透過兩條控制路徑算出相同的 0 或 1，但通常需要額外指令和標籤；條件設定則保持順序執行的 PC，結果可直接給後續指令使用。</p>
+<div class='table-wrap'><table><thead><tr><th>指令</th><th>比較運算元</th><th>比較語意</th><th>結果</th></tr></thead><tbody><tr><td><code>slt rd, rs1, rs2</code></td><td>兩個暫存器</td><td>有號小於</td><td>成立 <code>rd=1</code>，否則 <code>0</code></td></tr><tr><td><code>sltu rd, rs1, rs2</code></td><td>兩個暫存器</td><td>無號小於</td><td>同上</td></tr><tr><td><code>slti rd, rs1, imm</code></td><td>暫存器與符號延伸的立即數</td><td>有號小於</td><td>同上</td></tr><tr><td><code>sltiu rd, rs1, imm</code></td><td>暫存器與符號延伸的立即數</td><td>無號小於</td><td>同上</td></tr></tbody></table></div>
+<p><code>Core_execute()</code> 對應的實作（節錄）：</p>
+<pre><code class="language-c">case inst_slt:   result = (int32_t)a &lt; (int32_t)b; break;
+case inst_sltu:  result = a &lt; b; break;
+case inst_slti:  result = (int32_t)a &lt; (int32_t)imm_i; break;
+case inst_sltiu: result = a &lt; imm_i; break;</code></pre>
+<p><code>a</code>、<code>b</code> 是 32 位元暫存器原值；<code>(int32_t)</code> 讓有號比較把最高位解讀為符號位。<code>SLTIU</code> <strong>仍先符號延伸 12 位元立即數</strong>，之後才把 32 位元位元模式拿去做無號比較。例如立即數 <code>-1</code> 經符號延伸後成為 <code>0xffffffff</code>；若 <code>a=0</code>，無號比較 <code>0 &lt; 0xffffffff</code> 為真，因此結果是 <code>1</code>。</p>
+<p>分支的等價寫法（示意：比較 <code>x1&lt;x2</code>，結果放 <code>x3</code>）需安排不同控制流程：</p>
+<pre><code class="language-asm">addi x3, x0, 0
+blt  x1, x2, true_case
+jal  x0, done
+true_case:
+addi x3, x0, 1
+done:</code></pre>
+<p>直接使用 <code>slt x3, x1, x2</code> 即可產生同一布林結果；實際執行成本仍取決於處理器實作與編譯器最佳化，不能宣稱所有硬體一定更快。若只是決定是否跳躍，直接使用 branch 可能最合適；若後續需要數值 0/1，conditional-set 較直接。</p>
+</section>
+      </div>
+    </details>
+    <details class="qcard" id="q4" >
+      <summary><span class="qnum">Q4</span><span>Question 4</span><span class="chev">⌄</span></summary>
+      <div class="qbody">
+        <section class="visual"><h3>概念图解</h3><div class="memmap"><div class="rom"><b>ROM</b><span>0x00000000</span><small>CPU 可讀；一般 store 拒絕</small></div><div class="gap">Memory Map</div><div class="ram"><b>MainMem</b><span>0x80000000</span><small>CPU 可讀 / 可寫</small></div></div></section>
+        <section class="original">
+<p><strong>What is the difference between <code>ROM</code> and <code>MainMem</code>? Answer this question by tracing the source code.</strong></p>
+<h4>Your Answer</h4>
+<h3>追蹤原始碼的答案</h3>
+<p>本專案的 <code>ROM</code> 和 <code>MainMem</code> 都繼承同一個抽象記憶體介面，均可被 MemoryMap 定位並讀取；關鍵差異在 <strong>CPU 經由記憶體映射寫入時的行為</strong>：ROM 的 store 回呼直接拒絕修改，MainMem 的 store 回呼則將位元組寫入陣列。此處描述的是這份模擬器的軟體實作，而不是所有實體 ROM/RAM 的電路細節。</p>
+<div class='table-wrap'><table><thead><tr><th>項目</th><th>ROM</th><th>MainMem</th></tr></thead><tbody><tr><td>定義檔</td><td><code>src/rom.h</code></td><td><code>src/main_mem.h</code></td></tr><tr><td>映射基底</td><td><code>0x00000000</code></td><td><code>0x80000000</code></td></tr><tr><td>容量</td><td><code>0x1000</code> = 4096 bytes</td><td><code>0x10000</code> = 65536 bytes</td></tr><tr><td>CPU load</td><td>從 <code>rom[]</code> 複製 bytes</td><td>從 <code>mem[]</code> 複製 bytes</td></tr><tr><td>CPU store</td><td><code>Panic(&quot;ROM should not be modified!&quot;)</code></td><td>將資料寫回 <code>mem[]</code></td></tr><tr><td>建構時</td><td>將內部陣列清為 0</td><td>將內部陣列清為 0</td></tr></tbody></table></div>
+<p><strong>第一步：註冊位址。</strong><code>src/iss.c</code> 的 <code>ISS_ctor()</code> 建立兩個裝置，並各自註冊半開區間 <code>[base, base + size)</code>：</p>
+<pre><code class="language-c">mmap_unit_t ROM_mmap_unit = { .addr_bound = { .first = ROM_MMAP_BASE,
+                                              .second = ROM_MMAP_BASE + ROM_SIZE },
+                              .device_ptr = (AbstractMem *)&amp;self_-&gt;rom_mmio };
+Core_add_device(&amp;self_-&gt;core, ROM_mmap_unit);</code></pre>
+<p>MainMem 的註冊方式相同，改用 <code>MAIN_MEM_MMAP_BASE</code>、<code>MAIN_MEM_SIZE</code> 與 <code>main_mem_mmio</code>。大小和基底來自各自的 <code>.h</code> 檔；例如 <code>ROM_SIZE 0x1000</code>，因此合法區間最後一個位址是 <code>0x00000fff</code>。</p>
+<p><strong>第二步：路由存取。</strong><code>src/mem_map.c</code> 的 <code>MemoryMap_generic_load/store()</code> 掃描範圍，找到所屬裝置，將完整位址減去映射基底後，透過 <code>AbstractMem_load/store()</code> 派送。例如 CPU 寫入 <code>0x80000004</code>，MainMem 收到內部偏移 <code>4</code>。</p>
+<p><strong>第三步：裝置決定行為。</strong><code>src/rom.c</code> 的關鍵程式是：</p>
+<pre><code class="language-c">DECLARE_ABSTRACT_MEM_LOAD(ROM) {
+    ROM *self_ = container_of(self, ROM, super);
+    for (int i = 0; i &lt; length; i++)
+        buffer[i] = self_-&gt;rom[base_addr + i];
+}
+DECLARE_ABSTRACT_MEM_STORE(ROM) {
+    Panic(&quot;ROM should not be modified!&quot;);
+}</code></pre>
+<p><code>src/main_mem.c</code> 的 store 則有實際寫回：</p>
+<pre><code class="language-c">DECLARE_ABSTRACT_MEM_STORE(MainMem) {
+    MainMem *self_ = container_of(self, MainMem, super);
+    for (int i = 0; i &lt; length; i++)
+        self_-&gt;mem[base_addr + i] = ref_data[i];
+}</code></pre>
+<p>程式還在各回呼中檢查裝置內存取範圍。<code>ISS_ctor()</code> 呼叫 <code>load_elf(elf_file_name, self_-&gt;rom_mmio.rom, ROM_SIZE, &amp;self_-&gt;core.arch_state.current_pc)</code>，是<strong>啟動時直接取得 ROM 陣列供載入器填入映像</strong>；它並不等於程式執行期間以 store 指令寫 ROM。因此「ROM 可在初始化時載入程式」與「CPU 不可對 ROM 做一般 store」沒有矛盾。</p>
+</section>
+      </div>
+    </details>
+    <details class="qcard" id="q5" >
+      <summary><span class="qnum">Q5</span><span>Question 5</span><span class="chev">⌄</span></summary>
+      <div class="qbody">
+        <section class="visual"><h3>概念图解</h3><div class="jalr"><div><b>① 先讀舊 xN</b><span>old_xN</span></div><div>→</div><div><b>② 算 target</b><span>(old_xN + imm) &amp; ~1</span></div><div>→</div><div><b>③ 再寫 rd</b><span>xN = old_pc + 4</span></div></div>
+<div class="warning">关键：rd == rs1 时，不能先覆盖 xN，否则跳跃目标会用到错误的新值。</div></section>
+        <section class="original">
+<p><strong>Consider <code>jalr xN, xN, imm</code>, where N is a positive number from 1 to 31. What potential problem might arise when implementing JALR in an ISS?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p><code>jalr xN, xN, imm</code> 的 <code>rd</code> 與 <code>rs1</code> 指向同一個暫存器。JALR 同時要產生兩個結果：跳躍目標使用執行前的 <code>xN</code>，而連結位址 <code>old_pc + 4</code> 要寫回 <code>xN</code>。若 ISS 先把 <code>pc+4</code> 寫到 <code>xN</code>，再讀 <code>xN</code> 計算目標，就會把剛寫入的連結位址誤當舊基底，跳到錯誤位置。</p>
+<div class='table-wrap'><table><thead><tr><th>時序</th><th>正確做法</th><th>錯誤做法</th></tr></thead><tbody><tr><td>讀 rs1</td><td>先保存 <code>old_xN</code></td><td>尚未讀取</td></tr><tr><td>目標</td><td><code>(old_xN + sign_extend(imm)) &amp; ~1</code></td><td><code>(old_pc+4 + sign_extend(imm)) &amp; ~1</code></td></tr><tr><td>寫 rd</td><td>最後寫入 <code>old_pc + 4</code></td><td>過早寫入，破壞目標運算元</td></tr></tbody></table></div>
+<p>本作業的 <code>Core_execute()</code> 先在 switch 前讀取來源值：</p>
+<pre><code class="language-c">const unsigned rd = (raw &gt;&gt; 7) &amp; 31u;
+const unsigned rs1 = (raw &gt;&gt; 15) &amp; 31u;
+const reg_t a = self-&gt;arch_state.gpr[rs1];
+self-&gt;new_pc = self-&gt;arch_state.current_pc + 4;</code></pre>
+<p>JALR 分支先計算下一個 PC，統一寫回在 switch 後執行：</p>
+<pre><code class="language-c">case inst_jalr:
+    result = self-&gt;new_pc;
+    self-&gt;new_pc = (a + imm_i) &amp; ~1u;
+    break;
+/* switch 結束後 */
+if (write_rd &amp;&amp; rd != 0) self-&gt;arch_state.gpr[rd] = result;</code></pre>
+<p>例如舊 PC 為 <code>0x00000100</code>、舊 <code>x5=0x00000200</code>、<code>imm=3</code>，執行 <code>jalr x5, x5, 3</code> 應得到新 PC <code>(0x200+3)&amp;~1 = 0x202</code>、新 <code>x5=0x104</code>。若先寫 <code>x5=0x104</code>，錯誤目標就變成 <code>(0x104+3)&amp;~1 = 0x106</code>。遮罩 <code>&amp; ~1u</code> 會強制清除目標位址最低位；<code>imm_i</code> 必須先符號延伸。最後 <code>Core_update_pc()</code> 才將計算好的 <code>new_pc</code> 提交。</p>
+</section>
+      </div>
+    </details>
+    <details class="qcard" id="q6" >
+      <summary><span class="qnum">Q6</span><span>Question 6</span><span class="chev">⌄</span></summary>
+      <div class="qbody">
+        <section class="visual"><h3>概念图解</h3><div class="bits"><div><b>B / J immediate</b></div><div class="bitrow"><span>高位偏移</span><span>…</span><span>imm[2]</span><span>imm[1]</span><span class="zero">imm[0]=0</span></div><p>最低位固定为 0，因此无需占用指令编码栏位；重组 immediate 时直接补 0。</p></div></section>
+        <section class="original">
+<p><strong>Why do the encoding formats for JAL and BRANCH instructions omit <code>imm[0]</code>?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>JAL 的 J-type 偏移與 BRANCH 的 B-type 偏移，重組後最低位 <code>imm[0]</code> 都固定為 0；也就是目標相對偏移以 <strong>2 bytes</strong> 為最小編碼單位。既然最低位不是自由變動的資料，就沒有必要用一個機器碼欄位儲存它。把欄位留給較高位的偏移，可在固定 32 位元指令長度下涵蓋較大的相對跳躍距離。這種半字（16 位元）對齊也與可選的壓縮指令擴充相容；本實驗只執行 32 位元指令，不代表編碼中必須額外存一個恆為零的 bit。</p>
+<div class='table-wrap'><table><thead><tr><th>編碼</th><th>整數偏移的位元配置</th><th><code>imm[0]</code></th><th>計算下一個 PC</th></tr></thead><tbody><tr><td>B-type（BEQ 等）</td><td>`imm[12</td><td>10:5</td><td>4:1</td><td>11</td><td>0]`</td><td>隱含 0</td><td><code>old_pc + sign_extend(imm_b)</code>，分支成立時</td></tr><tr><td>J-type（JAL）</td><td>`imm[20</td><td>19:12</td><td>11</td><td>10:1</td><td>0]`</td><td>隱含 0</td><td><code>old_pc + sign_extend(imm_j)</code></td></tr></tbody></table></div>
+<p><code>src/core.c</code> 以左移 1 重組最低幾位，沒有把任何位元放在位置 0（節錄自改良版 <code>core_improved.c</code>）：</p>
+<pre><code class="language-c">const reg_t imm_b = sign_extend(((raw &gt;&gt; 31) &lt;&lt; 12) |
+                                 (((raw &gt;&gt; 7) &amp; 1u) &lt;&lt; 11) |
+                                 (((raw &gt;&gt; 25) &amp; 0x3fu) &lt;&lt; 5) |
+                                 (((raw &gt;&gt; 8) &amp; 0xfu) &lt;&lt; 1), 13);
+
+const reg_t imm_j = sign_extend(((raw &gt;&gt; 31) &lt;&lt; 20) |
+                                 (((raw &gt;&gt; 12) &amp; 0xffu) &lt;&lt; 12) |
+                                 (((raw &gt;&gt; 20) &amp; 1u) &lt;&lt; 11) |
+                                 (((raw &gt;&gt; 21) &amp; 0x3ffu) &lt;&lt; 1), 21);</code></pre>
+<p>其中 <code>sign_extend(value, width)</code> 使用無號運算將位元圖樣擴展為 32 位元；B-type 使用 13 位、J-type 使用 21 位。B-type 的 <code>raw[7]</code> 放到 <code>imm[11]</code>；J-type 的 <code>raw[20]</code> 放到 <code>imm[11]</code>。由於最高位仍需符號延伸，正負位移都能以目前 PC 為基準跳向前或向後。JALR 不屬於這兩種立即數編碼：它採 I-type 偏移加 <code>rs1</code>，然後將<strong>目標位址</strong>的 bit 0 清為零，不可把兩種規則混為一談。</p>
+</section>
+      </div>
+    </details>
+<section class="reflection" id="reflection"><h2>Reflection Report (0 pts)</h2>
+<h3>Your Reflection</h3>
+<p>這份作業使我把「ISA 對程式承諾的行為」和「模擬器內部實作步驟」連在一起理解。每次 tick 都依序 Fetch、Decode、Execute、更新 PC：Fetch 要正確依小端序組出 32 位元指令；Decode 要看 opcode、funct3 與 funct7；Execute 要區分算術、記憶體和控制流程的副作用。表面看起來一條指令只要做一次運算，實際上還要保證暫存器、PC、記憶體及 <code>x0</code> 在每步結束後符合規格。</p>
+<p>我最需要反覆核對的是四個細節。第一，I/S/B/J 立即數散布在不同 bit 位置，必須依格式重組並處理符號延伸；尤其 B/J 的 bit 0 固定為零。第二，<code>LB</code>/<code>LH</code> 與 <code>LBU</code>/<code>LHU</code> 讀相同數量的位元組，但對最高資料位的延伸規則不同：例如位元組 <code>0x80</code> 以 LB 讀得 <code>0xffffff80</code>，以 LBU 讀得 <code>0x00000080</code>。第三，有號與無號比較及 <code>SRA</code>/<code>SRL</code> 右移必須分開實作。第四，<code>jalr rd, rs1, imm</code> 在 <code>rd==rs1</code> 時必須先保存舊運算元，再更新連結暫存器。將來源值先存於 <code>a</code>、<code>b</code>，並將寫回集中於 switch 後，讓這些資料相依關係較容易檢查。</p>
+<p>驗證方面，我學到一定要先確認<strong>目前檔案成功重新編譯</strong>，才能用 CTest 通過率評估這次修改；若 build 失敗而單獨執行 <code>ctest</code>，可能只是舊執行檔的結果。正確的本機順序是在倉庫根目錄存檔後執行 <code>cmake --build build --parallel &amp;&amp; ctest --test-dir build --output-on-failure</code>，並核對最後一次成功編譯和測試的輸出。原版 <code>core(1).c</code> 已成功建置並通過 37／37 項公開 CTest；改良版 <code>core_improved.c</code> 的立即數重組經 20 萬筆隨機位元測試核對，但尚未在完整專案中重新執行 37 項 CTest。公開測試、邊界案例（負偏移、位元組符號延伸、<code>jalr</code> 來源與目的相同）都應分開檢視；最終自動評分仍需看 Classroom50。此段描述的是我的實作與驗證方法，實際測試結果應以最終提交版本的終端機輸出為準。</p>
+<p>給助教的建議：希望提供一個對照 B/J 立即數位元重組的完整範例，以及一個 <code>jalr xN, xN, imm</code> 的公開測試示例；也希望提醒同學 CTest 在編譯失敗後仍可能執行舊產物，讓第一次使用 CMake 的同學能更快辨認問題。</p></section>
+</main>
+
+<script>
+function setAll(v){document.querySelectorAll('details.qcard').forEach(x=>x.open=v)}
+document.querySelectorAll('details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open) history.replaceState(null,'','#'+d.id)}));
+</script>
+</section>
+
+
+
+<aside class="right-pane" id="rightPane">
+  <div class="pane-label right-label right-toolbar">
+    <div>
+      <span>📄 reportAnser(1).md</span>
+      <small id="modeLabel">Markdown Viewer</small>
+    </div>
+    <div class="mode-switch" role="group" aria-label="Markdown display mode">
+      <button type="button" id="viewerBtn" class="mode-btn active" onclick="setMdMode('viewer')">Viewer</button>
+      <button type="button" id="rawBtn" class="mode-btn" onclick="setMdMode('raw')">No Viewer</button>
+    </div>
+  </div>
+  <article class="right-content" id="mdViewerContent">
+    <h1>Lab 1 Assignment Report</h1>
+<h2>Student Information</h2>
+<ul><li>Student Name: <strong>彭靖翔</strong></li><li>Student ID: <strong>E24144773</strong></li></ul>
+<h2>Questions (20 pts)</h2>
+<h3 id="md-q1" class="md-q-anchor" data-q="1">Question 1</h3>
+<p><strong>What is the benefit for a processor of using the MMIO scheme to control I/O devices?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>MMIO（memory-mapped I/O，記憶體映射輸入輸出）把裝置的控制暫存器或資料介面配置到一般位址空間。處理器沿用原本的 load/store 指令、位址計算和資料路徑，便能存取記憶體或 I/O 裝置，不必為每一種裝置另設一組專用 I/O 指令。軟體看到的都是位址，實際由位址解碼與裝置介面決定要交給哪個裝置處理。因此，ISA 和程式的存取方式較一致，也方便增添新裝置。</p>
+<div class='md-table-wrap'><table><thead><tr><th>步驟</th><th>在本作業中的實際動作</th><th>對應程式</th></tr></thead><tbody><tr><td>1</td><td>執行 load/store，計算有效位址 <code>rs1 + offset</code></td><td><code>src/core.c</code> 的 <code>Core_execute()</code></td></tr><tr><td>2</td><td>以完整實體位址查找所屬映射區間</td><td><code>src/mem_map.c</code> 的 <code>MemoryMap_generic_load/store()</code></td></tr><tr><td>3</td><td>位址減去裝置映射起點，得到裝置內部位移</td><td><code>base_addr - mmap_unit_ptr-&gt;addr_bound.first</code></td></tr><tr><td>4</td><td>透過裝置的 load/store 回呼處理請求</td><td><code>AbstractMem_load/store()</code>；由 ROM、MainMem 等各自實作</td></tr></tbody></table></div>
+<p>例如 <code>src/core.c</code> 的 load/store 分支會先形成有效位址，再交給統一的記憶體映射介面（此段在原版及改良版均相同）：</p>
+<pre><code class="language-c">MemoryMap_generic_load(&amp;self-&gt;mem_map, a + imm_i, length, bytes);
+/* STORE 分支： */
+MemoryMap_generic_store(&amp;self-&gt;mem_map, a + imm_s, length, bytes);</code></pre>
+<p>其中 <code>a</code> 是事先讀取的 <code>gpr[rs1]</code>；<code>imm_i</code>、<code>imm_s</code> 分別是 LOAD 的 I-type 偏移和 STORE 的 S-type 偏移；<code>length</code> 決定一次讀寫 1、2 或 4 個位元組。核心不需知道目標是 ROM 還是 RAM；同樣的入口也可以對應文字輸出與停止旗標等 MMIO 裝置。</p>
+<p><code>src/mem_map.c</code> 的位址派送關鍵片段如下：</p>
+<pre><code class="language-c">if ((base_addr &gt;= self-&gt;memory_map_arr[i].addr_bound.first) &amp;&amp;
+    (base_addr + length &lt;= self-&gt;memory_map_arr[i].addr_bound.second)) {
+    mmap_unit_ptr = &amp;self-&gt;memory_map_arr[i];
+}
+AbstractMem_load(mmap_unit_ptr-&gt;device_ptr,
+                 base_addr - mmap_unit_ptr-&gt;addr_bound.first, length, buffer);</code></pre>
+<p>這段程式先確定完整存取範圍都落在同一個裝置的區間，然後以裝置相對位址呼叫 load。store 採相同路徑、改呼叫 <code>AbstractMem_store()</code>。<strong>限制</strong>是 MMIO 位址仍須由軟體依裝置規格使用；某些裝置讀寫可能具有副作用，並非每個映射位址都能當一般 RAM 任意存取。</p>
+<h3 id="md-q2" class="md-q-anchor" data-q="2">Question 2</h3>
+<p><strong>What components in a RISC-V processor are considered part of the architecturally visible state, and why are they important for program execution?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>「架構可見狀態」是執行程式可以透過 ISA 觀察或影響、且執行下一條指令所需依賴的狀態。在此 Lab 1 的 RV32I 模擬器中，主要包括 32 個通用暫存器、PC，以及透過 load/store 可觀察的記憶體與映射裝置狀態。每執行一步，指令依舊狀態產生新狀態；若任一項更新錯誤，後續指令的運算、資料或控制流程都可能偏離原程式。</p>
+<div class='md-table-wrap'><table><thead><tr><th>項目</th><th>本作業中所在位置</th><th>對後續執行的影響</th></tr></thead><tbody><tr><td><code>x0</code>～<code>x31</code></td><td><code>self-&gt;arch_state.gpr[]</code></td><td><code>rs1</code>、<code>rs2</code> 讀取運算元，<code>rd</code> 接收結果；<code>x0</code> 必須永遠為零</td></tr><tr><td>PC</td><td><code>self-&gt;arch_state.current_pc</code></td><td>指定下一條要讀取的指令；分支與跳躍會改變控制流程</td></tr><tr><td>可觀察記憶體</td><td>ROM、MainMem 與 MemoryMap</td><td>指令擷取、load/store 的資料和裝置效果影響程式行為</td></tr><tr><td>其他環境狀態</td><td>依完整 ISA 與執行環境而定</td><td>例如 CSR 或例外狀態；本作業未實作完整特權架構</td></tr></tbody></table></div>
+<p>從 <code>Core_fetch()</code> 可看出 PC 的直接作用：</p>
+<pre><code class="language-c">MemoryMap_generic_load(&amp;self-&gt;mem_map,
+                       self-&gt;arch_state.current_pc, 4, inst_in_bytes);</code></pre>
+<p>這一行從 PC 指向的位址讀取 4 個位元組機器碼。<code>Core_execute()</code> 一開始設定 <code>new_pc = current_pc + 4</code>；條件分支成立、JAL 或 JALR 會覆寫它。最後 <code>Core_update_pc()</code> 才將新 PC 提交：</p>
+<pre><code class="language-c">static void Core_update_pc(Core *self) {
+    self-&gt;arch_state.current_pc = self-&gt;new_pc;
+}</code></pre>
+<p>對暫存器的寫回，程式有明確的 <code>x0</code> 保護：</p>
+<pre><code class="language-c">if (write_rd &amp;&amp; rd != 0) self-&gt;arch_state.gpr[rd] = result;
+self-&gt;arch_state.gpr[0] = 0;</code></pre>
+<p>這表示指定 <code>rd=x0</code> 時仍執行該指令其他效果（例如 JAL 的跳躍），但不會讓 <code>x0</code> 變成非零。ROM 在此實作中包含載入的程式映像；MainMem 的內容可隨 store 改變。兩者皆可能影響未來的取指或資料讀取。<code>new_pc</code> 是模擬器的中間變數，不應與提交後的架構 PC 混為一談。</p>
+<h3 id="md-q3" class="md-q-anchor" data-q="3">Question 3</h3>
+<p><strong>Why does RISC-V define conditional-set instructions? Can branch instructions alone achieve the same functionality? If yes, what is the benefit of having the additional conditional-set instructions?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>條件設定（conditional-set）指令把比較結果直接寫進暫存器：條件成立寫 <code>1</code>，否則寫 <code>0</code>。本作業的 <code>SLT</code>、<code>SLTU</code>、<code>SLTI</code>、<code>SLTIU</code> 分別支援有號／無號、暫存器／立即數比較。條件分支也能透過兩條控制路徑算出相同的 0 或 1，但通常需要額外指令和標籤；條件設定則保持順序執行的 PC，結果可直接給後續指令使用。</p>
+<div class='md-table-wrap'><table><thead><tr><th>指令</th><th>比較運算元</th><th>比較語意</th><th>結果</th></tr></thead><tbody><tr><td><code>slt rd, rs1, rs2</code></td><td>兩個暫存器</td><td>有號小於</td><td>成立 <code>rd=1</code>，否則 <code>0</code></td></tr><tr><td><code>sltu rd, rs1, rs2</code></td><td>兩個暫存器</td><td>無號小於</td><td>同上</td></tr><tr><td><code>slti rd, rs1, imm</code></td><td>暫存器與符號延伸的立即數</td><td>有號小於</td><td>同上</td></tr><tr><td><code>sltiu rd, rs1, imm</code></td><td>暫存器與符號延伸的立即數</td><td>無號小於</td><td>同上</td></tr></tbody></table></div>
+<p><code>Core_execute()</code> 對應的實作（節錄）：</p>
+<pre><code class="language-c">case inst_slt:   result = (int32_t)a &lt; (int32_t)b; break;
+case inst_sltu:  result = a &lt; b; break;
+case inst_slti:  result = (int32_t)a &lt; (int32_t)imm_i; break;
+case inst_sltiu: result = a &lt; imm_i; break;</code></pre>
+<p><code>a</code>、<code>b</code> 是 32 位元暫存器原值；<code>(int32_t)</code> 讓有號比較把最高位解讀為符號位。<code>SLTIU</code> <strong>仍先符號延伸 12 位元立即數</strong>，之後才把 32 位元位元模式拿去做無號比較。例如立即數 <code>-1</code> 經符號延伸後成為 <code>0xffffffff</code>；若 <code>a=0</code>，無號比較 <code>0 &lt; 0xffffffff</code> 為真，因此結果是 <code>1</code>。</p>
+<p>分支的等價寫法（示意：比較 <code>x1&lt;x2</code>，結果放 <code>x3</code>）需安排不同控制流程：</p>
+<pre><code class="language-asm">addi x3, x0, 0
+blt  x1, x2, true_case
+jal  x0, done
+true_case:
+addi x3, x0, 1
+done:</code></pre>
+<p>直接使用 <code>slt x3, x1, x2</code> 即可產生同一布林結果；實際執行成本仍取決於處理器實作與編譯器最佳化，不能宣稱所有硬體一定更快。若只是決定是否跳躍，直接使用 branch 可能最合適；若後續需要數值 0/1，conditional-set 較直接。</p>
+<h3 id="md-q4" class="md-q-anchor" data-q="4">Question 4</h3>
+<p><strong>What is the difference between <code>ROM</code> and <code>MainMem</code>? Answer this question by tracing the source code.</strong></p>
+<h4>Your Answer</h4>
+<h3>追蹤原始碼的答案</h3>
+<p>本專案的 <code>ROM</code> 和 <code>MainMem</code> 都繼承同一個抽象記憶體介面，均可被 MemoryMap 定位並讀取；關鍵差異在 <strong>CPU 經由記憶體映射寫入時的行為</strong>：ROM 的 store 回呼直接拒絕修改，MainMem 的 store 回呼則將位元組寫入陣列。此處描述的是這份模擬器的軟體實作，而不是所有實體 ROM/RAM 的電路細節。</p>
+<div class='md-table-wrap'><table><thead><tr><th>項目</th><th>ROM</th><th>MainMem</th></tr></thead><tbody><tr><td>定義檔</td><td><code>src/rom.h</code></td><td><code>src/main_mem.h</code></td></tr><tr><td>映射基底</td><td><code>0x00000000</code></td><td><code>0x80000000</code></td></tr><tr><td>容量</td><td><code>0x1000</code> = 4096 bytes</td><td><code>0x10000</code> = 65536 bytes</td></tr><tr><td>CPU load</td><td>從 <code>rom[]</code> 複製 bytes</td><td>從 <code>mem[]</code> 複製 bytes</td></tr><tr><td>CPU store</td><td><code>Panic(&quot;ROM should not be modified!&quot;)</code></td><td>將資料寫回 <code>mem[]</code></td></tr><tr><td>建構時</td><td>將內部陣列清為 0</td><td>將內部陣列清為 0</td></tr></tbody></table></div>
+<p><strong>第一步：註冊位址。</strong><code>src/iss.c</code> 的 <code>ISS_ctor()</code> 建立兩個裝置，並各自註冊半開區間 <code>[base, base + size)</code>：</p>
+<pre><code class="language-c">mmap_unit_t ROM_mmap_unit = { .addr_bound = { .first = ROM_MMAP_BASE,
+                                              .second = ROM_MMAP_BASE + ROM_SIZE },
+                              .device_ptr = (AbstractMem *)&amp;self_-&gt;rom_mmio };
+Core_add_device(&amp;self_-&gt;core, ROM_mmap_unit);</code></pre>
+<p>MainMem 的註冊方式相同，改用 <code>MAIN_MEM_MMAP_BASE</code>、<code>MAIN_MEM_SIZE</code> 與 <code>main_mem_mmio</code>。大小和基底來自各自的 <code>.h</code> 檔；例如 <code>ROM_SIZE 0x1000</code>，因此合法區間最後一個位址是 <code>0x00000fff</code>。</p>
+<p><strong>第二步：路由存取。</strong><code>src/mem_map.c</code> 的 <code>MemoryMap_generic_load/store()</code> 掃描範圍，找到所屬裝置，將完整位址減去映射基底後，透過 <code>AbstractMem_load/store()</code> 派送。例如 CPU 寫入 <code>0x80000004</code>，MainMem 收到內部偏移 <code>4</code>。</p>
+<p><strong>第三步：裝置決定行為。</strong><code>src/rom.c</code> 的關鍵程式是：</p>
+<pre><code class="language-c">DECLARE_ABSTRACT_MEM_LOAD(ROM) {
+    ROM *self_ = container_of(self, ROM, super);
+    for (int i = 0; i &lt; length; i++)
+        buffer[i] = self_-&gt;rom[base_addr + i];
+}
+DECLARE_ABSTRACT_MEM_STORE(ROM) {
+    Panic(&quot;ROM should not be modified!&quot;);
+}</code></pre>
+<p><code>src/main_mem.c</code> 的 store 則有實際寫回：</p>
+<pre><code class="language-c">DECLARE_ABSTRACT_MEM_STORE(MainMem) {
+    MainMem *self_ = container_of(self, MainMem, super);
+    for (int i = 0; i &lt; length; i++)
+        self_-&gt;mem[base_addr + i] = ref_data[i];
+}</code></pre>
+<p>程式還在各回呼中檢查裝置內存取範圍。<code>ISS_ctor()</code> 呼叫 <code>load_elf(elf_file_name, self_-&gt;rom_mmio.rom, ROM_SIZE, &amp;self_-&gt;core.arch_state.current_pc)</code>，是<strong>啟動時直接取得 ROM 陣列供載入器填入映像</strong>；它並不等於程式執行期間以 store 指令寫 ROM。因此「ROM 可在初始化時載入程式」與「CPU 不可對 ROM 做一般 store」沒有矛盾。</p>
+<h3 id="md-q5" class="md-q-anchor" data-q="5">Question 5</h3>
+<p><strong>Consider <code>jalr xN, xN, imm</code>, where N is a positive number from 1 to 31. What potential problem might arise when implementing JALR in an ISS?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p><code>jalr xN, xN, imm</code> 的 <code>rd</code> 與 <code>rs1</code> 指向同一個暫存器。JALR 同時要產生兩個結果：跳躍目標使用執行前的 <code>xN</code>，而連結位址 <code>old_pc + 4</code> 要寫回 <code>xN</code>。若 ISS 先把 <code>pc+4</code> 寫到 <code>xN</code>，再讀 <code>xN</code> 計算目標，就會把剛寫入的連結位址誤當舊基底，跳到錯誤位置。</p>
+<div class='md-table-wrap'><table><thead><tr><th>時序</th><th>正確做法</th><th>錯誤做法</th></tr></thead><tbody><tr><td>讀 rs1</td><td>先保存 <code>old_xN</code></td><td>尚未讀取</td></tr><tr><td>目標</td><td><code>(old_xN + sign_extend(imm)) &amp; ~1</code></td><td><code>(old_pc+4 + sign_extend(imm)) &amp; ~1</code></td></tr><tr><td>寫 rd</td><td>最後寫入 <code>old_pc + 4</code></td><td>過早寫入，破壞目標運算元</td></tr></tbody></table></div>
+<p>本作業的 <code>Core_execute()</code> 先在 switch 前讀取來源值：</p>
+<pre><code class="language-c">const unsigned rd = (raw &gt;&gt; 7) &amp; 31u;
+const unsigned rs1 = (raw &gt;&gt; 15) &amp; 31u;
+const reg_t a = self-&gt;arch_state.gpr[rs1];
+self-&gt;new_pc = self-&gt;arch_state.current_pc + 4;</code></pre>
+<p>JALR 分支先計算下一個 PC，統一寫回在 switch 後執行：</p>
+<pre><code class="language-c">case inst_jalr:
+    result = self-&gt;new_pc;
+    self-&gt;new_pc = (a + imm_i) &amp; ~1u;
+    break;
+/* switch 結束後 */
+if (write_rd &amp;&amp; rd != 0) self-&gt;arch_state.gpr[rd] = result;</code></pre>
+<p>例如舊 PC 為 <code>0x00000100</code>、舊 <code>x5=0x00000200</code>、<code>imm=3</code>，執行 <code>jalr x5, x5, 3</code> 應得到新 PC <code>(0x200+3)&amp;~1 = 0x202</code>、新 <code>x5=0x104</code>。若先寫 <code>x5=0x104</code>，錯誤目標就變成 <code>(0x104+3)&amp;~1 = 0x106</code>。遮罩 <code>&amp; ~1u</code> 會強制清除目標位址最低位；<code>imm_i</code> 必須先符號延伸。最後 <code>Core_update_pc()</code> 才將計算好的 <code>new_pc</code> 提交。</p>
+<h3 id="md-q6" class="md-q-anchor" data-q="6">Question 6 (2 pts for bonus)</h3>
+<p><strong>Why do the encoding formats for JAL and BRANCH instructions omit <code>imm[0]</code>?</strong></p>
+<h4>Your Answer</h4>
+<h3>核心答案</h3>
+<p>JAL 的 J-type 偏移與 BRANCH 的 B-type 偏移，重組後最低位 <code>imm[0]</code> 都固定為 0；也就是目標相對偏移以 <strong>2 bytes</strong> 為最小編碼單位。既然最低位不是自由變動的資料，就沒有必要用一個機器碼欄位儲存它。把欄位留給較高位的偏移，可在固定 32 位元指令長度下涵蓋較大的相對跳躍距離。這種半字（16 位元）對齊也與可選的壓縮指令擴充相容；本實驗只執行 32 位元指令，不代表編碼中必須額外存一個恆為零的 bit。</p>
+<div class='md-table-wrap'><table><thead><tr><th>編碼</th><th>整數偏移的位元配置</th><th><code>imm[0]</code></th><th>計算下一個 PC</th></tr></thead><tbody><tr><td>B-type（BEQ 等）</td><td>`imm[12</td><td>10:5</td><td>4:1</td><td>11</td><td>0]`</td><td>隱含 0</td><td><code>old_pc + sign_extend(imm_b)</code>，分支成立時</td></tr><tr><td>J-type（JAL）</td><td>`imm[20</td><td>19:12</td><td>11</td><td>10:1</td><td>0]`</td><td>隱含 0</td><td><code>old_pc + sign_extend(imm_j)</code></td></tr></tbody></table></div>
+<p><code>src/core.c</code> 以左移 1 重組最低幾位，沒有把任何位元放在位置 0（節錄自改良版 <code>core_improved.c</code>）：</p>
+<pre><code class="language-c">const reg_t imm_b = sign_extend(((raw &gt;&gt; 31) &lt;&lt; 12) |
+                                 (((raw &gt;&gt; 7) &amp; 1u) &lt;&lt; 11) |
+                                 (((raw &gt;&gt; 25) &amp; 0x3fu) &lt;&lt; 5) |
+                                 (((raw &gt;&gt; 8) &amp; 0xfu) &lt;&lt; 1), 13);
+
+const reg_t imm_j = sign_extend(((raw &gt;&gt; 31) &lt;&lt; 20) |
+                                 (((raw &gt;&gt; 12) &amp; 0xffu) &lt;&lt; 12) |
+                                 (((raw &gt;&gt; 20) &amp; 1u) &lt;&lt; 11) |
+                                 (((raw &gt;&gt; 21) &amp; 0x3ffu) &lt;&lt; 1), 21);</code></pre>
+<p>其中 <code>sign_extend(value, width)</code> 使用無號運算將位元圖樣擴展為 32 位元；B-type 使用 13 位、J-type 使用 21 位。B-type 的 <code>raw[7]</code> 放到 <code>imm[11]</code>；J-type 的 <code>raw[20]</code> 放到 <code>imm[11]</code>。由於最高位仍需符號延伸，正負位移都能以目前 PC 為基準跳向前或向後。JALR 不屬於這兩種立即數編碼：它採 I-type 偏移加 <code>rs1</code>，然後將<strong>目標位址</strong>的 bit 0 清為零，不可把兩種規則混為一談。</p>
+<h2>Reflection Report (0 pts)</h2>
+<h3>Your Reflection</h3>
+<p>這份作業使我把「ISA 對程式承諾的行為」和「模擬器內部實作步驟」連在一起理解。每次 tick 都依序 Fetch、Decode、Execute、更新 PC：Fetch 要正確依小端序組出 32 位元指令；Decode 要看 opcode、funct3 與 funct7；Execute 要區分算術、記憶體和控制流程的副作用。表面看起來一條指令只要做一次運算，實際上還要保證暫存器、PC、記憶體及 <code>x0</code> 在每步結束後符合規格。</p>
+<p>我最需要反覆核對的是四個細節。第一，I/S/B/J 立即數散布在不同 bit 位置，必須依格式重組並處理符號延伸；尤其 B/J 的 bit 0 固定為零。第二，<code>LB</code>/<code>LH</code> 與 <code>LBU</code>/<code>LHU</code> 讀相同數量的位元組，但對最高資料位的延伸規則不同：例如位元組 <code>0x80</code> 以 LB 讀得 <code>0xffffff80</code>，以 LBU 讀得 <code>0x00000080</code>。第三，有號與無號比較及 <code>SRA</code>/<code>SRL</code> 右移必須分開實作。第四，<code>jalr rd, rs1, imm</code> 在 <code>rd==rs1</code> 時必須先保存舊運算元，再更新連結暫存器。將來源值先存於 <code>a</code>、<code>b</code>，並將寫回集中於 switch 後，讓這些資料相依關係較容易檢查。</p>
+<p>驗證方面，我學到一定要先確認<strong>目前檔案成功重新編譯</strong>，才能用 CTest 通過率評估這次修改；若 build 失敗而單獨執行 <code>ctest</code>，可能只是舊執行檔的結果。正確的本機順序是在倉庫根目錄存檔後執行 <code>cmake --build build --parallel &amp;&amp; ctest --test-dir build --output-on-failure</code>，並核對最後一次成功編譯和測試的輸出。原版 <code>core(1).c</code> 已成功建置並通過 37／37 項公開 CTest；改良版 <code>core_improved.c</code> 的立即數重組經 20 萬筆隨機位元測試核對，但尚未在完整專案中重新執行 37 項 CTest。公開測試、邊界案例（負偏移、位元組符號延伸、<code>jalr</code> 來源與目的相同）都應分開檢視；最終自動評分仍需看 Classroom50。此段描述的是我的實作與驗證方法，實際測試結果應以最終提交版本的終端機輸出為準。</p>
+<p>給助教的建議：希望提供一個對照 B/J 立即數位元重組的完整範例，以及一個 <code>jalr xN, xN, imm</code> 的公開測試示例；也希望提醒同學 CTest 在編譯失敗後仍可能執行舊產物，讓第一次使用 CMake 的同學能更快辨認問題。</p>
+  </article>
+  <pre class="raw-md-content" id="mdRawContent" hidden># Lab 1 Assignment Report
+
+## Student Information
+
+- Student Name: **彭靖翔**
+- Student ID: **E24144773**
+
+## Questions (20 pts)
+
+### Question 1
+
+**What is the benefit for a processor of using the MMIO scheme to control I/O devices?**
+
+#### Your Answer
+
+### 核心答案
+
+MMIO（memory-mapped I/O，記憶體映射輸入輸出）把裝置的控制暫存器或資料介面配置到一般位址空間。處理器沿用原本的 load/store 指令、位址計算和資料路徑，便能存取記憶體或 I/O 裝置，不必為每一種裝置另設一組專用 I/O 指令。軟體看到的都是位址，實際由位址解碼與裝置介面決定要交給哪個裝置處理。因此，ISA 和程式的存取方式較一致，也方便增添新裝置。
+
+| 步驟 | 在本作業中的實際動作 | 對應程式 |
+|---|---|---|
+| 1 | 執行 load/store，計算有效位址 `rs1 + offset` | `src/core.c` 的 `Core_execute()` |
+| 2 | 以完整實體位址查找所屬映射區間 | `src/mem_map.c` 的 `MemoryMap_generic_load/store()` |
+| 3 | 位址減去裝置映射起點，得到裝置內部位移 | `base_addr - mmap_unit_ptr-&gt;addr_bound.first` |
+| 4 | 透過裝置的 load/store 回呼處理請求 | `AbstractMem_load/store()`；由 ROM、MainMem 等各自實作 |
+
+例如 `src/core.c` 的 load/store 分支會先形成有效位址，再交給統一的記憶體映射介面（此段在原版及改良版均相同）：
+
+```c
+MemoryMap_generic_load(&amp;self-&gt;mem_map, a + imm_i, length, bytes);
+/* STORE 分支： */
+MemoryMap_generic_store(&amp;self-&gt;mem_map, a + imm_s, length, bytes);
+```
+
+其中 `a` 是事先讀取的 `gpr[rs1]`；`imm_i`、`imm_s` 分別是 LOAD 的 I-type 偏移和 STORE 的 S-type 偏移；`length` 決定一次讀寫 1、2 或 4 個位元組。核心不需知道目標是 ROM 還是 RAM；同樣的入口也可以對應文字輸出與停止旗標等 MMIO 裝置。
+
+`src/mem_map.c` 的位址派送關鍵片段如下：
+
+```c
+if ((base_addr &gt;= self-&gt;memory_map_arr[i].addr_bound.first) &amp;&amp;
+    (base_addr + length &lt;= self-&gt;memory_map_arr[i].addr_bound.second)) {
+    mmap_unit_ptr = &amp;self-&gt;memory_map_arr[i];
+}
+AbstractMem_load(mmap_unit_ptr-&gt;device_ptr,
+                 base_addr - mmap_unit_ptr-&gt;addr_bound.first, length, buffer);
+```
+
+這段程式先確定完整存取範圍都落在同一個裝置的區間，然後以裝置相對位址呼叫 load。store 採相同路徑、改呼叫 `AbstractMem_store()`。**限制**是 MMIO 位址仍須由軟體依裝置規格使用；某些裝置讀寫可能具有副作用，並非每個映射位址都能當一般 RAM 任意存取。
+
+### Question 2
+
+**What components in a RISC-V processor are considered part of the architecturally visible state, and why are they important for program execution?**
+
+#### Your Answer
+
+### 核心答案
+
+「架構可見狀態」是執行程式可以透過 ISA 觀察或影響、且執行下一條指令所需依賴的狀態。在此 Lab 1 的 RV32I 模擬器中，主要包括 32 個通用暫存器、PC，以及透過 load/store 可觀察的記憶體與映射裝置狀態。每執行一步，指令依舊狀態產生新狀態；若任一項更新錯誤，後續指令的運算、資料或控制流程都可能偏離原程式。
+
+| 項目 | 本作業中所在位置 | 對後續執行的影響 |
+|---|---|---|
+| `x0`～`x31` | `self-&gt;arch_state.gpr[]` | `rs1`、`rs2` 讀取運算元，`rd` 接收結果；`x0` 必須永遠為零 |
+| PC | `self-&gt;arch_state.current_pc` | 指定下一條要讀取的指令；分支與跳躍會改變控制流程 |
+| 可觀察記憶體 | ROM、MainMem 與 MemoryMap | 指令擷取、load/store 的資料和裝置效果影響程式行為 |
+| 其他環境狀態 | 依完整 ISA 與執行環境而定 | 例如 CSR 或例外狀態；本作業未實作完整特權架構 |
+
+從 `Core_fetch()` 可看出 PC 的直接作用：
+
+```c
+MemoryMap_generic_load(&amp;self-&gt;mem_map,
+                       self-&gt;arch_state.current_pc, 4, inst_in_bytes);
+```
+
+這一行從 PC 指向的位址讀取 4 個位元組機器碼。`Core_execute()` 一開始設定 `new_pc = current_pc + 4`；條件分支成立、JAL 或 JALR 會覆寫它。最後 `Core_update_pc()` 才將新 PC 提交：
+
+```c
+static void Core_update_pc(Core *self) {
+    self-&gt;arch_state.current_pc = self-&gt;new_pc;
+}
+```
+
+對暫存器的寫回，程式有明確的 `x0` 保護：
+
+```c
+if (write_rd &amp;&amp; rd != 0) self-&gt;arch_state.gpr[rd] = result;
+self-&gt;arch_state.gpr[0] = 0;
+```
+
+這表示指定 `rd=x0` 時仍執行該指令其他效果（例如 JAL 的跳躍），但不會讓 `x0` 變成非零。ROM 在此實作中包含載入的程式映像；MainMem 的內容可隨 store 改變。兩者皆可能影響未來的取指或資料讀取。`new_pc` 是模擬器的中間變數，不應與提交後的架構 PC 混為一談。
+
+### Question 3
+
+**Why does RISC-V define conditional-set instructions? Can branch instructions alone achieve the same functionality? If yes, what is the benefit of having the additional conditional-set instructions?**
+
+#### Your Answer
+
+### 核心答案
+
+條件設定（conditional-set）指令把比較結果直接寫進暫存器：條件成立寫 `1`，否則寫 `0`。本作業的 `SLT`、`SLTU`、`SLTI`、`SLTIU` 分別支援有號／無號、暫存器／立即數比較。條件分支也能透過兩條控制路徑算出相同的 0 或 1，但通常需要額外指令和標籤；條件設定則保持順序執行的 PC，結果可直接給後續指令使用。
+
+| 指令 | 比較運算元 | 比較語意 | 結果 |
+|---|---|---|---|
+| `slt rd, rs1, rs2` | 兩個暫存器 | 有號小於 | 成立 `rd=1`，否則 `0` |
+| `sltu rd, rs1, rs2` | 兩個暫存器 | 無號小於 | 同上 |
+| `slti rd, rs1, imm` | 暫存器與符號延伸的立即數 | 有號小於 | 同上 |
+| `sltiu rd, rs1, imm` | 暫存器與符號延伸的立即數 | 無號小於 | 同上 |
+
+`Core_execute()` 對應的實作（節錄）：
+
+```c
+case inst_slt:   result = (int32_t)a &lt; (int32_t)b; break;
+case inst_sltu:  result = a &lt; b; break;
+case inst_slti:  result = (int32_t)a &lt; (int32_t)imm_i; break;
+case inst_sltiu: result = a &lt; imm_i; break;
+```
+
+`a`、`b` 是 32 位元暫存器原值；`(int32_t)` 讓有號比較把最高位解讀為符號位。`SLTIU` **仍先符號延伸 12 位元立即數**，之後才把 32 位元位元模式拿去做無號比較。例如立即數 `-1` 經符號延伸後成為 `0xffffffff`；若 `a=0`，無號比較 `0 &lt; 0xffffffff` 為真，因此結果是 `1`。
+
+分支的等價寫法（示意：比較 `x1&lt;x2`，結果放 `x3`）需安排不同控制流程：
+
+```asm
+addi x3, x0, 0
+blt  x1, x2, true_case
+jal  x0, done
+true_case:
+addi x3, x0, 1
+done:
+```
+
+直接使用 `slt x3, x1, x2` 即可產生同一布林結果；實際執行成本仍取決於處理器實作與編譯器最佳化，不能宣稱所有硬體一定更快。若只是決定是否跳躍，直接使用 branch 可能最合適；若後續需要數值 0/1，conditional-set 較直接。
+
+### Question 4
+
+**What is the difference between `ROM` and `MainMem`? Answer this question by tracing the source code.**
+
+#### Your Answer
+
+### 追蹤原始碼的答案
+
+本專案的 `ROM` 和 `MainMem` 都繼承同一個抽象記憶體介面，均可被 MemoryMap 定位並讀取；關鍵差異在 **CPU 經由記憶體映射寫入時的行為**：ROM 的 store 回呼直接拒絕修改，MainMem 的 store 回呼則將位元組寫入陣列。此處描述的是這份模擬器的軟體實作，而不是所有實體 ROM/RAM 的電路細節。
+
+| 項目 | ROM | MainMem |
+|---|---|---|
+| 定義檔 | `src/rom.h` | `src/main_mem.h` |
+| 映射基底 | `0x00000000` | `0x80000000` |
+| 容量 | `0x1000` = 4096 bytes | `0x10000` = 65536 bytes |
+| CPU load | 從 `rom[]` 複製 bytes | 從 `mem[]` 複製 bytes |
+| CPU store | `Panic(&quot;ROM should not be modified!&quot;)` | 將資料寫回 `mem[]` |
+| 建構時 | 將內部陣列清為 0 | 將內部陣列清為 0 |
+
+**第一步：註冊位址。**`src/iss.c` 的 `ISS_ctor()` 建立兩個裝置，並各自註冊半開區間 `[base, base + size)`：
+
+```c
+mmap_unit_t ROM_mmap_unit = { .addr_bound = { .first = ROM_MMAP_BASE,
+                                              .second = ROM_MMAP_BASE + ROM_SIZE },
+                              .device_ptr = (AbstractMem *)&amp;self_-&gt;rom_mmio };
+Core_add_device(&amp;self_-&gt;core, ROM_mmap_unit);
+```
+
+MainMem 的註冊方式相同，改用 `MAIN_MEM_MMAP_BASE`、`MAIN_MEM_SIZE` 與 `main_mem_mmio`。大小和基底來自各自的 `.h` 檔；例如 `ROM_SIZE 0x1000`，因此合法區間最後一個位址是 `0x00000fff`。
+
+**第二步：路由存取。**`src/mem_map.c` 的 `MemoryMap_generic_load/store()` 掃描範圍，找到所屬裝置，將完整位址減去映射基底後，透過 `AbstractMem_load/store()` 派送。例如 CPU 寫入 `0x80000004`，MainMem 收到內部偏移 `4`。
+
+**第三步：裝置決定行為。**`src/rom.c` 的關鍵程式是：
+
+```c
+DECLARE_ABSTRACT_MEM_LOAD(ROM) {
+    ROM *self_ = container_of(self, ROM, super);
+    for (int i = 0; i &lt; length; i++)
+        buffer[i] = self_-&gt;rom[base_addr + i];
+}
+DECLARE_ABSTRACT_MEM_STORE(ROM) {
+    Panic(&quot;ROM should not be modified!&quot;);
+}
+```
+
+`src/main_mem.c` 的 store 則有實際寫回：
+
+```c
+DECLARE_ABSTRACT_MEM_STORE(MainMem) {
+    MainMem *self_ = container_of(self, MainMem, super);
+    for (int i = 0; i &lt; length; i++)
+        self_-&gt;mem[base_addr + i] = ref_data[i];
+}
+```
+
+程式還在各回呼中檢查裝置內存取範圍。`ISS_ctor()` 呼叫 `load_elf(elf_file_name, self_-&gt;rom_mmio.rom, ROM_SIZE, &amp;self_-&gt;core.arch_state.current_pc)`，是**啟動時直接取得 ROM 陣列供載入器填入映像**；它並不等於程式執行期間以 store 指令寫 ROM。因此「ROM 可在初始化時載入程式」與「CPU 不可對 ROM 做一般 store」沒有矛盾。
+
+### Question 5
+
+**Consider `jalr xN, xN, imm`, where N is a positive number from 1 to 31. What potential problem might arise when implementing JALR in an ISS?**
+
+#### Your Answer
+
+### 核心答案
+
+`jalr xN, xN, imm` 的 `rd` 與 `rs1` 指向同一個暫存器。JALR 同時要產生兩個結果：跳躍目標使用執行前的 `xN`，而連結位址 `old_pc + 4` 要寫回 `xN`。若 ISS 先把 `pc+4` 寫到 `xN`，再讀 `xN` 計算目標，就會把剛寫入的連結位址誤當舊基底，跳到錯誤位置。
+
+| 時序 | 正確做法 | 錯誤做法 |
+|---|---|---|
+| 讀 rs1 | 先保存 `old_xN` | 尚未讀取 |
+| 目標 | `(old_xN + sign_extend(imm)) &amp; ~1` | `(old_pc+4 + sign_extend(imm)) &amp; ~1` |
+| 寫 rd | 最後寫入 `old_pc + 4` | 過早寫入，破壞目標運算元 |
+
+本作業的 `Core_execute()` 先在 switch 前讀取來源值：
+
+```c
+const unsigned rd = (raw &gt;&gt; 7) &amp; 31u;
+const unsigned rs1 = (raw &gt;&gt; 15) &amp; 31u;
+const reg_t a = self-&gt;arch_state.gpr[rs1];
+self-&gt;new_pc = self-&gt;arch_state.current_pc + 4;
+```
+
+JALR 分支先計算下一個 PC，統一寫回在 switch 後執行：
+
+```c
+case inst_jalr:
+    result = self-&gt;new_pc;
+    self-&gt;new_pc = (a + imm_i) &amp; ~1u;
+    break;
+/* switch 結束後 */
+if (write_rd &amp;&amp; rd != 0) self-&gt;arch_state.gpr[rd] = result;
+```
+
+例如舊 PC 為 `0x00000100`、舊 `x5=0x00000200`、`imm=3`，執行 `jalr x5, x5, 3` 應得到新 PC `(0x200+3)&amp;~1 = 0x202`、新 `x5=0x104`。若先寫 `x5=0x104`，錯誤目標就變成 `(0x104+3)&amp;~1 = 0x106`。遮罩 `&amp; ~1u` 會強制清除目標位址最低位；`imm_i` 必須先符號延伸。最後 `Core_update_pc()` 才將計算好的 `new_pc` 提交。
+
+### Question 6 (2 pts for bonus)
+
+**Why do the encoding formats for JAL and BRANCH instructions omit `imm[0]`?**
+
+#### Your Answer
+
+### 核心答案
+
+JAL 的 J-type 偏移與 BRANCH 的 B-type 偏移，重組後最低位 `imm[0]` 都固定為 0；也就是目標相對偏移以 **2 bytes** 為最小編碼單位。既然最低位不是自由變動的資料，就沒有必要用一個機器碼欄位儲存它。把欄位留給較高位的偏移，可在固定 32 位元指令長度下涵蓋較大的相對跳躍距離。這種半字（16 位元）對齊也與可選的壓縮指令擴充相容；本實驗只執行 32 位元指令，不代表編碼中必須額外存一個恆為零的 bit。
+
+| 編碼 | 整數偏移的位元配置 | `imm[0]` | 計算下一個 PC |
+|---|---|---|---|
+| B-type（BEQ 等） | `imm[12|10:5|4:1|11|0]` | 隱含 0 | `old_pc + sign_extend(imm_b)`，分支成立時 |
+| J-type（JAL） | `imm[20|19:12|11|10:1|0]` | 隱含 0 | `old_pc + sign_extend(imm_j)` |
+
+`src/core.c` 以左移 1 重組最低幾位，沒有把任何位元放在位置 0（節錄自改良版 `core_improved.c`）：
+
+```c
+const reg_t imm_b = sign_extend(((raw &gt;&gt; 31) &lt;&lt; 12) |
+                                 (((raw &gt;&gt; 7) &amp; 1u) &lt;&lt; 11) |
+                                 (((raw &gt;&gt; 25) &amp; 0x3fu) &lt;&lt; 5) |
+                                 (((raw &gt;&gt; 8) &amp; 0xfu) &lt;&lt; 1), 13);
+
+const reg_t imm_j = sign_extend(((raw &gt;&gt; 31) &lt;&lt; 20) |
+                                 (((raw &gt;&gt; 12) &amp; 0xffu) &lt;&lt; 12) |
+                                 (((raw &gt;&gt; 20) &amp; 1u) &lt;&lt; 11) |
+                                 (((raw &gt;&gt; 21) &amp; 0x3ffu) &lt;&lt; 1), 21);
+```
+
+其中 `sign_extend(value, width)` 使用無號運算將位元圖樣擴展為 32 位元；B-type 使用 13 位、J-type 使用 21 位。B-type 的 `raw[7]` 放到 `imm[11]`；J-type 的 `raw[20]` 放到 `imm[11]`。由於最高位仍需符號延伸，正負位移都能以目前 PC 為基準跳向前或向後。JALR 不屬於這兩種立即數編碼：它採 I-type 偏移加 `rs1`，然後將**目標位址**的 bit 0 清為零，不可把兩種規則混為一談。
+
+## Reflection Report (0 pts)
+
+### Your Reflection
+
+這份作業使我把「ISA 對程式承諾的行為」和「模擬器內部實作步驟」連在一起理解。每次 tick 都依序 Fetch、Decode、Execute、更新 PC：Fetch 要正確依小端序組出 32 位元指令；Decode 要看 opcode、funct3 與 funct7；Execute 要區分算術、記憶體和控制流程的副作用。表面看起來一條指令只要做一次運算，實際上還要保證暫存器、PC、記憶體及 `x0` 在每步結束後符合規格。
+
+我最需要反覆核對的是四個細節。第一，I/S/B/J 立即數散布在不同 bit 位置，必須依格式重組並處理符號延伸；尤其 B/J 的 bit 0 固定為零。第二，`LB`/`LH` 與 `LBU`/`LHU` 讀相同數量的位元組，但對最高資料位的延伸規則不同：例如位元組 `0x80` 以 LB 讀得 `0xffffff80`，以 LBU 讀得 `0x00000080`。第三，有號與無號比較及 `SRA`/`SRL` 右移必須分開實作。第四，`jalr rd, rs1, imm` 在 `rd==rs1` 時必須先保存舊運算元，再更新連結暫存器。將來源值先存於 `a`、`b`，並將寫回集中於 switch 後，讓這些資料相依關係較容易檢查。
+
+驗證方面，我學到一定要先確認**目前檔案成功重新編譯**，才能用 CTest 通過率評估這次修改；若 build 失敗而單獨執行 `ctest`，可能只是舊執行檔的結果。正確的本機順序是在倉庫根目錄存檔後執行 `cmake --build build --parallel &amp;&amp; ctest --test-dir build --output-on-failure`，並核對最後一次成功編譯和測試的輸出。原版 `core(1).c` 已成功建置並通過 37／37 項公開 CTest；改良版 `core_improved.c` 的立即數重組經 20 萬筆隨機位元測試核對，但尚未在完整專案中重新執行 37 項 CTest。公開測試、邊界案例（負偏移、位元組符號延伸、`jalr` 來源與目的相同）都應分開檢視；最終自動評分仍需看 Classroom50。此段描述的是我的實作與驗證方法，實際測試結果應以最終提交版本的終端機輸出為準。
+
+給助教的建議：希望提供一個對照 B/J 立即數位元重組的完整範例，以及一個 `jalr xN, xN, imm` 的公開測試示例；也希望提醒同學 CTest 在編譯失敗後仍可能執行舊產物，讓第一次使用 CMake 的同學能更快辨認問題。
+</pre>
+</aside>
+
+
+</div>
+
+<script>
+function flash(el){
+  if(!el) return;
+  el.classList.remove('link-flash');
+  void el.offsetWidth;
+  el.classList.add('link-flash');
+  setTimeout(()=>el.classList.remove('link-flash'),1300);
+}
+function linkToQuestion(q, from){
+  const left=document.getElementById('q'+q);
+  const right=document.getElementById('md-q'+q);
+  if(left){
+    left.open=true;
+    left.scrollIntoView({behavior:'smooth',block:'start'});
+    flash(left);
+  }
+  if(right){
+    right.scrollIntoView({behavior:'smooth',block:'start'});
+    flash(right);
+  }
+}
+document.querySelectorAll('.left-pane details.qcard').forEach(d=>{
+  d.addEventListener('toggle',()=>{
+    if(d.open){
+      const q=d.id.replace('q','');
+      const right=document.getElementById('md-q'+q);
+      if(right){ right.scrollIntoView({behavior:'smooth',block:'start'}); flash(right); }
+    }
+  });
+});
+document.querySelectorAll('.left-pane a.navbtn[href^="#q"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const q=a.getAttribute('href').replace('#q','');
+    linkToQuestion(q,'left');
+  });
+});
+document.querySelectorAll('.md-q-anchor').forEach(h=>{
+  h.addEventListener('click',()=>linkToQuestion(h.dataset.q,'right'));
+});
+</script>
+
+
+<script id="viewer-toggle-js">
+function setMdMode(mode){
+  const viewer=document.getElementById('mdViewerContent');
+  const raw=document.getElementById('mdRawContent');
+  const vb=document.getElementById('viewerBtn');
+  const rb=document.getElementById('rawBtn');
+  const label=document.getElementById('modeLabel');
+  const isViewer=mode==='viewer';
+  viewer.hidden=!isViewer;
+  raw.hidden=isViewer;
+  vb.classList.toggle('active',isViewer);
+  rb.classList.toggle('active',!isViewer);
+  label.textContent=isViewer ? 'Markdown Viewer' : 'Raw Markdown · No Viewer';
+  document.getElementById('rightPane').scrollTop=0;
+}
+</script>
+
+</body>
+</html>
