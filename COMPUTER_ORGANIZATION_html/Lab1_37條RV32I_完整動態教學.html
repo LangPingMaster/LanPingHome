@@ -1,6 +1,6 @@
 <!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lab 1｜37 條 RV32I Instruction 完整動態教學｜動畫欄位圖對齊校正版</title>
+<title>Lab 1｜37 條 RV32I Instruction 完整動態教學｜動畫欄位圖對齊校正版｜最終全面檢查修正版</title>
 <style>
 :root{--b:#2f75b5;--b2:#5b9bd5;--n:#17365d;--bg:#f4f7fb;--line:#bfd1e2}
 *{box-sizing:border-box}html,body{overflow-anchor:none}body{margin:0;background:var(--bg);font-family:"Microsoft JhengHei",Arial,sans-serif;color:#14243a;line-height:1.55}
@@ -165,6 +165,167 @@ pre{background:#17212b;color:#f7f9fb;padding:10px;border-radius:8px;white-space:
 }
 </style>
 
+
+<style>
+/* Core_execute 結果來源說明：只增加可讀性 */
+.card:nth-child(3) .effect pre{line-height:1.65}
+</style>
+
+
+<style>
+/* ===== 最上方 Case 摘要：新增完整 32-bit + Fields ===== */
+#summary .sum-binary-label,
+#summary .sum-fields-label{
+  font-size:19px;
+  font-weight:900;
+  color:#5d4037;
+}
+#summary .sum-binary{
+  display:inline-block;
+  margin:5px 0 2px;
+  padding:4px 9px;
+  border-radius:7px;
+  background:#eaf3ff;
+  color:#174a7e;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.7px;
+  overflow-wrap:anywhere;
+}
+#summary .sum-fields{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:6px 9px;
+  margin-top:5px;
+  vertical-align:middle;
+}
+#summary .sum-field{
+  display:inline-block;
+  padding:3px 8px;
+  border:1px solid #bfd1e2;
+  border-radius:7px;
+  background:#f7fafc;
+  color:#243b53;
+  font-size:16px;
+  font-weight:600;
+}
+#summary .sum-field code{
+  color:#7b2cbf;
+  font-weight:800;
+}
+#summary .sum-field small{
+  color:#66788a;
+  font-size:13px;
+}
+</style>
+
+
+<style>
+/* ===== ④ Binary → Hex：依附件 Result 樣式呈現 ===== */
+#hx .hex-convert-result{
+  margin-top:8px;
+  padding:14px 12px 12px;
+  border-radius:10px;
+  background:#f3f3f3;
+  overflow-x:auto;
+}
+#hx .hex-grid{
+  display:grid;
+  grid-template-columns:repeat(8,minmax(44px,1fr));
+  min-width:500px;
+  align-items:center;
+  text-align:center;
+  font-family:Consolas,"Courier New",monospace;
+}
+#hx .hex-grid .bits{
+  font-size:16px;
+  font-weight:700;
+  color:#202020;
+  white-space:nowrap;
+}
+#hx .hex-grid .digit{
+  margin-top:8px;
+  font-size:17px;
+  font-weight:700;
+  color:#202020;
+}
+#hx .hex-arrow{
+  margin-top:14px;
+  font-family:Consolas,"Courier New",monospace;
+  font-size:17px;
+  font-weight:800;
+  color:#17365d;
+}
+#hx .hex-note{
+  margin-bottom:8px;
+}
+</style>
+
+
+<style>
+/* ===== 最上方「完整 32-bit」：Hex 在上、4-bit Binary 在下 ===== */
+#summary .sum-binary-map{
+  display:inline-block;
+  vertical-align:middle;
+  margin:7px 0 5px 8px;
+  padding:8px 12px;
+  border-radius:8px;
+  background:#f3f3f3;
+  overflow-x:auto;
+  max-width:100%;
+}
+#summary .sum-binary-grid{
+  display:grid;
+  grid-template-columns:repeat(8,minmax(52px,1fr));
+  min-width:500px;
+  text-align:center;
+  align-items:center;
+  font-family:Consolas,"Courier New",monospace;
+}
+#summary .sum-hex-digit{
+  font-size:20px;
+  line-height:1.45;
+  font-weight:900;
+  color:#111827;
+}
+#summary .sum-nibble{
+  font-size:18px;
+  line-height:1.5;
+  font-weight:800;
+  color:#111827;
+}
+</style>
+
+
+<style>
+.card:nth-child(3) .effect pre{
+  white-space:pre-wrap;
+  line-height:1.7;
+}
+</style>
+
+
+<style>
+.card:nth-child(4) .effect pre,
+.card:nth-child(4) .box pre{
+  line-height:1.7;
+}
+</style>
+
+
+<style>
+/* 摘要標題列：直接顯示 PC + ? */
+#summary .sum-pc-delta{
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:7px;
+  background:#e8f5e9;
+  color:#1b5e20;
+  font-size:18px;
+  font-weight:900;
+}
+</style>
+
 </head><body>
 <header><div class="wrap"><h1 style="margin:0">Lab 1｜作業 37 條 RV32I Instruction 完整動態教學｜最終審核修正版</h1>
 <div>依附件專案 <code>src/inst.h</code> 的 37 個必要 <code>inst_enum_t</code> 順序建立；Decode / Execute 語意依 <code>src/core.c</code>。37 個 Case 為獨立教學範例。</div></div></header>
@@ -180,7 +341,7 @@ pre{background:#17212b;color:#f7f9fb;padding:10px;border-radius:8px;white-space:
 <span style="background:#d99000;color:#fff;padding:2px 7px;border-radius:5px;font-weight:800">橘色＝目前 instruction</span>　｜　
 <span style="color:#17365d">深藍＝尚未執行</span>
 </div><div id="groups"></div></div>
-<div class="section"><h2>PC 教學示意軌跡</h2><div class="trail" id="trail"></div><div class="note" style="margin-top:10px">這 37 個頁面是「各指令獨立的教學 Case」，不是宣稱它們真的組成同一支可直接執行的 37-instruction 程式。下方 PC 僅用來示範各類指令如何產生 new_pc：一般 instruction 預設 PC+4；此處 Branch 範例刻意設定為 taken，因此示範 PC+8；JAL 示範 PC+16；JALR 則使用該 Case 指定的 rs1+imm 目標。每個 Case 的 register/memory 執行前狀態也是獨立設定，目的是讓該 instruction 的效果清楚可見。</div></div>
+<div class="section"><h2>PC 教學示意軌跡</h2><div class="trail" id="trail"></div><div class="note" style="margin-top:10px">這 37 個頁面是「各指令獨立的教學 Case」，不是宣稱它們真的組成同一支可直接執行的 37-instruction 程式。每個 Case 的 Core_execute() OUTPUT 最上方現在會直接標出【PC 變化】：一般 instruction 為 current_pc+4；Branch 若 taken 則為 current_pc+branch immediate（本頁範例 immediate=8，所以顯示 +8）；JAL 為 current_pc+J immediate（本頁範例 immediate=16，所以顯示 +16）；JALR 則是 (rs1+imm)&~1，不能一般化成「PC 固定加多少」。JALR 仍會另外把 current_pc+4 寫入 rd 當 return address。每個 Case 的 register/memory 執行前狀態都是獨立教學設定。</div></div>
 
 <div class="section">
 <h2>本版審核後的重要校正</h2>
@@ -203,16 +364,78 @@ PC 數字主要用來展示 PC+4、Branch、JAL、JALR 的規則。
 </div>
 </div>
 
+
+<div class="section">
+<h2>最終互動資料檢查結果</h2>
+<div class="note">
+<b>驗證狀態：PASS</b>（37/37 Case）<br>本版已逐一檢查 37 個 Case：instruction 順序與 <code>src/inst.h</code> 的
+<code>inst_add ... inst_lui</code> 一致；每個 Case 的 32-bit Binary 與 Hex machine code
+逐位一致；opcode / funct3 / funct7、rd / rs1 / rs2、immediate 顯示重新核對。
+另外把 SLLI/SRLI/SRAI 改為明確顯示 <code>funct7 + shamt</code>，
+把 B-type 與 J-type 的 split immediate 改為與 <code>inst.h</code> 欄位一致的拆分顯示。
+Fetch → Decode → Execute → Update PC 的敘述也依附件 <code>core.c</code> 核對。
+</div>
+</div>
+
 </main>
 <script>
-const cases=[{"name": "ADD", "category": "OP", "format": "R-type", "pc": "0x1000", "next": "0x1004", "asm": "add x5, x6, x7", "c": "x5 = x6 + x7;", "hex": "0x007302B3", "binary": "00000000011100110000001010110011", "grouped": "0000 0000 0111 0011 0000 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_add", "enumValue": 0, "before": "x6=20, x7=3", "effect": "x5=23"}, {"name": "SUB", "category": "OP", "format": "R-type", "pc": "0x1004", "next": "0x1008", "asm": "sub x5, x6, x7", "c": "x5 = x6 - x7;", "hex": "0x407302B3", "binary": "01000000011100110000001010110011", "grouped": "0100 0000 0111 0011 0000 0010 1011 0011", "fields": [["funct7", "0100000", "0x20"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sub", "enumValue": 1, "before": "x6=20, x7=3", "effect": "x5=17"}, {"name": "SLL", "category": "OP", "format": "R-type", "pc": "0x1008", "next": "0x100C", "asm": "sll x5, x6, x7", "c": "x5 = x6 << (x7 & 31);", "hex": "0x007312B3", "binary": "00000000011100110001001010110011", "grouped": "0000 0000 0111 0011 0001 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "001", "1"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sll", "enumValue": 2, "before": "x6=5, x7=2", "effect": "x5=20"}, {"name": "SLT", "category": "OP", "format": "R-type", "pc": "0x100C", "next": "0x1010", "asm": "slt x5, x6, x7", "c": "x5 = ((int32_t)x6 < (int32_t)x7);", "hex": "0x007322B3", "binary": "00000000011100110010001010110011", "grouped": "0000 0000 0111 0011 0010 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "010", "2"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_slt", "enumValue": 3, "before": "x6=-3, x7=2", "effect": "x5=1"}, {"name": "SLTU", "category": "OP", "format": "R-type", "pc": "0x1010", "next": "0x1014", "asm": "sltu x5, x6, x7", "c": "x5 = ((uint32_t)x6 < (uint32_t)x7);", "hex": "0x007332B3", "binary": "00000000011100110011001010110011", "grouped": "0000 0000 0111 0011 0011 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "011", "3"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sltu", "enumValue": 4, "before": "x6=3, x7=20", "effect": "x5=1"}, {"name": "XOR", "category": "OP", "format": "R-type", "pc": "0x1014", "next": "0x1018", "asm": "xor x5, x6, x7", "c": "x5 = x6 ^ x7;", "hex": "0x007342B3", "binary": "00000000011100110100001010110011", "grouped": "0000 0000 0111 0011 0100 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "100", "4"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_xor", "enumValue": 5, "before": "x6=0x0F0F, x7=0x00FF", "effect": "x5=0x00000FF0"}, {"name": "SRL", "category": "OP", "format": "R-type", "pc": "0x1018", "next": "0x101C", "asm": "srl x5, x6, x7", "c": "x5 = (uint32_t)x6 >> (x7 & 31);", "hex": "0x007352B3", "binary": "00000000011100110101001010110011", "grouped": "0000 0000 0111 0011 0101 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_srl", "enumValue": 6, "before": "x6=0x80000000, x7=2", "effect": "x5=0x20000000"}, {"name": "SRA", "category": "OP", "format": "R-type", "pc": "0x101C", "next": "0x1020", "asm": "sra x5, x6, x7", "c": "x5 = ((int32_t)x6) >> (x7 & 31);", "hex": "0x407352B3", "binary": "01000000011100110101001010110011", "grouped": "0100 0000 0111 0011 0101 0010 1011 0011", "fields": [["funct7", "0100000", "0x20"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sra", "enumValue": 7, "before": "x6=0x80000000, x7=2", "effect": "x5=0xE0000000"}, {"name": "OR", "category": "OP", "format": "R-type", "pc": "0x1020", "next": "0x1024", "asm": "or x5, x6, x7", "c": "x5 = x6 | x7;", "hex": "0x007362B3", "binary": "00000000011100110110001010110011", "grouped": "0000 0000 0111 0011 0110 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "110", "6"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_or", "enumValue": 8, "before": "x6=0x0F00, x7=0x00F0", "effect": "x5=0x00000FF0"}, {"name": "AND", "category": "OP", "format": "R-type", "pc": "0x1024", "next": "0x1028", "asm": "and x5, x6, x7", "c": "x5 = x6 & x7;", "hex": "0x007372B3", "binary": "00000000011100110111001010110011", "grouped": "0000 0000 0111 0011 0111 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "111", "7"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_and", "enumValue": 9, "before": "x6=0x0FF0, x7=0x00FF", "effect": "x5=0x000000F0"}, {"name": "ADDI", "category": "OP-IMM", "format": "I-type", "pc": "0x1028", "next": "0x102C", "asm": "addi x5, x6, 10", "c": "x5 = x6 + 10;", "hex": "0x00A30293", "binary": "00000000101000110000001010010011", "grouped": "0000 0000 1010 0011 0000 0010 1001 0011", "fields": [["imm[11:0]", "000000001010", "10"], ["rs1", "00110", "x6"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_addi", "enumValue": 10, "before": "x6=20", "effect": "x5=30"}, {"name": "SLTI", "category": "OP-IMM", "format": "I-type", "pc": "0x102C", "next": "0x1030", "asm": "slti x5, x6, 10", "c": "x5 = ((int32_t)x6 < 10);", "hex": "0x00A32293", "binary": "00000000101000110010001010010011", "grouped": "0000 0000 1010 0011 0010 0010 1001 0011", "fields": [["imm[11:0]", "000000001010", "10"], ["rs1", "00110", "x6"], ["funct3", "010", "2"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_slti", "enumValue": 11, "before": "x6=-3", "effect": "x5=1"}, {"name": "SLTIU", "category": "OP-IMM", "format": "I-type", "pc": "0x1030", "next": "0x1034", "asm": "sltiu x5, x6, 10", "c": "x5 = ((uint32_t)x6 < (uint32_t)10);", "hex": "0x00A33293", "binary": "00000000101000110011001010010011", "grouped": "0000 0000 1010 0011 0011 0010 1001 0011", "fields": [["imm[11:0]", "000000001010", "10"], ["rs1", "00110", "x6"], ["funct3", "011", "3"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_sltiu", "enumValue": 12, "before": "x6=3", "effect": "x5=1"}, {"name": "XORI", "category": "OP-IMM", "format": "I-type", "pc": "0x1034", "next": "0x1038", "asm": "xori x5, x6, 15", "c": "x5 = x6 ^ 15;", "hex": "0x00F34293", "binary": "00000000111100110100001010010011", "grouped": "0000 0000 1111 0011 0100 0010 1001 0011", "fields": [["imm[11:0]", "000000001111", "15"], ["rs1", "00110", "x6"], ["funct3", "100", "4"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_xori", "enumValue": 13, "before": "x6=0xF0", "effect": "x5=0x000000FF"}, {"name": "ORI", "category": "OP-IMM", "format": "I-type", "pc": "0x1038", "next": "0x103C", "asm": "ori x5, x6, 15", "c": "x5 = x6 | 15;", "hex": "0x00F36293", "binary": "00000000111100110110001010010011", "grouped": "0000 0000 1111 0011 0110 0010 1001 0011", "fields": [["imm[11:0]", "000000001111", "15"], ["rs1", "00110", "x6"], ["funct3", "110", "6"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_ori", "enumValue": 14, "before": "x6=0xF0", "effect": "x5=0x000000FF"}, {"name": "ANDI", "category": "OP-IMM", "format": "I-type", "pc": "0x103C", "next": "0x1040", "asm": "andi x5, x6, 15", "c": "x5 = x6 & 15;", "hex": "0x00F37293", "binary": "00000000111100110111001010010011", "grouped": "0000 0000 1111 0011 0111 0010 1001 0011", "fields": [["imm[11:0]", "000000001111", "15"], ["rs1", "00110", "x6"], ["funct3", "111", "7"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_andi", "enumValue": 15, "before": "x6=0xFF", "effect": "x5=0x0000000F"}, {"name": "SLLI", "category": "OP-IMM", "format": "I-type shift", "pc": "0x1040", "next": "0x1044", "asm": "slli x5, x6, 3", "c": "x5 = x6 << 3;", "hex": "0x00331293", "binary": "00000000001100110001001010010011", "grouped": "0000 0000 0011 0011 0001 0010 1001 0011", "fields": [["imm[11:0]", "000000000011", "3"], ["rs1", "00110", "x6"], ["funct3", "001", "1"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_slli", "enumValue": 16, "before": "x6=5", "effect": "x5=40"}, {"name": "SRLI", "category": "OP-IMM", "format": "I-type shift", "pc": "0x1044", "next": "0x1048", "asm": "srli x5, x6, 3", "c": "x5 = (uint32_t)x6 >> 3;", "hex": "0x00335293", "binary": "00000000001100110101001010010011", "grouped": "0000 0000 0011 0011 0101 0010 1001 0011", "fields": [["imm[11:0]", "000000000011", "3"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_srli", "enumValue": 17, "before": "x6=0x80000000", "effect": "x5=0x10000000"}, {"name": "SRAI", "category": "OP-IMM", "format": "I-type shift", "pc": "0x1048", "next": "0x104C", "asm": "srai x5, x6, 3", "c": "x5 = ((int32_t)x6) >> 3;", "hex": "0x40335293", "binary": "01000000001100110101001010010011", "grouped": "0100 0000 0011 0011 0101 0010 1001 0011", "fields": [["imm[11:0]", "010000000011", "1027"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_srai", "enumValue": 18, "before": "x6=0x80000000", "effect": "x5=0xF0000000"}, {"name": "LB", "category": "LOAD", "format": "I-type", "pc": "0x104C", "next": "0x1050", "asm": "lb x5, 8(x10)", "c": "x5 = sign_extend_8(Memory8[x10+8]);", "hex": "0x00850283", "binary": "00000000100001010000001010000011", "grouped": "0000 0000 1000 0101 0000 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lb", "enumValue": 19, "before": "x10=0x2000, Memory8[0x2008]=0x80", "effect": "x5=0xFFFFFF80"}, {"name": "LH", "category": "LOAD", "format": "I-type", "pc": "0x1050", "next": "0x1054", "asm": "lh x5, 8(x10)", "c": "x5 = sign_extend_16(Memory16[x10+8]);", "hex": "0x00851283", "binary": "00000000100001010001001010000011", "grouped": "0000 0000 1000 0101 0001 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "001", "1"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lh", "enumValue": 20, "before": "x10=0x2000, Memory16[0x2008]=0x8001", "effect": "x5=0xFFFF8001"}, {"name": "LW", "category": "LOAD", "format": "I-type", "pc": "0x1054", "next": "0x1058", "asm": "lw x5, 8(x10)", "c": "x5 = Memory32[x10+8];", "hex": "0x00852283", "binary": "00000000100001010010001010000011", "grouped": "0000 0000 1000 0101 0010 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "010", "2"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lw", "enumValue": 21, "before": "x10=0x2000, Memory32[0x2008]=100", "effect": "x5=100"}, {"name": "LBU", "category": "LOAD", "format": "I-type", "pc": "0x1058", "next": "0x105C", "asm": "lbu x5, 8(x10)", "c": "x5 = zero_extend_8(Memory8[x10+8]);", "hex": "0x00854283", "binary": "00000000100001010100001010000011", "grouped": "0000 0000 1000 0101 0100 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "100", "4"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lbu", "enumValue": 22, "before": "x10=0x2000, Memory8[0x2008]=0x80", "effect": "x5=0x00000080"}, {"name": "LHU", "category": "LOAD", "format": "I-type", "pc": "0x105C", "next": "0x1060", "asm": "lhu x5, 8(x10)", "c": "x5 = zero_extend_16(Memory16[x10+8]);", "hex": "0x00855283", "binary": "00000000100001010101001010000011", "grouped": "0000 0000 1000 0101 0101 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lhu", "enumValue": 23, "before": "x10=0x2000, Memory16[0x2008]=0x8001", "effect": "x5=0x00008001"}, {"name": "SB", "category": "STORE", "format": "S-type", "pc": "0x1060", "next": "0x1064", "asm": "sb x5, 8(x10)", "c": "Memory8[x10+8] = x5 & 0xFF;", "hex": "0x00550423", "binary": "00000000010101010000010000100011", "grouped": "0000 0000 0101 0101 0000 0100 0010 0011", "fields": [["imm[11:5]", "0000000", "high"], ["rs2", "00101", "x5"], ["rs1", "01010", "x10"], ["funct3", "000", "0"], ["imm[4:0]", "01000", "low"], ["opcode", "0100011", "0x23"]], "enum": "inst_sb", "enumValue": 24, "before": "x10=0x2000, x5=0x12345678", "effect": "Memory8[0x2008] ← 0x78"}, {"name": "SH", "category": "STORE", "format": "S-type", "pc": "0x1064", "next": "0x1068", "asm": "sh x5, 8(x10)", "c": "Memory16[x10+8] = x5 & 0xFFFF;", "hex": "0x00551423", "binary": "00000000010101010001010000100011", "grouped": "0000 0000 0101 0101 0001 0100 0010 0011", "fields": [["imm[11:5]", "0000000", "high"], ["rs2", "00101", "x5"], ["rs1", "01010", "x10"], ["funct3", "001", "1"], ["imm[4:0]", "01000", "low"], ["opcode", "0100011", "0x23"]], "enum": "inst_sh", "enumValue": 25, "before": "x10=0x2000, x5=0x12345678", "effect": "Memory16[0x2008] ← 0x5678"}, {"name": "SW", "category": "STORE", "format": "S-type", "pc": "0x1068", "next": "0x106C", "asm": "sw x5, 8(x10)", "c": "Memory32[x10+8] = x5;", "hex": "0x00552423", "binary": "00000000010101010010010000100011", "grouped": "0000 0000 0101 0101 0010 0100 0010 0011", "fields": [["imm[11:5]", "0000000", "high"], ["rs2", "00101", "x5"], ["rs1", "01010", "x10"], ["funct3", "010", "2"], ["imm[4:0]", "01000", "low"], ["opcode", "0100011", "0x23"]], "enum": "inst_sw", "enumValue": 26, "before": "x10=0x2000, x5=0x12345678", "effect": "Memory32[0x2008] ← 0x12345678"}, {"name": "BEQ", "category": "BRANCH", "format": "B-type", "pc": "0x106C", "next": "0x1074", "asm": "beq x5, x6, 8", "c": "if (x5 == x6) PC += 8;", "hex": "0x00628463", "binary": "00000000011000101000010001100011", "grouped": "0000 0000 0110 0010 1000 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "000", "0"], ["opcode", "1100011", "0x63"]], "enum": "inst_beq", "enumValue": 27, "before": "x5=10, x6=10", "effect": "taken → new_pc=PC+8"}, {"name": "BNE", "category": "BRANCH", "format": "B-type", "pc": "0x1074", "next": "0x107C", "asm": "bne x5, x6, 8", "c": "if (x5 != x6) PC += 8;", "hex": "0x00629463", "binary": "00000000011000101001010001100011", "grouped": "0000 0000 0110 0010 1001 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "001", "1"], ["opcode", "1100011", "0x63"]], "enum": "inst_bne", "enumValue": 28, "before": "x5=10, x6=20", "effect": "taken → new_pc=PC+8"}, {"name": "BLT", "category": "BRANCH", "format": "B-type", "pc": "0x107C", "next": "0x1084", "asm": "blt x5, x6, 8", "c": "if ((int32_t)x5 < (int32_t)x6) PC += 8;", "hex": "0x0062C463", "binary": "00000000011000101100010001100011", "grouped": "0000 0000 0110 0010 1100 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "100", "4"], ["opcode", "1100011", "0x63"]], "enum": "inst_blt", "enumValue": 29, "before": "x5=-1, x6=1", "effect": "taken → new_pc=PC+8"}, {"name": "BGE", "category": "BRANCH", "format": "B-type", "pc": "0x1084", "next": "0x108C", "asm": "bge x5, x6, 8", "c": "if ((int32_t)x5 >= (int32_t)x6) PC += 8;", "hex": "0x0062D463", "binary": "00000000011000101101010001100011", "grouped": "0000 0000 0110 0010 1101 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "101", "5"], ["opcode", "1100011", "0x63"]], "enum": "inst_bge", "enumValue": 30, "before": "x5=5, x6=1", "effect": "taken → new_pc=PC+8"}, {"name": "BLTU", "category": "BRANCH", "format": "B-type", "pc": "0x108C", "next": "0x1094", "asm": "bltu x5, x6, 8", "c": "if ((uint32_t)x5 < (uint32_t)x6) PC += 8;", "hex": "0x0062E463", "binary": "00000000011000101110010001100011", "grouped": "0000 0000 0110 0010 1110 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "110", "6"], ["opcode", "1100011", "0x63"]], "enum": "inst_bltu", "enumValue": 31, "before": "x5=1, x6=5", "effect": "taken → new_pc=PC+8"}, {"name": "BGEU", "category": "BRANCH", "format": "B-type", "pc": "0x1094", "next": "0x109C", "asm": "bgeu x5, x6, 8", "c": "if ((uint32_t)x5 >= (uint32_t)x6) PC += 8;", "hex": "0x0062F463", "binary": "00000000011000101111010001100011", "grouped": "0000 0000 0110 0010 1111 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "111", "7"], ["opcode", "1100011", "0x63"]], "enum": "inst_bgeu", "enumValue": 32, "before": "x5=5, x6=1", "effect": "taken → new_pc=PC+8"}, {"name": "JAL", "category": "JAL", "format": "J-type", "pc": "0x109C", "next": "0x10AC", "asm": "jal x1, 16", "c": "x1 = PC+4; PC = PC+16;", "hex": "0x010000EF", "binary": "00000001000000000000000011101111", "grouped": "0000 0001 0000 0000 0000 0000 1110 1111", "fields": [["imm", "16", "J-type distributed"], ["rd", "00001", "x1"], ["opcode", "1101111", "0x6F"]], "enum": "inst_jal", "enumValue": 33, "before": "current_pc 如本 Case 顯示", "effect": "x1=0x10A0；new_pc=0x10AC"}, {"name": "JALR", "category": "JALR", "format": "I-type", "pc": "0x10AC", "next": "0x10CC", "asm": "jalr x1, 8(x10)", "c": "x1 = PC+4; PC = (x10+8)&~1;", "hex": "0x008500E7", "binary": "00000000100001010000000011100111", "grouped": "0000 0000 1000 0101 0000 0000 1110 0111", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "000", "0"], ["rd", "00001", "x1"], ["opcode", "1100111", "0x67"]], "enum": "inst_jalr", "enumValue": 34, "before": "x10=0x10C4 (= current_pc+0x18)", "effect": "x1=0x10B0；new_pc=(0x10C4+8)&~1=0x10CC"}, {"name": "AUIPC", "category": "AUIPC", "format": "U-type", "pc": "0x10CC", "next": "0x10D0", "asm": "auipc x5, 0x1", "c": "x5 = PC + 0x00001000;", "hex": "0x00001297", "binary": "00000000000000000001001010010111", "grouped": "0000 0000 0000 0000 0001 0010 1001 0111", "fields": [["imm[31:12]", "00000000000000000001", "0x1"], ["rd", "00101", "x5"], ["opcode", "0010111", "0x17"]], "enum": "inst_auipc", "enumValue": 35, "before": "current_pc 如本 Case 顯示", "effect": "x5=0x10CC+0x1000=0x20CC"}, {"name": "LUI", "category": "LUI", "format": "U-type", "pc": "0x10D0", "next": "0x10D4", "asm": "lui x5, 0x1", "c": "x5 = 0x00001000;", "hex": "0x000012B7", "binary": "00000000000000000001001010110111", "grouped": "0000 0000 0000 0000 0001 0010 1011 0111", "fields": [["imm[31:12]", "00000000000000000001", "0x1"], ["rd", "00101", "x5"], ["opcode", "0110111", "0x37"]], "enum": "inst_lui", "enumValue": 36, "before": "—", "effect": "x5=0x00001000"}];
+const cases=[{"name":"ADD","category":"OP","format":"R-type","pc":"0x1000","next":"0x1004","asm":"add x5, x6, x7","c":"x5 = x6 + x7;","hex":"0x007302B3","binary":"00000000011100110000001010110011","grouped":"0000 0000 0111 0011 0000 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","000","0"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_add","enumValue":0,"before":"x6=20, x7=3","effect":"x5=23"},{"name":"SUB","category":"OP","format":"R-type","pc":"0x1004","next":"0x1008","asm":"sub x5, x6, x7","c":"x5 = x6 - x7;","hex":"0x407302B3","binary":"01000000011100110000001010110011","grouped":"0100 0000 0111 0011 0000 0010 1011 0011","fields":[["funct7","0100000","0x20"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","000","0"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_sub","enumValue":1,"before":"x6=20, x7=3","effect":"x5=17"},{"name":"SLL","category":"OP","format":"R-type","pc":"0x1008","next":"0x100C","asm":"sll x5, x6, x7","c":"x5 = x6 << (x7 & 31);","hex":"0x007312B3","binary":"00000000011100110001001010110011","grouped":"0000 0000 0111 0011 0001 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","001","1"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_sll","enumValue":2,"before":"x6=5, x7=2","effect":"x5=20"},{"name":"SLT","category":"OP","format":"R-type","pc":"0x100C","next":"0x1010","asm":"slt x5, x6, x7","c":"x5 = ((int32_t)x6 < (int32_t)x7);","hex":"0x007322B3","binary":"00000000011100110010001010110011","grouped":"0000 0000 0111 0011 0010 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","010","2"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_slt","enumValue":3,"before":"x6=-3, x7=2","effect":"x5=1"},{"name":"SLTU","category":"OP","format":"R-type","pc":"0x1010","next":"0x1014","asm":"sltu x5, x6, x7","c":"x5 = ((uint32_t)x6 < (uint32_t)x7);","hex":"0x007332B3","binary":"00000000011100110011001010110011","grouped":"0000 0000 0111 0011 0011 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","011","3"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_sltu","enumValue":4,"before":"x6=3, x7=20","effect":"x5=1"},{"name":"XOR","category":"OP","format":"R-type","pc":"0x1014","next":"0x1018","asm":"xor x5, x6, x7","c":"x5 = x6 ^ x7;","hex":"0x007342B3","binary":"00000000011100110100001010110011","grouped":"0000 0000 0111 0011 0100 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","100","4"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_xor","enumValue":5,"before":"x6=0x0F0F, x7=0x00FF","effect":"x5=0x00000FF0"},{"name":"SRL","category":"OP","format":"R-type","pc":"0x1018","next":"0x101C","asm":"srl x5, x6, x7","c":"x5 = (uint32_t)x6 >> (x7 & 31);","hex":"0x007352B3","binary":"00000000011100110101001010110011","grouped":"0000 0000 0111 0011 0101 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","101","5"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_srl","enumValue":6,"before":"x6=0x80000000, x7=2","effect":"x5=0x20000000"},{"name":"SRA","category":"OP","format":"R-type","pc":"0x101C","next":"0x1020","asm":"sra x5, x6, x7","c":"x5 = ((int32_t)x6) >> (x7 & 31);","hex":"0x407352B3","binary":"01000000011100110101001010110011","grouped":"0100 0000 0111 0011 0101 0010 1011 0011","fields":[["funct7","0100000","0x20"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","101","5"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_sra","enumValue":7,"before":"x6=0x80000000, x7=2","effect":"x5=0xE0000000"},{"name":"OR","category":"OP","format":"R-type","pc":"0x1020","next":"0x1024","asm":"or x5, x6, x7","c":"x5 = x6 | x7;","hex":"0x007362B3","binary":"00000000011100110110001010110011","grouped":"0000 0000 0111 0011 0110 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","110","6"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_or","enumValue":8,"before":"x6=0x0F00, x7=0x00F0","effect":"x5=0x00000FF0"},{"name":"AND","category":"OP","format":"R-type","pc":"0x1024","next":"0x1028","asm":"and x5, x6, x7","c":"x5 = x6 & x7;","hex":"0x007372B3","binary":"00000000011100110111001010110011","grouped":"0000 0000 0111 0011 0111 0010 1011 0011","fields":[["funct7","0000000","0x00"],["rs2","00111","x7"],["rs1","00110","x6"],["funct3","111","7"],["rd","00101","x5"],["opcode","0110011","0x33"]],"enum":"inst_and","enumValue":9,"before":"x6=0x0FF0, x7=0x00FF","effect":"x5=0x000000F0"},{"name":"ADDI","category":"OP-IMM","format":"I-type","pc":"0x1028","next":"0x102C","asm":"addi x5, x6, 10","c":"x5 = x6 + 10;","hex":"0x00A30293","binary":"00000000101000110000001010010011","grouped":"0000 0000 1010 0011 0000 0010 1001 0011","fields":[["imm[11:0]","000000001010","10"],["rs1","00110","x6"],["funct3","000","0"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_addi","enumValue":10,"before":"x6=20","effect":"x5=30"},{"name":"SLTI","category":"OP-IMM","format":"I-type","pc":"0x102C","next":"0x1030","asm":"slti x5, x6, 10","c":"x5 = ((int32_t)x6 < 10);","hex":"0x00A32293","binary":"00000000101000110010001010010011","grouped":"0000 0000 1010 0011 0010 0010 1001 0011","fields":[["imm[11:0]","000000001010","10"],["rs1","00110","x6"],["funct3","010","2"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_slti","enumValue":11,"before":"x6=-3","effect":"x5=1"},{"name":"SLTIU","category":"OP-IMM","format":"I-type","pc":"0x1030","next":"0x1034","asm":"sltiu x5, x6, 10","c":"x5 = ((uint32_t)x6 < (uint32_t)10);","hex":"0x00A33293","binary":"00000000101000110011001010010011","grouped":"0000 0000 1010 0011 0011 0010 1001 0011","fields":[["imm[11:0]","000000001010","10"],["rs1","00110","x6"],["funct3","011","3"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_sltiu","enumValue":12,"before":"x6=3","effect":"x5=1"},{"name":"XORI","category":"OP-IMM","format":"I-type","pc":"0x1034","next":"0x1038","asm":"xori x5, x6, 15","c":"x5 = x6 ^ 15;","hex":"0x00F34293","binary":"00000000111100110100001010010011","grouped":"0000 0000 1111 0011 0100 0010 1001 0011","fields":[["imm[11:0]","000000001111","15"],["rs1","00110","x6"],["funct3","100","4"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_xori","enumValue":13,"before":"x6=0xF0","effect":"x5=0x000000FF"},{"name":"ORI","category":"OP-IMM","format":"I-type","pc":"0x1038","next":"0x103C","asm":"ori x5, x6, 15","c":"x5 = x6 | 15;","hex":"0x00F36293","binary":"00000000111100110110001010010011","grouped":"0000 0000 1111 0011 0110 0010 1001 0011","fields":[["imm[11:0]","000000001111","15"],["rs1","00110","x6"],["funct3","110","6"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_ori","enumValue":14,"before":"x6=0xF0","effect":"x5=0x000000FF"},{"name":"ANDI","category":"OP-IMM","format":"I-type","pc":"0x103C","next":"0x1040","asm":"andi x5, x6, 15","c":"x5 = x6 & 15;","hex":"0x00F37293","binary":"00000000111100110111001010010011","grouped":"0000 0000 1111 0011 0111 0010 1001 0011","fields":[["imm[11:0]","000000001111","15"],["rs1","00110","x6"],["funct3","111","7"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_andi","enumValue":15,"before":"x6=0xFF","effect":"x5=0x0000000F"},{"name":"SLLI","category":"OP-IMM","format":"I-type shift","pc":"0x1040","next":"0x1044","asm":"slli x5, x6, 3","c":"x5 = x6 << 3;","hex":"0x00331293","binary":"00000000001100110001001010010011","grouped":"0000 0000 0011 0011 0001 0010 1001 0011","fields":[["funct7","0000000","0x00"],["shamt","00011","3"],["rs1","00110","x6"],["funct3","001","1"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_slli","enumValue":16,"before":"x6=5","effect":"x5=40"},{"name":"SRLI","category":"OP-IMM","format":"I-type shift","pc":"0x1044","next":"0x1048","asm":"srli x5, x6, 3","c":"x5 = (uint32_t)x6 >> 3;","hex":"0x00335293","binary":"00000000001100110101001010010011","grouped":"0000 0000 0011 0011 0101 0010 1001 0011","fields":[["funct7","0000000","0x00"],["shamt","00011","3"],["rs1","00110","x6"],["funct3","101","5"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_srli","enumValue":17,"before":"x6=0x80000000","effect":"x5=0x10000000"},{"name":"SRAI","category":"OP-IMM","format":"I-type shift","pc":"0x1048","next":"0x104C","asm":"srai x5, x6, 3","c":"x5 = ((int32_t)x6) >> 3;","hex":"0x40335293","binary":"01000000001100110101001010010011","grouped":"0100 0000 0011 0011 0101 0010 1001 0011","fields":[["funct7","0100000","0x20"],["shamt","00011","3"],["rs1","00110","x6"],["funct3","101","5"],["rd","00101","x5"],["opcode","0010011","0x13"]],"enum":"inst_srai","enumValue":18,"before":"x6=0x80000000","effect":"x5=0xF0000000"},{"name":"LB","category":"LOAD","format":"I-type","pc":"0x104C","next":"0x1050","asm":"lb x5, 8(x10)","c":"x5 = sign_extend_8(Memory8[x10+8]);","hex":"0x00850283","binary":"00000000100001010000001010000011","grouped":"0000 0000 1000 0101 0000 0010 1000 0011","fields":[["imm[11:0]","000000001000","8"],["rs1","01010","x10"],["funct3","000","0"],["rd","00101","x5"],["opcode","0000011","0x03"]],"enum":"inst_lb","enumValue":19,"before":"x10=0x2000, Memory8[0x2008]=0x80","effect":"x5=0xFFFFFF80"},{"name":"LH","category":"LOAD","format":"I-type","pc":"0x1050","next":"0x1054","asm":"lh x5, 8(x10)","c":"x5 = sign_extend_16(Memory16[x10+8]);","hex":"0x00851283","binary":"00000000100001010001001010000011","grouped":"0000 0000 1000 0101 0001 0010 1000 0011","fields":[["imm[11:0]","000000001000","8"],["rs1","01010","x10"],["funct3","001","1"],["rd","00101","x5"],["opcode","0000011","0x03"]],"enum":"inst_lh","enumValue":20,"before":"x10=0x2000, Memory16[0x2008]=0x8001","effect":"x5=0xFFFF8001"},{"name":"LW","category":"LOAD","format":"I-type","pc":"0x1054","next":"0x1058","asm":"lw x5, 8(x10)","c":"x5 = Memory32[x10+8];","hex":"0x00852283","binary":"00000000100001010010001010000011","grouped":"0000 0000 1000 0101 0010 0010 1000 0011","fields":[["imm[11:0]","000000001000","8"],["rs1","01010","x10"],["funct3","010","2"],["rd","00101","x5"],["opcode","0000011","0x03"]],"enum":"inst_lw","enumValue":21,"before":"x10=0x2000, Memory32[0x2008]=100","effect":"x5=100"},{"name":"LBU","category":"LOAD","format":"I-type","pc":"0x1058","next":"0x105C","asm":"lbu x5, 8(x10)","c":"x5 = zero_extend_8(Memory8[x10+8]);","hex":"0x00854283","binary":"00000000100001010100001010000011","grouped":"0000 0000 1000 0101 0100 0010 1000 0011","fields":[["imm[11:0]","000000001000","8"],["rs1","01010","x10"],["funct3","100","4"],["rd","00101","x5"],["opcode","0000011","0x03"]],"enum":"inst_lbu","enumValue":22,"before":"x10=0x2000, Memory8[0x2008]=0x80","effect":"x5=0x00000080"},{"name":"LHU","category":"LOAD","format":"I-type","pc":"0x105C","next":"0x1060","asm":"lhu x5, 8(x10)","c":"x5 = zero_extend_16(Memory16[x10+8]);","hex":"0x00855283","binary":"00000000100001010101001010000011","grouped":"0000 0000 1000 0101 0101 0010 1000 0011","fields":[["imm[11:0]","000000001000","8"],["rs1","01010","x10"],["funct3","101","5"],["rd","00101","x5"],["opcode","0000011","0x03"]],"enum":"inst_lhu","enumValue":23,"before":"x10=0x2000, Memory16[0x2008]=0x8001","effect":"x5=0x00008001"},{"name":"SB","category":"STORE","format":"S-type","pc":"0x1060","next":"0x1064","asm":"sb x5, 8(x10)","c":"Memory8[x10+8] = x5 & 0xFF;","hex":"0x00550423","binary":"00000000010101010000010000100011","grouped":"0000 0000 0101 0101 0000 0100 0010 0011","fields":[["imm[11:5]","0000000","high"],["rs2","00101","x5"],["rs1","01010","x10"],["funct3","000","0"],["imm[4:0]","01000","low"],["opcode","0100011","0x23"]],"enum":"inst_sb","enumValue":24,"before":"x10=0x2000, x5=0x12345678","effect":"Memory8[0x2008] ← 0x78"},{"name":"SH","category":"STORE","format":"S-type","pc":"0x1064","next":"0x1068","asm":"sh x5, 8(x10)","c":"Memory16[x10+8] = x5 & 0xFFFF;","hex":"0x00551423","binary":"00000000010101010001010000100011","grouped":"0000 0000 0101 0101 0001 0100 0010 0011","fields":[["imm[11:5]","0000000","high"],["rs2","00101","x5"],["rs1","01010","x10"],["funct3","001","1"],["imm[4:0]","01000","low"],["opcode","0100011","0x23"]],"enum":"inst_sh","enumValue":25,"before":"x10=0x2000, x5=0x12345678","effect":"Memory16[0x2008] ← 0x5678"},{"name":"SW","category":"STORE","format":"S-type","pc":"0x1068","next":"0x106C","asm":"sw x5, 8(x10)","c":"Memory32[x10+8] = x5;","hex":"0x00552423","binary":"00000000010101010010010000100011","grouped":"0000 0000 0101 0101 0010 0100 0010 0011","fields":[["imm[11:5]","0000000","high"],["rs2","00101","x5"],["rs1","01010","x10"],["funct3","010","2"],["imm[4:0]","01000","low"],["opcode","0100011","0x23"]],"enum":"inst_sw","enumValue":26,"before":"x10=0x2000, x5=0x12345678","effect":"Memory32[0x2008] ← 0x12345678"},{"name":"BEQ","category":"BRANCH","format":"B-type","pc":"0x106C","next":"0x1074","asm":"beq x5, x6, 8","c":"if (x5 == x6) PC += 8;","hex":"0x00628463","binary":"00000000011000101000010001100011","grouped":"0000 0000 0110 0010 1000 0100 0110 0011","fields":[["imm[12]","0","B offset sign bit"],["imm[10:5]","000000","B offset"],["rs2","00110","x6"],["rs1","00101","x5"],["funct3","000","0"],["imm[4:1]","0100","B offset"],["imm[11]","0","B offset"],["opcode","1100011","0x63"]],"enum":"inst_beq","enumValue":27,"before":"x5=10, x6=10","effect":"taken → new_pc=PC+8"},{"name":"BNE","category":"BRANCH","format":"B-type","pc":"0x1074","next":"0x107C","asm":"bne x5, x6, 8","c":"if (x5 != x6) PC += 8;","hex":"0x00629463","binary":"00000000011000101001010001100011","grouped":"0000 0000 0110 0010 1001 0100 0110 0011","fields":[["imm[12]","0","B offset sign bit"],["imm[10:5]","000000","B offset"],["rs2","00110","x6"],["rs1","00101","x5"],["funct3","001","1"],["imm[4:1]","0100","B offset"],["imm[11]","0","B offset"],["opcode","1100011","0x63"]],"enum":"inst_bne","enumValue":28,"before":"x5=10, x6=20","effect":"taken → new_pc=PC+8"},{"name":"BLT","category":"BRANCH","format":"B-type","pc":"0x107C","next":"0x1084","asm":"blt x5, x6, 8","c":"if ((int32_t)x5 < (int32_t)x6) PC += 8;","hex":"0x0062C463","binary":"00000000011000101100010001100011","grouped":"0000 0000 0110 0010 1100 0100 0110 0011","fields":[["imm[12]","0","B offset sign bit"],["imm[10:5]","000000","B offset"],["rs2","00110","x6"],["rs1","00101","x5"],["funct3","100","4"],["imm[4:1]","0100","B offset"],["imm[11]","0","B offset"],["opcode","1100011","0x63"]],"enum":"inst_blt","enumValue":29,"before":"x5=-1, x6=1","effect":"taken → new_pc=PC+8"},{"name":"BGE","category":"BRANCH","format":"B-type","pc":"0x1084","next":"0x108C","asm":"bge x5, x6, 8","c":"if ((int32_t)x5 >= (int32_t)x6) PC += 8;","hex":"0x0062D463","binary":"00000000011000101101010001100011","grouped":"0000 0000 0110 0010 1101 0100 0110 0011","fields":[["imm[12]","0","B offset sign bit"],["imm[10:5]","000000","B offset"],["rs2","00110","x6"],["rs1","00101","x5"],["funct3","101","5"],["imm[4:1]","0100","B offset"],["imm[11]","0","B offset"],["opcode","1100011","0x63"]],"enum":"inst_bge","enumValue":30,"before":"x5=5, x6=1","effect":"taken → new_pc=PC+8"},{"name":"BLTU","category":"BRANCH","format":"B-type","pc":"0x108C","next":"0x1094","asm":"bltu x5, x6, 8","c":"if ((uint32_t)x5 < (uint32_t)x6) PC += 8;","hex":"0x0062E463","binary":"00000000011000101110010001100011","grouped":"0000 0000 0110 0010 1110 0100 0110 0011","fields":[["imm[12]","0","B offset sign bit"],["imm[10:5]","000000","B offset"],["rs2","00110","x6"],["rs1","00101","x5"],["funct3","110","6"],["imm[4:1]","0100","B offset"],["imm[11]","0","B offset"],["opcode","1100011","0x63"]],"enum":"inst_bltu","enumValue":31,"before":"x5=1, x6=5","effect":"taken → new_pc=PC+8"},{"name":"BGEU","category":"BRANCH","format":"B-type","pc":"0x1094","next":"0x109C","asm":"bgeu x5, x6, 8","c":"if ((uint32_t)x5 >= (uint32_t)x6) PC += 8;","hex":"0x0062F463","binary":"00000000011000101111010001100011","grouped":"0000 0000 0110 0010 1111 0100 0110 0011","fields":[["imm[12]","0","B offset sign bit"],["imm[10:5]","000000","B offset"],["rs2","00110","x6"],["rs1","00101","x5"],["funct3","111","7"],["imm[4:1]","0100","B offset"],["imm[11]","0","B offset"],["opcode","1100011","0x63"]],"enum":"inst_bgeu","enumValue":32,"before":"x5=5, x6=1","effect":"taken → new_pc=PC+8"},{"name":"JAL","category":"JAL","format":"J-type","pc":"0x109C","next":"0x10AC","asm":"jal x1, 16","c":"x1 = PC+4; PC = PC+16;","hex":"0x010000EF","binary":"00000001000000000000000011101111","grouped":"0000 0001 0000 0000 0000 0000 1110 1111","fields":[["imm[20]","0","J offset sign bit"],["imm[10:1]","0000001000","J offset"],["imm[11]","0","J offset"],["imm[19:12]","00000000","J offset"],["rd","00001","x1"],["opcode","1101111","0x6F"]],"enum":"inst_jal","enumValue":33,"before":"current_pc 如本 Case 顯示","effect":"x1=0x10A0；new_pc=0x10AC"},{"name":"JALR","category":"JALR","format":"I-type","pc":"0x10AC","next":"0x10CC","asm":"jalr x1, 8(x10)","c":"x1 = PC+4; PC = (x10+8)&~1;","hex":"0x008500E7","binary":"00000000100001010000000011100111","grouped":"0000 0000 1000 0101 0000 0000 1110 0111","fields":[["imm[11:0]","000000001000","8"],["rs1","01010","x10"],["funct3","000","0"],["rd","00001","x1"],["opcode","1100111","0x67"]],"enum":"inst_jalr","enumValue":34,"before":"x10=0x10C4 (= current_pc+0x18)","effect":"x1=0x10B0；new_pc=(0x10C4+8)&~1=0x10CC"},{"name":"AUIPC","category":"AUIPC","format":"U-type","pc":"0x10CC","next":"0x10D0","asm":"auipc x5, 0x1","c":"x5 = PC + 0x00001000;","hex":"0x00001297","binary":"00000000000000000001001010010111","grouped":"0000 0000 0000 0000 0001 0010 1001 0111","fields":[["imm[31:12]","00000000000000000001","0x1"],["rd","00101","x5"],["opcode","0010111","0x17"]],"enum":"inst_auipc","enumValue":35,"before":"current_pc 如本 Case 顯示","effect":"x5=0x10CC+0x1000=0x20CC"},{"name":"LUI","category":"LUI","format":"U-type","pc":"0x10D0","next":"0x10D4","asm":"lui x5, 0x1","c":"x5 = 0x00001000;","hex":"0x000012B7","binary":"00000000000000000001001010110111","grouped":"0000 0000 0000 0000 0001 0010 1011 0111","fields":[["imm[31:12]","00000000000000000001","0x1"],["rd","00101","x5"],["opcode","0110111","0x37"]],"enum":"inst_lui","enumValue":36,"before":"—","effect":"x5=0x00001000"}];
 let idx=0;
 function fmt(c){return c.fields.map(f=>`${f[0]} = ${f[1]}  (${f[2]})`).join("\n")}
+
+
+function pcChangeExplanation(c){
+  const pc=parseInt(c.pc,16), np=parseInt(c.next,16);
+  const delta=np-pc;
+  const hx=n=>`0x${n.toString(16).toUpperCase()}`;
+  if(["BEQ","BNE","BLT","BGE","BLTU","BGEU"].includes(c.name)){
+    return `【PC 變化】Branch 本 Case = taken：new_pc = current_pc + immediate = ${c.pc} + ${delta} (${hx(delta)}) = ${c.next}。所以本 Case 的 PC 是「+${delta}」，不是固定每次都 +8；數值取決於 branch immediate。`;
+  }
+  if(c.name==="JAL"){
+    return `【PC 變化】JAL：rd ← current_pc + 4；但跳轉 PC 為 new_pc = current_pc + immediate = ${c.pc} + ${delta} (${hx(delta)}) = ${c.next}。所以本 Case 的 PC 是「+${delta}」。`;
+  }
+  if(c.name==="JALR"){
+    return `【PC 變化】JALR 有兩個不同加法：① rd ← current_pc + 4 = ${c.pc} + 4；② 跳轉目標 new_pc = (rs1 + imm) & ~1 = ${c.next}。因此 JALR 的 new_pc「不是 current_pc 固定加某個數」；本 Case 只是因為設定 rs1=current_pc+0x18、imm=8，所以最後數值剛好等於 current_pc+0x20：${c.pc} + 32 = ${c.next}。`;
+  }
+  return `【PC 變化】本指令沒有改寫跳轉目標，因此使用預設值：new_pc = current_pc + 4 = ${c.pc} + 4 = ${c.next}。所以本 Case 的 PC 是「+4」。`;
+}
+
+function executeSource(c){
+  const n=c.name;
+  if(["LB","LH","LW","LBU","LHU"].includes(n)){
+    const width={LB:"Memory8",LBU:"Memory8",LH:"Memory16",LHU:"Memory16",LW:"Memory32"}[n];
+    const ext={LB:"讀取 8-bit 後做 sign extension",LH:"讀取 16-bit 後做 sign extension",LBU:"讀取 8-bit 後做 zero extension",LHU:"讀取 16-bit 後做 zero extension",LW:"讀取完整 32-bit word"}[n];
+    return `【結果來源】\n1. 先用 rs1 + imm 計算 effective address。\n2. 再透過 MemoryMap 從該位址讀取 ${width}。\n3. ${ext}。\n4. 最後把讀出的值 write-back 到 rd。\n\n因此 ${c.effect} 的資料來源是「執行前」欄位中指定的 Memory 內容，不是 Decode 產生的值。`;
+  }
+  if(["SB","SH","SW"].includes(n)){
+    return `【結果來源】\n1. 用 rs1 + imm 計算 effective address。\n2. 寫入資料來自 rs2。\n3. ${n} 依指令寬度把 rs2 的低位元寫入 MemoryMap。\n\n因此 ${c.effect} 是 STORE 對 memory 造成的 side effect；STORE 不會把資料寫回 rd。`;
+  }
+  if(["BEQ","BNE","BLT","BGE","BLTU","BGEU"].includes(n)){
+    return `【結果來源】\nBranch 會比較 rs1 與 rs2。條件成立時 new_pc=current_pc+imm；不成立則保留預設 current_pc+4。本 Case 的執行前狀態刻意設定成條件成立，因此 ${c.effect}。`;
+  }
+  if(n==="JAL") return `【結果來源】\nJAL 先把 current_pc+4 寫入 rd 當 return address，再把 new_pc 設為 current_pc+imm。`;
+  if(n==="JALR") return `【結果來源】\nJALR 先把 current_pc+4 寫入 rd，再以 (rs1+imm)&~1 產生 new_pc。`;
+  if(n==="AUIPC") return `【結果來源】\nAUIPC 的 rd 結果來自 current_pc + U-type immediate。`;
+  if(n==="LUI") return `【結果來源】\nLUI 直接把 U-type immediate（imm[31:12] 放到高 20 bits，低 12 bits 為 0）寫入 rd。`;
+  return `【結果來源】\nALU 依 ${c.enum} 對 inst_fields_t 指定的 operand 執行 ${c.name}，再把運算結果 write-back 到 rd。執行前 operand：${c.before}；因此得到：${c.effect}。`;
+}
+
 function stage(c,n){
- if(n===0)return {t:"Core_fetch()",i:`current_pc = ${c.pc}\nMemory / MemoryMap`,o:`inst_fields_t\nraw = ${c.hex}\n${fmt(c)}`,d:`以 current_pc=${c.pc} 為 instruction address 讀 4 bytes（32 bits）。附件 core.c 的 Core_fetch() 實際先把 4 個 little-endian bytes 組成 inst_fields_t.ret.raw；因 inst_fields_t 是 union，之後可用 R/I/S/U/B/J 對應視圖解讀相同的 32 bits。Fetch 本身不執行 ${c.name}。`};
+ if(n===0)return {t:"Core_fetch()",i:`current_pc = ${c.pc}\nMemory / MemoryMap`,o:`inst_fields_t\nraw = ${c.hex}\n${fmt(c)}`,d:`以 current_pc=${c.pc} 為 instruction address 讀 4 bytes（32 bits）。附件 core.c 的 Core_fetch() 實際先把 4 個 little-endian bytes 組成 inst_fields_t.ret.raw；因 inst_fields_t 是 union，之後可用 R/I/S/U/B/J 對應視圖解讀相同的 32 bits。Fetch 本身不執行 ${c.name}。下方列出的 Fields 是同一個 inst_fields_t.raw 依該 instruction format 的 union 視圖解讀結果，不是 Fetch 額外計算出的另一份資料。`};
  if(n===1)return {t:"Core_decode()",i:`inst_fields_t\n${fmt(c)}`,o:`inst_enum_t = ${c.enum}\nenum 底層值 = ${c.enumValue}\n\n意思：這條 instruction 被辨識為 ${c.name}`,d:`${c.enum} 是「指令種類」的 enum，不是運算結果，也不是 opcode。附件 src/inst.h 沒有手動指定 inst_enum_t 的數值，因此依 C enum 規則由 inst_add=0 依序遞增；本 Case 的值為 ${c.enumValue}。core.c 會先取 opcode、func3、func7 所在 bit 位置來分類，但 funct7 並不是所有 instruction format 都具有的獨立語意欄位；例如一般 I-type 的 bits[31:20] 是 immediate。真正的 ${c.name} 運算在下一階段 Core_execute()。`};
- if(n===2)return {t:"Core_execute()",i:`inst_enum_t = ${c.enum}\ninst_fields_t\n執行前：${c.before}`,o:`${c.effect}\nnew_pc = ${c.next}`,d:`Execute 同時需要「做什麼」(${c.enum}) 與「對哪些 operand 做」(inst_fields_t)。依附件 core.c 執行 ${c.name}；register write-back 與 LOAD/STORE 的 memory side effect 都在 Core_execute() 內完成。new_pc 一開始預設為 current_pc+4，Branch/JAL/JALR 可覆寫；真正把 new_pc 寫成 current_pc 則留到 Core_update_pc()。`};
- return {t:"Core_update_pc()",i:`new_pc = ${c.next}`,o:`current_pc ← ${c.next}\n下一個實際執行 instruction 從此位址 Fetch`,d:`這一步只提交 Execute 已算好的 new_pc，不重新 Decode，也不重新做 ${c.name} 運算。`};
+ if(n===2)return {t:"Core_execute()",i:`inst_enum_t = ${c.enum}\ninst_fields_t\n執行前：${c.before}`,o:`${pcChangeExplanation(c)}\n\n${c.effect}\nnew_pc = ${c.next}\n\n${executeSource(c)}`,d:`${pcChangeExplanation(c)}\n\nExecute 同時需要「做什麼」(${c.enum}) 與「對哪些 operand 做」(inst_fields_t)。依附件 core.c 執行 ${c.name}；register write-back 與 LOAD/STORE 的 memory side effect 都在 Core_execute() 內完成。new_pc 一開始預設為 current_pc+4，Branch/JAL/JALR 可覆寫；真正把 new_pc 寫成 current_pc 則留到 Core_update_pc()。\n\n${executeSource(c)}`};
+ {
+   const pc=parseInt(c.pc,16), np=parseInt(c.next,16), delta=np-pc;
+   let pcLine, pcDetail;
+   if(c.name==="JALR"){
+     pcLine=`PC 變化：不是固定 PC + ?\nnew_pc = (rs1 + imm) & ~1 = ${c.next}`;
+     pcDetail=`JALR 的跳轉位址由 (rs1+imm)&~1 決定，不應一般化成固定 PC+某數。本 Case 數值上 ${c.pc} → ${c.next}，剛好相差 ${delta} (0x${delta.toString(16).toUpperCase()})；另外 rd 的 return address 才是 current_pc+4。`;
+   }else{
+     pcLine=`PC + ${delta}：${c.pc} → ${c.next}`;
+     pcDetail=`本 Case 的 new_pc 相對 current_pc 為 +${delta}：${c.pc} + ${delta} = ${c.next}。`;
+   }
+   return {t:"Core_update_pc()",i:`new_pc = ${c.next}\n${pcLine}`,o:`current_pc ← ${c.next}\n${pcLine}\n下一個實際執行 instruction 從此位址 Fetch`,d:`${pcDetail}\n\n這一步只提交 Execute 已算好的 new_pc，不重新 Decode，也不重新做 ${c.name} 運算。`};
+ }
 }
 function diagram(c){
  const map={
@@ -229,12 +452,31 @@ function diagram(c){
 }
 function render(){
  const c=cases[idx];document.getElementById("counter").textContent=`${idx+1} / 37 · ${c.name} · ${c.category}`;
- document.getElementById("summary").innerHTML=`<span class="sum-case">Case ${idx+1}：${c.name}</span>　<code class="sum-asm">${c.asm}</code>　｜ <span class="sum-pc-label">PC</span> <span class="sum-pc">${c.pc} → ${c.next}</span>　｜ <span class="sum-machine-label">Machine code</span> <code class="sum-machine">${c.hex}</code><br><span class="sum-before-label">執行前：</span><span class="sum-before">${c.before}</span><br><span class="sum-result-label">Execute 結果：</span><span class="sum-result">${c.effect}</span>`;
+ document.getElementById("summary").innerHTML=`<span class="sum-case">Case ${idx+1}：${c.name}</span>　<code class="sum-asm">${c.asm}</code>　｜ <span class="sum-pc-label">PC</span> <span class="sum-pc">${c.pc} → ${c.next}</span>　<span class="sum-pc-delta">${c.name==="JALR" ? `PC：由 (rs1+imm)&~1 決定` : (["BEQ","BNE","BLT","BGE","BLTU","BGEU"].includes(c.name) ? `PC + ${parseInt(c.next,16)-parseInt(c.pc,16)}（本 Case branch taken）` : (c.name==="JAL" ? `PC + ${parseInt(c.next,16)-parseInt(c.pc,16)}（本 Case J immediate）` : `PC + ${parseInt(c.next,16)-parseInt(c.pc,16)}`))}</span>　｜ <span class="sum-machine-label">Machine code</span> <code class="sum-machine">${c.hex}</code><br><span class="sum-before-label">執行前：</span><span class="sum-before">${c.before}</span><br><span class="sum-result-label">Execute 結果：</span><span class="sum-result">${c.effect}</span><br><span class="sum-binary-label">完整 32-bit：</span>
+<span class="sum-binary-map">
+  <span class="sum-binary-grid">
+    ${c.binary.match(/.{4}/g).map(b=>`<span class="sum-hex-digit">${parseInt(b,2).toString(16).toUpperCase()}</span>`).join("")}
+    ${c.binary.match(/.{4}/g).map(b=>`<span class="sum-nibble">${b}</span>`).join("")}
+  </span>
+</span><br><span class="sum-fields-label">Fields：</span><span class="sum-fields">${c.fields.map(f=>`<span class="sum-field"><b>${f[0]}</b> = <code>${f[1]}</code> <small>(${f[2]})</small></span>`).join("　")}</span>`;
  let p=document.getElementById("pipeline");p.innerHTML="";for(let n=0;n<4;n++){let d=stage(c,n);p.insertAdjacentHTML("beforeend",`<article class="card"><div class="head">${n+1}. ${d.t}</div><div class="body"><div class="lab">INPUT</div><div class="box"><pre>${d.i}</pre></div><div class="lab">OUTPUT / EFFECT</div><div class="box effect"><pre>${d.o}</pre></div><div class="lab">詳細說明</div><div class="detail">${d.d}</div></div></article>`)}
  document.getElementById("diagram").innerHTML=diagram(c);document.getElementById("ca").innerHTML=`<b>C-like 語意</b><pre>${c.c}</pre><b>Assembly</b><pre>${c.asm}</pre><p><b>Format：</b>${c.format}</p>`;
  document.getElementById("fields").innerHTML=`<table><tr><th>Field</th><th>Value</th><th>意義</th></tr>${c.fields.map(f=>`<tr><td><b>${f[0]}</b></td><td><code>${f[1]}</code></td><td>${f[2]}</td></tr>`).join("")}</table>`;
  document.getElementById("bin").innerHTML=`完整 32-bit：<pre>${c.binary}</pre>每 4 bits 分組：<pre>${c.grouped}</pre>`;
- document.getElementById("hx").innerHTML=`Binary 每 4 bits 轉 1 個 hexadecimal digit：<pre>${c.grouped}</pre><b>Machine code</b><pre>${c.hex}</pre><p>Decode → <code>${c.enum}</code>（enum 值 ${c.enumValue}）</p>`;
+ {
+   const nibs=c.binary.match(/.{4}/g);
+   const hexDigits=nibs.map(b=>parseInt(b,2).toString(16).toUpperCase());
+   document.getElementById("hx").innerHTML=`
+     <div class="hex-note">Binary 每 4 bits 轉 1 個 hexadecimal digit：</div>
+     <div class="hex-convert-result">
+       <div class="hex-grid">
+         ${nibs.map(b=>`<div class="bits">${b}</div>`).join("")}
+         ${hexDigits.map(h=>`<div class="digit">${h}</div>`).join("")}
+       </div>
+     </div>
+     <div class="hex-arrow">→ ${c.hex}</div>
+     <p>Decode → <code>${c.enum}</code>（enum 值 ${c.enumValue}）</p>`;
+ }
  document.getElementById("trail").innerHTML=cases.map((x,i)=>`<span class="${i===idx?"on":""}">C${i+1} ${x.pc}→${x.next}</span>`).join(" → ");
  renderGroups();
  document.getElementById("prev").disabled=idx===0;document.getElementById("next").disabled=idx===36;[...document.querySelectorAll(".caseBtn")].forEach((b,i)=>b.classList.toggle("on",i===idx));
