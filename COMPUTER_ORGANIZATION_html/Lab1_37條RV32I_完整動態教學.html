@@ -1,0 +1,262 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 1｜37 條 RV32I Instruction 完整動態教學｜動畫欄位圖對齊校正版</title>
+<style>
+:root{--b:#2f75b5;--b2:#5b9bd5;--n:#17365d;--bg:#f4f7fb;--line:#bfd1e2}
+*{box-sizing:border-box}html,body{overflow-anchor:none}body{margin:0;background:var(--bg);font-family:"Microsoft JhengHei",Arial,sans-serif;color:#14243a;line-height:1.55}
+header{background:linear-gradient(120deg,#17365d,#2f75b5);color:#fff;padding:22px}.wrap{max-width:1550px;margin:auto}
+.toolbar{position:sticky;top:0;z-index:20;background:#fffffff2;border-bottom:1px solid var(--line);padding:9px;backdrop-filter:blur(7px)}
+.nav{display:flex;gap:7px;flex-wrap:wrap;align-items:center}button{border:0;border-radius:9px;background:var(--b);color:#fff;padding:9px 12px;font-weight:800;cursor:pointer}button.on{background:var(--n)}button:disabled{opacity:.35}
+.counter{border:1px solid #8db5d9;background:#eef6ff;border-radius:999px;padding:8px 13px;font-weight:800}
+main{max-width:1550px;margin:auto;padding:16px}.summary,.section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:15px}
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid #8fb8dc;border-radius:14px;overflow:hidden;min-height:570px}.head{background:var(--b2);padding:13px;font-weight:900;font-size:1.08rem}.body{padding:13px}.lab{font-weight:900;color:var(--n);margin:9px 0 4px}
+pre{background:#17212b;color:#f7f9fb;padding:10px;border-radius:8px;white-space:pre-wrap;overflow:auto}.box{background:#edf6ff;border-left:5px solid var(--b2);padding:9px;border-radius:8px}.effect{background:#eaf7ed}.detail{background:#fff6dc;padding:10px;border-radius:8px}
+.encoding{display:grid;grid-template-columns:1fr 1.15fr 1fr 1fr;gap:12px}.mini{border:1px solid #a8c4de;border-radius:12px;padding:12px;background:#fff}table{width:100%;border-collapse:collapse}th,td{border:1px solid #c7d7e7;padding:6px;text-align:center}th{background:var(--b2);color:#fff}
+.diagram{overflow-x:auto}.diagram svg{width:100%;min-width:900px;display:block}.trail span{display:inline-block;margin:3px;padding:6px 8px;border-radius:8px;background:#e8f2fb}.trail span.on{background:var(--n);color:#fff}
+.note{background:#fff3cd;border-left:5px solid #d39e00;padding:10px;border-radius:7px}.groupTitle{font-weight:900;color:var(--n);margin:7px 5px}
+@media(max-width:1050px){.pipeline,.encoding{grid-template-columns:1fr 1fr}}@media(max-width:650px){.pipeline,.encoding{grid-template-columns:1fr}}
+</style>
+<style>
+/* ===== 僅調整目前 Case 摘要的字體大小與配色 ===== */
+#summary{
+  font-size:18px;
+  line-height:1.9;
+}
+#summary .sum-case{
+  font-size:25px;
+  font-weight:900;
+  color:#17365d;
+}
+#summary .sum-asm{
+  font-size:22px;
+  font-weight:800;
+  color:#7b2cbf;
+  background:#f5edff;
+  padding:3px 8px;
+  border-radius:7px;
+}
+#summary .sum-pc-label{
+  font-size:19px;
+  font-weight:900;
+  color:#2f75b5;
+}
+#summary .sum-pc{
+  font-size:21px;
+  font-weight:800;
+  color:#006d77;
+}
+#summary .sum-machine-label{
+  font-size:19px;
+  font-weight:900;
+  color:#b45309;
+}
+#summary .sum-machine{
+  font-size:21px;
+  font-weight:800;
+  color:#9c2f2f;
+  background:#fff0f0;
+  padding:3px 8px;
+  border-radius:7px;
+}
+#summary .sum-before-label{
+  font-size:19px;
+  font-weight:900;
+  color:#455a64;
+}
+#summary .sum-before{
+  font-size:20px;
+  font-weight:700;
+  color:#37474f;
+}
+#summary .sum-result-label{
+  font-size:19px;
+  font-weight:900;
+  color:#2e7d32;
+}
+#summary .sum-result{
+  font-size:21px;
+  font-weight:800;
+  color:#1b5e20;
+}
+</style>
+
+
+<style>
+/* ===== 37 條 Instruction 分組：動態進度狀態 ===== */
+#groups .inst-group{
+  margin:6px 0;
+  padding:5px 9px;
+  border-radius:8px;
+  transition:background-color .18s ease, opacity .18s ease;
+}
+#groups .inst-group.past{
+  color:#9aa0a6;
+  opacity:.62;
+  background:#f3f4f6;
+}
+#groups .inst-group.past .groupTitle,
+#groups .inst-group.past .group-items{
+  color:#9aa0a6;
+  text-decoration:none;
+}
+#groups .inst-group.current{
+  background:#fff3cd;
+  border-left:5px solid #e0a800;
+  color:#17365d;
+  font-weight:800;
+}
+#groups .inst-group.current .groupTitle{
+  color:#b45309;
+}
+#groups .inst-group.current .group-items{
+  color:#17365d;
+}
+#groups .inst-group.future{
+  color:#17365d;
+}
+#groups .inst-group .state-badge{
+  display:inline-block;
+  margin-left:8px;
+  padding:1px 7px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  vertical-align:middle;
+}
+#groups .inst-group.current .state-badge{
+  background:#e0a800;
+  color:#fff;
+}
+#groups .inst-group.past .state-badge{
+  background:#d5d8dc;
+  color:#666;
+}
+</style>
+
+
+<style>
+/* ===== 分組內每條 instruction 的動態進度 ===== */
+#groups .inst-item{
+  display:inline-block;
+  padding:1px 4px;
+  border-radius:5px;
+  transition:all .15s ease;
+}
+#groups .inst-item.done{
+  color:#a5a5a5 !important;
+  opacity:.58;
+}
+#groups .inst-item.now{
+  color:#fff !important;
+  background:#d99000;
+  font-weight:900;
+  padding:2px 7px;
+}
+#groups .inst-item.todo{
+  color:#17365d;
+}
+#groups .sep{
+  color:#7b8794;
+  margin:0 2px;
+}
+#groups .inst-group.past .inst-item{
+  color:#a5a5a5 !important;
+  opacity:.58;
+}
+</style>
+
+</head><body>
+<header><div class="wrap"><h1 style="margin:0">Lab 1｜作業 37 條 RV32I Instruction 完整動態教學｜最終審核修正版</h1>
+<div>依附件專案 <code>src/inst.h</code> 的 37 個必要 <code>inst_enum_t</code> 順序建立；Decode / Execute 語意依 <code>src/core.c</code>。37 個 Case 為獨立教學範例。</div></div></header>
+<div class="toolbar"><div class="wrap nav"><button id="prev">← 上一個</button><span class="counter" id="counter"></span><button id="next">下一個 →</button><span id="buttons"></span></div></div>
+<main>
+<div class="summary" id="summary"></div>
+<div class="pipeline" id="pipeline"></div>
+<div class="section"><h2>目前 Instruction：C code → Assembly → Fields → Binary → Hex</h2><div class="diagram" id="diagram"></div>
+<div class="encoding"><div class="mini"><h3>① C code → Assembly</h3><div id="ca"></div></div><div class="mini"><h3>② Fields = ?</h3><div id="fields"></div></div><div class="mini"><h3>③ 32-bit Binary</h3><div id="bin"></div></div><div class="mini"><h3>④ Binary → Hex</h3><div id="hx"></div></div></div></div>
+<div class="section"><h2>37 條作業 Instruction 分組</h2>
+<div style="margin:0 0 10px;color:#52606d;font-size:14px">
+<span style="color:#a5a5a5">灰色＝已跑過</span>　｜　
+<span style="background:#d99000;color:#fff;padding:2px 7px;border-radius:5px;font-weight:800">橘色＝目前 instruction</span>　｜　
+<span style="color:#17365d">深藍＝尚未執行</span>
+</div><div id="groups"></div></div>
+<div class="section"><h2>PC 教學示意軌跡</h2><div class="trail" id="trail"></div><div class="note" style="margin-top:10px">這 37 個頁面是「各指令獨立的教學 Case」，不是宣稱它們真的組成同一支可直接執行的 37-instruction 程式。下方 PC 僅用來示範各類指令如何產生 new_pc：一般 instruction 預設 PC+4；此處 Branch 範例刻意設定為 taken，因此示範 PC+8；JAL 示範 PC+16；JALR 則使用該 Case 指定的 rs1+imm 目標。每個 Case 的 register/memory 執行前狀態也是獨立設定，目的是讓該 instruction 的效果清楚可見。</div></div>
+
+<div class="section">
+<h2>本版審核後的重要校正</h2>
+<div class="note">
+<b>① 37 條指令：</b>依附件 <code>src/inst.h</code>，必要指令確實是
+OP 10 + OP-IMM 9 + LOAD 5 + STORE 3 + BRANCH 6 + JAL/JALR/AUIPC/LUI 各 1 = 37；
+<code>inst_invalid</code> 是額外的無效分類，不算第 38 條作業指令。<br><br>
+<b>② enum 數值：</b><code>inst_add=0</code>，之後依宣告順序遞增到 <code>inst_lui=36</code>；
+<code>inst_invalid=37</code>。這是因為附件 enum 沒有另外指定整數值。<br><br>
+<b>③ Fetch：</b>附件 <code>Core_fetch()</code> 從 <code>current_pc</code> 經 MemoryMap 讀 4 bytes，
+按 little-endian 組成 <code>inst_fields_t.raw</code>。<br><br>
+<b>④ Decode：</b>輸出 <code>inst_enum_t</code>，不在此階段修改 register 或 memory。
+<code>inst_sll</code> 等名稱表示「辨識出的指令種類」，不是 ALU 計算結果。<br><br>
+<b>⑤ Execute / PC：</b><code>Core_execute()</code> 先令 <code>new_pc=current_pc+4</code>；
+Branch taken、JAL、JALR 可覆寫。Register write-back 與 LOAD/STORE memory side effect 在 Execute 內完成；
+<code>Core_update_pc()</code> 最後才做 <code>current_pc=new_pc</code>。<br><br>
+<b>⑥ 37 個 Case 的關係：</b>本頁每個 Case 的 operand/register/memory 初值是獨立的教學設定，
+因此不可把 37 個 Case 的 register state 誤解成同一支程式逐條自然延續的完整 architectural state。
+PC 數字主要用來展示 PC+4、Branch、JAL、JALR 的規則。
+</div>
+</div>
+
+</main>
+<script>
+const cases=[{"name": "ADD", "category": "OP", "format": "R-type", "pc": "0x1000", "next": "0x1004", "asm": "add x5, x6, x7", "c": "x5 = x6 + x7;", "hex": "0x007302B3", "binary": "00000000011100110000001010110011", "grouped": "0000 0000 0111 0011 0000 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_add", "enumValue": 0, "before": "x6=20, x7=3", "effect": "x5=23"}, {"name": "SUB", "category": "OP", "format": "R-type", "pc": "0x1004", "next": "0x1008", "asm": "sub x5, x6, x7", "c": "x5 = x6 - x7;", "hex": "0x407302B3", "binary": "01000000011100110000001010110011", "grouped": "0100 0000 0111 0011 0000 0010 1011 0011", "fields": [["funct7", "0100000", "0x20"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sub", "enumValue": 1, "before": "x6=20, x7=3", "effect": "x5=17"}, {"name": "SLL", "category": "OP", "format": "R-type", "pc": "0x1008", "next": "0x100C", "asm": "sll x5, x6, x7", "c": "x5 = x6 << (x7 & 31);", "hex": "0x007312B3", "binary": "00000000011100110001001010110011", "grouped": "0000 0000 0111 0011 0001 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "001", "1"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sll", "enumValue": 2, "before": "x6=5, x7=2", "effect": "x5=20"}, {"name": "SLT", "category": "OP", "format": "R-type", "pc": "0x100C", "next": "0x1010", "asm": "slt x5, x6, x7", "c": "x5 = ((int32_t)x6 < (int32_t)x7);", "hex": "0x007322B3", "binary": "00000000011100110010001010110011", "grouped": "0000 0000 0111 0011 0010 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "010", "2"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_slt", "enumValue": 3, "before": "x6=-3, x7=2", "effect": "x5=1"}, {"name": "SLTU", "category": "OP", "format": "R-type", "pc": "0x1010", "next": "0x1014", "asm": "sltu x5, x6, x7", "c": "x5 = ((uint32_t)x6 < (uint32_t)x7);", "hex": "0x007332B3", "binary": "00000000011100110011001010110011", "grouped": "0000 0000 0111 0011 0011 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "011", "3"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sltu", "enumValue": 4, "before": "x6=3, x7=20", "effect": "x5=1"}, {"name": "XOR", "category": "OP", "format": "R-type", "pc": "0x1014", "next": "0x1018", "asm": "xor x5, x6, x7", "c": "x5 = x6 ^ x7;", "hex": "0x007342B3", "binary": "00000000011100110100001010110011", "grouped": "0000 0000 0111 0011 0100 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "100", "4"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_xor", "enumValue": 5, "before": "x6=0x0F0F, x7=0x00FF", "effect": "x5=0x00000FF0"}, {"name": "SRL", "category": "OP", "format": "R-type", "pc": "0x1018", "next": "0x101C", "asm": "srl x5, x6, x7", "c": "x5 = (uint32_t)x6 >> (x7 & 31);", "hex": "0x007352B3", "binary": "00000000011100110101001010110011", "grouped": "0000 0000 0111 0011 0101 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_srl", "enumValue": 6, "before": "x6=0x80000000, x7=2", "effect": "x5=0x20000000"}, {"name": "SRA", "category": "OP", "format": "R-type", "pc": "0x101C", "next": "0x1020", "asm": "sra x5, x6, x7", "c": "x5 = ((int32_t)x6) >> (x7 & 31);", "hex": "0x407352B3", "binary": "01000000011100110101001010110011", "grouped": "0100 0000 0111 0011 0101 0010 1011 0011", "fields": [["funct7", "0100000", "0x20"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_sra", "enumValue": 7, "before": "x6=0x80000000, x7=2", "effect": "x5=0xE0000000"}, {"name": "OR", "category": "OP", "format": "R-type", "pc": "0x1020", "next": "0x1024", "asm": "or x5, x6, x7", "c": "x5 = x6 | x7;", "hex": "0x007362B3", "binary": "00000000011100110110001010110011", "grouped": "0000 0000 0111 0011 0110 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "110", "6"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_or", "enumValue": 8, "before": "x6=0x0F00, x7=0x00F0", "effect": "x5=0x00000FF0"}, {"name": "AND", "category": "OP", "format": "R-type", "pc": "0x1024", "next": "0x1028", "asm": "and x5, x6, x7", "c": "x5 = x6 & x7;", "hex": "0x007372B3", "binary": "00000000011100110111001010110011", "grouped": "0000 0000 0111 0011 0111 0010 1011 0011", "fields": [["funct7", "0000000", "0x00"], ["rs2", "00111", "x7"], ["rs1", "00110", "x6"], ["funct3", "111", "7"], ["rd", "00101", "x5"], ["opcode", "0110011", "0x33"]], "enum": "inst_and", "enumValue": 9, "before": "x6=0x0FF0, x7=0x00FF", "effect": "x5=0x000000F0"}, {"name": "ADDI", "category": "OP-IMM", "format": "I-type", "pc": "0x1028", "next": "0x102C", "asm": "addi x5, x6, 10", "c": "x5 = x6 + 10;", "hex": "0x00A30293", "binary": "00000000101000110000001010010011", "grouped": "0000 0000 1010 0011 0000 0010 1001 0011", "fields": [["imm[11:0]", "000000001010", "10"], ["rs1", "00110", "x6"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_addi", "enumValue": 10, "before": "x6=20", "effect": "x5=30"}, {"name": "SLTI", "category": "OP-IMM", "format": "I-type", "pc": "0x102C", "next": "0x1030", "asm": "slti x5, x6, 10", "c": "x5 = ((int32_t)x6 < 10);", "hex": "0x00A32293", "binary": "00000000101000110010001010010011", "grouped": "0000 0000 1010 0011 0010 0010 1001 0011", "fields": [["imm[11:0]", "000000001010", "10"], ["rs1", "00110", "x6"], ["funct3", "010", "2"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_slti", "enumValue": 11, "before": "x6=-3", "effect": "x5=1"}, {"name": "SLTIU", "category": "OP-IMM", "format": "I-type", "pc": "0x1030", "next": "0x1034", "asm": "sltiu x5, x6, 10", "c": "x5 = ((uint32_t)x6 < (uint32_t)10);", "hex": "0x00A33293", "binary": "00000000101000110011001010010011", "grouped": "0000 0000 1010 0011 0011 0010 1001 0011", "fields": [["imm[11:0]", "000000001010", "10"], ["rs1", "00110", "x6"], ["funct3", "011", "3"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_sltiu", "enumValue": 12, "before": "x6=3", "effect": "x5=1"}, {"name": "XORI", "category": "OP-IMM", "format": "I-type", "pc": "0x1034", "next": "0x1038", "asm": "xori x5, x6, 15", "c": "x5 = x6 ^ 15;", "hex": "0x00F34293", "binary": "00000000111100110100001010010011", "grouped": "0000 0000 1111 0011 0100 0010 1001 0011", "fields": [["imm[11:0]", "000000001111", "15"], ["rs1", "00110", "x6"], ["funct3", "100", "4"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_xori", "enumValue": 13, "before": "x6=0xF0", "effect": "x5=0x000000FF"}, {"name": "ORI", "category": "OP-IMM", "format": "I-type", "pc": "0x1038", "next": "0x103C", "asm": "ori x5, x6, 15", "c": "x5 = x6 | 15;", "hex": "0x00F36293", "binary": "00000000111100110110001010010011", "grouped": "0000 0000 1111 0011 0110 0010 1001 0011", "fields": [["imm[11:0]", "000000001111", "15"], ["rs1", "00110", "x6"], ["funct3", "110", "6"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_ori", "enumValue": 14, "before": "x6=0xF0", "effect": "x5=0x000000FF"}, {"name": "ANDI", "category": "OP-IMM", "format": "I-type", "pc": "0x103C", "next": "0x1040", "asm": "andi x5, x6, 15", "c": "x5 = x6 & 15;", "hex": "0x00F37293", "binary": "00000000111100110111001010010011", "grouped": "0000 0000 1111 0011 0111 0010 1001 0011", "fields": [["imm[11:0]", "000000001111", "15"], ["rs1", "00110", "x6"], ["funct3", "111", "7"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_andi", "enumValue": 15, "before": "x6=0xFF", "effect": "x5=0x0000000F"}, {"name": "SLLI", "category": "OP-IMM", "format": "I-type shift", "pc": "0x1040", "next": "0x1044", "asm": "slli x5, x6, 3", "c": "x5 = x6 << 3;", "hex": "0x00331293", "binary": "00000000001100110001001010010011", "grouped": "0000 0000 0011 0011 0001 0010 1001 0011", "fields": [["imm[11:0]", "000000000011", "3"], ["rs1", "00110", "x6"], ["funct3", "001", "1"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_slli", "enumValue": 16, "before": "x6=5", "effect": "x5=40"}, {"name": "SRLI", "category": "OP-IMM", "format": "I-type shift", "pc": "0x1044", "next": "0x1048", "asm": "srli x5, x6, 3", "c": "x5 = (uint32_t)x6 >> 3;", "hex": "0x00335293", "binary": "00000000001100110101001010010011", "grouped": "0000 0000 0011 0011 0101 0010 1001 0011", "fields": [["imm[11:0]", "000000000011", "3"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_srli", "enumValue": 17, "before": "x6=0x80000000", "effect": "x5=0x10000000"}, {"name": "SRAI", "category": "OP-IMM", "format": "I-type shift", "pc": "0x1048", "next": "0x104C", "asm": "srai x5, x6, 3", "c": "x5 = ((int32_t)x6) >> 3;", "hex": "0x40335293", "binary": "01000000001100110101001010010011", "grouped": "0100 0000 0011 0011 0101 0010 1001 0011", "fields": [["imm[11:0]", "010000000011", "1027"], ["rs1", "00110", "x6"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0010011", "0x13"]], "enum": "inst_srai", "enumValue": 18, "before": "x6=0x80000000", "effect": "x5=0xF0000000"}, {"name": "LB", "category": "LOAD", "format": "I-type", "pc": "0x104C", "next": "0x1050", "asm": "lb x5, 8(x10)", "c": "x5 = sign_extend_8(Memory8[x10+8]);", "hex": "0x00850283", "binary": "00000000100001010000001010000011", "grouped": "0000 0000 1000 0101 0000 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "000", "0"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lb", "enumValue": 19, "before": "x10=0x2000, Memory8[0x2008]=0x80", "effect": "x5=0xFFFFFF80"}, {"name": "LH", "category": "LOAD", "format": "I-type", "pc": "0x1050", "next": "0x1054", "asm": "lh x5, 8(x10)", "c": "x5 = sign_extend_16(Memory16[x10+8]);", "hex": "0x00851283", "binary": "00000000100001010001001010000011", "grouped": "0000 0000 1000 0101 0001 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "001", "1"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lh", "enumValue": 20, "before": "x10=0x2000, Memory16[0x2008]=0x8001", "effect": "x5=0xFFFF8001"}, {"name": "LW", "category": "LOAD", "format": "I-type", "pc": "0x1054", "next": "0x1058", "asm": "lw x5, 8(x10)", "c": "x5 = Memory32[x10+8];", "hex": "0x00852283", "binary": "00000000100001010010001010000011", "grouped": "0000 0000 1000 0101 0010 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "010", "2"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lw", "enumValue": 21, "before": "x10=0x2000, Memory32[0x2008]=100", "effect": "x5=100"}, {"name": "LBU", "category": "LOAD", "format": "I-type", "pc": "0x1058", "next": "0x105C", "asm": "lbu x5, 8(x10)", "c": "x5 = zero_extend_8(Memory8[x10+8]);", "hex": "0x00854283", "binary": "00000000100001010100001010000011", "grouped": "0000 0000 1000 0101 0100 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "100", "4"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lbu", "enumValue": 22, "before": "x10=0x2000, Memory8[0x2008]=0x80", "effect": "x5=0x00000080"}, {"name": "LHU", "category": "LOAD", "format": "I-type", "pc": "0x105C", "next": "0x1060", "asm": "lhu x5, 8(x10)", "c": "x5 = zero_extend_16(Memory16[x10+8]);", "hex": "0x00855283", "binary": "00000000100001010101001010000011", "grouped": "0000 0000 1000 0101 0101 0010 1000 0011", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "101", "5"], ["rd", "00101", "x5"], ["opcode", "0000011", "0x03"]], "enum": "inst_lhu", "enumValue": 23, "before": "x10=0x2000, Memory16[0x2008]=0x8001", "effect": "x5=0x00008001"}, {"name": "SB", "category": "STORE", "format": "S-type", "pc": "0x1060", "next": "0x1064", "asm": "sb x5, 8(x10)", "c": "Memory8[x10+8] = x5 & 0xFF;", "hex": "0x00550423", "binary": "00000000010101010000010000100011", "grouped": "0000 0000 0101 0101 0000 0100 0010 0011", "fields": [["imm[11:5]", "0000000", "high"], ["rs2", "00101", "x5"], ["rs1", "01010", "x10"], ["funct3", "000", "0"], ["imm[4:0]", "01000", "low"], ["opcode", "0100011", "0x23"]], "enum": "inst_sb", "enumValue": 24, "before": "x10=0x2000, x5=0x12345678", "effect": "Memory8[0x2008] ← 0x78"}, {"name": "SH", "category": "STORE", "format": "S-type", "pc": "0x1064", "next": "0x1068", "asm": "sh x5, 8(x10)", "c": "Memory16[x10+8] = x5 & 0xFFFF;", "hex": "0x00551423", "binary": "00000000010101010001010000100011", "grouped": "0000 0000 0101 0101 0001 0100 0010 0011", "fields": [["imm[11:5]", "0000000", "high"], ["rs2", "00101", "x5"], ["rs1", "01010", "x10"], ["funct3", "001", "1"], ["imm[4:0]", "01000", "low"], ["opcode", "0100011", "0x23"]], "enum": "inst_sh", "enumValue": 25, "before": "x10=0x2000, x5=0x12345678", "effect": "Memory16[0x2008] ← 0x5678"}, {"name": "SW", "category": "STORE", "format": "S-type", "pc": "0x1068", "next": "0x106C", "asm": "sw x5, 8(x10)", "c": "Memory32[x10+8] = x5;", "hex": "0x00552423", "binary": "00000000010101010010010000100011", "grouped": "0000 0000 0101 0101 0010 0100 0010 0011", "fields": [["imm[11:5]", "0000000", "high"], ["rs2", "00101", "x5"], ["rs1", "01010", "x10"], ["funct3", "010", "2"], ["imm[4:0]", "01000", "low"], ["opcode", "0100011", "0x23"]], "enum": "inst_sw", "enumValue": 26, "before": "x10=0x2000, x5=0x12345678", "effect": "Memory32[0x2008] ← 0x12345678"}, {"name": "BEQ", "category": "BRANCH", "format": "B-type", "pc": "0x106C", "next": "0x1074", "asm": "beq x5, x6, 8", "c": "if (x5 == x6) PC += 8;", "hex": "0x00628463", "binary": "00000000011000101000010001100011", "grouped": "0000 0000 0110 0010 1000 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "000", "0"], ["opcode", "1100011", "0x63"]], "enum": "inst_beq", "enumValue": 27, "before": "x5=10, x6=10", "effect": "taken → new_pc=PC+8"}, {"name": "BNE", "category": "BRANCH", "format": "B-type", "pc": "0x1074", "next": "0x107C", "asm": "bne x5, x6, 8", "c": "if (x5 != x6) PC += 8;", "hex": "0x00629463", "binary": "00000000011000101001010001100011", "grouped": "0000 0000 0110 0010 1001 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "001", "1"], ["opcode", "1100011", "0x63"]], "enum": "inst_bne", "enumValue": 28, "before": "x5=10, x6=20", "effect": "taken → new_pc=PC+8"}, {"name": "BLT", "category": "BRANCH", "format": "B-type", "pc": "0x107C", "next": "0x1084", "asm": "blt x5, x6, 8", "c": "if ((int32_t)x5 < (int32_t)x6) PC += 8;", "hex": "0x0062C463", "binary": "00000000011000101100010001100011", "grouped": "0000 0000 0110 0010 1100 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "100", "4"], ["opcode", "1100011", "0x63"]], "enum": "inst_blt", "enumValue": 29, "before": "x5=-1, x6=1", "effect": "taken → new_pc=PC+8"}, {"name": "BGE", "category": "BRANCH", "format": "B-type", "pc": "0x1084", "next": "0x108C", "asm": "bge x5, x6, 8", "c": "if ((int32_t)x5 >= (int32_t)x6) PC += 8;", "hex": "0x0062D463", "binary": "00000000011000101101010001100011", "grouped": "0000 0000 0110 0010 1101 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "101", "5"], ["opcode", "1100011", "0x63"]], "enum": "inst_bge", "enumValue": 30, "before": "x5=5, x6=1", "effect": "taken → new_pc=PC+8"}, {"name": "BLTU", "category": "BRANCH", "format": "B-type", "pc": "0x108C", "next": "0x1094", "asm": "bltu x5, x6, 8", "c": "if ((uint32_t)x5 < (uint32_t)x6) PC += 8;", "hex": "0x0062E463", "binary": "00000000011000101110010001100011", "grouped": "0000 0000 0110 0010 1110 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "110", "6"], ["opcode", "1100011", "0x63"]], "enum": "inst_bltu", "enumValue": 31, "before": "x5=1, x6=5", "effect": "taken → new_pc=PC+8"}, {"name": "BGEU", "category": "BRANCH", "format": "B-type", "pc": "0x1094", "next": "0x109C", "asm": "bgeu x5, x6, 8", "c": "if ((uint32_t)x5 >= (uint32_t)x6) PC += 8;", "hex": "0x0062F463", "binary": "00000000011000101111010001100011", "grouped": "0000 0000 0110 0010 1111 0100 0110 0011", "fields": [["imm", "8", "B-type distributed"], ["rs2", "00110", "x6"], ["rs1", "00101", "x5"], ["funct3", "111", "7"], ["opcode", "1100011", "0x63"]], "enum": "inst_bgeu", "enumValue": 32, "before": "x5=5, x6=1", "effect": "taken → new_pc=PC+8"}, {"name": "JAL", "category": "JAL", "format": "J-type", "pc": "0x109C", "next": "0x10AC", "asm": "jal x1, 16", "c": "x1 = PC+4; PC = PC+16;", "hex": "0x010000EF", "binary": "00000001000000000000000011101111", "grouped": "0000 0001 0000 0000 0000 0000 1110 1111", "fields": [["imm", "16", "J-type distributed"], ["rd", "00001", "x1"], ["opcode", "1101111", "0x6F"]], "enum": "inst_jal", "enumValue": 33, "before": "current_pc 如本 Case 顯示", "effect": "x1=0x10A0；new_pc=0x10AC"}, {"name": "JALR", "category": "JALR", "format": "I-type", "pc": "0x10AC", "next": "0x10CC", "asm": "jalr x1, 8(x10)", "c": "x1 = PC+4; PC = (x10+8)&~1;", "hex": "0x008500E7", "binary": "00000000100001010000000011100111", "grouped": "0000 0000 1000 0101 0000 0000 1110 0111", "fields": [["imm[11:0]", "000000001000", "8"], ["rs1", "01010", "x10"], ["funct3", "000", "0"], ["rd", "00001", "x1"], ["opcode", "1100111", "0x67"]], "enum": "inst_jalr", "enumValue": 34, "before": "x10=0x10C4 (= current_pc+0x18)", "effect": "x1=0x10B0；new_pc=(0x10C4+8)&~1=0x10CC"}, {"name": "AUIPC", "category": "AUIPC", "format": "U-type", "pc": "0x10CC", "next": "0x10D0", "asm": "auipc x5, 0x1", "c": "x5 = PC + 0x00001000;", "hex": "0x00001297", "binary": "00000000000000000001001010010111", "grouped": "0000 0000 0000 0000 0001 0010 1001 0111", "fields": [["imm[31:12]", "00000000000000000001", "0x1"], ["rd", "00101", "x5"], ["opcode", "0010111", "0x17"]], "enum": "inst_auipc", "enumValue": 35, "before": "current_pc 如本 Case 顯示", "effect": "x5=0x10CC+0x1000=0x20CC"}, {"name": "LUI", "category": "LUI", "format": "U-type", "pc": "0x10D0", "next": "0x10D4", "asm": "lui x5, 0x1", "c": "x5 = 0x00001000;", "hex": "0x000012B7", "binary": "00000000000000000001001010110111", "grouped": "0000 0000 0000 0000 0001 0010 1011 0111", "fields": [["imm[31:12]", "00000000000000000001", "0x1"], ["rd", "00101", "x5"], ["opcode", "0110111", "0x37"]], "enum": "inst_lui", "enumValue": 36, "before": "—", "effect": "x5=0x00001000"}];
+let idx=0;
+function fmt(c){return c.fields.map(f=>`${f[0]} = ${f[1]}  (${f[2]})`).join("\n")}
+function stage(c,n){
+ if(n===0)return {t:"Core_fetch()",i:`current_pc = ${c.pc}\nMemory / MemoryMap`,o:`inst_fields_t\nraw = ${c.hex}\n${fmt(c)}`,d:`以 current_pc=${c.pc} 為 instruction address 讀 4 bytes（32 bits）。附件 core.c 的 Core_fetch() 實際先把 4 個 little-endian bytes 組成 inst_fields_t.ret.raw；因 inst_fields_t 是 union，之後可用 R/I/S/U/B/J 對應視圖解讀相同的 32 bits。Fetch 本身不執行 ${c.name}。`};
+ if(n===1)return {t:"Core_decode()",i:`inst_fields_t\n${fmt(c)}`,o:`inst_enum_t = ${c.enum}\nenum 底層值 = ${c.enumValue}\n\n意思：這條 instruction 被辨識為 ${c.name}`,d:`${c.enum} 是「指令種類」的 enum，不是運算結果，也不是 opcode。附件 src/inst.h 沒有手動指定 inst_enum_t 的數值，因此依 C enum 規則由 inst_add=0 依序遞增；本 Case 的值為 ${c.enumValue}。core.c 會先取 opcode、func3、func7 所在 bit 位置來分類，但 funct7 並不是所有 instruction format 都具有的獨立語意欄位；例如一般 I-type 的 bits[31:20] 是 immediate。真正的 ${c.name} 運算在下一階段 Core_execute()。`};
+ if(n===2)return {t:"Core_execute()",i:`inst_enum_t = ${c.enum}\ninst_fields_t\n執行前：${c.before}`,o:`${c.effect}\nnew_pc = ${c.next}`,d:`Execute 同時需要「做什麼」(${c.enum}) 與「對哪些 operand 做」(inst_fields_t)。依附件 core.c 執行 ${c.name}；register write-back 與 LOAD/STORE 的 memory side effect 都在 Core_execute() 內完成。new_pc 一開始預設為 current_pc+4，Branch/JAL/JALR 可覆寫；真正把 new_pc 寫成 current_pc 則留到 Core_update_pc()。`};
+ return {t:"Core_update_pc()",i:`new_pc = ${c.next}`,o:`current_pc ← ${c.next}\n下一個實際執行 instruction 從此位址 Fetch`,d:`這一步只提交 Execute 已算好的 new_pc，不重新 Decode，也不重新做 ${c.name} 運算。`};
+}
+function diagram(c){
+ const map={
+ "R-type":[["funct7",31,25],["rs2",24,20],["rs1",19,15],["funct3",14,12],["rd",11,7],["opcode",6,0]],
+ "I-type":[["imm[11:0]",31,20],["rs1",19,15],["funct3",14,12],["rd",11,7],["opcode",6,0]],
+ "I-type shift":[["funct7",31,25],["shamt",24,20],["rs1",19,15],["funct3",14,12],["rd",11,7],["opcode",6,0]],
+ "S-type":[["imm[11:5]",31,25],["rs2",24,20],["rs1",19,15],["funct3",14,12],["imm[4:0]",11,7],["opcode",6,0]],
+ "B-type":[["imm[12|10:5]",31,25],["rs2",24,20],["rs1",19,15],["funct3",14,12],["imm[4:1|11]",11,7],["opcode",6,0]],
+ "J-type":[["imm[20|10:1|11|19:12]",31,12],["rd",11,7],["opcode",6,0]],
+ "U-type":[["imm[31:12]",31,12],["rd",11,7],["opcode",6,0]]
+ };
+ let f=map[c.format],W=1200,H=150,L=35,T=34,U=1130,bw=U/32,s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W}" height="${H}" rx="12" fill="#f8fbff"/>`;
+ f.forEach(a=>{let [nm,hi,lo]=a,w=(hi-lo+1)*bw,x=L+(31-hi)*bw,range=(hi===lo?`[${hi}]`:`[${hi}:${lo}]`);s+=`<rect x="${x}" y="${T}" width="${w}" height="68" fill="${({"funct7":"#ffd9d9","rs2":"#eadcff","rs1":"#d9ebff","funct3":"#ffe7c7","rd":"#dcf4df","opcode":"#dde1ff","shamt":"#d6f4f2","imm[11:0]":"#ffe0ed","imm[11:5]":"#ffe0ed","imm[4:0]":"#ffd7e8","imm[12|10:5]":"#ffe0ed","imm[4:1|11]":"#ffd7e8","imm[20|10:1|11|19:12]":"#ffe0ed","imm[31:12]":"#ffe0ed"}[nm]||"#eaf3fb")}" stroke="#376f9f"/><text x="${x+w/2}" y="${T-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#17365d">${range}</text><text x="${x+w/2}" y="${T+29}" text-anchor="middle" font-size="14" font-weight="800" fill="#102a43">${nm}</text>`});s+=`<text x="${W/2}" y="128" text-anchor="middle" font-size="17" font-weight="700">${c.name} · ${c.format} · ${c.asm}</text></svg>`;return s;
+}
+function render(){
+ const c=cases[idx];document.getElementById("counter").textContent=`${idx+1} / 37 · ${c.name} · ${c.category}`;
+ document.getElementById("summary").innerHTML=`<span class="sum-case">Case ${idx+1}：${c.name}</span>　<code class="sum-asm">${c.asm}</code>　｜ <span class="sum-pc-label">PC</span> <span class="sum-pc">${c.pc} → ${c.next}</span>　｜ <span class="sum-machine-label">Machine code</span> <code class="sum-machine">${c.hex}</code><br><span class="sum-before-label">執行前：</span><span class="sum-before">${c.before}</span><br><span class="sum-result-label">Execute 結果：</span><span class="sum-result">${c.effect}</span>`;
+ let p=document.getElementById("pipeline");p.innerHTML="";for(let n=0;n<4;n++){let d=stage(c,n);p.insertAdjacentHTML("beforeend",`<article class="card"><div class="head">${n+1}. ${d.t}</div><div class="body"><div class="lab">INPUT</div><div class="box"><pre>${d.i}</pre></div><div class="lab">OUTPUT / EFFECT</div><div class="box effect"><pre>${d.o}</pre></div><div class="lab">詳細說明</div><div class="detail">${d.d}</div></div></article>`)}
+ document.getElementById("diagram").innerHTML=diagram(c);document.getElementById("ca").innerHTML=`<b>C-like 語意</b><pre>${c.c}</pre><b>Assembly</b><pre>${c.asm}</pre><p><b>Format：</b>${c.format}</p>`;
+ document.getElementById("fields").innerHTML=`<table><tr><th>Field</th><th>Value</th><th>意義</th></tr>${c.fields.map(f=>`<tr><td><b>${f[0]}</b></td><td><code>${f[1]}</code></td><td>${f[2]}</td></tr>`).join("")}</table>`;
+ document.getElementById("bin").innerHTML=`完整 32-bit：<pre>${c.binary}</pre>每 4 bits 分組：<pre>${c.grouped}</pre>`;
+ document.getElementById("hx").innerHTML=`Binary 每 4 bits 轉 1 個 hexadecimal digit：<pre>${c.grouped}</pre><b>Machine code</b><pre>${c.hex}</pre><p>Decode → <code>${c.enum}</code>（enum 值 ${c.enumValue}）</p>`;
+ document.getElementById("trail").innerHTML=cases.map((x,i)=>`<span class="${i===idx?"on":""}">C${i+1} ${x.pc}→${x.next}</span>`).join(" → ");
+ renderGroups();
+ document.getElementById("prev").disabled=idx===0;document.getElementById("next").disabled=idx===36;[...document.querySelectorAll(".caseBtn")].forEach((b,i)=>b.classList.toggle("on",i===idx));
+}
+function keep(fn){const x=scrollX,y=scrollY;fn();scrollTo(x,y);requestAnimationFrame(()=>scrollTo(x,y));setTimeout(()=>scrollTo(x,y),0)}
+document.getElementById("prev").onclick=e=>{e.preventDefault();if(idx>0)keep(()=>{idx--;render()})};document.getElementById("next").onclick=e=>{e.preventDefault();if(idx<36)keep(()=>{idx++;render()})};
+const b=document.getElementById("buttons");cases.forEach((c,i)=>{let x=document.createElement("button");x.className="caseBtn";x.textContent=`${i+1} ${c.name}`;x.onclick=e=>{e.preventDefault();keep(()=>{idx=i;render()})};b.appendChild(x)});
+const cats=["OP","OP-IMM","LOAD","STORE","BRANCH","JAL","JALR","AUIPC","LUI"];
+function renderGroups(){
+ const currentCat=cases[idx].category;
+ const currentGroupIndex=cats.indexOf(currentCat);
+ document.getElementById("groups").innerHTML=cats.map((cat,gi)=>{
+   const state=gi<currentGroupIndex?"past":(gi===currentGroupIndex?"current":"future");
+   const badge=state==="past"?`<span class="state-badge">已完成</span>`:(state==="current"?`<span class="state-badge">目前</span>`:"");
+   const members=cases.map((x,i)=>({name:x.name,category:x.category,index:i})).filter(x=>x.category===cat);
+   const names=members.map((m,j)=>{
+     const itemState=m.index<idx?"done":(m.index===idx?"now":"todo");
+     const sep=j<members.length-1?`<span class="sep">、</span>`:"";
+     return `<span class="inst-item ${itemState}">${m.name}</span>${sep}`;
+   }).join("");
+   return `<div class="inst-group ${state}" aria-current="${state==="current"?"true":"false"}"><span class="groupTitle">${cat}</span>：<span class="group-items">${names}</span>${badge}</div>`;
+ }).join("");
+}
+render();
+</script></body></html>
