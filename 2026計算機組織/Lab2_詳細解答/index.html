@@ -1,0 +1,507 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lab2 作業二詳細解答說明</title><style>body{margin:0;background:#edf3f8;color:#19394f;font:17px/1.95 "Microsoft JhengHei",system-ui}header{padding:40px max(22px,calc((100vw - 1200px)/2));background:linear-gradient(120deg,#17374f,#256886);color:white}main{max-width:1200px;margin:auto;padding:22px}h1{font-size:36px}h2{color:#226c8d}details,.intro{background:white;border:1px solid #cedce7;border-radius:14px;margin:18px 0;padding:22px}summary{font-size:22px;font-weight:bold;cursor:pointer}.body p{margin:16px 0}.button,button,select{display:inline-block;padding:9px 16px;margin:6px 8px 6px 0;border:1px solid #a9c2d5;border-radius:9px;background:white;color:#195477;font:inherit;text-decoration:none}.button.primary{background:#236a91;color:white}nav{position:sticky;top:0;background:#f8fbff;padding:10px 20px;z-index:2;display:flex;flex-wrap:wrap;align-items:center}.note{padding:16px;border-left:5px solid #bf9236;background:#fff6df}.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.map a{padding:16px;background:#e9f3f9;border-radius:9px;text-decoration:none;color:#204f6a}pre{max-height:600px;overflow:auto;white-space:pre;background:#102739;color:#e0f0ff;padding:20px;font:13px/1.7 Consolas,monospace}.count{font-size:13px;color:#617e92}details{scroll-margin-top:110px}@media print{nav,button,.button{display:none}pre{max-height:none;white-space:pre-wrap}details{break-inside:auto}header{background:white;color:#19394f}}</style><style id="tech-theme">@media screen {
+:root{color-scheme:dark;--ink:#dce7f5;--blue:#5bd4ee;--bg:#080f1d;--surface:#111d30;--border:#293a52;--muted:#a3b5cd}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:120px}body{background:radial-gradient(ellipse at 90% 0%,#162748 0,transparent 42%),radial-gradient(ellipse at 0% 55%,#102739 0,transparent 40%),#080f1d;color:#dce7f5;font-family:"Segoe UI","Microsoft JhengHei",system-ui,sans-serif;line-height:1.85;min-height:100vh}::selection{background:#25627b;color:white}
+header{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(115deg,#101d32 0%,#132743 58%,#17354a 100%);border-bottom:1px solid #34516b;padding:48px max(24px,calc((100vw - 1440px)/2));color:#f3f8ff}
+header::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#83c5ea0c 1px,transparent 1px),linear-gradient(90deg,#83c5ea0c 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(90deg,transparent,#000)}
+header::after{content:"";position:absolute;width:280px;height:280px;right:6%;top:-85px;border:1px solid #56cde834;border-radius:50%;box-shadow:0 0 0 40px #56cde809,0 0 0 80px #56cde807;z-index:-1;pointer-events:none}
+h1{font-size:clamp(26px,3.2vw,44px);letter-spacing:.015em;line-height:1.4;font-weight:750;max-width:1180px;margin:14px 0}header p{color:#b8cee4;max-width:1100px}h2{color:#e7f2ff;font-size:22px;letter-spacing:.01em}h3{color:#d2e6fb}a{color:#77d7ed;text-underline-offset:4px}a:hover{color:#b6f0ff}.badge{background:#143e52;border:1px solid #346478;color:#8ee4f3;font-size:12px;letter-spacing:.04em;padding:5px 12px;border-radius:6px}
+main{padding-bottom:60px}.panel,details,.intro{background:linear-gradient(145deg,#142237,#101b2d);border:1px solid #293c55;border-radius:14px;box-shadow:0 12px 32px #02071126}.panel,.intro{padding:24px}.panel{min-width:0}.panel h2:first-child{margin-top:0}details{transition:border-color .18s}details:hover{border-color:#45627f}details[open]{border-color:#3b5673}summary{background:#17253b;color:#e2edfb;font-size:17px;line-height:1.6;padding:17px 20px}summary::marker{color:#63d3ea}details[open]>summary{background:linear-gradient(90deg,#183348,#17253b);border-bottom:1px solid #30465f}details .body{padding-top:8px}.body p{color:#c3d2e5;line-height:2}.intro>h2{color:#87e0f3}
+.toolbar,body>nav:not(.bundleNav){background:#0d182aee;border-bottom:1px solid #2a4058;backdrop-filter:blur(16px);padding:12px max(20px,calc((100vw - 1440px)/2));box-shadow:0 8px 20px #0002;gap:8px}.toolbar{z-index:10}.bundleNav{padding:12px max(20px,calc((100vw - 1440px)/2));background:#0c1728;border-bottom:1px solid #24364e;gap:8px}.bundleNav a{background:transparent;color:#a6bad3;border:1px solid transparent;border-radius:7px;padding:7px 12px;font-size:13px}.bundleNav a:hover{color:#e8f6ff;background:#172b43;border-color:#304962}.bundleNav a[aria-current]{background:#183c52;border-color:#32657a;color:#8fe5f2}
+button,select,input:not([type=checkbox]):not([type=range]),textarea,.button,.pageLink{background:#16263c;color:#dbeafa;border:1px solid #3b526e;border-radius:8px;font:inherit;padding:8px 13px}button,.button{font-size:14px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}button:hover,.button:hover,.pageLink:hover{background:#213b54;border-color:#60b8d5;color:#eafaff;box-shadow:0 0 0 2px #58c4e112}button:disabled{opacity:.4;box-shadow:none}.button.primary,button.active,#compareWorkspace button.active,.sourceTabs .active,.flowNav button.active,.pageLink[aria-current=page],.rowButton.active,.active{background:#184b62;color:#a5f2ff;border-color:#49a9c1}input[type=checkbox],input[type=range]{accent-color:#54c9e5}input[type=range]{padding:0}textarea{background:#0c1728;line-height:1.7}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid #6eddf2;outline-offset:4px}select{max-width:100%}option{background:#16263c;color:#dce7f5}
+pre,.source{background:#080f1c;color:#cbdcf2;border:1px solid #2a3e58;border-radius:10px;font-family:Consolas,"Cascadia Code",monospace;font-size:13px;line-height:1.8;tab-size:4}code{background:#20334b;color:#9ce0f0;border-radius:4px}pre code{background:transparent;padding:0;color:inherit}.codewrap .copy{background:#1d324b;border-color:#405973;color:#b9d7ec}.line b,.cline b{color:#647f9f}.line,.cline{border-left:3px solid transparent}.line:hover,.cline:hover{background:#17283c}.line.hot,.cline.hot{background:#174459;color:#e1fbff;border-left:3px solid #69dfef}.codewrap{margin-top:18px}.compareGrid{gap:20px}
+th,td{border-color:#2c4059;padding:12px}th{background:#1a2e46;color:#a6daf0;font-weight:600}td{color:#c8d7e9}tbody tr:nth-child(even){background:#18273b66}tbody tr:hover{background:#243e5433}table{font-size:14px}table code{overflow-wrap:anywhere}
+.muted,.count,footer,.sourceStatus,.flow small,.meter small{color:#a0b4cd}.count{font-size:12px;letter-spacing:.02em}.pass{background:#12352e;color:#9be3c9;border:1px solid #2a6958}.fail{background:#3d2327;color:#ffb8af;border:1px solid #805056}.ok{color:#8adab8}.notice,.note,.warning{background:#342e21;color:#e9d5a6;border:1px solid #6b5a37;border-left:3px solid #dbb563;border-radius:8px}.dirty{color:#e1bd77}.flow div,.stateGrid div,.stats div{background:#172b40;color:#c6e0f0;border-color:#4bacbe}.statusBox{border-color:#3a526b;background:#14253a}.bar{background:#25364c}.bar span{background:linear-gradient(90deg,#468ddd,#5bd5da)}.cell{background:#172f46;color:#cbefff;border-color:#59b9cf;border-radius:7px}.square{border-color:#45647f;color:#d6e9fb;background:#132439}.boardGrid,.square:nth-child(4n+2),.square:nth-child(n+5):nth-child(-n+8){border-color:#7396b3}.square.fixed{background:#213a53;color:#97d8e8}.square.focus{background:#66511f;color:#fff0bb}.square small{color:#a0b4cd}.square.check{box-shadow:inset 0 0 0 3px #59cadd}.toast{background:#184459;border:1px solid #43859a;color:#c4f4ff;box-shadow:0 12px 36px #0005}
+.map{gap:14px;counter-reset:modules}.map a{position:relative;background:linear-gradient(140deg,#18334a,#16243b);border:1px solid #36546e;color:#cae5f5;padding:20px;min-height:125px;border-radius:10px;transition:border-color .2s,transform .2s}.map a::before{counter-increment:modules;content:"0" counter(modules);display:block;font:12px/1.4 Consolas,monospace;color:#65d6eb;margin-bottom:12px}.map a:hover{border-color:#64bfd8;transform:translateY(-3px)}.rowButton{border-top-color:#30445d;color:#bdcee4}.tree details{box-shadow:none}.tree summary{font-size:14px}.sourceTabs{padding-bottom:8px}#pairTitle{color:#80dcef}#flow svg{background:#eef5fb;border-radius:12px;padding:8px}footer{border-top:1px solid #263a51}.topLink{color:#89dff0}::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-track{background:#0c1626}::-webkit-scrollbar-thumb{background:#3a526c;border:2px solid #0c1626;border-radius:8px}
+@media(max-width:650px){header{padding:28px 20px}header::after{right:-160px}h1{font-size:27px}.panel,.intro{padding:18px}main{padding-left:12px;padding-right:12px}summary{font-size:16px;padding:14px}.bundleNav{padding:10px 12px}.bundleNav a{font-size:12px;padding:6px 8px}.toolbar,body>nav:not(.bundleNav){padding:10px 12px;position:static}.map{grid-template-columns:repeat(2,minmax(0,1fr))}.map a{padding:14px;min-height:110px}button,select{min-height:40px}.compareGrid .source{height:400px;max-height:400px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}.map a:hover{transform:none}}
+}
+</style></head><body><header><p>計算機組織2026｜Lab2</p><h1>作業二：完整解答與程式詳解</h1><p>從題目需求、兩題實作到共同規格、建置提交與逐項查核</p></header><nav><select id="jump" aria-label="首頁章節"><option value="">選擇分頁或程式介紹</option><option value="page0">項目一：32-bit有號整數陣列排序</option><option value="page1">項目二：4×4數獨求解器</option><option value="page2">共同開發規格：RV32I、ABI與資源限制</option><option value="page3">建置、提交與正式驗收</option><option value="page4">43項規格查核：程式與流程圖</option><option value="code0">merge(4).c</option><option value="code1">merge(6).S</option><option value="code2">sudoku(3).c</option><option value="code3">sudoku(5).S</option><option value="code4">test-local(3).sh</option></select><button id="expand">全部展開</button><button id="collapse">全部收合</button><button id="print">列印／存PDF</button></nav><main><section class="intro"><h2>作業二要完成什麼？</h2><p>交付兩個RV32I組合語言函式：merge.S以Merge Sort排序有號整數；sudoku.S求解4×4數獨。兩者直接修改呼叫者提供的原始記憶體，遵守ABI與資源限制，並正確返回。正式解答不需另交報告。</p><div class="map"><a href="#page0">排序解答<br>分割、合併、回寫</a><a href="#page1">數獨解答<br>檢查、試填、回溯</a><a href="#page2">共同規格<br>指令、ABI、容量</a><a href="#page3">建置提交<br>測試、版本、成績</a><a href="#page4">逐項查核<br>需求、程式、證據</a></div><p>建議依序閱讀兩題解答與共同規格，再進入建置提交和逐項查核。下方每個分頁及每份程式均有超過500個中文字的說明。</p><p class="note">附件5份程式與上一版內嵌來源逐位元組相同，分頁解答仍對應此版來源。首頁中的解答介紹不等於本次已重新執行官方批改；43項教學查核與官方測試ID需依實際資料判讀。</p></section><h2>五個分頁：功能、目的與閱讀重點</h2><details id="page0" open><summary>01｜項目一：32-bit有號整數陣列排序</summary><div class="body"><p class="count">本分頁功能與目的介紹：640個中文字</p><p>這一頁的主要目的，是讓你看懂第一題從規格到程式的完整解答。作業要求把零到一百二十八個有號三十二位元整數排成升序，結果寫回原本陣列，而且每個值與出現次數都必須保留。指定的方法是合併排序，因此不能只用另一種演算法得到相同結果。頁面先說明輸入位址與元素數如何透過暫存器傳入，再介紹分割左右兩半、分別排序、合併到暫存區以及寫回原陣列的流程，讓每個步驟都有明確目的。</p><p>多視窗區把左側的Ｃ呼叫者和右側的組合語言實作放在一起。左側負責建立陣列、呼叫排序以及檢查升序，右側才負責真正的合併排序。點選主題或程式行，可以看到相關位置反白及下方說明。這種對照可以幫助你理解跨語言呼叫，不會把驗證程式誤當成排序演算法。程式原文保留，複製時可以取得原始内容，便於回到課程環境繼續查看。</p><p>逐步示範區讓你輸入陣列，觀察原陣列與共享暫存區的不同狀態。分割時只是改變區間，合併時先填暫存區，回寫時才更新原陣列。透過上一步、下一步及滑桿，可以把數值變化和指令位置連起來。建議先看四個元素的例子，再測空陣列、重複值、逆序與正負極值，避免一次看太多步驟而失去資料流的方向。</p><p>本頁特別解釋有號比較與索引比較的差別。元素可能是負數，應以有號分支比較；索引與長度則是非負的邊界數值。元素位址由索引乘四取得，暫存區避免提早覆蓋尚未讀取的元素。最後還會說明函式保存返回位址與暫存器，以及如何確認排序結果不只升序，也保留全部原值。</p><p>閱讀完成後，你應能回答三個問題：為什麼必須先完成左右兩半，為什麼不能直接覆蓋原陣列，以及Ｃ的驗證結果能證明哪些條件。頁面的動畫是教學模型，不能取代組合語言執行。真正驗收仍要在課程容器中測試目前儲存的解答，並核對提交版本。</p><a class="button primary" href="Lab2_項目一_多視窗互動.html">進入此分頁</a></div></details><details id="page1" open><summary>02｜項目二：4×4數獨求解器</summary><div class="body"><p class="count">本分頁功能與目的介紹：620個中文字</p><p>這一頁用來詳解第二題四乘四數獨求解器。输入棋盤共有十六個三十二位元整數，依橫列順序排列。零代表空格，一到四代表不可改動的線索。題目保證輸入合法且至少有一解，輸出必須把空格填滿，使每一橫列、每一直行與每個二乘二宮格都各有一到四一次。若有多個解，符合所有條件的任何一個都能接受，不必與特定標準答案完全相同。</p><p>頁面以回溯搜尋介紹解法：先找第一個空格，再試一到四，檢查橫列、直行與宮格，合法才填入並繼續求解。若後面的格子無法完成，就清除這次試填，換下一個候選；若子層成功，就保留棋盤並向上返回。這個过程讓你理解搜尋不是盲目填數字，而是每一步都利用限制條件縮小選擇。</p><p>棋盤視窗會顯示原始線索、目前格子、候選值和受檢查的區域，也提供座標、記憶體偏移與活動搜尋層資訊。按上一個或下一個步驟，可以看見填值、拒絕與清零發生的時機。自動播放適合先觀察整體流程，滑桿則適合停在某次回溯仔細閱讀。已完成、單空格、少線索、全空與需要回溯的範例，能呈現不同的搜尋行為。</p><p>Ｃ與組合語言雙視窗說明分工。Ｃ先保存原始線索並呼叫求解器，組合語言直接修改工作棋盤，最後Ｃ檢查線索未變、數值範圍與三類约束。私有搜尋函式用成功或失敗旗標控制回溯，公開入口卻是沒有回傳值的函式，真正結果在棋盤記憶體中。這兩種回傳意義需要分清楚，才能看懂成功傳播與正常返回。</p><p>本頁還解釋索引如何得到列和欄、同欄位址為什麼相差十六位元組，以及宮格四個位置如何計算。每層搜尋保存自己處理的格子與候選，避免子呼叫破壞父層狀態。完成閱讀後，你應能自行檢查任一解是否保留線索，並說明失敗時為什麼一定要清零。教學模型的成功仍需與實際解答測試區分。</p><a class="button primary" href="Lab2_項目二_數獨_多視窗互動.html">進入此分頁</a></div></details><details id="page2" open><summary>03｜共同開發規格：RV32I、ABI與資源限制</summary><div class="body"><p class="count">本分頁功能與目的介紹：633個中文字</p><p>這一頁集中說明兩題都必須遵守的共同開發規格。排序或數獨答案看起來正確，仍可能因使用錯誤指令、破壞呼叫者暫存器、超出記憶體範圍或容量過大而不符合要求。因此本頁的功能，是把「算出答案」之外的條件逐項具體化，協助你了解一份可以安全連結與呼叫的組合語言函式應如何設計。</p><p>首先介紹基本指令集合與呼叫約定。兩題限定使用基本三十二位元整數指令與指定資料模型，不能依賴乘法、除法或餘數等擴充。索引乘四可以用左移，數獨列欄可用位移與遮罩取得。公開入口必須使用指定符號，輔助標籤保持私有。參數暫存器、返回位址和保存型暫存器各有不同責任，不能因某次範例剛好成功，就忽略跨呼叫的狀態保存。</p><p>互動模型會讓你觀察配置堆疊、保存返回位址、呼叫子函式、還原狀態與返回的順序。也可以用錯誤情境比較沒有還原暫存器或對齊錯誤時會發生什麼問題。這些模型主要用來理解規則，不是執行真正處理器，也不會自動證明解答通過正式安全測試。原始組合語言視窗仍可用於核對實際保存位置與指令。</p><p>資源計算區可以輸入來源檔大小、各區段大小、入口空間、每層遞迴空間與層數，觀察是否超過規定。排序的工作區只配置一次，數獨每層保留少量狀態；兩者的額外堆疊峰值可以由來源推導。來源檔大小不能代替組譯後的機器碼大小，程式、唯讀資料與靜態資料的合計限制也要分別核對，不能只看單一區段。</p><p>記憶體工具則示範範圍與自然對齊。例如合法區域總共有多少位元組、一次讀取幾個位元組、起始偏移在哪裡，都影響是否越界。讀取前先檢查上界，是兩題共同的重要做法。閱讀後應能自行畫出堆疊配置，確認返回時還原入口狀態，並知道哪些證據必須從組譯產物或實際執行取得，而不是只靠來源註解。</p><a class="button primary" href="Lab2_共同開發規格_RV32I_ABI_資源限制.html">進入此分頁</a></div></details><details id="page3" open><summary>04｜建置、提交與正式驗收</summary><div class="body"><p class="count">本分頁功能與目的介紹：641個中文字</p><p>這一頁說明完成程式之後，如何建置、測試、提交以及判讀正式驗收結果。它的主要目的，是把工作檔、本機測試、版本紀錄與正式提交之間的關係講清楚。程式寫完不代表已提交，建置成功也不代表功能與安全全部正確；必須依次確認檔案已儲存、測試使用的來源、提交版本以及對應的完整成績。</p><p>建置區提供課程容器中的操作流程，讓你了解編譯目標與執行位置。修改程式後先儲存，再重新建置與本機測試。測試腳本讀取目前儲存的兩份組合語言，不要求先提交修改；倉庫的既有版本則用來提供可重現種子。工具未安裝時才先設定，不需要每次改一行都重新下載。遇到建置失敗、工具版本不符或容器路徑錯誤時，應先處理環境問題再判斷解答。</p><p>提交區說明加入指定檔案、建立版本、推送以及依課程工具送出作業的順序。推送到倉庫與建立正式提交是不同動作，最後必須確認正式系統取得的版本。頁面也提醒核對提交雜湊與完整結果，避免把較早的本機成功紀錄當成目前這版的證據。課程期限若有衝突，應依正式公告確認；在未確認前不應自行採用較晚日期。</p><p>多視窗驗收區提供分模組的項目導覽、規格說明、來源定位與教學檢核。可用搜尋與篩選快速找出想看的項目，也能記錄人工核對進度及備註。模型排序和數獨檢查可以幫助理解案例，但不是執行附件組合語言。來源結構掃描也只能找到有限類型的問題，不能代替完整組譯、暫存器檢查或記憶體監控。</p><p>結果匯入讓你把完整批改紀錄帶入頁面，查看各列分數、通過狀態與訊息。匯入時會檢查格式與加總，但仍需核對來源版本與原始稽核資料。官方測試列與教學安排的案例不能任意一對一推定。閱讀完成後，你應能區分建置、模型示範、本機批改与正式驗收四種結果，並保留足以說明本次提交的實際證據。</p><a class="button primary" href="Lab2_建置_提交與正式驗收_43項分模組多視窗.html">進入此分頁</a></div></details><details id="page4" open><summary>05｜43項規格查核：程式與流程圖</summary><div class="body"><p class="count">本分頁功能與目的介紹：629個中文字</p><p>這一頁把作業需求整理成四十三個逐項規格查核項，方便你用相同的閱讀方式核對排序、數獨與共同限制。每次選一項，就能同時看到主要需求、附件如何完成、相關程式、技術解說、驗收方法和目前證據狀態。這個頁面的目的，是將大段規格拆成可以逐項理解與記錄的工作，而不是只顯示一張已完成的勾選清單。</p><p>每項都直接插入相關原始程式區塊，並標出来源行號。你不必先切到完整程式再自行搜尋，便能看見分支判斷、位址運算或返回處理。指令解說協助你辨認讀取、寫入、游標更新和狀態保存各自的作用。若這一項是Ｃ驗證端或測試腳本，頁面會說明它的角色，避免把驗收程式當成實際解題演算法。</p><p>流程圖依序呈現規格需求、附件實作、驗收方式與結果證據。例如排序空陣列需要避免元素存取，程式用長度判斷提前返回，驗收則應觀察沒有讀寫輸入區。數獨線索不變需要只填空格，並在Ｃ端保存原線索比較。圖解把需求與證據連起來，讓你不只知道用了哪條指令，也知道這條指令負責滿足哪個要求。</p><p>互動功能包含上一項、下一項、下拉選擇、全部展開、手動查核與備註，以及查核紀錄匯出。完整Ｃ與組合語言雙視窗可以在排序與數獨間切換，讓局部程式仍能放回完整上下文理解。建議先核對介面與邊界，再看演算法核心，最後看呼叫約定與資源安全；每一項留下實際輸入、输出與版本證據，才能避免只靠印象勾選。</p><p>需要特別區分的是，本頁的查核編號是教學整理，不等於官方測試代號的案例定義。官方共有四十三列，但附件腳本沒有公開每一列的全部測資內容。頁面因此保留官方結果查詢與紀錄匯入，不憑空宣布每列通過。閱讀後應能逐项說明程式為什麼符合規格、還缺哪種測試證據，以及哪些結論只是來源推導而非實際執行結果。</p><a class="button primary" href="Lab2_43項_程式逐段解說與流程圖.html">進入此分頁</a></div></details><h2>五份程式：原文與作業規格對照</h2><details id="code0"><summary>程式01｜merge(4).c</summary><div class="body"><p class="count">程式角色與符合規格的說明：630個中文字</p><p>這份Ｃ程式是第一題的呼叫者與升序驗證器，不是合併排序的解答本體。它包含設定檔與輸出工具，宣告外部排序函式，再於主函式建立陣列、呼叫組合語言排序，最後檢查排序結果。作業真正要繳交的排序檔是組合語言來源；這份Ｃ的作用，是展示呼叫介面如何使用，以及提供一部分結果檢查。</p><p>陣列初始内容由設定檔的巨集提供，元素數也由對應巨集給定。Ｃ把陣列首位址和元素數傳給排序函式，在指定呼叫約定下對應到參數暫存器。陣列沒有被複製成另一份函式輸入，組合語言直接寫回這個記憶體區域。因此排序函式的回傳型別可以是沒有值，主函式仍能從原本陣列看到完成結果。這符合題目要求修改呼叫者提供的原始記憶體。</p><p>驗證函式用迴圈檢查相鄰元素，發現前者大於後者就回傳失敗，全部檢查完則回傳成功。這個比较使用有號整數語意，因此能判斷負數和正數的升序。迴圈條件先確認下一格存在，再進行讀取；長度零或一時沒有相鄰元素可檢查，便直接成功。相等值也被接受，因為升序允許非遞減，不要求每格都嚴格變大。</p><p>這份驗證器有明確限制：它沒有保存原陣列的全部頻次，也沒有比較排序前後是否具有相同元素。若錯誤解答把所有元素改成零，仍可能通過升序檢查。此外，它不檢查組合語言使用的演算法、不直接監控越界，也不完整檢查保存型暫存器與堆疊狀態。因此它只對應升序要求，不能單獨證明整題滿分。</p><p>使用時應把它放在課程既有建置架構下，保留設定檔與輸出工具依賴，不要把這個檔案當成獨立排序函式。若要加強驗證，可另存排序前的值與次數，排序後重新統計比對，並由正式工具確認呼叫約定及記憶體安全。首頁提供完整原文供檢視與下載，不修改附件內容，也不把Ｃ的成功回傳冒充完整批改結果。</p><a class="button primary" href="code/merge(4).c" download>下載原始程式</a><button data-copy="src0">複製完整程式</button><details><summary>展開完整原文</summary><pre id="src0">#include &quot;merge_config.h&quot;
+
+#include &quot;print.h&quot;
+
+extern void array_sort(int *arr_ptr, unsigned arr_size);
+
+int array_sort_verifier(int *arr_ptr, unsigned arr_size) {
+    for (unsigned i = 0; i + 1 &lt; arr_size; i++) {
+        my_printf(&quot;i: %d, i+1: %d\n&quot;, arr_ptr[i], arr_ptr[i + 1]);
+        if (arr_ptr[i] &gt; arr_ptr[i + 1]) {
+            return -1;
+        }
+    }
+    return 0;
+}
+
+int main(void) {
+    int arr[] = { MERGE_SORT_RANDOM_ARRAY };
+    array_sort(arr, MERGE_SORT_RANDOM_ARRAY_SIZE);
+    return array_sort_verifier(arr, MERGE_SORT_RANDOM_ARRAY_SIZE);
+}
+</pre></details></div></details><details id="code1"><summary>程式02｜merge(6).S</summary><div class="body"><p class="count">程式角色與符合規格的說明：608個中文字</p><p>這份組合語言是第一題的正式解答，入口為指定的陣列排序函式。它接收原陣列位址與元素數，以遞迴合併排序完成升序，並把結果寫回原陣列。來源公開唯一指定入口，輔助程式使用私有標籤；位移、分支、讀寫與加減都可以在基本整數指令集合中完成，不需要乘法或除法擴充。</p><p>入口先配置堆疊並保存返回位址與需要的保存型暫存器。工作區有五百一十二位元組，可以容納一百二十八個整數，所有遞迴層共用，不是每層重新配置一個大陣列。長度小於二時直接走返回路徑，不讀寫陣列元素，因此空陣列與單元素符合邊界要求。堆疊讀寫仍會發生，但題目禁止的是空陣列的元素存取，兩者不能混淆。</p><p>輔助函式使用左含右不含的區間，先計算中點，遞迴完成左半與右半，再把兩個已排序區間合併。左右各有一個讀取游標，工作區有一個寫入游標。每次先檢查邊界，再讀取左右值，用有號比較選較小值。相等時取左，但右值仍會在之後搬入，所以重複值次數保留。若一半耗盡，就把另一半剩餘元素依序補上。</p><p>合併完成才將工作區寫回原陣列，避免提前覆蓋尚未讀取的值。索引乘四以左移取得，讀寫位址保持自然對齊。每層保存自己的區間與返回位址，子呼叫完成後能恢復父層狀態；出口也恢復被使用的保存型暫存器與堆疊指標。依来源推導，最大長度的額外堆疊峰值小於題目限制。</p><p>這份程式主要對應指定合併排序、完整有號範圍、升序、元素頻次不變、原陣列输出與呼叫約定要求。來源註解中說輔助程式只用呼叫者保存暫存器並不精確，實際也使用已保存還原的保存型暫存器。原文保留時要以指令為準。正式驗收仍需組譯後檢查容量及執行安全，不能只憑閱讀來源宣布全部測試通過。</p><a class="button primary" href="code/merge(6).S" download>下載原始程式</a><button data-copy="src1">複製完整程式</button><details><summary>展開完整原文</summary><pre id="src1">.section .text
+        .align  2
+        .global array_sort
+        .type   array_sort, @function
+
+# void array_sort(int32_t *array, uint32_t size)
+#
+# a0: Pointer to the first signed 32-bit array element.
+# a1: Number of elements (0 through 128).
+#
+# Sort the array in ascending SIGNED order using merge sort.
+# The final sorted values are written back into the input array.
+# A 128-element temporary buffer is allocated on the stack.
+#
+# Calling convention:
+#   - s0 and s1 are callee-saved and are restored before returning.
+#   - The stack remains 16-byte aligned at every function call.
+#   - All helper routines use caller-saved registers only.
+#
+# Stack frame (544 bytes):
+#   0..511   Temporary merge buffer (128 * 4 bytes)
+#   528      Saved s1 (buffer base)
+#   532      Saved s0 (array base)
+#   536      Saved ra
+#   540      Unused padding
+array_sort:
+        addi    sp, sp, -544       # Reserve temporary storage and saved-register slots.
+        sw      ra, 536(sp)        # Preserve the return address.
+        sw      s0, 532(sp)        # Preserve the caller&#x27;s s0.
+        sw      s1, 528(sp)        # Preserve the caller&#x27;s s1.
+        mv      s0, a0             # Keep the original array base in s0.
+        mv      s1, sp             # Use the beginning of the frame as the buffer.
+
+        li      t0, 2              # Arrays with fewer than two elements are sorted.
+        bltu    a1, t0, .Lsort_done
+
+        # Recursive helper arguments:
+        #   a0 = array base, a1 = temporary buffer base
+        #   a2 = left index (inclusive), a3 = right index (exclusive)
+        mv      a3, a1             # Preserve size before replacing a1 with buffer.
+        mv      a1, s1             # Temporary buffer pointer.
+        mv      a2, zero           # Left boundary = 0.
+        mv      a0, s0             # Original array pointer.
+        jal     ra, .Lmerge_sort
+
+.Lsort_done:
+        lw      s1, 528(sp)        # Restore callee-saved registers.
+        lw      s0, 532(sp)
+        lw      ra, 536(sp)
+        addi    sp, sp, 544        # Release the temporary buffer and frame.
+        ret
+
+# Recursive merge sort over the half-open range [left, right).
+# Arguments: a0=array, a1=buffer, a2=left, a3=right.
+# This routine saves its working state because recursive calls overwrite
+# caller-saved argument registers.
+.Lmerge_sort:
+        addi    sp, sp, -48        # Allocate an aligned recursive stack frame.
+        sw      ra, 44(sp)
+        sw      s0, 40(sp)
+        sw      s1, 36(sp)
+        sw      s2, 32(sp)
+        sw      s3, 28(sp)
+        sw      s4, 24(sp)
+        sw      s5, 20(sp)
+        mv      s0, a0             # Array base.
+        mv      s1, a1             # Buffer base.
+        mv      s2, a2             # Left index.
+        mv      s3, a3             # Right index (exclusive).
+
+        sub     t0, s3, s2         # Number of elements in the current range.
+        li      t1, 2
+        bltu    t0, t1, .Lmerge_return # Length 0 or 1: already sorted.
+
+        srli    t0, t0, 1          # Half the range length, rounded down.
+        add     s4, s2, t0         # Midpoint = left + (right-left)/2.
+
+        # Sort the left half [left, mid).
+        mv      a0, s0
+        mv      a1, s1
+        mv      a2, s2
+        mv      a3, s4
+        jal     ra, .Lmerge_sort
+
+        # Sort the right half [mid, right).
+        mv      a0, s0
+        mv      a1, s1
+        mv      a2, s4
+        mv      a3, s3
+        jal     ra, .Lmerge_sort
+
+        # Merge two sorted halves into buffer[left:right].
+        mv      t0, s2             # i: current index in left half.
+        mv      t1, s4             # j: current index in right half.
+        mv      t2, s2             # k: destination index in buffer.
+
+.Lmerge_compare:
+        bgeu    t0, s4, .Lcopy_right # Left half exhausted.
+        bgeu    t1, s3, .Lcopy_left  # Right half exhausted.
+        slli    t3, t0, 2          # Convert left element index to byte offset.
+        add     t3, s0, t3
+        lw      t4, 0(t3)          # Load signed left value.
+        slli    t3, t1, 2
+        add     t3, s0, t3
+        lw      t5, 0(t3)          # Load signed right value.
+        blt     t5, t4, .Ltake_right # Signed comparison: right &lt; left.
+
+        # Left value &lt;= right value; take left to preserve stable order.
+        slli    t3, t2, 2
+        add     t3, s1, t3
+        sw      t4, 0(t3)
+        addi    t0, t0, 1
+        addi    t2, t2, 1
+        j       .Lmerge_compare
+
+.Ltake_right:
+        slli    t3, t2, 2
+        add     t3, s1, t3
+        sw      t5, 0(t3)
+        addi    t1, t1, 1
+        addi    t2, t2, 1
+        j       .Lmerge_compare
+
+.Lcopy_left:
+        bgeu    t0, s4, .Lcopy_back # No remaining left elements.
+        slli    t3, t0, 2
+        add     t3, s0, t3
+        lw      t4, 0(t3)
+        slli    t3, t2, 2
+        add     t3, s1, t3
+        sw      t4, 0(t3)
+        addi    t0, t0, 1
+        addi    t2, t2, 1
+        j       .Lcopy_left
+
+.Lcopy_right:
+        bgeu    t1, s3, .Lcopy_back # No remaining right elements.
+        slli    t3, t1, 2
+        add     t3, s0, t3
+        lw      t4, 0(t3)
+        slli    t3, t2, 2
+        add     t3, s1, t3
+        sw      t4, 0(t3)
+        addi    t1, t1, 1
+        addi    t2, t2, 1
+        j       .Lcopy_right
+
+.Lcopy_back:
+        mv      t0, s2             # Copy merged range back into input array.
+.Lcopy_back_loop:
+        bgeu    t0, s3, .Lmerge_return
+        slli    t1, t0, 2
+        add     t2, s1, t1
+        lw      t3, 0(t2)          # Read merged value from temporary buffer.
+        add     t2, s0, t1
+        sw      t3, 0(t2)          # Overwrite original array element.
+        addi    t0, t0, 1
+        j       .Lcopy_back_loop
+
+.Lmerge_return:
+        lw      s5, 20(sp)
+        lw      s4, 24(sp)
+        lw      s3, 28(sp)
+        lw      s2, 32(sp)
+        lw      s1, 36(sp)
+        lw      s0, 40(sp)
+        lw      ra, 44(sp)
+        addi    sp, sp, 48
+        ret
+
+        .size   array_sort, .-array_sort
+</pre></details></div></details><details id="code2"><summary>程式03｜sudoku(3).c</summary><div class="body"><p class="count">程式角色與符合規格的說明：597個中文字</p><p>這份Ｃ程式是數獨題目的呼叫者與結果驗證器。它宣告外部求解函式，在主函式建立原始線索與可修改棋盤，呼叫組合語言求解，再檢查完成結果。數獨解答本體在組合語言來源中，Ｃ負責準備資料與確認答案符合題目。這種分工讓你能把搜尋演算法與驗收條件分開理解。</p><p>主函式建立兩份相同初始內容，一份是不可修改的線索備份，一份是交給求解器的工作棋盤。求解器只收到工作棋盤位址，直接在原地填空格；線索備份留給驗證器使用。這符合題目指定的固定十六格輸入和原始記憶體輸出，也让驗證器能知道哪些值是原始線索，而不是把求解後的非零值全部誤認成原始資料。</p><p>驗證第一步逐格確認原非零線索沒有改变。只要原線索位置的完成值不同，就回傳失敗。接著同時檢查每一橫列與直行：先確認值介於一到四，再用已出現標記確認沒有重複。四個格子都在合法範圍且互不重複，就等於一到四各一次。程式條件先檢查範圍，才使用值當成標記索引，避免零或超界數值造成錯誤存取。</p><p>最後逐一檢查四個二乘二宮格，以宮格位置和內部列欄計算原棋盤索引。每個宮格同樣檢查數值範圍與重複。所有線索、橫列、直行和宮格都通過，才回傳成功。這個方式不與固定答案逐格比較，因此多解棋盤只要得到任一合法且保留線索的解，就符合題目要求。</p><p>這份Ｃ主要對應輸出值域、三類約束、原線索不變與多解接受任一的驗收規格。它仍不能直接證明求解過程沒有越界或完整保存暫存器，也不量測機器碼容量。使用時保留課程設定檔依賴，將完成棋盤與原線索一起傳入驗證器。首頁提供的是新附件原文，便於你查看檢查條件，不把驗證器視為回溯搜尋本體。</p><a class="button primary" href="code/sudoku(3).c" download>下載原始程式</a><button data-copy="src2">複製完整程式</button><details><summary>展開完整原文</summary><pre id="src2">#include &quot;sudoku_config.h&quot;
+
+extern void sudoku_solver(int *arr_ptr);
+
+int sudoku_verifier(int *arr_ptr, const int *clues) {
+    // Every non-zero input value is a fixed clue and must remain unchanged.
+    for (int i = 0; i &lt; 16; i++) {
+        if (clues[i] != 0 &amp;&amp; arr_ptr[i] != clues[i]) {
+            return -1;
+        }
+    }
+
+    // check each row and column
+    for (int i = 0; i &lt; 4; i++) {
+        int row[5] = { 0 }, col[5] = { 0 };
+        for (int j = 0; j &lt; 4; j++) {
+            int r = arr_ptr[4 * i + j];
+            int c = arr_ptr[4 * j + i];
+
+            if (r &lt; 1 || r &gt; 4 || row[r]) {
+                return -1;
+            }
+            if (c &lt; 1 || c &gt; 4 || col[c]) {
+                return -1;
+            }
+
+            row[r] = 1;
+            col[c] = 1;
+        }
+    }
+
+    // check each sub-block
+    for (int bi = 0; bi &lt; 2; bi++) {
+        for (int bj = 0; bj &lt; 2; bj++) {
+            int seen[5] = { 0 };
+            for (int i = 0; i &lt; 2; i++) {
+                for (int j = 0; j &lt; 2; j++) {
+                    int v = arr_ptr[(bi * 2 + i) * 4 + (bj * 2 + j)];
+                    if (v &lt; 1 || v &gt; 4 || seen[v]) {
+                        return -1;
+                    }
+                    seen[v] = 1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+int main(void) {
+    const int clues[] = { SUDOKU_RANDOM_ARRAY };
+    int arr[]          = { SUDOKU_RANDOM_ARRAY };
+    sudoku_solver(arr);
+    return sudoku_verifier(arr, clues);
+}
+</pre></details></div></details><details id="code3"><summary>程式04｜sudoku(5).S</summary><div class="body"><p class="count">程式角色與符合規格的說明：592個中文字</p><p>這份組合語言是數獨題目的正式解答，以回溯搜尋填滿四乘四棋盤。公開入口接收棋盤首位址，尾端跳到私有搜尋函式，保留原呼叫者的返回位址。公開函式沒有回傳值；私有搜尋使用成功與失敗旗標控制回溯，真正解答仍留在原棋盤記憶體中。这符合題目指定介面與原地修改的要求。</p><p>每層搜尋先保存返回位址、棋盤指標、目前格子索引、候選值和格子位址。程式從第一格開始找零，非零格直接跳過，因此固定線索不會成為試填目標。掃描到第十六格而沒有空格，代表在合法輸入假設下已完成答案。索引乘四後加棋盤位址取得格子位置，最後一格位於合法的六十四位元組棋盤內。</p><p>找到空格後依序試一到四，填入之前先呼叫合法性檢查。橫列用連續四個整數比較，直行每次跨十六位元組，宮格則計算左上角，再檢查四個固定偏移。列號由索引右移取得，欄號用低位元遮罩取得，不需要除法與餘數指令。候選與任一已填值相同就拒絕，三類條件都沒有衝突才允许寫入。</p><p>填入合法候選後繼續遞迴。若子層成功，立即保留棋盤並傳回成功；若子層失敗，先把本層格子清零，再試下一候選。四個值都失敗時返回上一層，讓父層改選。清零是恢復搜尋狀態的關鍵，否則錯誤試填會干擾後續合法性檢查。成功時則不能清零，否則會把找到的答案撤銷。</p><p>每層搜尋使用三十二位元組，保持堆疊對齊，返回前還原保存狀態；合法性檢查是葉函式，使用呼叫者保存暫存器。全空棋盤最多十六次填值再加完成層，來源推導的額外堆疊使用仍低於限制。本程式對應值域、列行宮約束、線索不變、任一合法解与基本指令要求；正式安全與容量結果仍要由實際組譯和批改取得。</p><a class="button primary" href="code/sudoku(5).S" download>下載原始程式</a><button data-copy="src3">複製完整程式</button><details><summary>展開完整原文</summary><pre id="src3">        .section .text
+        .align  2
+        .global sudoku_solver
+        .type   sudoku_solver, @function
+
+# Solve a valid, solvable 4x4 Sudoku puzzle using backtracking.
+# Input: a0 points to 16 row-major int32_t cells; 0 means empty, 1-4 are clues.
+# Output: fill the board in place without modifying fixed clues; no public return value.
+# Tail-jump to the internal search routine, preserving the original return address.
+# Public entry point: a0 contains the base address of the 4x4 board.
+# The jump reuses the caller&#x27;s return address; the search routine returns to the caller.
+sudoku_solver:
+        j       .Lsudoku_search
+        .size   sudoku_solver, .-sudoku_solver
+
+        .type   .Lsudoku_search, @function
+# Internal search: a0 = board; return a0 = 1 on success, or 0 on failure.
+# Use a 32-byte stack frame at each level to maintain 16-byte stack alignment.
+# Recursive depth-first search with backtracking.
+# Saved registers: s0=board, s1=cell index, s2=candidate, s3=cell address.
+# Each stack frame is 32 bytes, preserving 16-byte alignment at calls.
+.Lsudoku_search:
+        addi    sp, sp, -32
+        sw      ra, 28(sp)  # Save ra before recursive and helper calls
+        sw      s0, 24(sp)
+        sw      s1, 20(sp)
+        sw      s2, 16(sp)
+        sw      s3, 12(sp)
+        mv      s0, a0  # Keep board pointer across calls
+        li      s1, 0  # Current cell index
+# Scan the board in row-major order for the first zero-valued cell.
+# Each int32_t occupies 4 bytes, so board[i] is at board + (i &lt;&lt; 2).
+.Lsudoku_find:
+        li      t0, 16
+        beq     s1, t0, .Lsudoku_success  # No empty cells remain: solution found
+        slli    t0, s1, 2
+        add     s3, s0, t0  # Address of board[index]
+        lw      t1, 0(s3)
+        beq     t1, zero, .Lsudoku_empty
+        addi    s1, s1, 1  # Skip nonempty clues without changing them
+        j       .Lsudoku_find
+# An empty cell was found; enumerate candidate values 1, 2, 3, and 4.
+.Lsudoku_empty:
+        li      s2, 1  # Candidate value from 1 to 4
+# Call the validity helper before modifying the board.
+# Arguments: a0=board, a1=linear cell index, a2=candidate.
+# On a valid placement, recurse. A failed recursive attempt is undone.
+.Lsudoku_try:
+        mv      a0, s0
+        mv      a1, s1
+        mv      a2, s2
+        jal     ra, .Lsudoku_valid  # Check row, column, and 2x2 subgrid
+        beq     a0, zero, .Lsudoku_next
+        sw      s2, 0(s3)  # Place candidate only if valid
+        mv      a0, s0
+        jal     ra, .Lsudoku_search  # Recursively solve remaining empty cells
+        bne     a0, zero, .Lsudoku_success  # Keep solution if recursion succeeds
+        sw      zero, 0(s3)  # Undo trial placement on failure
+# Advance to the next candidate. If all four fail, return failure
+# so the previous recursion level can try a different value.
+.Lsudoku_next:
+        addi    s2, s2, 1
+        li      t0, 5
+        bltu    s2, t0, .Lsudoku_try
+        li      a0, 0  # All candidates failed: backtrack
+        j       .Lsudoku_return
+# Success means every cell is nonzero after valid placements.
+# Leave all chosen values in memory and propagate success up the call stack.
+.Lsudoku_success:
+        li      a0, 1
+# Restore callee-saved registers and ra from their original stack slots.
+# Release the 32-byte frame and return the Boolean result in a0.
+.Lsudoku_return:
+        lw      s3, 12(sp)
+        lw      s2, 16(sp)
+        lw      s1, 20(sp)
+        lw      s0, 24(sp)
+        lw      ra, 28(sp)
+        addi    sp, sp, 32  # Restore stack pointer and callee-saved registers
+        ret
+        .size   .Lsudoku_search, .-.Lsudoku_search
+
+        .type   .Lsudoku_valid, @function
+# Inputs: a0 = board, a1 = index, a2 = candidate; target cell is still zero.
+# Return a0 = 1 if valid, 0 if conflicting; leaf helper uses caller-saved registers.
+# Leaf routine: check whether a candidate conflicts with the current board.
+# Input: a0=board pointer, a1=index (0..15), a2=value (1..4).
+# Output: a0=1 when allowed; a0=0 on any row/column/box conflict.
+# For a 4-column board: row=index&gt;&gt;2 and column=index&amp;3.
+.Lsudoku_valid:
+        srli    t0, a1, 2  # row = index / 4
+        andi    t1, a1, 3  # col = index % 4
+        slli    t2, t0, 4  # Four int32_t values per row = 16 bytes
+        add     t2, a0, t2  # Start address of current row
+        li      t3, 4
+# Inspect four consecutive 32-bit entries in the selected row.
+# If any entry equals the candidate, reject immediately.
+.Lvalid_row:
+        lw      t4, 0(t2)
+        beq     t4, a2, .Lvalid_no
+        addi    t2, t2, 4
+        addi    t3, t3, -1
+        bne     t3, zero, .Lvalid_row
+        slli    t2, t1, 2
+        add     t2, a0, t2  # Address of first row at current column
+        li      t3, 4
+# Inspect the same column across four rows.
+# A row is 4 words = 16 bytes, hence the 16-byte stride.
+.Lvalid_col:
+        lw      t4, 0(t2)
+        beq     t4, a2, .Lvalid_no
+        addi    t2, t2, 16  # Move down one row (16 bytes)
+        addi    t3, t3, -1
+        bne     t3, zero, .Lvalid_col
+        andi    t0, t0, 2  # Subgrid starting row is 0 or 2
+        andi    t1, t1, 2  # Subgrid starting column is 0 or 2
+        slli    t0, t0, 4
+        slli    t1, t1, 2
+        add     t2, a0, t0
+        add     t2, t2, t1  # Top-left cell of the 2x2 subgrid
+        lw      t4, 0(t2)
+        beq     t4, a2, .Lvalid_no
+        lw      t4, 4(t2)
+        beq     t4, a2, .Lvalid_no
+        lw      t4, 16(t2)
+        beq     t4, a2, .Lvalid_no
+        lw      t4, 20(t2)
+        beq     t4, a2, .Lvalid_no
+        li      a0, 1
+        ret
+# Shared rejection path for a duplicate in the row, column, or box.
+.Lvalid_no:
+        li      a0, 0
+        ret
+        .size   .Lsudoku_valid, .-.Lsudoku_valid
+</pre></details></div></details><details id="code4"><summary>程式05｜test-local(3).sh</summary><div class="body"><p class="count">程式角色與符合規格的說明：627個中文字</p><p>這份腳本是本機測試流程的包裝程式，不是排序或數獨演算法，也不是要另交的解答報告。它的功能，是確認目前環境與工具版本，讓指定批改器讀取已儲存的兩份組合語言，再檢查批改結果格式與分數是否一致。執行成功或失敗的訊息，是由批改器資料決定，而不是由腳本自行用幾個簡單範例評分。</p><p>腳本先確認在指定的作業容器與工作區中執行，檢查版本控制、權限工具和執行環境是否可用，也確認本機批改器已安裝。它讀取鎖定版本資訊並核對批改器摘要，避免使用不同版本工具卻誤把結果當成課程正式標準。倉庫必須有既有版本，該版本提供可重現測試種子；批改器讀取的是目前已儲存工作檔，所以修改後不必先建立新版本才能測試。</p><p>接著腳本建立受控暫存目錄，呼叫批改器並取得成績與稽核資料。它確認稽核沒有基礎設施錯誤、工具摘要與指定值相同，以及成績格式、清單版本和總分正确。預期測試列共有四十三個，包含兩個編譯列、排序列和數獨列；列順序也必須一致。腳本只公開代號清單，沒有公開每列全部測資，因此不能直接推定同號教學案例就是官方定義。</p><p>每列分數必须是合法整數，不可超過上限，通過旗標也要與滿分條件一致；逐列上限總和和得分總和必須對上總分。只有总分一百分且全部列都通過，才印出本機全部通過。若未滿分，只顯示第一個失敗列、原因與有限長度的訊息，並以失敗狀態結束。</p><p>腳本退出时會刪除暫存結果，因此一般終端輸出不能提供完整四十三列紀錄。完整查核需要正式平台或助教提供的結果資料與提交版本。它主要對應測試流程、結果一致性與工具版本要求，不單獨證明來源內容或正式提交已完成。首頁保留原文供下載，使用時應放在課程倉庫並遵循工具安裝流程。</p><a class="button primary" href="code/test-local(3).sh" download>下載原始程式</a><button data-copy="src4">複製完整程式</button><details><summary>展開完整原文</summary><pre id="src4">#!/usr/bin/env bash
+# Local feedback only. Reads the two current assembly files without a commit.
+set -euo pipefail
+
+expected_digest=&#x27;sha256:f0ff938b7c554c1d021d5e91e31dfcbaeb810b88892dec6c0c404fac530b42db&#x27;
+repo_root=&quot;$(cd -- &quot;$(dirname -- &quot;${BASH_SOURCE[0]}&quot;)&quot; &amp;&amp; pwd -P)&quot;
+error() { printf &#x27;ERROR：%s\n&#x27; &quot;$*&quot; &gt;&amp;2; exit 2; }
+trap &#x27;error &quot;測試工具遇到非預期錯誤（第 ${LINENO} 行）；請保留上方訊息並聯絡助教。&quot;&#x27; ERR
+
+[[ &quot;$(uname -s)&quot; == Linux &amp;&amp; &quot;$(uname -m)&quot; == x86_64 &amp;&amp; -f /.dockerenv ]] ||
+    error &#x27;請在 Lab 0 的課程容器內執行。&#x27;
+for executable in git sudo python3; do
+    command -v &quot;$executable&quot; &gt;/dev/null 2&gt;&amp;1 || error &quot;找不到 $executable。&quot;
+done
+[[ -x /opt/lab2-grader/grade-one &amp;&amp; -f /opt/lab2-tools/lab2-tools-lock.json ]] ||
+    error &#x27;本機測試工具尚未安裝，請先執行 ./setup-local-test.sh。&#x27;
+[[ -d &quot;$repo_root/.git&quot; ]] || error &#x27;請在你自己的 Lab 2 作業 repo 內執行。&#x27;
+[[ &quot;$repo_root&quot; == /home/ubuntu/workspace/* ]] || error &#x27;作業須位於課程容器的工作區。&#x27;
+
+python3 - &quot;$expected_digest&quot; &lt;&lt;&#x27;PY&#x27; || error &#x27;批改工具版本與課程正式版本不符。&#x27;
+import json, pathlib, sys
+try:
+    lock = json.loads(pathlib.Path(&#x27;/opt/lab2-tools/lab2-tools-lock.json&#x27;).read_text())
+    if lock[&#x27;grader_image&#x27;] != &#x27;ghcr.io/computer-organization-at-ncku-ee/co-lab2-grader-v2@&#x27; + sys.argv[1]:
+        raise ValueError(&#x27;unexpected grader version&#x27;)
+except (OSError, ValueError, KeyError, TypeError):
+    raise SystemExit(1)
+PY
+
+# HEAD is only a reproducible test seed. The grader reads saved working files.
+commit=&quot;$(git -C &quot;$repo_root&quot; rev-parse --verify HEAD 2&gt;/dev/null)&quot; ||
+    error &#x27;作業 repo 沒有可用的 commit。&#x27;
+[[ &quot;$commit&quot; =~ ^[0-9a-f]{40}$ ]] || error &#x27;無法取得有效的測試種子。&#x27;
+
+temporary=&quot;$(sudo mktemp -d /tmp/lab2-self-test.XXXXXXXX)&quot; ||
+    error &#x27;無法建立批改暫存資料夾。&#x27;
+[[ &quot;$temporary&quot; =~ ^/tmp/lab2-self-test\.[A-Za-z0-9]{8}$ ]] ||
+    error &#x27;批改暫存路徑異常。&#x27;
+trap &#x27;sudo rm -r -- &quot;$temporary&quot;&#x27; EXIT
+
+printf &#x27;正在測試目前已儲存的兩份組合語言程式，請稍候。\n&#x27;
+if ! sudo env \
+    PATH=&#x27;/opt/riscv-gnu-toolchain/bin:/usr/local/bin:/usr/bin:/bin&#x27; \
+    LAB2_WORKER_USER=lab2worker \
+    LAB2_GRADER_IMAGE_DIGEST=&quot;$expected_digest&quot; \
+    /opt/lab2-grader/grade-one \
+    --submission &quot;$repo_root&quot; \
+    --owner local \
+    --commit &quot;$commit&quot; \
+    --manifest lab2-v1 \
+    --output-dir &quot;$temporary&quot; &gt;/dev/null; then
+    error &#x27;批改器執行失敗，請把上方訊息提供給助教。&#x27;
+fi
+sudo chown &quot;$(id -u):$(id -g)&quot; &quot;$temporary&quot; &quot;$temporary/grade.json&quot; &quot;$temporary/audit.json&quot; ||
+    error &#x27;批改器未產生完整結果。&#x27;
+chmod 0700 &quot;$temporary&quot;
+chmod 0600 &quot;$temporary/grade.json&quot; &quot;$temporary/audit.json&quot;
+
+if python3 - &quot;$temporary/grade.json&quot; &quot;$temporary/audit.json&quot; &quot;$expected_digest&quot; &lt;&lt;&#x27;PY&#x27;
+import json, pathlib, sys
+try:
+    grade = json.loads(pathlib.Path(sys.argv[1]).read_text())
+    audit = json.loads(pathlib.Path(sys.argv[2]).read_text())
+    rows = grade[&#x27;rows&#x27;]
+    expected_ids = [&#x27;C01&#x27;, &#x27;C02&#x27;] + [f&#x27;M{i:02d}&#x27; for i in range(1, 22)] + [f&#x27;S{i:02d}&#x27; for i in range(1, 21)]
+    score = grade[&#x27;score&#x27;]
+    valid = (
+        grade[&#x27;schema&#x27;] == &#x27;ncku-co/lab2-grade/v1&#x27;
+        and audit[&#x27;schema&#x27;] == &#x27;ncku-co/lab2-audit/v1&#x27;
+        and audit[&#x27;infrastructure_error&#x27;] is False
+        and audit[&#x27;grader&#x27;][&#x27;image_digest&#x27;] == sys.argv[3]
+        and grade[&#x27;manifest&#x27;][&#x27;version&#x27;] == &#x27;lab2-v1&#x27;
+        and [row[&#x27;id&#x27;] for row in rows] == expected_ids
+        and sum(row[&#x27;max_score&#x27;] for row in rows) == 100
+        and sum(row[&#x27;score&#x27;] for row in rows) == score
+        and grade[&#x27;max_score&#x27;] == 100
+        and type(score) is int and 0 &lt;= score &lt;= 100
+        and all(
+            type(row[&#x27;score&#x27;]) is int and type(row[&#x27;max_score&#x27;]) is int
+            and 0 &lt;= row[&#x27;score&#x27;] &lt;= row[&#x27;max_score&#x27;]
+            and type(row[&#x27;passed&#x27;]) is bool
+            and row[&#x27;passed&#x27;] == (row[&#x27;score&#x27;] == row[&#x27;max_score&#x27;])
+            for row in rows
+        )
+    )
+    if not valid:
+        raise ValueError(&#x27;批改結果格式、配分或工具版本不符&#x27;)
+    if score == 100:
+        if not all(row[&#x27;passed&#x27;] for row in rows):
+            raise ValueError(&#x27;100 分結果仍含失敗測試列&#x27;)
+        print(&#x27;PASS：本機測試全部通過（100/100）。&#x27;)
+    else:
+        first = next(row for row in rows if not row[&#x27;passed&#x27;])
+        message = first[&#x27;message&#x27;].replace(&#x27;\n&#x27;, &#x27; &#x27;).replace(&#x27;\r&#x27;, &#x27; &#x27;)[:240]
+        print(f&#x27;FAIL：本機測試未全通過（{score}/100）。&#x27;)
+        print(f&quot;第一項失敗：{first[&#x27;id&#x27;]} {first[&#x27;reason&#x27;]} — {message}&quot;)
+        raise SystemExit(1)
+except (OSError, KeyError, TypeError, ValueError, IndexError, StopIteration) as exc:
+    print(f&#x27;ERROR：無法確認批改結果：{exc}&#x27;, file=sys.stderr)
+    raise SystemExit(2)
+PY
+then
+    exit 0
+else
+    exit $?
+fi
+</pre></details></div></details><p id="status" role="status"></p></main><script>const ds=[...document.querySelectorAll('details')];document.getElementById('expand').onclick=()=>ds.forEach(d=>d.open=true);document.getElementById('collapse').onclick=()=>ds.forEach(d=>d.open=false);document.getElementById('jump').onchange=e=>{if(!e.target.value)return;const d=document.getElementById(e.target.value);d.open=true;d.scrollIntoView({behavior:'smooth'})};let state;window.addEventListener('beforeprint',()=>{state=ds.map(d=>d.open);ds.forEach(d=>d.open=true)});window.addEventListener('afterprint',()=>{if(state)ds.forEach((d,i)=>d.open=state[i]);state=null});document.getElementById('print').onclick=()=>window.print();async function copyText(t){let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);ok=true}}catch{}if(!ok){const e=document.createElement('textarea');e.value=t;document.body.append(e);e.select();try{ok=document.execCommand('copy')}catch{}e.remove()}document.getElementById('status').textContent=ok?'已複製完整程式':'請選取原文後按Ctrl+C複製'}document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyText(document.getElementById(b.dataset.copy).textContent));</script></body></html>
