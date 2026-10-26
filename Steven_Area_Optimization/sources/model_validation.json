@@ -1,0 +1,18 @@
+{
+  "type": "Python two-state transformation model checks; not RTL simulation",
+  "status": "PASS",
+  "seed": 20261025,
+  "byte_product_range_cases": 65536,
+  "dotp_random_cases": 100000,
+  "count_random_cases_per_operation": 100000,
+  "normalization_small_exhaustive_cases": 262144,
+  "normalization_random_cases": 100000,
+  "normalization_single_one_all_exponents": 6912,
+  "fp_add_sub_directed_cases": 200,
+  "fp_add_sub_random_cases": 200000,
+  "pipeline_selection_state_steps": 100000,
+  "hdl_simulation": "NOT RUN",
+  "formal_equivalence": "NOT RUN",
+  "official_regression": "NOT RUN",
+  "synthesis_STA_Superlint": "NOT RUN"
+}
